@@ -276,15 +276,10 @@
       background-color: var(--accent-cyan-hover);
     }
 
-    /* Disabled State for Download Button */
     .btn-download.disabled {
       background-color: #2a3546;
       color: #5d6d7e;
       cursor: not-allowed;
-    }
-
-    .btn-download.disabled:hover {
-      background-color: #2a3546;
     }
 
     .btn-cfid {
@@ -304,7 +299,6 @@
       color: var(--accent-cyan);
     }
 
-    /* Placeholder style for Coming Soon Card */
     .placeholder-preview {
       display: flex;
       align-items: center;
@@ -316,7 +310,6 @@
       background: radial-gradient(circle, #141c2c 0%, #05070a 100%);
     }
 
-    /* Floating Support Button */
     .floating-support {
       position: fixed;
       bottom: 24px;
@@ -392,7 +385,7 @@
       <div class="cf-card" data-name="CALEB WILSON" data-cfid="png20603.iff">
         <div class="card-preview">
           <span class="badge-tag">NEW</span>
-          <img src="images/caleb_wilson.jpg.png" alt="Caleb Wilson Preview">
+          <img src="caleb_wilson.jpg" alt="Caleb Wilson Preview">
         </div>
         <div class="card-body">
           <div class="player-name">CALEB WILSON</div>
@@ -410,7 +403,7 @@
       <div class="cf-card" data-name="AJ DYBANTSA" data-cfid="png20600.iff">
         <div class="card-preview">
           <span class="badge-tag">NEW</span>
-          <img src="images/aj_dybantsa.jpg.png" alt="AJ Dybantsa Preview">
+          <img src="aj_dybantsa.jpg" alt="AJ Dybantsa Preview">
         </div>
         <div class="card-body">
           <div class="player-name">AJ DYBANTSA</div>
@@ -428,7 +421,7 @@
       <div class="cf-card" data-name="CAMERON BOOZER" data-cfid="png20602.iff">
         <div class="card-preview">
           <span class="badge-tag">NEW</span>
-          <img src="images/cameron_boozer.jpg.png" alt="Cameron Boozer Preview">
+          <img src="cameron_boozer.jpg" alt="Cameron Boozer Preview">
         </div>
         <div class="card-body">
           <div class="player-name">CAMERON BOOZER</div>
@@ -446,7 +439,7 @@
       <div class="cf-card" data-name="KINGSTON FLEMINGS" data-cfid="png20607.iff">
         <div class="card-preview">
           <span class="badge-tag">NEW</span>
-          <img src="images/kingston_flemings.jpg.png" alt="Kingston Flemings Preview">
+          <img src="kingston_flemings.jpg" alt="Kingston Flemings Preview">
         </div>
         <div class="card-body">
           <div class="player-name">KINGSTON FLEMINGS</div>
@@ -464,7 +457,7 @@
       <div class="cf-card" data-name="YAXEL LENDEBORG" data-cfid="png20610.iff">
         <div class="card-preview">
           <span class="badge-tag">NEW</span>
-          <img src="images/yaxel_lendeborg.jpg.png" alt="Yaxel Lendeborg Preview">
+          <img src="yaxel_lendeborg.jpg" alt="Yaxel Lendeborg Preview">
         </div>
         <div class="card-body">
           <div class="player-name">YAXEL LENDEBORG</div>
@@ -521,7 +514,6 @@
 
   <!-- Interactive Scripts -->
   <script>
-    // Live Search Controls
     document.getElementById('freeSearch').addEventListener('input', function(e) {
       const query = e.target.value.toLowerCase();
       const cards = document.querySelectorAll('#freeGrid .cf-card');
@@ -540,7 +532,6 @@
       });
     });
 
-    // Copy Function with Non-blocking Toast Popup
     function copyCFID(cfid) {
       if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(cfid).then(() => {
