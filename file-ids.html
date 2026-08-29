@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyberface IDs — RAY2K</title>
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --sidebar-bg: #04060a;
+      --card-bg: #0f1520;
+      --card-inner: #141c2c;
+      --border-color: #1a2638;
+      --accent-cyan: #00f0ff;
+      --accent-cyan-hover: #00cce0;
+      --accent-glow: rgba(0, 240, 255, 0.15);
+      --text-white: #ffffff;
+      --text-muted: #808e9b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Left Sidebar */
+    aside {
+      width: 240px;
+      background-color: var(--sidebar-bg);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px 16px;
+      position: fixed;
+      height: 100vh;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--text-white);
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: var(--accent-cyan);
+    }
+
+    .sub-title {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav-menu a {
+      display: block;
+      padding: 10px 12px;
+      border-radius: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.75rem;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+
+    .nav-menu a.active,
+    .nav-menu a:hover {
+      background: var(--accent-glow);
+      color: var(--accent-cyan);
+    }
+
+    .sidebar-footer {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+    }
+
+    /* Main Area */
+    main {
+      margin-left: 240px;
+      flex: 1;
+      padding: 30px 40px 80px;
+      max-width: 1400px;
+    }
+
+    /* Top Notice Bar */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .top-bar span {
+      color: var(--accent-cyan);
+    }
+
+    /* Page Header */
+    .header-banner {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.05) 0%, rgba(15, 21, 32, 1) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .header-tag {
+      font-size: 0.7rem;
+      font-weight: 900;
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .header-title {
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .header-title span {
+      color: var(--accent-cyan);
+    }
+
+    .header-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .meta-pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      background-color: var(--card-inner);
+      border: 1px solid var(--border-color);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: var(--text-white);
+    }
+
+    /* Filter & Search Bar */
+    .controls-wrapper {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .search-input {
+      flex: 1;
+      background-color: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 12px 16px;
+      color: var(--text-white);
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    .sort-select, .btn-reset {
+      background-color: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      color: var(--text-white);
+      padding: 0 16px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .btn-reset:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .range-pills, .alphabet-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background-color: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 14px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background-color: var(--accent-cyan);
+      color: #000000;
+      border-color: var(--accent-cyan);
+    }
+
+    /* Database Table */
+    .db-container {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .db-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .db-title {
+      font-size: 0.85rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .db-count {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 800;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      background-color: rgba(255, 255, 255, 0.02);
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border-color);
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    tr:hover td {
+      background-color: var(--accent-glow);
+    }
+
+    .cfid-col {
+      color: var(--accent-cyan);
+      font-weight: 900;
+      text-align: right;
+    }
+
+    .btn-copy {
+      background-color: var(--card-inner);
+      border: 1px solid var(--border-color);
+      color: var(--text-white);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      cursor: pointer;
+      margin-left: 12px;
+      transition: all 0.2s;
+    }
+
+    .btn-copy:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    /* Floating Support */
+    .floating-support {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background-color: var(--accent-cyan);
+      color: #000000;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 18px;
+      font-weight: 900;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 240, 255, 0.3);
+      text-decoration: none;
+      z-index: 999;
+    }
+
+    @media (max-width: 768px) {
+      aside { display: none; }
+      main { margin-left: 0; padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left Sidebar Navigation -->
+  <aside>
+    <div>
+      <div class="brand">
+        <a href="index.html" class="logo">RAY<span>2K</span></a>
+        <span class="sub-title">NBA 2K14 LAB</span>
+      </div>
+
+      <ul class="nav-menu">
+        <li><a href="index.html">RAY2K LAB</a></li>
+        <li><a href="rosters.html">ROSTER UPDATES</a></li>
+        <li><a href="cyberfaces.html">CYBERFACES</a></li>
+        <li><a href="#">INSTALLATION</a></li>
+        <li><a href="#">DEDICATED MODS</a></li>
+        <li><a href="file-ids.html" class="active">FILE IDS</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-footer">
+      <p>Facebook</p>
+      <p style="margin-top: 4px; color: var(--text-muted);">PC / Windows only</p>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main>
+
+    <div class="top-bar">
+      <span>● PC ONLY</span> WINDOWS PC — NOT WINLATOR / ANDROID
+      <div>PHT 23:28:02</div>
+    </div>
+
+    <!-- Page Banner -->
+    <div class="header-banner">
+      <div class="header-tag">RAY2K // LAB • FILE IDS</div>
+      <h1 class="header-title">CYBERFACE <span>IDS</span></h1>
+      <p class="header-desc">
+        2026–2027 Cyberface ID reference for NBA 2K14 modding. Search by player, filter by ID generation, browse alphabetically, sort instantly, and copy an ID with one click.
+      </p>
+      <div class="meta-pills">
+        <span class="pill">729 UNIQUE IDS</span>
+        <span class="pill">729 MATCHES</span>
+        <span class="pill">2026–2027 REFERENCE</span>
+        <span class="pill">PC / NBA 2K14</span>
+      </div>
+    </div>
+
+    <!-- Search & Filters -->
+    <div class="controls-wrapper">
+      <div class="search-row">
+        <input type="text" id="dbSearch" class="search-input" placeholder="Search player name or Cyberface ID...">
+        <select id="dbSort" class="sort-select">
+          <option value="last">SORT: LAST NAME</option>
+          <option value="first">SORT: FIRST NAME</option>
+          <option value="id">SORT: CFID</option>
+        </select>
+        <button class="btn-reset" onclick="resetFilters()">RESET</button>
+      </div>
+
+      <!-- Range Filters -->
+      <div class="range-pills">
+        <button class="filter-btn active" onclick="filterRange('all', this)">ALL IDS</button>
+        <button class="filter-btn" onclick="filterRange('1000', this)">1000s</button>
+        <button class="filter-btn" onclick="filterRange('2000', this)">2000s</button>
+        <button class="filter-btn" onclick="filterRange('4000', this)">4000s</button>
+        <button class="filter-btn" onclick="filterRange('17000', this)">17xxx</button>
+        <button class="filter-btn" onclick="filterRange('19000', this)">19xxx</button>
+        <button class="filter-btn" onclick="filterRange('20000', this)">20xxx</button>
+      </div>
+
+      <!-- Alphabet Filters -->
+      <div class="alphabet-pills" id="alphabetContainer">
+        <button class="filter-btn active" onclick="filterAlpha('ALL', this)">ALL</button>
+      </div>
+    </div>
+
+    <!-- Database Table -->
+    <div class="db-container">
+      <div class="db-header">
+        <div class="db-title">CYBERFACE ID DATABASE</div>
+        <div class="db-count" id="matchCount">Showing 1-50 of 729</div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>LAST NAME</th>
+            <th>FIRST NAME</th>
+            <th style="text-align: right;">CFID</th>
+          </tr>
+        </thead>
+        <tbody id="idTableBody">
+          <!-- Rows dynamically injected by Script -->
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <!-- Support Button -->
+  <a href="#" class="floating-support">⚡ SUPPORT</a>
+
+  <!-- Database & Interactivity Script -->
+  <script>
+    // Database Items
+    const database = [
+      { last: "Achiuwa", first: "Precious", cfid: "19219" },
+      { last: "Acuff Jr.", first: "Darius", cfid: "20606" },
+      { last: "Adams", first: "Steven", cfid: "2698" },
+      { last: "Adebayo", first: "Bam", cfid: "17013" },
+      { last: "Agbaji", first: "Ochai", cfid: "19413" },
+      { last: "Aldama", first: "Santi", cfid: "19329" },
+      { last: "Alexander", first: "Trey", cfid: "20501" },
+      { last: "Boozer", first: "Cameron", cfid: "20602" },
+      { last: "Dybantsa", first: "AJ", cfid: "20600" },
+      { last: "Flemings", first: "Kingston", cfid: "20607" },
+      { last: "Lendeborg", first: "Yaxel", cfid: "20610" },
+      { last: "Wilson", first: "Caleb", cfid: "20603" }
+    ];
+
+    // Generate Alphabet Buttons
+    const alphaContainer = document.getElementById('alphabetContainer');
+    for (let i = 65; i <= 90; i++) {
+      const char = String.fromCharCode(i);
+      const btn = document.createElement('button');
+      btn.className = 'filter-btn';
+      btn.innerText = char;
+      btn.onclick = function() { filterAlpha(char, this); };
+      alphaContainer.appendChild(btn);
+    }
+
+    let currentSearch = "";
+    let currentAlpha = "ALL";
+    let currentRange = "all";
+
+    function renderTable() {
+      const tbody = document.getElementById('idTableBody');
+      tbody.innerHTML = "";
+
+      const filtered = database.filter(item => {
+        const fullText = (item.last + " " + item.first + " " + item.cfid).toLowerCase();
+        const matchesSearch = fullText.includes(currentSearch);
+        const matchesAlpha = currentAlpha === "ALL" || item.last.toUpperCase().startsWith(currentAlpha);
+        
+        let matchesRange = true;
+        const idNum = parseInt(item.cfid);
+        if (currentRange === '1000') matchesRange = idNum >= 1000 && idNum < 2000;
+        if (currentRange === '2000') matchesRange = idNum >= 2000 && idNum < 3000;
+        if (currentRange === '4000') matchesRange = idNum >= 4000 && idNum < 5000;
+        if (currentRange === '17000') matchesRange = idNum >= 17000 && idNum < 18000;
+        if (currentRange === '19000') matchesRange = idNum >= 19000 && idNum < 20000;
+        if (currentRange === '20000') matchesRange = idNum >= 20000 && idNum < 30000;
+
+        return matchesSearch && matchesAlpha && matchesRange;
+      });
+
+      filtered.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${item.last}</td>
+          <td>${item.first}</td>
+          <td class="cfid-col">
+            ${item.cfid}
+            <button class="btn-copy" onclick="copyCFID('${item.cfid}')">COPY</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('matchCount').innerText = `Showing 1-${filtered.length} of ${database.length}`;
+    }
+
+    // Input handlers
+    document.getElementById('dbSearch').addEventListener('input', (e) => {
+      currentSearch = e.target.value.toLowerCase();
+      renderTable();
+    });
+
+    function filterAlpha(letter, el) {
+      currentAlpha = letter;
+      document.querySelectorAll('#alphabetContainer .filter-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      renderTable();
+    }
+
+    function filterRange(range, el) {
+      currentRange = range;
+      document.querySelectorAll('.range-pills .filter-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      renderTable();
+    }
+
+    function resetFilters() {
+      document.getElementById('dbSearch').value = "";
+      currentSearch = "";
+      currentAlpha = "ALL";
+      currentRange = "all";
+      renderTable();
+    }
+
+    function copyCFID(cfid) {
+      navigator.clipboard.writeText(`png${cfid}.iff`).then(() => {
+        alert(`Copied: png${cfid}.iff`);
+      });
+    }
+
+    // Initial Render
+    renderTable();
+  </script>
+</body>
+</html>
