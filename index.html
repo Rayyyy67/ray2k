@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAY2K // NBA 2K14 LAB</title>
+  <title>RAY2K // NBA LAB</title>
   <style>
     :root {
       --bg-dark: #0b0f17;
@@ -230,106 +230,47 @@
       white-space: nowrap;
     }
 
-    .tags-row {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-
-    .pill {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      padding: 4px 12px;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--text-muted);
-    }
-
-    .pill.accent {
-      border-color: var(--accent-cyan);
-      color: var(--accent-cyan);
-    }
-
-    .hero-title {
-      font-size: 4rem;
-      font-weight: 900;
-      line-height: 1;
-      letter-spacing: -1px;
-      margin-bottom: 20px;
-    }
-
-    .hero-title span {
-      color: var(--accent-cyan);
-    }
-
-    .hero-desc {
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      max-width: 650px;
-      line-height: 1.6;
-      margin-bottom: 30px;
-    }
-
-    .btn-row {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 60px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 14px 32px;
-      border-radius: 6px;
-      font-weight: 800;
-      font-size: 0.85rem;
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .btn-cyan {
-      background-color: var(--accent-cyan);
-      color: #000000;
-    }
-
-    .btn-cyan:hover {
-      background-color: var(--accent-cyan-hover);
-    }
-
-    .btn-outline {
-      border: 1px solid var(--border-color);
-      color: var(--text-white);
-      background: var(--card-bg);
-    }
-
-    .dashboard-header {
-      border-top: 1px solid var(--border-color);
-      padding-top: 40px;
-      margin-bottom: 24px;
+    /* Views container logic */
+    .view-section {
+      display: none;
       width: 100%;
     }
 
-    .dash-tag {
+    .view-section.active-view {
+      display: block;
+    }
+
+    .section-header {
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+      width: 100%;
+    }
+
+    .section-tag {
       color: var(--accent-cyan);
       font-size: 0.75rem;
       font-weight: 800;
       letter-spacing: 1px;
     }
 
-    .dash-title {
-      font-size: 2rem;
+    .section-title {
+      font-size: 2.2rem;
       font-weight: 900;
       margin-top: 4px;
     }
 
-    .dash-subtitle {
+    .section-subtitle {
       color: var(--text-muted);
       font-size: 0.95rem;
       margin-top: 6px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      width: 100%;
     }
 
     .grid-4 {
@@ -444,6 +385,25 @@
       color: var(--accent-cyan);
     }
 
+    .back-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--accent-cyan);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      cursor: pointer;
+      margin-bottom: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .back-btn:hover {
+      border-color: var(--accent-cyan);
+    }
+
     .floating-support {
       position: fixed;
       bottom: 24px;
@@ -474,39 +434,22 @@
       .mobile-header {
         display: flex;
       }
-
       aside {
         transform: translateX(-100%);
       }
-
       aside.open {
         transform: translateX(0);
       }
-
       main {
         margin-left: 0;
         padding: 80px 20px 40px;
         width: 100%;
       }
-
       .top-bar {
         flex-direction: column;
         align-items: flex-start;
       }
-
-      .hero-title {
-        font-size: 2.5rem;
-      }
-
-      .btn-row {
-        flex-direction: column;
-      }
-
-      .btn {
-        width: 100%;
-      }
-
-      .grid-4 {
+      .grid-2, .grid-4 {
         grid-template-columns: 1fr;
       }
     }
@@ -530,11 +473,11 @@
     <div>
       <div class="brand">
         <a href="index.html" class="logo">RAY<span>2K</span></a>
-        <span class="sub-title">NBA 2K14 LAB</span>
+        <span class="sub-title">NBA LAB</span>
       </div>
 
       <ul class="sidebar-menu">
-        <li><a href="index.html" class="active">RAY2K LAB</a></li>
+        <li><a href="#" onclick="showVersionSelect(); return false;" class="active" id="navLab">RAY2K LAB</a></li>
         <li><a href="rosters.html">ROSTER UPDATES</a></li>
         <li><a href="cyberfaces.html">CYBERFACES</a></li>
         <li><a href="presentation.html">PRESENTATION</a></li>
@@ -557,81 +500,103 @@
         <div class="time-badge">STATUS: ONLINE</div>
       </div>
 
-      <div class="tags-row">
-        <span class="pill accent">LAB ARCHIVE</span>
-        <span class="pill">Roster 2026</span>
-        <span class="pill">Updated Aug 2026</span>
-        <span class="pill">PC / Windows</span>
-      </div>
-
-      <h1 class="hero-title">NBA 2K14,<br><span>REBUILT.</span></h1>
-      <p class="hero-desc">Roster updates, dedicated mods, IDs, tools, fixes, and installation guides — organized in one place.</p>
-
-      <div class="btn-row">
-        <a href="#dashboard" class="btn btn-cyan">START HERE</a>
-        <a href="#dashboard" class="btn btn-outline">BROWSE MODS</a>
-      </div>
-
-      <!-- Lab Modules Dashboard Section (Exact Layout Preserved) -->
-      <div class="dashboard-header" id="dashboard">
-        <span class="dash-tag">RAY2K LAB</span>
-        <h2 class="dash-title">LAB DASHBOARD</h2>
-        <p class="dash-subtitle">Access active mods or check incoming updates.</p>
-      </div>
-
-      <div class="grid-4">
-        <!-- Roster Updates Card -->
-        <div class="dash-card active-card" onclick="location.href='rosters.html';" style="cursor: pointer;">
-          <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" alt="Rosters">
-          <div class="card-content-wrap">
-            <div>
-              <span class="card-badge badge-active">Available</span>
-              <h3>ROSTER UPDATES</h3>
-              <p>Download current season rosters, draft classes, and team rotations.</p>
-            </div>
-            <a href="rosters.html" class="card-link">OPEN ARCHIVE &rarr;</a>
-          </div>
+      <!-- VIEW 1: GAME VERSION SELECTION (Shown by default) -->
+      <div id="versionSelectView" class="view-section active-view">
+        <div class="section-header">
+          <span class="section-tag">GAME VERSION</span>
+          <h2 class="section-title">CHOOSE GAME LAB</h2>
+          <p class="section-subtitle">Select an active game lab or view upcoming releases.</p>
         </div>
 
-        <!-- Cyberfaces Card -->
-        <div class="dash-card active-card" onclick="location.href='cyberfaces.html';" style="cursor: pointer;">
-          <img src="https://images.unsplash.com/photo-1519766304817-4f37bda74a29?auto=format&fit=crop&w=600&q=80" alt="Cyberfaces">
-          <div class="card-content-wrap">
-            <div>
-              <span class="card-badge badge-active">Available</span>
-              <h3>CYBERFACES</h3>
-              <p>Updated face scans, headshapes, and skin textures for modern players.</p>
+        <div class="grid-2">
+          <!-- Clicking this hides version selection and reveals the 4-card dashboard -->
+          <div class="dash-card active-card" onclick="showDashboard();" style="cursor: pointer;">
+            <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" alt="NBA 2K14 LAB">
+            <div class="card-content-wrap">
+              <div>
+                <span class="card-badge badge-active">Available</span>
+                <h3>NBA 2K14 LAB</h3>
+                <p>Full modding suite, roster archives, cyberfaces, and presentation updates.</p>
+              </div>
+              <span class="card-link">ENTER 2K14 LAB &rarr;</span>
             </div>
-            <a href="cyberfaces.html" class="card-link">OPEN ARCHIVE &rarr;</a>
           </div>
-        </div>
 
-        <!-- Courts & Arenas Card (Locked) -->
-        <div class="dash-card locked-card">
-          <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80" alt="Courts & Arenas">
-          <div class="card-content-wrap">
-            <div>
-              <span class="card-badge badge-locked">Coming Soon</span>
-              <h3>COURTS & ARENAS</h3>
-              <p>3D stadium lighting, floor updates, and custom arena textures.</p>
+          <div class="dash-card locked-card">
+            <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80" alt="NBA 2K23 LAB">
+            <div class="card-content-wrap">
+              <div>
+                <span class="card-badge badge-locked">Coming Soon</span>
+                <h3>NBA 2K23 LAB</h3>
+                <p>Next-gen roster updates, custom lighting, and graphics mods.</p>
+              </div>
+              <span class="card-link" style="color: var(--text-muted); cursor: not-allowed;">LOCKED</span>
             </div>
-            <span class="card-link" style="color: var(--text-muted); cursor: not-allowed;">LOCKED</span>
-          </div>
-        </div>
-
-        <!-- Presentation & ENB Card -->
-        <div class="dash-card active-card" onclick="location.href='presentation.html';" style="cursor: pointer;">
-          <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80" alt="Presentation & ENB">
-          <div class="card-content-wrap">
-            <div>
-              <span class="card-badge badge-active">Available</span>
-              <h3>PRESENTATION & ENB</h3>
-              <p>Scoreboards, replay wipes, and custom visual graphics suites.</p>
-            </div>
-            <a href="presentation.html" class="card-link">OPEN ARCHIVE &rarr;</a>
           </div>
         </div>
       </div>
+
+      <!-- VIEW 2: 4-CARD DASHBOARD (Hidden by default, shown after clicking 2K14) -->
+      <div id="dashboardView" class="view-section">
+        <button class="back-btn" onclick="showVersionSelect();">&larr; BACK TO GAMES</button>
+        
+        <div class="section-header">
+          <span class="section-tag">RAY2K LAB</span>
+          <h2 class="section-title">LAB DASHBOARD</h2>
+          <p class="section-subtitle">Access active mods or check incoming updates.</p>
+        </div>
+
+        <div class="grid-4">
+          <div class="dash-card active-card" onclick="location.href='rosters.html';" style="cursor: pointer;">
+            <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" alt="Rosters">
+            <div class="card-content-wrap">
+              <div>
+                <span class="card-badge badge-active">Available</span>
+                <h3>ROSTER UPDATES</h3>
+                <p>Download current season rosters, draft classes, and team rotations.</p>
+              </div>
+              <a href="rosters.html" class="card-link">OPEN ARCHIVE &rarr;</a>
+            </div>
+          </div>
+
+          <div class="dash-card active-card" onclick="location.href='cyberfaces.html';" style="cursor: pointer;">
+            <img src="https://images.unsplash.com/photo-1519766304817-4f37bda74a29?auto=format&fit=crop&w=600&q=80" alt="Cyberfaces">
+            <div class="card-content-wrap">
+              <div>
+                <span class="card-badge badge-active">Available</span>
+                <h3>CYBERFACES</h3>
+                <p>Updated face scans, headshapes, and skin textures for modern players.</p>
+              </div>
+              <a href="cyberfaces.html" class="card-link">OPEN ARCHIVE &rarr;</a>
+            </div>
+          </div>
+
+          <div class="dash-card locked-card">
+            <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80" alt="Courts & Arenas">
+            <div class="card-content-wrap">
+              <div>
+                <span class="card-badge badge-locked">Coming Soon</span>
+                <h3>COURTS & ARENAS</h3>
+                <p>3D stadium lighting, floor updates, and custom arena textures.</p>
+              </div>
+              <span class="card-link" style="color: var(--text-muted); cursor: not-allowed;">LOCKED</span>
+            </div>
+          </div>
+
+          <div class="dash-card active-card" onclick="location.href='presentation.html';" style="cursor: pointer;">
+            <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80" alt="Presentation & ENB">
+            <div class="card-content-wrap">
+              <div>
+                <span class="card-badge badge-active">Available</span>
+                <h3>PRESENTATION & ENB</h3>
+                <p>Scoreboards, replay wipes, and custom visual graphics suites.</p>
+              </div>
+              <a href="presentation.html" class="card-link">OPEN ARCHIVE &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </main>
 
@@ -643,10 +608,24 @@
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.getElementById('sidebar');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const versionSelectView = document.getElementById('versionSelectView');
+    const dashboardView = document.getElementById('dashboardView');
 
     function toggleMenu() {
       sidebar.classList.toggle('open');
       sidebarOverlay.classList.toggle('active');
+    }
+
+    function showDashboard() {
+      versionSelectView.classList.remove('active-view');
+      dashboardView.classList.add('active-view');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showVersionSelect() {
+      dashboardView.classList.remove('active-view');
+      versionSelectView.classList.add('active-view');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     menuToggle.addEventListener('click', toggleMenu);
