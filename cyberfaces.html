@@ -266,7 +266,7 @@ main{margin-left:0;flex:1;padding:30px 40px 80px;max-width:1400px;margin-right:a
     </div>
    </div>
    <div style="text-align:right;margin:-18px 0 30px">
-    <a class="folder-btn" style="display:inline-block;width:auto" href="file-ids.html">VIEW ALL FILE IDS →</a>
+    <a class="folder-btn" id="viewAllFileIds" style="display:inline-block;width:auto" href="./file-ids.html">VIEW ALL FILE IDS →</a>
    </div>
    <div class="section-header">
     <div class="section-title">
@@ -337,6 +337,14 @@ function apply(){const m=modes[i];let accent='#00f0ff',bg='#07090e',side='#04060
 function cycle(){i=(i+1)%modes.length;apply()}const b=document.getElementById('folderThemeBtn');if(b)b.addEventListener('click',cycle);
 function clock(){const d=new Date();const t=document.getElementById('folderTime'),dt=document.getElementById('folderDate');if(t)t.textContent=d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});if(dt)dt.textContent=d.toLocaleDateString([], {weekday:'short',month:'short',day:'numeric',year:'numeric'})}clock();setInterval(clock,1000);apply();
 })();
-  </script>
+  
+    const fileIdLink = document.getElementById('viewAllFileIds');
+    if (fileIdLink) {
+      fileIdLink.addEventListener('click', function(event) {
+        event.preventDefault();
+        window.location.href = './file-ids.html';
+      });
+    }
+</script>
  </body>
 </html>
