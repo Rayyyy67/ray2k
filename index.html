@@ -265,6 +265,122 @@
       margin-top: 6px;
     }
 
+    /* Hero Banner matching image style */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(18, 24, 36, 0.9), rgba(11, 15, 23, 0.95)), url('https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1200&q=80');
+      background-blend-mode: overlay;
+      background-size: cover;
+      background-position: center;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-banner h1 {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      color: var(--text-white);
+    }
+
+    .hero-banner p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      max-width: 600px;
+      margin: 0 auto 24px auto;
+      line-height: 1.5;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary-red {
+      background-color: #ff3333;
+      color: #ffffff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-primary-red:hover {
+      background-color: #e02828;
+    }
+
+    .btn-secondary-dark {
+      background-color: #121824;
+      color: #ffffff;
+      border: 1px solid var(--border-color);
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s;
+    }
+
+    .btn-secondary-dark:hover {
+      border-color: var(--text-muted);
+    }
+
+    /* Stats bar matching image style */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      margin-bottom: 40px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .stat-box {
+      padding: 20px 10px;
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stat-box:last-child {
+      border-right: none;
+    }
+
+    .stat-number {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--text-white);
+    }
+
+    .stat-number span {
+      color: #ff3333;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -330,7 +446,7 @@
     }
 
     .dash-card.locked-card {
-      opacity: 0.5;
+      opacity: 0.6;
     }
 
     .card-badge {
@@ -424,8 +540,11 @@
     }
 
     @media (max-width: 1024px) {
-      .grid-4 {
+      .grid-4, .stats-bar {
         grid-template-columns: repeat(2, 1fr);
+      }
+      .stat-box:nth-child(2) {
+        border-right: none;
       }
     }
 
@@ -448,8 +567,15 @@
         flex-direction: column;
         align-items: flex-start;
       }
-      .grid-2, .grid-4 {
+      .grid-2, .grid-4, .stats-bar {
         grid-template-columns: 1fr;
+      }
+      .stat-box {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .stat-box:last-child {
+        border-bottom: none;
       }
     }
   </style>
@@ -501,7 +627,37 @@
 
       <!-- GAME SELECTION VIEW -->
       <div id="gameSelectView" class="view-section active-view">
-        <div class="section-header">
+        <!-- Hero Section matching user requested image style -->
+        <div class="hero-banner">
+          <h1>EVERYTHING NBA 2K</h1>
+          <p>Discover rosters, cyberfaces, courts, scoreboards, tools, and total conversions across multiple basketball gaming communities.</p>
+          <div class="hero-actions">
+            <a href="#gamesGrid" class="btn-primary-red">Browse Archives</a>
+            <a href="https://www.facebook.com/profile.php?id=61594111973222" target="_blank" rel="noopener noreferrer" class="btn-secondary-dark">Join Community</a>
+          </div>
+        </div>
+
+        <!-- Stats Bar matching user requested image style -->
+        <div class="stats-bar">
+          <div class="stat-box">
+            <div class="stat-number">10<span>+</span></div>
+            <div class="stat-label">Years Modding</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">500<span>+</span></div>
+            <div class="stat-label">Mods Archived</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">4</div>
+            <div class="stat-label">Game Platforms</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number" style="font-size: 1.5rem; padding-top: 4px;">Active</div>
+            <div class="stat-label">Community</div>
+          </div>
+        </div>
+
+        <div class="section-header" id="gamesGrid">
           <span class="section-tag">GAME VERSION</span>
           <h2 class="section-title">CHOOSE GAME LAB</h2>
           <p class="section-subtitle">Select an active game lab or view upcoming releases.</p>
@@ -521,12 +677,12 @@
             </div>
           </div>
 
-          <!-- NBA 2K23 LAB Option -->
+          <!-- NBA 2K23 LAB Option (Locked as requested) -->
           <div class="dash-card locked-card">
             <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80" alt="NBA 2K23 LAB">
             <div class="card-content-wrap">
               <div>
-                <span class="card-badge badge-locked">Coming Soon</span>
+                <span class="card-badge badge-locked">Locked</span>
                 <h3>NBA 2K23 LAB</h3>
                 <p>Next-gen roster updates, custom lighting, and graphics mods.</p>
               </div>
@@ -565,7 +721,7 @@
               <div>
                 <span class="card-badge badge-active">Available</span>
                 <h3>CYBERFACES</h3>
-                <p>Updated face scans, headshapes, and skin textures for modern players.</p>
+                <p>Updated face scans, headshapes, and skin textures for modern players with realistic tattoos and hair physics.</p>
               </div>
               <a href="cyberfaces.html" class="card-link">OPEN ARCHIVE &rarr;</a>
             </div>
@@ -589,7 +745,7 @@
               <div>
                 <span class="card-badge badge-active">Available</span>
                 <h3>PRESENTATION & ENB</h3>
-                <p>Scoreboards, replay wipes, and custom visual graphics suites.</p>
+                <p>Scoreboards, broadcast overlays, replay wipes, and custom visual graphics shaders.</p>
               </div>
               <a href="presentation.html" class="card-link">OPEN ARCHIVE &rarr;</a>
             </div>
