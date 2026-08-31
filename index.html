@@ -12,12 +12,17 @@
       --card-inner: #162032;
       --border-color: #1a2332;
       --accent-cyan: #00f0ff;
+      --accent-cyan-hover: #00d0df;
       --accent-glow: rgba(0, 240, 255, 0.15);
       --text-white: #ffffff;
       --text-muted: #808e9b;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       background-color: var(--bg-dark);
@@ -26,32 +31,16 @@
       display: flex;
       min-height: 100vh;
       overflow-x: hidden;
-      position: relative;
     }
 
-    .bg-video {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      object-fit: cover;
-      z-index: -2;
-      pointer-events: none;
-    }
-
-    .bg-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(11, 15, 23, 0.88);
-      z-index: -1;
-      pointer-events: none;
-    }
-
+    /* Mobile Header */
     .mobile-header {
       display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 60px;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
       background-color: var(--bg-sidebar);
       border-bottom: 1px solid var(--border-color);
       padding: 0 20px;
@@ -61,22 +50,30 @@
     }
 
     .menu-toggle {
-      background: none; border: none;
+      background: none;
+      border: none;
       color: var(--accent-cyan);
-      font-size: 1.5rem; cursor: pointer;
+      font-size: 1.5rem;
+      cursor: pointer;
     }
 
     .sidebar-overlay {
       display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(4px);
       z-index: 1001;
     }
 
-    .sidebar-overlay.active { display: block; }
+    .sidebar-overlay.active {
+      display: block;
+    }
 
+    /* Sidebar Nav */
     aside {
       width: 260px;
       background-color: var(--bg-sidebar);
@@ -91,141 +88,387 @@
       transition: transform 0.3s ease-in-out;
     }
 
-    .brand { display: flex; flex-direction: column; gap: 6px; }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
 
     .logo {
-      font-size: 1.8rem; font-weight: 900;
-      letter-spacing: 1px; text-decoration: none;
-      color: var(--text-white); cursor: pointer;
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-decoration: none;
+      color: var(--text-white);
     }
 
-    .logo span { color: var(--accent-cyan); }
-    .sub-title { font-size: 0.75rem; font-weight: 800; color: var(--accent-cyan); letter-spacing: 1px; }
+    .logo span {
+      color: var(--accent-cyan);
+    }
 
-    .sidebar-menu { list-style: none; margin-top: 40px; display: flex; flex-direction: column; gap: 8px; }
+    .sub-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
 
     .sidebar-menu a {
-      display: block; padding: 12px 16px; border-radius: 6px;
-      color: var(--text-muted); text-decoration: none;
-      font-weight: 700; font-size: 0.85rem; transition: all 0.2s; cursor: pointer;
+      display: block;
+      padding: 12px 16px;
+      border-radius: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
     }
 
-    .sidebar-menu a.active, .sidebar-menu a:hover {
+    .sidebar-menu a.active,
+    .sidebar-menu a:hover {
       background: var(--accent-glow);
       color: var(--accent-cyan);
       border-left: 3px solid var(--accent-cyan);
     }
 
-    .sidebar-footer { font-size: 0.75rem; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 16px; }
-
-    main {
-      margin-left: 260px; flex: 1;
-      padding: 40px 60px;
-      width: calc(100% - 260px);
-      display: flex; flex-direction: column; align-items: center;
+    .sidebar-footer {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
     }
 
-    .content-container { width: 100%; max-width: 1200px; text-align: left; }
+    /* Main Area */
+    main {
+      margin-left: 260px;
+      flex: 1;
+      padding: 30px 50px;
+      width: 100%;
+    }
 
     .top-bar {
-      display: flex; justify-content: space-between; align-items: center;
-      background: var(--card-bg); border: 1px solid var(--border-color);
-      padding: 10px 18px; border-radius: 8px; font-size: 0.8rem;
-      margin-bottom: 40px; gap: 12px; width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      margin-bottom: 40px;
+      gap: 12px;
     }
 
     .badge-dot {
-      display: inline-block; width: 8px; height: 8px;
-      background-color: var(--accent-cyan); border-radius: 50%; margin-right: 8px;
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-cyan);
+      border-radius: 50%;
+      margin-right: 8px;
     }
 
-    .notice { color: var(--text-muted); }
-    .notice strong { color: var(--text-white); }
-    .notice a { color: var(--accent-cyan); text-decoration: none; font-weight: 700; }
-    .time-badge { font-weight: 800; color: var(--text-muted); white-space: nowrap; }
+    .notice {
+      color: var(--text-muted);
+    }
 
-    .view-section { display: none; width: 100%; }
-    .view-section.active-view { display: block; }
+    .notice strong {
+      color: var(--text-white);
+    }
 
-    .section-header { border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 30px; width: 100%; }
-    .section-tag { color: var(--accent-cyan); font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; }
-    .section-title { font-size: 2.2rem; font-weight: 900; margin-top: 4px; }
-    .section-subtitle { color: var(--text-muted); font-size: 0.95rem; margin-top: 6px; }
+    .notice a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-weight: 700;
+    }
 
-    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; width: 100%; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; }
+    .time-badge {
+      font-weight: 800;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .tags-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .pill.accent {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    .hero-title span {
+      color: var(--accent-cyan);
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 650px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn-cyan {
+      background-color: var(--accent-cyan);
+      color: #000000;
+    }
+
+    .btn-cyan:hover {
+      background-color: var(--accent-cyan-hover);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border-color);
+      color: var(--text-white);
+      background: var(--card-bg);
+    }
+
+    .dashboard-header {
+      border-top: 1px solid var(--border-color);
+      padding-top: 40px;
+      margin-bottom: 30px;
+    }
+
+    .dash-tag {
+      color: var(--accent-cyan);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .dash-title {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-top: 4px;
+    }
+
+    .dash-subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 6px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
 
     .dash-card {
-      background: var(--card-bg); border: 1px solid var(--border-color);
-      border-radius: 10px; padding: 30px;
-      display: flex; flex-direction: column; justify-content: space-between;
-      position: relative; text-align: left;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-      min-height: 240px; cursor: pointer;
+    }
+
+    .card-banner {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .card-content {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
     }
 
     .dash-card::before {
-      content: ''; position: absolute; top: 0; left: 0;
-      width: 0%; height: 3px; background: var(--accent-cyan);
-      transition: width 0.3s ease; z-index: 2;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--accent-cyan);
+      transition: width 0.3s ease;
+      z-index: 2;
     }
 
-    .dash-card:hover {
+    .dash-card.active-card:hover {
       border-color: var(--accent-cyan);
       transform: translateY(-3px);
       box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
     }
 
-    .dash-card:hover::before { width: 100%; }
-
-    .card-top-row { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
-    .card-icon-box {
-      width: 44px; height: 44px; background: var(--card-inner);
-      border: 1px solid var(--border-color); border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 900; font-size: 1.1rem; color: var(--accent-cyan);
+    .dash-card.active-card:hover::before {
+      width: 100%;
     }
 
-    .dash-card h3 { font-size: 1.4rem; font-weight: 900; color: var(--text-white); margin-bottom: 8px; }
-    .dash-card p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-bottom: 24px; }
-    .card-link { color: var(--accent-cyan); text-decoration: none; font-weight: 800; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; }
-
-    .back-btn {
-      background: var(--card-bg); border: 1px solid var(--border-color);
-      color: var(--accent-cyan); padding: 8px 16px; border-radius: 6px;
-      font-weight: 800; font-size: 0.8rem; cursor: pointer; margin-bottom: 20px;
-      display: inline-flex; align-items: center; gap: 6px;
+    .dash-card.locked-card {
+      opacity: 0.6;
     }
-    .back-btn:hover { border-color: var(--accent-cyan); }
+
+    .card-badge {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+
+    .badge-active {
+      background: var(--accent-glow);
+      color: var(--accent-cyan);
+      border: 1px solid var(--accent-cyan);
+    }
+
+    .badge-locked {
+      background: var(--card-inner);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
+    .dash-card h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .dash-card p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .card-link {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-link:hover {
+      text-decoration: underline;
+    }
 
     .floating-support {
-      position: fixed; bottom: 24px; right: 24px;
-      background-color: var(--accent-cyan); color: #000000;
-      border: none; border-radius: 30px; padding: 12px 20px;
-      font-weight: 800; font-size: 0.85rem; display: flex; align-items: center; gap: 8px;
-      cursor: pointer; box-shadow: 0 4px 20px rgba(0, 240, 255, 0.3);
-      text-decoration: none; z-index: 999;
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background-color: var(--accent-cyan);
+      color: #000000;
+      border: none;
+      border-radius: 30px;
+      padding: 12px 20px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 240, 255, 0.3);
+      text-decoration: none;
+      z-index: 999;
     }
 
-    @media (max-width: 1024px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 768px) {
-      .mobile-header { display: flex; }
-      aside { transform: translateX(-100%); }
-      aside.open { transform: translateX(0); }
-      main { margin-left: 0; padding: 80px 20px 40px; width: 100%; }
-      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .mobile-header {
+        display: flex;
+      }
+
+      aside {
+        transform: translateX(-100%);
+      }
+
+      aside.open {
+        transform: translateX(0);
+      }
+
+      main {
+        margin-left: 0;
+        padding: 80px 20px 40px;
+      }
+
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .btn-row {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
 
-  <video class="bg-video" autoplay muted loop playsinline>
-    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-  </video>
-  <div class="bg-overlay"></div>
-
   <header class="mobile-header">
-    <a onclick="showGameSelect(); return false;" class="logo">RAY<span>2K</span></a>
+    <a href="index.html" class="logo">RAY<span>2K</span></a>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
   </header>
 
@@ -234,13 +477,18 @@
   <aside id="sidebar">
     <div>
       <div class="brand">
-        <a onclick="showGameSelect(); return false;" class="logo">RAY<span>2K</span></a>
+        <a href="index.html" class="logo">RAY<span>2K</span></a>
         <span class="sub-title">NBA LAB</span>
       </div>
+
       <ul class="sidebar-menu">
-        <li><a onclick="showGameSelect(); return false;" class="active" id="navLab">RAY2K LAB</a></li>
+        <li><a href="index.html" class="active">RAY2K LAB</a></li>
+        <li><a href="rosters.html">ROSTER UPDATES</a></li>
+        <li><a href="cyberfaces.html">CYBERFACES</a></li>
+        <li><a href="presentation.html">PRESENTATION</a></li>
       </ul>
     </div>
+
     <div class="sidebar-footer">
       <p>RAY2K Modding Vault</p>
       <p style="color: var(--text-muted); margin-top: 4px;">PC / Windows Support</p>
@@ -248,108 +496,65 @@
   </aside>
 
   <main>
-    <div class="content-container">
-      <div class="top-bar">
-        <div class="notice">
-          <span class="badge-dot"></span>
-          <strong>PC ONLY</strong> WINDOWS PC — NOT WINLATOR / ANDROID. <a href="#">INSTALL GUIDE &rarr;</a>
-        </div>
-        <div class="time-badge">STATUS: ONLINE</div>
+    <div class="top-bar">
+      <div class="notice">
+        <span class="badge-dot"></span>
+        <strong>PC ONLY</strong> WINDOWS PC — NOT WINLATOR / ANDROID. <a href="#">INSTALL GUIDE &rarr;</a>
       </div>
+      <div class="time-badge">STATUS: ONLINE</div>
+    </div>
 
-      <!-- MAIN LAB VIEW (2K14 & 2K23 Selection) -->
-      <div id="gameSelectView" class="view-section active-view">
-        <div class="section-header">
-          <span class="section-tag">GAME VERSION</span>
-          <h2 class="section-title">CHOOSE GAME LAB</h2>
-          <p class="section-subtitle">Select an active game lab or view upcoming releases.</p>
-        </div>
+    <div class="tags-row">
+      <span class="pill accent">LAB</span>
+      <span class="pill">Ecosystem Hub</span>
+      <span class="pill">Updated Aug 2026</span>
+      <span class="pill">PC / Windows</span>
+    </div>
 
-        <div class="grid-2">
-          <div class="dash-card" onclick="show2k14Dashboard();">
-            <div>
-              <div class="card-top-row"><div class="card-icon-box">14</div></div>
-              <h3>NBA 2K14</h3>
-              <p>Full modding suite, roster archives, cyberfaces, and presentation updates.</p>
-            </div>
-            <span class="card-link">ENTER 2K14 LAB &rarr;</span>
-          </div>
+    <h1 class="hero-title">EVERYTHING NBA 2K,<br><span>REBUILT.</span></h1>
+    <p class="hero-desc">Discover rosters, cyberfaces, courts, scoreboards, tools, and total conversions across multiple basketball gaming communities.</p>
 
-          <div class="dash-card" onclick="show2k23Dashboard();">
-            <div>
-              <div class="card-top-row"><div class="card-icon-box">23</div></div>
-              <h3>NBA 2K23</h3>
-              <p>Next-generation roster and visual modification archive.</p>
-            </div>
-            <span class="card-link">ENTER 2K23 LAB &rarr;</span>
-          </div>
-        </div>
-      </div>
+    <div class="btn-row">
+      <a href="#dashboard" class="btn btn-cyan">BROWSE ARCHIVES</a>
+      <a href="#dashboard" class="btn btn-outline">JOIN COMMUNITY</a>
+    </div>
 
-      <!-- 2K14 CATEGORIES VIEW -->
-      <div id="dashboard2k14" class="view-section">
-        <button class="back-btn" onclick="showGameSelect();">&larr; BACK TO GAMES</button>
-        <div class="section-header">
-          <span class="section-tag">NBA 2K14 LAB</span>
-          <h2 class="section-title">CATEGORIES</h2>
-          <p class="section-subtitle">Select a category folder to open files.</p>
-        </div>
-        <div class="grid-3">
-          <div class="dash-card" onclick="openModLink('2k14_rosters');">
-            <div><div class="card-top-row"><div class="card-icon-box">R</div></div><h3>ROSTER UPDATES</h3><p>Season rosters and draft classes.</p></div>
-            <span class="card-link">OPEN FOLDER &rarr;</span>
+    <div class="dashboard-header" id="dashboard">
+      <span class="dash-tag">GAME ECOSYSTEMS</span>
+      <h2 class="dash-title">CHOOSE YOUR GAME</h2>
+      <p class="dash-subtitle">Each game has its own dedicated hub with organized mods, tools, and community content.</p>
+    </div>
+
+    <div class="grid">
+      <!-- NBA 2K14 (Active) -->
+      <div class="dash-card active-card">
+        <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80" alt="NBA 2K14" class="card-banner">
+        <div class="card-content">
+          <div>
+            <span class="card-badge badge-active">Active Hub</span>
+            <h3>NBA 2K14</h3>
+            <p>The original QOL2K archive featuring rosters, cyberfaces, courts, and presentation mods.</p>
           </div>
-          <div class="dash-card" onclick="openModLink('2k14_cyberfaces');">
-            <div><div class="card-top-row"><div class="card-icon-box">F</div></div><h3>CYBERFACES</h3><p>Player headshapes and textures.</p></div>
-            <span class="card-link">OPEN FOLDER &rarr;</span>
-          </div>
-          <div class="dash-card" onclick="openModLink('2k14_presentation');">
-            <div><div class="card-top-row"><div class="card-icon-box">P</div></div><h3>PRESENTATION</h3><p>Scoreboards and overlays.</p></div>
-            <span class="card-link">OPEN FOLDER &rarr;</span>
-          </div>
+          <a href="rosters.html" class="card-link">ENTER ARCHIVE &rarr;</a>
         </div>
       </div>
 
-      <!-- 2K23 CATEGORIES VIEW -->
-      <div id="dashboard2k23" class="view-section">
-        <button class="back-btn" onclick="showGameSelect();">&larr; BACK TO GAMES</button>
-        <div class="section-header">
-          <span class="section-tag">NBA 2K23 LAB</span>
-          <h2 class="section-title">CATEGORIES</h2>
-          <p class="section-subtitle">Select a category folder to open files.</p>
-        </div>
-        <div class="grid-3">
-          <div class="dash-card" onclick="openModLink('2k23_rosters');">
-            <div><div class="card-top-row"><div class="card-icon-box">R</div></div><h3>ROSTERS</h3><p>Updated franchise files and rosters.</p></div>
-            <span class="card-link">OPEN FOLDER &rarr;</span>
+      <!-- NBA 2K23 (Locked to 14 only) -->
+      <div class="dash-card locked-card">
+        <img src="https://images.unsplash.com/photo-1519766304817-4f37bda74a29?auto=format&fit=crop&w=600&q=80" alt="NBA 2K23" class="card-banner" style="filter: grayscale(100%);">
+        <div class="card-content">
+          <div>
+            <span class="card-badge badge-locked">Locked</span>
+            <h3>NBA 2K23</h3>
+            <p>Next-generation roster and visual modification archive.</p>
           </div>
-          <div class="dash-card" onclick="openModLink('2k23_cyberfaces');">
-            <div><div class="card-top-row"><div class="card-icon-box">F</div></div><h3>CYBERFACES</h3><p>Player appearance upgrades.</p></div>
-            <span class="card-link">OPEN FOLDER &rarr;</span>
-          </div>
-          <div class="dash-card" onclick="openModLink('2k23_portraits');">
-            <div><div class="card-top-row"><div class="card-icon-box">P</div></div><h3>PORTRAITS</h3><p>Menu and menu UI player art.</p></div>
-            <span class="card-link">OPEN FOLDER &rarr;</span>
-          </div>
-          <div class="dash-card" onclick="openModLink('2k23_jerseys');">
-            <div><div class="card-top-row"><div class="card-icon-box">J</div></div><h3>JERSEYS</h3><p>Era-accurate team jerseys.</p></div>
-            <span class="card-link">OPEN FOLDER &rarr;</span>
-          </div>
-          <div class="dash-card" onclick="openModLink('2k23_courts');">
-            <div><div class="card-top-row"><div class="card-icon-box">C</div></div><h3>COURTS</h3><p>Rebuilt arena floors.</p></div>
-            <span class="card-link">OPEN FOLDER &rarr;</span>
-          </div>
-          <div class="dash-card" onclick="openModLink('2k23_scoreboards');">
-            <div><div class="card-top-row"><div class="card-icon-box">S</div></div><h3>SCOREBOARDS</h3><p>Broadcast overlays and HUDs.</p></div>
-            <span class="card-link">OPEN FOLDER &rarr;</span>
-          </div>
+          <span class="card-link" style="color: var(--text-muted); cursor: not-allowed;">COMING SOON &rarr;</span>
         </div>
       </div>
-
     </div>
   </main>
 
-  <a href="https://www.facebook.com/profile.php?id=61594111973222" target="_blank" rel="noopener noreferrer" class="floating-support">
+  <a href="#" class="floating-support">
     ⚡ Support RAY2K
   </a>
 
@@ -357,46 +562,10 @@
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.getElementById('sidebar');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
-    const gameSelectView = document.getElementById('gameSelectView');
-    const dashboard2k14 = document.getElementById('dashboard2k14');
-    const dashboard2k23 = document.getElementById('dashboard2k23');
 
     function toggleMenu() {
       sidebar.classList.toggle('open');
       sidebarOverlay.classList.toggle('active');
-    }
-
-    function hideAllViews() {
-      gameSelectView.classList.remove('active-view');
-      dashboard2k14.classList.remove('active-view');
-      dashboard2k23.classList.remove('active-view');
-    }
-
-    function showGameSelect() {
-      hideAllViews();
-      gameSelectView.classList.add('active-view');
-      if (sidebar.classList.contains('open')) toggleMenu();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function show2k14Dashboard() {
-      hideAllViews();
-      dashboard2k14.classList.add('active-view');
-      if (sidebar.classList.contains('open')) toggleMenu();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function show2k23Dashboard() {
-      hideAllViews();
-      dashboard2k23.classList.add('active-view');
-      if (sidebar.classList.contains('open')) toggleMenu();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function openModLink(category) {
-      // Replace the link below with your actual specific folder links or file URLs if needed!
-      // Example: if(category === '2k23_rosters') { window.open('YOUR_ROSTERS_LINK', '_blank'); return; }
-      window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');
     }
 
     menuToggle.addEventListener('click', toggleMenu);
