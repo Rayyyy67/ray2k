@@ -265,122 +265,7 @@
       margin-top: 6px;
     }
 
-    /* Hero Banner matching original style */
-    .hero-banner {
-      background: linear-gradient(135deg, rgba(18, 24, 36, 0.9), rgba(11, 15, 23, 0.95)), url('https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1200&q=80');
-      background-blend-mode: overlay;
-      background-size: cover;
-      background-position: center;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 40px;
-      margin-bottom: 30px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-banner h1 {
-      font-size: 2rem;
-      font-weight: 900;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-      color: var(--text-white);
-    }
-
-    .hero-banner p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      max-width: 600px;
-      margin: 0 auto 24px auto;
-      line-height: 1.5;
-    }
-
-    .hero-actions {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary-red {
-      background-color: #ff3333;
-      color: #ffffff;
-      border: none;
-      padding: 10px 24px;
-      border-radius: 6px;
-      font-weight: 800;
-      font-size: 0.85rem;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-
-    .btn-primary-red:hover {
-      background-color: #e02828;
-    }
-
-    .btn-secondary-dark {
-      background-color: #121824;
-      color: #ffffff;
-      border: 1px solid var(--border-color);
-      padding: 10px 24px;
-      border-radius: 6px;
-      font-weight: 800;
-      font-size: 0.85rem;
-      cursor: pointer;
-      text-decoration: none;
-      transition: border-color 0.2s;
-    }
-
-    .btn-secondary-dark:hover {
-      border-color: var(--text-muted);
-    }
-
-    /* Stats bar */
-    .stats-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      margin-bottom: 40px;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    .stat-box {
-      padding: 20px 10px;
-      border-right: 1px solid var(--border-color);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .stat-box:last-child {
-      border-right: none;
-    }
-
-    .stat-number {
-      font-size: 1.8rem;
-      font-weight: 900;
-      color: var(--text-white);
-    }
-
-    .stat-number span {
-      color: #ff3333;
-    }
-
-    .stat-label {
-      font-size: 0.7rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      letter-spacing: 1px;
-      margin-top: 4px;
-    }
-
+    /* Grid Layouts */
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -388,39 +273,26 @@
       width: 100%;
     }
 
-    .grid-4 {
+    .grid-3 {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
       width: 100%;
     }
 
+    /* Card Component Styled like User Images */
     .dash-card {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 10px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      text-align: left;
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .dash-card img {
-      width: 100%;
-      height: 140px;
-      object-fit: cover;
-      display: block;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .card-content-wrap {
-      padding: 24px;
+      padding: 30px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      flex: 1;
+      position: relative;
+      text-align: left;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      min-height: 240px;
     }
 
     .dash-card::before {
@@ -433,6 +305,10 @@
       background: var(--accent-cyan);
       transition: width 0.3s ease;
       z-index: 2;
+    }
+
+    .dash-card.active-card {
+      cursor: pointer;
     }
 
     .dash-card.active-card:hover {
@@ -449,33 +325,32 @@
       opacity: 0.6;
     }
 
-    .card-badge {
-      font-size: 0.7rem;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 4px 8px;
-      border-radius: 4px;
-      display: inline-block;
-      margin-bottom: 12px;
-      width: fit-content;
+    .card-top-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
     }
 
-    .badge-active {
-      background: var(--accent-glow);
-      color: var(--accent-cyan);
-      border: 1px solid var(--accent-cyan);
-    }
-
-    .badge-locked {
+    .card-icon-box {
+      width: 44px;
+      height: 44px;
       background: var(--card-inner);
-      color: var(--text-muted);
       border: 1px solid var(--border-color);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--accent-cyan);
     }
 
     .dash-card h3 {
-      font-size: 1.25rem;
-      font-weight: 800;
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      color: var(--text-white);
       margin-bottom: 8px;
     }
 
@@ -483,21 +358,23 @@
       color: var(--text-muted);
       font-size: 0.85rem;
       line-height: 1.5;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
     .card-link {
-      color: var(--text-white);
+      color: var(--accent-cyan);
       text-decoration: none;
       font-weight: 800;
       font-size: 0.85rem;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      letter-spacing: 0.5px;
     }
 
-    .dash-card.active-card .card-link:hover {
-      color: var(--accent-cyan);
+    .dash-card.locked-card .card-link {
+      color: var(--text-muted);
+      cursor: not-allowed;
     }
 
     .back-btn {
@@ -540,11 +417,8 @@
     }
 
     @media (max-width: 1024px) {
-      .grid-4, .stats-bar {
+      .grid-3 {
         grid-template-columns: repeat(2, 1fr);
-      }
-      .stat-box:nth-child(2) {
-        border-right: none;
       }
     }
 
@@ -567,15 +441,8 @@
         flex-direction: column;
         align-items: flex-start;
       }
-      .grid-2, .grid-4, .stats-bar {
+      .grid-2, .grid-3 {
         grid-template-columns: 1fr;
-      }
-      .stat-box {
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-      }
-      .stat-box:last-child {
-        border-bottom: none;
       }
     }
   </style>
@@ -588,7 +455,7 @@
   <div class="bg-overlay"></div>
 
   <header class="mobile-header">
-    <a href="index.html" class="logo">RAY<span>2K</span></a>
+    <a href="#" onclick="showGameSelect(); return false;" class="logo">RAY<span>2K</span></a>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
   </header>
 
@@ -597,15 +464,13 @@
   <aside id="sidebar">
     <div>
       <div class="brand">
-        <a href="index.html" class="logo">RAY<span>2K</span></a>
+        <a href="#" onclick="showGameSelect(); return false;" class="logo">RAY<span>2K</span></a>
         <span class="sub-title">NBA LAB</span>
       </div>
 
       <ul class="sidebar-menu">
-        <li><a href="#" onclick="showGameSelect(); return false;" class="active">RAY2K LAB</a></li>
-        <li><a href="https://www.facebook.com/profile.php?id=61594111973222" target="_blank" rel="noopener noreferrer">ROSTER UPDATES</a></li>
-        <li><a href="https://www.facebook.com/profile.php?id=61594111973222" target="_blank" rel="noopener noreferrer">CYBERFACES</a></li>
-        <li><a href="https://www.facebook.com/profile.php?id=61594111973222" target="_blank" rel="noopener noreferrer">PRESENTATION</a></li>
+        <li><a href="#" onclick="showGameSelect(); return false;" class="active" id="navLab">RAY2K LAB</a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61594111973222" target="_blank" rel="noopener noreferrer">COMMUNITY</a></li>
       </ul>
     </div>
 
@@ -625,130 +490,116 @@
         <div class="time-badge">STATUS: ONLINE</div>
       </div>
 
-      <!-- GAME SELECTION VIEW -->
+      <!-- GAME SELECTION VIEW (Only NBA 2K23 as requested) -->
       <div id="gameSelectView" class="view-section active-view">
-        <!-- Hero Section -->
-        <div class="hero-banner">
-          <h1>EVERYTHING NBA 2K</h1>
-          <p>Discover rosters, cyberfaces, courts, scoreboards, tools, and total conversions across multiple basketball gaming communities.</p>
-          <div class="hero-actions">
-            <a href="#gamesGrid" class="btn-primary-red">Browse Archives</a>
-            <a href="https://www.facebook.com/profile.php?id=61594111973222" target="_blank" rel="noopener noreferrer" class="btn-secondary-dark">Join Community</a>
-          </div>
-        </div>
-
-        <!-- Stats Bar -->
-        <div class="stats-bar">
-          <div class="stat-box">
-            <div class="stat-number">10<span>+</span></div>
-            <div class="stat-label">Years Modding</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-number">500<span>+</span></div>
-            <div class="stat-label">Mods Archived</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-number">4</div>
-            <div class="stat-label">Game Platforms</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-number" style="font-size: 1.5rem; padding-top: 4px;">Active</div>
-            <div class="stat-label">Community</div>
-          </div>
-        </div>
-
-        <div class="section-header" id="gamesGrid">
+        <div class="section-header">
           <span class="section-tag">GAME VERSION</span>
           <h2 class="section-title">CHOOSE GAME LAB</h2>
           <p class="section-subtitle">Select an active game lab or view upcoming releases.</p>
         </div>
 
         <div class="grid-2">
-          <!-- NBA 2K14 LAB Option -->
-          <div class="dash-card active-card" onclick="show2k14Dashboard();" style="cursor: pointer;">
-            <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" alt="NBA 2K14 LAB">
-            <div class="card-content-wrap">
-              <div>
-                <span class="card-badge badge-active">Available</span>
-                <h3>NBA 2K14 LAB</h3>
-                <p>Full modding suite, roster archives, cyberfaces, and presentation updates.</p>
+          <!-- NBA 2K23 LAB Card matching your exact style and blue theme -->
+          <div class="dash-card active-card" onclick="show2k23Dashboard();">
+            <div>
+              <div class="card-top-row">
+                <div class="card-icon-box">N</div>
               </div>
-              <span class="card-link">ENTER 2K14 LAB &rarr;</span>
+              <h3>NBA 2K23</h3>
+              <p>Next-generation roster and visual modification archive.</p>
             </div>
+            <span class="card-link">ENTER 2K23 LAB &rarr;</span>
           </div>
 
-          <!-- NBA 2K23 LAB Option (Locked) -->
+          <!-- Locked Placeholder Card -->
           <div class="dash-card locked-card">
-            <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80" alt="NBA 2K23 LAB">
-            <div class="card-content-wrap">
-              <div>
-                <span class="card-badge badge-locked">Locked</span>
-                <h3>NBA 2K23 LAB</h3>
-                <p>Next-gen roster updates, custom lighting, and graphics mods.</p>
+            <div>
+              <div class="card-top-row">
+                <div class="card-icon-box" style="color: var(--text-muted);">24</div>
               </div>
-              <span class="card-link" style="color: var(--text-muted); cursor: not-allowed;">LOCKED</span>
+              <h3 style="color: var(--text-muted);">NBA 2K24</h3>
+              <p>Future release mod archive and upcoming tool suites.</p>
             </div>
+            <span class="card-link">COMING SOON &rarr;</span>
           </div>
         </div>
       </div>
 
-      <!-- NBA 2K14 DASHBOARD VIEW -->
-      <div id="dashboard2k14" class="view-section">
+      <!-- NBA 2K23 DASHBOARD VIEW (Styled with blue accents matching your third image) -->
+      <div id="dashboard2k23" class="view-section">
         <button class="back-btn" onclick="showGameSelect();">&larr; BACK TO GAMES</button>
         
         <div class="section-header">
           <span class="section-tag">RAY2K LAB</span>
-          <h2 class="section-title">LAB DASHBOARD</h2>
+          <h2 class="section-title">NBA 2K23 DASHBOARD</h2>
           <p class="section-subtitle">Access active mods or check incoming updates.</p>
         </div>
 
-        <div class="grid-4">
-          <div class="dash-card active-card" onclick="window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');" style="cursor: pointer;">
-            <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" alt="Rosters">
-            <div class="card-content-wrap">
-              <div>
-                <span class="card-badge badge-active">Available</span>
-                <h3>ROSTER UPDATES</h3>
-                <p>Download current season rosters, draft classes, and team rotations.</p>
+        <div class="grid-3">
+          <div class="dash-card active-card" onclick="window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');">
+            <div>
+              <div class="card-top-row">
+                <div class="card-icon-box">R</div>
               </div>
-              <a href="https://www.facebook.com/profile.php?id=61594111973222" target="_blank" rel="noopener noreferrer" class="card-link">OPEN ARCHIVE &rarr;</a>
+              <h3>ROSTERS</h3>
+              <p>Updated season rosters, draft classes, and franchise files.</p>
             </div>
+            <span class="card-link">BROWSE &rarr;</span>
           </div>
 
-          <div class="dash-card active-card" onclick="window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');" style="cursor: pointer;">
-            <img src="https://images.unsplash.com/photo-1519766304817-4f37bda74a29?auto=format&fit=crop&w=600&q=80" alt="Cyberfaces">
-            <div class="card-content-wrap">
-              <div>
-                <span class="card-badge badge-active">Available</span>
-                <h3>CYBERFACES</h3>
-                <p>Updated face scans, headshapes, and skin textures for modern players with realistic tattoos and hair physics.</p>
+          <div class="dash-card active-card" onclick="window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');">
+            <div>
+              <div class="card-top-row">
+                <div class="card-icon-box">F</div>
               </div>
-              <a href="https://www.facebook.com/profile.php?id=61594111973222" target="_blank" rel="noopener noreferrer" class="card-link">OPEN ARCHIVE &rarr;</a>
+              <h3>CYBERFACES</h3>
+              <p>Player face scans and appearance upgrades for maximum realism.</p>
             </div>
+            <span class="card-link">BROWSE &rarr;</span>
           </div>
 
-          <div class="dash-card locked-card">
-            <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80" alt="Courts">
-            <div class="card-content-wrap">
-              <div>
-                <span class="card-badge badge-locked">Coming Soon</span>
-                <h3>COURTS & ARENAS</h3>
-                <p>3D stadium lighting, floor updates, and custom arena textures.</p>
+          <div class="dash-card active-card" onclick="window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');">
+            <div>
+              <div class="card-top-row">
+                <div class="card-icon-box">P</div>
               </div>
-              <span class="card-link" style="color: var(--text-muted); cursor: not-allowed;">LOCKED</span>
+              <h3>PORTRAITS</h3>
+              <p>Redrawn player portrait artwork for menus, rosters, and UI.</p>
             </div>
+            <span class="card-link">BROWSE &rarr;</span>
           </div>
 
-          <div class="dash-card active-card" onclick="window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');" style="cursor: pointer;">
-            <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80" alt="Presentation">
-            <div class="card-content-wrap">
-              <div>
-                <span class="card-badge badge-active">Available</span>
-                <h3>PRESENTATION & ENB</h3>
-                <p>Scoreboards, broadcast overlays, replay wipes, and custom visual graphics shaders.</p>
+          <div class="dash-card active-card" onclick="window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');">
+            <div>
+              <div class="card-top-row">
+                <div class="card-icon-box">J</div>
               </div>
-              <a href="https://www.facebook.com/profile.php?id=61594111973222" target="_blank" rel="noopener noreferrer" class="card-link">OPEN ARCHIVE &rarr;</a>
+              <h3>JERSEYS</h3>
+              <p>Accurate and alternate jersey sets for teams across every era.</p>
             </div>
+            <span class="card-link">BROWSE &rarr;</span>
+          </div>
+
+          <div class="dash-card active-card" onclick="window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');">
+            <div>
+              <div class="card-top-row">
+                <div class="card-icon-box">C</div>
+              </div>
+              <h3>COURTS</h3>
+              <p>Rebuilt arena floors matching current team branding and designs.</p>
+            </div>
+            <span class="card-link">BROWSE &rarr;</span>
+          </div>
+
+          <div class="dash-card active-card" onclick="window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');">
+            <div>
+              <div class="card-top-row">
+                <div class="card-icon-box">S</div>
+              </div>
+              <h3>SCOREBOARDS</h3>
+              <p>Modernized scoreboard and HUD designs for a cleaner in-game overlay.</p>
+            </div>
+            <span class="card-link">BROWSE &rarr;</span>
           </div>
         </div>
       </div>
@@ -765,7 +616,7 @@
     const sidebar = document.getElementById('sidebar');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
     const gameSelectView = document.getElementById('gameSelectView');
-    const dashboard2k14 = document.getElementById('dashboard2k14');
+    const dashboard2k23 = document.getElementById('dashboard2k23');
 
     function toggleMenu() {
       sidebar.classList.toggle('open');
@@ -774,7 +625,7 @@
 
     function hideAllViews() {
       gameSelectView.classList.remove('active-view');
-      dashboard2k14.classList.remove('active-view');
+      dashboard2k23.classList.remove('active-view');
     }
 
     function showGameSelect() {
@@ -783,9 +634,9 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function show2k14Dashboard() {
+    function show2k23Dashboard() {
       hideAllViews();
-      dashboard2k14.classList.add('active-view');
+      dashboard2k23.classList.add('active-view');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
