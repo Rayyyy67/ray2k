@@ -530,7 +530,7 @@
 
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-  <aside id="sidebar">
+  <aside id="sidebar" class="visible">
     <div>
       <div class="brand">
         <a href="#" class="logo" onclick="switchView('home', event)">RAY<span>2K</span></a>
@@ -540,7 +540,7 @@
       <ul class="sidebar-menu">
         <li><a href="#" id="nav-lab" onclick="switchView('dashboard', event)">RAY2K LAB</a></li>
         <li><a href="#" id="nav-rosters" onclick="switchView('rosters', event)">ROSTER UPDATES</a></li>
-        <li><a href="#" class="active" id="nav-cyberfaces" onclick="switchView('cyberfaces', event)">CYBERFACES</a></li>
+        <li><a href="#" id="nav-cyberfaces" onclick="switchView('cyberfaces', event)">CYBERFACES</a></li>
         <li><a href="#" id="nav-courts" onclick="switchView('courts', event)">COURTS & ARENAS</a></li>
         <li><a href="#" id="nav-presentation" onclick="switchView('presentation', event)">PRESENTATION & ENB</a></li>
       </ul>
@@ -606,7 +606,7 @@
     </div>
 
     <!-- VIEW 2: DASHBOARD / LAB ARCHIVE -->
-    <div id="view-dashboard" class="content-view">
+    <div id="view-dashboard" class="content-view active-view">
       <button class="back-btn" onclick="switchView('home')">&larr; Back to Home</button>
       <div class="dashboard-header" style="border-top: none; padding-top: 0;">
         <span class="dash-tag">NBA 2K14 LAB</span>
@@ -659,20 +659,26 @@
       <h2 class="hero-title" style="font-size: 2.5rem;">ROSTER <span>UPDATES</span></h2>
       <p class="hero-desc">Access official up-to-date roster files, transactions, and ratings sheets.</p>
       <div class="dash-card" style="max-width: 450px;">
-        <h3>Latest Season Roster Pack</h3>
-        <p>Includes updated contracts, rotation adjustments, and rookie cyberface mappings.</p>
+        <div>
+          <span class="card-badge badge-active">Ready to Download</span>
+          <h3>Latest Season Roster Pack</h3>
+          <p>Includes updated contracts, rotation adjustments, and rookie cyberface mappings.</p>
+        </div>
         <a href="#" class="card-link" style="color: var(--accent-cyan);">DOWNLOAD PACK (ZIP) &rarr;</a>
       </div>
     </div>
 
-    <!-- VIEW 4: CYBERFACES CONTENT (Active in screenshot) -->
-    <div id="view-cyberfaces" class="content-view active-view">
+    <!-- VIEW 4: CYBERFACES CONTENT -->
+    <div id="view-cyberfaces" class="content-view">
       <button class="back-btn" onclick="switchView('dashboard')">&larr; Back to Dashboard</button>
       <h2 class="hero-title" style="font-size: 2.5rem;">PLAYER <span>CYBERFACES</span></h2>
       <p class="hero-desc">High-definition face textures and custom headmodels mapped with exact IDs.</p>
       <div class="dash-card" style="max-width: 450px;">
-        <h3>Face Pack Vault</h3>
-        <p>Contains over 100+ updated player faces with realistic skin tones and beard mappings.</p>
+        <div>
+          <span class="card-badge badge-active">Ready to Download</span>
+          <h3>Face Pack Vault</h3>
+          <p>Contains over 100+ updated player faces with realistic skin tones and beard mappings.</p>
+        </div>
         <a href="#" class="card-link" style="color: var(--accent-cyan);">DOWNLOAD VAULT &rarr;</a>
       </div>
     </div>
@@ -683,8 +689,11 @@
       <h2 class="hero-title" style="font-size: 2.5rem;">COURTS & <span>ARENAS</span></h2>
       <p class="hero-desc">Custom hardwood floor designs, stadium lighting setups, and arena modifications.</p>
       <div class="dash-card" style="max-width: 450px;">
-        <h3>Arena Pack</h3>
-        <p>High-resolution flooring and stadium modifications.</p>
+        <div>
+          <span class="card-badge badge-active">Ready to Download</span>
+          <h3>Arena Pack</h3>
+          <p>High-resolution flooring and stadium modifications.</p>
+        </div>
         <a href="#" class="card-link" style="color: var(--accent-cyan);">DOWNLOAD ARENAS &rarr;</a>
       </div>
     </div>
@@ -695,8 +704,11 @@
       <h2 class="hero-title" style="font-size: 2.5rem;">PRESENTATION & <span>ENB</span></h2>
       <p class="hero-desc">Broadcast scoreboards, replay packages, overlays, and custom lighting filters.</p>
       <div class="dash-card" style="max-width: 450px;">
-        <h3>Broadcast Graphics Suite</h3>
-        <p>Modern TV-style broadcast overlays and high-contrast color grading configurations.</p>
+        <div>
+          <span class="card-badge badge-active">Ready to Download</span>
+          <h3>Broadcast Graphics Suite</h3>
+          <p>Modern TV-style broadcast overlays and high-contrast color grading configurations.</p>
+        </div>
         <a href="#" class="card-link" style="color: var(--accent-cyan);">DOWNLOAD SUITE &rarr;</a>
       </div>
     </div>
