@@ -31,6 +31,31 @@
       display: flex;
       min-height: 100vh;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Video Background Styling */
+    .bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    /* Dark Overlay to Keep Text Readable */
+    .bg-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(11, 15, 23, 0.85);
+      z-index: -1;
+      pointer-events: none;
     }
 
     /* Mobile Header */
@@ -452,6 +477,12 @@
 </head>
 <body>
 
+  <!-- Moving Video Background Loop -->
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+  </video>
+  <div class="bg-overlay"></div>
+
   <header class="mobile-header">
     <a href="index.html" class="logo">RAY<span>2K</span></a>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
@@ -501,7 +532,7 @@
 
     <div class="btn-row">
       <a href="#dashboard" class="btn btn-cyan">START HERE</a>
-      <a href="#dashboard" class="btn btn-outline">BROWSE MODS</a>
+      <a href="#dashboard" class="btn btn-outline">JOIN COMMUNITY</a>
     </div>
 
     <div class="dashboard-header" id="dashboard">
@@ -549,7 +580,7 @@
     </div>
   </main>
 
-  <a href="#" class="floating-support">
+  <a href="https://www.facebook.com/profile.php?id=61594111973222" target="_blank" rel="noopener noreferrer" class="floating-support">
     ⚡ Support RAY2K
   </a>
 
