@@ -1,461 +1,775 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Scoreboards — RAY2K</title>
-
-<style>
-
-:root {
-  --bg:#07090e;
-  --sidebar:#04060a;
-  --card:#0f1520;
-  --border:#1a2638;
-  --accent:#00f0ff;
-  --accent-hover:#00cce0;
-  --glow:rgba(0,240,255,.14);
-  --text:#fff;
-  --muted:#8290a0;
-}
-
-* {
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-body {
-  min-height:100vh;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Inter,Arial,system-ui,sans-serif;
-}
-
-aside {
-  position:fixed;
-  left:0;
-  top:0;
-
-  width:240px;
-  height:100vh;
-
-  padding:28px 16px;
-
-  background:var(--sidebar);
-  border-right:1px solid var(--border);
-
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-}
-
-.logo {
-  color:var(--text);
-  text-decoration:none;
-
-  font-size:1.55rem;
-  font-weight:950;
-}
-
-.logo span,
-.sub,
-.current {
-  color:var(--accent);
-}
-
-.sub {
-  display:block;
-  margin-top:4px;
-
-  font-size:.65rem;
-  font-weight:900;
-  letter-spacing:1px;
-}
-
-.current {
-  margin-top:30px;
-
-  padding:13px 14px;
-
-  border-left:3px solid var(--accent);
-  border-radius:6px;
-
-  background:var(--glow);
-
-  font-size:.75rem;
-  font-weight:900;
-}
-
-.bottom {
-  display:flex;
-  flex-direction:column;
-  gap:9px;
-}
-
-.clock {
-  border-top:1px solid var(--border);
-  padding-top:14px;
-}
-
-#clock {
-  color:var(--accent);
-  font-size:.78rem;
-  font-weight:950;
-}
-
-#date {
-  color:var(--muted);
-  font-size:.62rem;
-  margin-top:3px;
-}
-
-button,
-.bottom a {
-  width:100%;
-
-  padding:10px 12px;
-
-  background:var(--card);
-
-  border:1px solid var(--border);
-  border-radius:6px;
-
-  color:var(--text);
-
-  font-size:.65rem;
-  font-weight:900;
-
-  text-align:center;
-  text-decoration:none;
-  text-transform:uppercase;
-
-  cursor:pointer;
-}
-
-button:hover,
-.bottom a:hover {
-  color:var(--accent);
-  border-color:var(--accent);
-}
-
-main {
-  margin-left:240px;
-  min-height:100vh;
-  padding:55px 45px;
-}
-
-.container {
-  max-width:1100px;
-  margin:auto;
-}
-
-.kicker {
-  color:var(--accent);
-  font-size:.65rem;
-  font-weight:950;
-  letter-spacing:2px;
-}
-
-h1 {
-  margin-top:10px;
-  font-size:clamp(2rem,5vw,4rem);
-  font-weight:950;
-  text-transform:uppercase;
-}
-
-.description {
-  margin-top:12px;
-  color:var(--muted);
-  max-width:650px;
-
-  font-size:.75rem;
-  line-height:1.7;
-}
-
-.grid {
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:18px;
-
-  margin-top:35px;
-}
-
-.card {
-  padding:28px;
-
-  min-height:200px;
-
-  background:var(--card);
-
-  border:1px solid var(--border);
-  border-radius:8px;
-}
-
-.card:hover {
-  border-color:var(--accent);
-}
-
-.card h2 {
-  font-size:1rem;
-  font-weight:950;
-  text-transform:uppercase;
-}
-
-.card p {
-  margin-top:10px;
-
-  color:var(--muted);
-
-  font-size:.7rem;
-  line-height:1.7;
-}
-
-.download {
-  display:inline-block;
-
-  margin-top:22px;
-
-  padding:11px 18px;
-
-  background:var(--accent);
-  color:#000;
-
-  border-radius:4px;
-
-  font-size:.68rem;
-  font-weight:950;
-
-  text-decoration:none;
-  text-transform:uppercase;
-}
-
-@media(max-width:800px) {
-
-  aside {
-    position:relative;
-
-    width:100%;
-    height:auto;
-
-    border-right:none;
-    border-bottom:1px solid var(--border);
-  }
-
-  main {
-    margin-left:0;
-    padding:35px 20px 60px;
-  }
-
-  .grid {
-    grid-template-columns:1fr;
-  }
-
-}
-
-</style>
-</head>
-
-<body>
-
-<aside>
-
-  <div>
-
-    <a href="index.html" class="logo">
-      RAY<span>2K</span>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Scoreboards — RAY2K
+  </title>
+  <style>
+   :root {
+      --bg-dark: #0b0f17;
+      --bg-sidebar: #070a10;
+      --card-bg: #121824;
+      --card-inner: #162032;
+      --border-color: #1a2332;
+      --accent-cyan: #00f0ff;
+      --accent-cyan-hover: #00d0df;
+      --accent-glow: rgba(0, 240, 255, 0.15);
+      --text-white: #ffffff;
+      --text-muted: #808e9b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-white);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       SIDEBAR - THIS PAGE ONLY
+    ========================= */
+    aside {
+      width: 260px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px;
+      position: fixed;
+      height: 100vh;
+      z-index: 1000;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-decoration: none;
+      color: var(--text-white);
+    }
+
+    .logo span { color: var(--accent-cyan); }
+
+    .sub-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+    }
+
+    .current-page {
+      margin-top: 40px;
+      padding: 12px 16px;
+      border-left: 3px solid var(--accent-cyan);
+      border-radius: 6px;
+      background: var(--accent-glow);
+      color: var(--accent-cyan);
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .sidebar-footer {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+      line-height: 1.6;
+    }
+
+    .sidebar-footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .sidebar-footer a:hover { color: var(--accent-cyan); }
+
+    /* =========================
+       MAIN
+    ========================= */
+    main {
+      margin-left: 260px;
+      flex: 1;
+      padding: 30px 50px 90px;
+      width: 100%;
+      max-width: 1500px;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card-bg);
+      color: var(--text-white);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 10px 16px;
+      margin-bottom: 28px;
+      font-size: 0.75rem;
+      font-weight: 900;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+    }
+
+    .back-button:hover {
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      background: var(--accent-glow);
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
+      margin-bottom: 22px;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .section-title span { color: var(--accent-cyan); }
+
+    .pack-count {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* =========================
+       GRID
+    ========================= */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 50px;
+    }
+
+    .mod-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .mod-card:hover {
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.08);
+    }
+
+    .mod-preview {
+      height: 160px;
+      background: #000000;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mod-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .mod-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--accent-glow);
+      color: var(--accent-cyan);
+      border: 1px solid var(--accent-cyan);
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      z-index: 2;
+    }
+
+    .mod-content { padding: 16px; }
+
+    .mod-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: var(--text-white);
+      text-transform: uppercase;
+    }
+
+    .mod-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .mod-footer {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-download {
+      flex: 1;
+      background: var(--accent-cyan);
+      color: #000;
+      text-align: center;
+      padding: 9px;
+      border-radius: 4px;
+      font-weight: 900;
+      font-size: 0.75rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-download:hover { background: var(--accent-cyan-hover); }
+
+    .btn-id {
+      background: var(--card-inner);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-decoration: none;
+    }
+
+    .btn-id:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    /* =========================
+       SUPPORT / CLOCK / THEME
+    ========================= */
+    .floating-support {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--accent-cyan);
+      color: #000000;
+      border: none;
+      border-radius: 30px;
+      padding: 12px 20px;
+      font-weight: 900;
+      font-size: 0.8rem;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(0, 240, 255, 0.3);
+      z-index: 1100;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .floating-support:hover {
+      background: var(--accent-cyan-hover);
+      transform: translateY(-2px);
+    }
+
+    .tools {
+      position: fixed;
+      left: 282px;
+      bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 1100;
+    }
+
+    .clock-box {
+      padding: 8px 11px;
+      background: rgba(18, 24, 36, 0.95);
+      border: 1px solid var(--border-color);
+      border-radius: 7px;
+      min-width: 150px;
+    }
+
+    .clock-time {
+      color: var(--accent-cyan);
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .clock-date {
+      color: var(--text-muted);
+      font-size: 0.56rem;
+      margin-top: 2px;
+    }
+
+    .theme-button {
+      background: var(--card-bg);
+      color: var(--text-white);
+      border: 1px solid var(--border-color);
+      border-radius: 7px;
+      padding: 9px 11px;
+      font-size: 0.62rem;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .theme-button:hover {
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+    }
+
+    /* =========================
+       THEMES
+    ========================= */
+    body.red {
+      --accent-cyan: #ff3030;
+      --accent-cyan-hover: #df2020;
+      --accent-glow: rgba(255, 48, 48, 0.15);
+    }
+
+    body.light {
+      --bg-dark: #eef1f5;
+      --bg-sidebar: #ffffff;
+      --card-bg: #ffffff;
+      --card-inner: #edf1f5;
+      --border-color: #d7dee8;
+      --accent-cyan: #087cff;
+      --accent-cyan-hover: #0666d6;
+      --accent-glow: rgba(8, 124, 255, 0.12);
+      --text-white: #111827;
+      --text-muted: #687386;
+    }
+
+    body.light .mod-preview { background: #e8edf2; }
+
+    body.black {
+      --bg-dark: #000000;
+      --bg-sidebar: #000000;
+      --card-bg: #080808;
+      --card-inner: #111111;
+      --border-color: #202020;
+      --accent-cyan: #ffffff;
+      --accent-cyan-hover: #d9d9d9;
+      --accent-glow: rgba(255, 255, 255, 0.08);
+      --text-white: #ffffff;
+      --text-muted: #777777;
+    }
+
+    body.black .mod-preview { background: #000000; }
+
+    /* =========================
+       MOBILE
+    ========================= */
+    @media (max-width: 768px) {
+      aside {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      main {
+        margin-left: 0;
+        padding: 24px 18px 100px;
+      }
+
+      .grid { grid-template-columns: 1fr; }
+
+      .tools {
+        left: 14px;
+        bottom: 14px;
+      }
+
+      .floating-support {
+        right: 14px;
+        bottom: 14px;
+      }
+
+      .page-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+  <style id="ray2k-folder-overrides">
+   .folder-side{position:fixed;left:0;top:0;width:220px;height:100vh;background:#04060a;border-right:1px solid #1a2638;padding:24px 14px;display:flex;flex-direction:column;justify-content:space-between;z-index:9998}
+.folder-side .folder-brand{display:block;font-size:24px;font-weight:950;letter-spacing:1px;text-decoration:none;color:#fff}.folder-side .folder-brand span{color:#00f0ff}
+.folder-side .folder-sub{display:block;color:#00f0ff;font-size:10px;font-weight:900;letter-spacing:1px;margin-top:3px}
+.folder-current{margin-top:28px;padding:12px;border-left:3px solid #00f0ff;background:rgba(0,240,255,.12);border-radius:6px;color:#00f0ff;font-size:11px;font-weight:900;letter-spacing:.7px}
+.folder-bottom{display:flex;flex-direction:column;gap:8px}.folder-clock{border-top:1px solid #1a2638;padding-top:11px;color:#718094;font-size:9px;line-height:1.5}.folder-clock strong{color:#00f0ff;font-size:11px}.folder-btn{display:block;width:100%;padding:9px 10px;background:#0f1520;border:1px solid #1a2638;border-radius:5px;color:#fff;font-size:10px;font-weight:900;text-align:center;text-decoration:none;text-transform:uppercase;cursor:pointer}.folder-btn:hover{border-color:#00f0ff;color:#00f0ff}.folder-support{position:fixed;right:22px;bottom:22px;z-index:9999;background:#00f0ff;color:#000;border-radius:30px;padding:10px 16px;font-size:11px;font-weight:950;text-decoration:none;box-shadow:0 4px 20px rgba(0,240,255,.28)}
+@media(max-width:768px){.folder-side{position:relative;width:100%;height:auto;border-right:0;border-bottom:1px solid #1a2638}.folder-bottom{margin-top:25px}main{margin-left:0!important}.folder-support{right:12px;bottom:12px}}
+  </style>
+ </head>
+ <body>
+  <aside class="folder-side">
+   <div>
+    <a class="folder-brand" href="index.html">
+     RAY
+     <span>
+      2K
+     </span>
     </a>
-
-    <span class="sub">
-      NBA 2K14 LAB
+    <span class="folder-sub">
+     NBA 2K14 LAB
     </span>
-
-    <div class="current">
-      SCOREBOARDS
+    <div class="folder-current">
+     SCOREBOARDS
     </div>
-
-  </div>
-
-  <div class="bottom">
-
-    <div class="clock">
-      <div id="clock">00:00:00</div>
-      <div id="date">Loading...</div>
+   </div>
+   <div class="folder-bottom">
+    <div class="folder-clock">
+     <strong id="folderTime">
+      --:--:--
+     </strong>
+     <br/>
+     <span id="folderDate">
+      Loading...
+     </span>
     </div>
-
-    <button onclick="changeTheme()">
-      THEME: CYAN
+    <button class="folder-btn" id="folderThemeBtn" type="button">
+     THEME: CYAN
     </button>
-
-    <a
-      href="https://www.facebook.com/profile.php?id=61594111973222"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      JOIN COMMUNITY
+    <a class="folder-btn" href="https://www.facebook.com/profile.php?id=61594111973222" rel="noopener noreferrer" target="_blank">
+     JOIN COMMUNITY
     </a>
-
-    <a href="index.html">
-      BACK TO RAY2K
+    <a class="folder-btn" href="index.html">
+     BACK TO RAY2K
     </a>
-
-  </div>
-
-</aside>
-
-<main>
-
-<div class="container">
-
-  <div class="kicker">
-    NBA 2K14 ARCHIVE
-  </div>
-
-  <h1>
-    SCOREBOARDS
-  </h1>
-
-  <p class="description">
-    Browse RAY2K scoreboard and presentation downloads.
-  </p>
-
-  <div class="grid">
-
-    <div class="card">
-
-      <h2>
-        NBA 2K14 SCOREBOARDS
-      </h2>
-
-      <p>
-        Scoreboard and presentation files will be listed here.
-      </p>
-
-      <a href="#" class="download">
+   </div>
+  </aside>
+  <main style="margin-left:220px">
+   <a class="back-button" href="index.html">
+    ← BACK TO RAY2K
+   </a>
+   <div class="page-header">
+    <div class="section-title">
+     SCOREBOARDS
+     <span>
+      ARCHIVE
+     </span>
+    </div>
+    <div class="pack-count">
+     7 PACKS
+    </div>
+   </div>
+   <div class="grid">
+    <!-- 1. NBA ON ESPN -->
+    <div class="mod-card">
+     <div class="mod-preview">
+      <span class="mod-badge">
+       NEW
+      </span>
+      <img alt="scoreboard NBA ON ESPN" src="espn.jpg"/>
+     </div>
+     <div class="mod-content">
+      <div class="mod-title">
+       scoreboard NBA ON ESPN
+      </div>
+      <div class="mod-sub">
+       Broadcast Scoreboard
+      </div>
+      <div class="mod-footer">
+       <a class="btn-download" href="https://www.mediafire.com/file/d4leedzryctuedo/scoreboard%20NBA%20ON%20ESPN.rar/file" rel="noopener noreferrer" target="_blank">
         DOWNLOAD
-      </a>
-
+       </a>
+       <a class="btn-id" href="#">
+        INFO
+       </a>
+      </div>
+     </div>
     </div>
-
-    <div class="card">
-
-      <h2>
-        PRESENTATION
-      </h2>
-
-      <p>
-        Additional presentation content and future releases.
-      </p>
-
-      <a href="#" class="download">
-        COMING SOON
-      </a>
-
+    <!-- 2. NBA NEXGEN -->
+    <div class="mod-card">
+     <div class="mod-preview">
+      <span class="mod-badge">
+       NEW
+      </span>
+      <img alt="scoreboard NBA NEXGEN" src="nexgen.jpg"/>
+     </div>
+     <div class="mod-content">
+      <div class="mod-title">
+       scoreboard NBA NEXGEN
+      </div>
+      <div class="mod-sub">
+       Modern TV Scoreboard
+      </div>
+      <div class="mod-footer">
+       <a class="btn-download" href="https://www.mediafire.com/file/oj243rxj6u7e26w/Scoreboard%20NBA%20NEXGEN.rar/file" rel="noopener noreferrer" target="_blank">
+        DOWNLOAD
+       </a>
+       <a class="btn-id" href="#">
+        INFO
+       </a>
+      </div>
+     </div>
     </div>
-
+    <!-- 3. NBA 2K24 - 25 -->
+    <div class="mod-card">
+     <div class="mod-preview">
+      <span class="mod-badge">
+       NEW
+      </span>
+      <img alt="scoreboard NBA 2k24 - 25" src="2k24-25.jpg"/>
+     </div>
+     <div class="mod-content">
+      <div class="mod-title">
+       scoreboard NBA 2k24 - 25
+      </div>
+      <div class="mod-sub">
+       Next-Gen Scoreboard Suite
+      </div>
+      <div class="mod-footer">
+       <a class="btn-download" href="https://www.mediafire.com/file/pwdpesetvdx3y3v/scoreboard%20NBA%202k24%20-%2025.rar/file" rel="noopener noreferrer" target="_blank">
+        DOWNLOAD
+       </a>
+       <a class="btn-id" href="#">
+        INFO
+       </a>
+      </div>
+     </div>
+    </div>
+    <!-- 4. NBA 2K26 -->
+    <div class="mod-card">
+     <div class="mod-preview">
+      <span class="mod-badge">
+       NEW
+      </span>
+      <img alt="scoreboard NBA 2K26" src="2k26.jpg"/>
+     </div>
+     <div class="mod-content">
+      <div class="mod-title">
+       scoreboard NBA 2K26
+      </div>
+      <div class="mod-sub">
+       Futuristic Scoreboard
+      </div>
+      <div class="mod-footer">
+       <a class="btn-download" href="https://www.mediafire.com/file/ebp2t3eh0be27nr/scoreboard%20NBA%202k26.rar/file" rel="noopener noreferrer" target="_blank">
+        DOWNLOAD
+       </a>
+       <a class="btn-id" href="#">
+        INFO
+       </a>
+      </div>
+     </div>
+    </div>
+    <!-- 5. NBA 2K25 -->
+    <div class="mod-card">
+     <div class="mod-preview">
+      <span class="mod-badge">
+       NEW
+      </span>
+      <img alt="scoreboard NBA 2K25" src="2k25.jpg"/>
+     </div>
+     <div class="mod-content">
+      <div class="mod-title">
+       scoreboard NBA 2K25
+      </div>
+      <div class="mod-sub">
+       Clean Broadcast Layout
+      </div>
+      <div class="mod-footer">
+       <a class="btn-download" href="https://www.mediafire.com/file/287fwrpjjql6ae9/scoreboard%20NBA%202K25.rar/file" rel="noopener noreferrer" target="_blank">
+        DOWNLOAD
+       </a>
+       <a class="btn-id" href="#">
+        INFO
+       </a>
+      </div>
+     </div>
+    </div>
+    <!-- 6. NBA NBC Sports -->
+    <div class="mod-card">
+     <div class="mod-preview">
+      <span class="mod-badge">
+       NEW
+      </span>
+      <img alt="scoreboard NBA NBC Sports" src="nbc.jpg"/>
+     </div>
+     <div class="mod-content">
+      <div class="mod-title">
+       scoreboard NBA NBC Sports
+      </div>
+      <div class="mod-sub">
+       Classic NBC Network Skin
+      </div>
+      <div class="mod-footer">
+       <a class="btn-download" href="https://www.mediafire.com/file/9ac52fk5z3674nc/scoreboard%20NBA%20NBC%20Sports.rar/file" rel="noopener noreferrer" target="_blank">
+        DOWNLOAD
+       </a>
+       <a class="btn-id" href="#">
+        INFO
+       </a>
+      </div>
+     </div>
+    </div>
+    <!-- 7. ESPN V2 -->
+    <div class="mod-card">
+     <div class="mod-preview">
+      <span class="mod-badge">
+       NEW
+      </span>
+      <img alt="scoreboard ESPN V2" src="espn-v2.jpg"/>
+     </div>
+     <div class="mod-content">
+      <div class="mod-title">
+       scoreboard ESPN V2
+      </div>
+      <div class="mod-sub">
+       Updated Broadcast Overlay
+      </div>
+      <div class="mod-footer">
+       <a class="btn-download" href="https://www.mediafire.com/file/pe58eirf7gont1x/scoreboard%20NBA%20ESPN-V2.rar/file" rel="noopener noreferrer" target="_blank">
+        DOWNLOAD
+       </a>
+       <a class="btn-id" href="#">
+        INFO
+       </a>
+      </div>
+     </div>
+    </div>
+   </div>
+  </main>
+  <a class="floating-support" href="https://www.facebook.com/profile.php?id=61594111973222" rel="noopener noreferrer" target="_blank">
+   ⚡ SUPPORT RAY2K
+  </a>
+  <div class="tools">
+   <div class="clock-box">
+    <div class="clock-time" id="clockTime">
+     --:--:--
+    </div>
+    <div class="clock-date" id="clockDate">
+     Loading date...
+    </div>
+   </div>
+   <button class="theme-button" id="themeButton" type="button">
+    THEME
+   </button>
   </div>
+  <script>
+   /* =========================
+       CLOCK + DATE
+    ========================= */
+    function updateClock() {
+      const now = new Date();
 
-</div>
+      document.getElementById("clockTime").textContent =
+        now.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit"
+        });
 
-</main>
+      document.getElementById("clockDate").textContent =
+        now.toLocaleDateString([], {
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+          year: "numeric"
+        });
+    }
 
-<script>
-
-function updateClock() {
-
-  const now = new Date();
-
-  document.getElementById("clock").textContent =
-    now.toLocaleTimeString([], {
-      hour:"2-digit",
-      minute:"2-digit",
-      second:"2-digit"
-    });
-
-  document.getElementById("date").textContent =
-    now.toLocaleDateString([], {
-      weekday:"short",
-      month:"short",
-      day:"numeric",
-      year:"numeric"
-    });
-}
-
-updateClock();
-setInterval(updateClock,1000);
+    updateClock();
+    setInterval(updateClock, 1000);
 
 
-const themes = [
-  ["CYAN","#00f0ff","#00cce0","rgba(0,240,255,.14)"],
-  ["RED","#ff3030","#df2020","rgba(255,48,48,.14)"],
-  ["LIGHT","#087cff","#0666d6","rgba(8,124,255,.12)"],
-  ["BLACK","#fff","#d9d9d9","rgba(255,255,255,.08)"]
-];
+    /* =========================
+       THEME SWITCHER
+    ========================= */
+    const themeButton =
+      document.getElementById("themeButton");
 
-let themeIndex =
-  Number(localStorage.getItem("ray2kTheme") || 0);
+    const themes = [
+      "",
+      "red",
+      "black",
+      "light"
+    ];
 
-function applyTheme() {
+    const themeNames = [
+      "CYAN",
+      "RED",
+      "BLACK",
+      "LIGHT"
+    ];
 
-  const t = themes[themeIndex];
+    let themeIndex =
+      Number(localStorage.getItem("ray2kTheme") || 0);
 
-  document.documentElement.style.setProperty("--accent",t[1]);
-  document.documentElement.style.setProperty("--accent-hover",t[2]);
-  document.documentElement.style.setProperty("--glow",t[3]);
+    if (!Number.isInteger(themeIndex) ||
+        themeIndex < 0 ||
+        themeIndex >= themes.length) {
+      themeIndex = 0;
+    }
 
-  if(t[0] === "LIGHT") {
+    function applyTheme() {
+      document.body.classList.remove(
+        "red",
+        "black",
+        "light"
+      );
 
-    document.documentElement.style.setProperty("--bg","#eef1f5");
-    document.documentElement.style.setProperty("--sidebar","#fff");
-    document.documentElement.style.setProperty("--card","#fff");
-    document.documentElement.style.setProperty("--border","#d8dee8");
-    document.documentElement.style.setProperty("--text","#111827");
-    document.documentElement.style.setProperty("--muted","#687386");
+      if (themes[themeIndex]) {
+        document.body.classList.add(
+          themes[themeIndex]
+        );
+      }
 
-  } else if(t[0] === "BLACK") {
+      themeButton.textContent =
+        "THEME: " + themeNames[themeIndex];
+    }
 
-    document.documentElement.style.setProperty("--bg","#000");
-    document.documentElement.style.setProperty("--sidebar","#000");
-    document.documentElement.style.setProperty("--card","#080808");
-    document.documentElement.style.setProperty("--border","#202020");
-    document.documentElement.style.setProperty("--text","#fff");
-    document.documentElement.style.setProperty("--muted","#777");
+    themeButton.addEventListener(
+      "click",
+      function () {
+        themeIndex =
+          (themeIndex + 1) % themes.length;
 
-  } else {
+        localStorage.setItem(
+          "ray2kTheme",
+          themeIndex
+        );
 
-    document.documentElement.style.setProperty("--bg","#07090e");
-    document.documentElement.style.setProperty("--sidebar","#04060a");
-    document.documentElement.style.setProperty("--card","#0f1520");
-    document.documentElement.style.setProperty("--border","#1a2638");
-    document.documentElement.style.setProperty("--text","#fff");
-    document.documentElement.style.setProperty("--muted","#8290a0");
+        applyTheme();
+      }
+    );
 
-  }
-
-  document.querySelector("button").textContent =
-    "THEME: " + t[0];
-}
-
-function changeTheme() {
-
-  themeIndex++;
-
-  if(themeIndex >= themes.length)
-    themeIndex = 0;
-
-  localStorage.setItem(
-    "ray2kTheme",
-    themeIndex
-  );
-
-  applyTheme();
-}
-
-applyTheme();
-
-</script>
-
-</body>
+    applyTheme();
+  </script>
+  <a class="folder-support" href="https://www.facebook.com/profile.php?id=61594111973222" rel="noopener noreferrer" target="_blank">
+   ⚡ SUPPORT RAY2K
+  </a>
+  <script id="ray2k-folder-tools">
+   (function(){
+const key='ray2kFolderTheme';const modes=['CYAN','RED','BLACK','LIGHT'];let i=Math.max(0,modes.indexOf(localStorage.getItem(key)||'CYAN'));const root=document.documentElement,body=document.body;
+function apply(){const m=modes[i];let accent='#00f0ff',bg='#07090e',side='#04060a',card='#0f1520',line='#1a2638',text='#fff',muted='#808e9b';if(m==='RED'){accent='#ff3030';bg='#090608';line='#3a1b23'}if(m==='BLACK'){accent='#fff';bg='#000';side='#000';card='#080808';line='#222';muted='#777'}if(m==='LIGHT'){accent='#087cff';bg='#eef2f6';side='#fff';card='#fff';line='#d8dee8';text='#111827';muted='#687386'}root.style.setProperty('--accent-cyan',accent);root.style.setProperty('--bg-dark',bg);root.style.setProperty('--sidebar-bg',side);root.style.setProperty('--card-bg',card);root.style.setProperty('--border-color',line);root.style.setProperty('--text-white',text);root.style.setProperty('--text-muted',muted);const b=document.getElementById('folderThemeBtn');if(b)b.textContent='THEME: '+m;localStorage.setItem(key,m)}
+function cycle(){i=(i+1)%modes.length;apply()}const b=document.getElementById('folderThemeBtn');if(b)b.addEventListener('click',cycle);
+function clock(){const d=new Date();const t=document.getElementById('folderTime'),dt=document.getElementById('folderDate');if(t)t.textContent=d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});if(dt)dt.textContent=d.toLocaleDateString([], {weekday:'short',month:'short',day:'numeric',year:'numeric'})}clock();setInterval(clock,1000);apply();
+})();
+  </script>
+ </body>
 </html>
