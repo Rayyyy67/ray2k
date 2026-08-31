@@ -33,7 +33,6 @@
       position: relative;
     }
 
-    /* Video Background Styling */
     .bg-video {
       position: fixed;
       top: 0;
@@ -51,12 +50,11 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(11, 15, 23, 0.85);
+      background: rgba(11, 15, 23, 0.88);
       z-index: -1;
       pointer-events: none;
     }
 
-    /* Mobile Header */
     .mobile-header {
       display: none;
       position: fixed;
@@ -96,7 +94,6 @@
       display: block;
     }
 
-    /* Sidebar Nav */
     aside {
       width: 260px;
       background-color: var(--bg-sidebar);
@@ -109,11 +106,6 @@
       height: 100vh;
       z-index: 1002;
       transition: transform 0.3s ease-in-out;
-      transform: translateX(-100%);
-    }
-
-    aside.visible {
-      transform: translateX(0);
     }
 
     .brand {
@@ -177,17 +169,11 @@
       padding-top: 16px;
     }
 
-    /* Main Area */
     main {
-      margin-left: 0;
+      margin-left: 260px;
       flex: 1;
       padding: 30px 50px;
-      width: 100%;
-      transition: margin-left 0.3s ease;
-    }
-
-    main.sidebar-active {
-      margin-left: 260px;
+      width: calc(100% - 260px);
     }
 
     .top-bar {
@@ -233,9 +219,9 @@
     }
 
     .hero-title {
-      font-size: 4rem;
+      font-size: 3.5rem;
       font-weight: 900;
-      line-height: 1;
+      line-height: 1.1;
       letter-spacing: -1px;
       margin-bottom: 20px;
     }
@@ -246,7 +232,7 @@
 
     .hero-desc {
       color: var(--text-muted);
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       max-width: 650px;
       line-height: 1.6;
       margin-bottom: 30px;
@@ -255,7 +241,7 @@
     .btn-row {
       display: flex;
       gap: 16px;
-      margin-bottom: 60px;
+      margin-bottom: 50px;
       flex-wrap: wrap;
     }
 
@@ -280,7 +266,7 @@
 
     .btn-cyan:hover {
       background-color: var(--accent-cyan-hover);
-      transform: translateY(-2px) scale(1.03);
+      transform: translateY(-2px);
       box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
     }
 
@@ -293,14 +279,14 @@
     .btn-outline:hover {
       border-color: var(--accent-cyan);
       color: var(--accent-cyan);
-      transform: translateY(-2px) scale(1.03);
+      transform: translateY(-2px);
       box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
     }
 
     .dashboard-header {
       border-top: 1px solid var(--border-color);
-      padding-top: 40px;
-      margin-bottom: 30px;
+      padding-top: 30px;
+      margin-bottom: 24px;
     }
 
     .dash-tag {
@@ -332,24 +318,27 @@
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 10px;
-      padding: 24px;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       position: relative;
-      overflow: hidden;
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .dash-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 3px;
-      background: var(--accent-cyan);
-      transition: width 0.3s ease;
+    .dash-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
     }
 
     .dash-card.active-card {
@@ -360,10 +349,6 @@
       border-color: var(--accent-cyan);
       transform: translateY(-3px);
       box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
-    }
-
-    .dash-card.active-card:hover::before {
-      width: 100%;
     }
 
     .dash-card.locked-card {
@@ -396,7 +381,7 @@
     }
 
     .dash-card h3 {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 800;
       margin-bottom: 8px;
     }
@@ -409,7 +394,7 @@
     }
 
     .card-link {
-      color: var(--text-white);
+      color: var(--accent-cyan);
       text-decoration: none;
       font-weight: 800;
       font-size: 0.8rem;
@@ -418,11 +403,10 @@
       gap: 6px;
     }
 
-    .dash-card.active-card .card-link:hover {
-      color: var(--accent-cyan);
+    .card-link:hover {
+      text-decoration: underline;
     }
 
-    /* Content Views */
     .content-view {
       display: none;
       opacity: 0;
@@ -493,19 +477,17 @@
       aside.open {
         transform: translateX(0);
       }
-      main.sidebar-active {
+      main {
         margin-left: 0;
         padding: 80px 20px 40px;
-      }
-      main {
-        padding: 80px 20px 40px;
+        width: 100%;
       }
       .top-bar {
         flex-direction: column;
         align-items: flex-start;
       }
       .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.3rem;
       }
       .btn-row {
         flex-direction: column;
@@ -530,7 +512,7 @@
 
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-  <aside id="sidebar" class="visible">
+  <aside id="sidebar">
     <div>
       <div class="brand">
         <a href="#" class="logo" onclick="switchView('home', event)">RAY<span>2K</span></a>
@@ -542,7 +524,7 @@
         <li><a href="#" id="nav-rosters" onclick="switchView('rosters', event)">ROSTER UPDATES</a></li>
         <li><a href="#" id="nav-cyberfaces" onclick="switchView('cyberfaces', event)">CYBERFACES</a></li>
         <li><a href="#" id="nav-courts" onclick="switchView('courts', event)">COURTS & ARENAS</a></li>
-        <li><a href="#" id="nav-presentation" onclick="switchView('presentation', event)">PRESENTATION & ENB</a></li>
+        <li><a href="#" id="nav-presentation" onclick="switchView('presentation', event)">SCOREBOARDS & ENB</a></li>
       </ul>
     </div>
 
@@ -552,7 +534,7 @@
     </div>
   </aside>
 
-  <main id="mainContainer" class="sidebar-active">
+  <main id="mainContainer">
     <div class="top-bar">
       <div class="notice">
         <span class="badge-dot"></span>
@@ -561,155 +543,180 @@
       <div class="time-badge">STATUS: ONLINE</div>
     </div>
 
-    <!-- VIEW 1: HOME LANDING -->
-    <div id="view-home" class="content-view">
+    <!-- VIEW 1: HOME -->
+    <div id="view-home" class="content-view active-view">
       <div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
         <span class="badge-active card-badge">LAB</span>
         <span class="card-badge badge-locked">Roster 2026</span>
         <span class="card-badge badge-locked">Updated Aug 2026</span>
-        <span class="card-badge badge-locked">PC / Windows</span>
       </div>
 
       <h1 class="hero-title">NBA 2K14,<br><span>REBUILT.</span></h1>
-      <p class="hero-desc">Roster updates, dedicated mods, IDs, tools, fixes, and installation guides — organized in one place.</p>
+      <p class="hero-desc">Downloadable scoreboards, player cyberfaces, courts, presentation files, and custom rosters.</p>
 
       <div class="btn-row">
-        <a href="#dashboard" class="btn btn-cyan" onclick="switchView('dashboard', event)">START HERE</a>
+        <a href="#dashboard" class="btn btn-cyan" onclick="switchView('dashboard', event)">EXPLORE LAB</a>
         <a href="https://www.facebook.com/profile.php?id=61594111973222" target="_blank" rel="noopener noreferrer" class="btn btn-outline">JOIN COMMUNITY</a>
       </div>
 
       <div class="dashboard-header" id="dashboard">
         <span class="dash-tag">RAY2K LAB</span>
-        <h2 class="dash-title">LAB DASHBOARD</h2>
-        <p class="dash-subtitle">Choose your version below to access active archives.</p>
+        <h2 class="dash-title">SELECT ARCHIVE</h2>
+        <p class="dash-subtitle">Choose your platform version below.</p>
       </div>
 
       <div class="grid">
-        <div class="dash-card active-card" onclick="switchView('dashboard')">
-          <div>
-            <span class="card-badge badge-active">Available</span>
-            <h3>NBA 2K14</h3>
-            <p>The original QOL2K archive featuring rosters, cyberfaces, courts, and presentation mods.</p>
+        <div class="dash-card active-card" onclick="switchView('dashboard', event)">
+          <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80" alt="NBA 2K14">
+          <div class="card-body">
+            <div>
+              <span class="card-badge badge-active">Available</span>
+              <h3>NBA 2K14 Archive</h3>
+              <p>Full database of scoreboards, cyberfaces, court textures, and roster updates.</p>
+            </div>
+            <span class="card-link">ENTER ARCHIVE &rarr;</span>
           </div>
-          <span class="card-link">ENTER ARCHIVE &rarr;</span>
         </div>
 
         <div class="dash-card locked-card">
-          <div>
-            <span class="card-badge badge-locked">Locked</span>
-            <h3>NBA 2K23</h3>
-            <p>Next-generation roster and visual modification archive.</p>
+          <img src="https://images.unsplash.com/photo-1519766304817-4f37bda74a29?auto=format&fit=crop&w=600&q=80" alt="NBA 2K23">
+          <div class="card-body">
+            <div>
+              <span class="card-badge badge-locked">Locked</span>
+              <h3>NBA 2K23 Next-Gen</h3>
+              <p>Upcoming next-generation modding tools and graphics packages.</p>
+            </div>
+            <span class="card-link" style="color: var(--text-muted);">LOCKED &rarr;</span>
           </div>
-          <span class="card-link" style="color: var(--text-muted);">LOCKED &rarr;</span>
         </div>
       </div>
     </div>
 
-    <!-- VIEW 2: DASHBOARD / LAB ARCHIVE -->
-    <div id="view-dashboard" class="content-view active-view">
-      <button class="back-btn" onclick="switchView('home')">&larr; Back to Home</button>
+    <!-- VIEW 2: DASHBOARD -->
+    <div id="view-dashboard" class="content-view">
+      <button class="back-btn" onclick="switchView('home', event)">&larr; Back to Home</button>
       <div class="dashboard-header" style="border-top: none; padding-top: 0;">
         <span class="dash-tag">NBA 2K14 LAB</span>
-        <h2 class="dash-title">LAB ARCHIVE</h2>
-        <p class="dash-subtitle">Access active mods or check incoming updates.</p>
+        <h2 class="dash-title">MOD CATEGORIES</h2>
+        <p class="dash-subtitle">Select a category below to download image assets and mod packs.</p>
       </div>
       <br>
       <div class="grid">
-        <div class="dash-card active-card" onclick="switchView('rosters')">
-          <div>
-            <span class="card-badge badge-active">Available</span>
-            <h3>ROSTER UPDATES</h3>
-            <p>Download current season rosters, draft classes, and team rotations.</p>
+        <div class="dash-card active-card" onclick="switchView('rosters', event)">
+          <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" alt="Rosters">
+          <div class="card-body">
+            <div>
+              <span class="card-badge badge-active">Active</span>
+              <h3>ROSTER UPDATES</h3>
+              <p>Current season transactions, rotas, and draft classes.</p>
+            </div>
+            <span class="card-link">OPEN CATEGORY &rarr;</span>
           </div>
-          <span class="card-link">OPEN ARCHIVE &rarr;</span>
         </div>
 
-        <div class="dash-card active-card" onclick="switchView('cyberfaces')">
-          <div>
-            <span class="card-badge badge-active">Available</span>
-            <h3>CYBERFACES</h3>
-            <p>Updated face scans, headshapes, and skin textures for modern players.</p>
+        <div class="dash-card active-card" onclick="switchView('cyberfaces', event)">
+          <img src="https://images.unsplash.com/photo-1519766304817-4f37bda74a29?auto=format&fit=crop&w=600&q=80" alt="Cyberfaces">
+          <div class="card-body">
+            <div>
+              <span class="card-badge badge-active">Active</span>
+              <h3>CYBERFACES</h3>
+              <p>High-definition face textures and precise ID mappings.</p>
+            </div>
+            <span class="card-link">OPEN CATEGORY &rarr;</span>
           </div>
-          <span class="card-link">OPEN ARCHIVE &rarr;</span>
         </div>
 
-        <div class="dash-card active-card" onclick="switchView('courts')">
-          <div>
-            <span class="card-badge badge-active">Available</span>
-            <h3>COURTS & ARENAS</h3>
-            <p>3D stadium lighting, floor updates, and custom arena textures.</p>
+        <div class="dash-card active-card" onclick="switchView('courts', event)">
+          <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80" alt="Courts">
+          <div class="card-body">
+            <div>
+              <span class="card-badge badge-active">Active</span>
+              <h3>COURTS & ARENAS</h3>
+              <p>3D stadium floors, reflections, and stadium lighting configs.</p>
+            </div>
+            <span class="card-link">OPEN CATEGORY &rarr;</span>
           </div>
-          <span class="card-link">OPEN ARCHIVE &rarr;</span>
         </div>
 
-        <div class="dash-card active-card" onclick="switchView('presentation')">
-          <div>
-            <span class="card-badge badge-active">Available</span>
-            <h3>PRESENTATION & ENB</h3>
-            <p>Scoreboards, replay wipes, and custom visual graphics suites.</p>
+        <div class="dash-card active-card" onclick="switchView('presentation', event)">
+          <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80" alt="Scoreboards">
+          <div class="card-body">
+            <div>
+              <span class="card-badge badge-active">Active</span>
+              <h3>SCOREBOARDS & ENB</h3>
+              <p>Downloadable TV broadcast scoreboards and graphical enhancements.</p>
+            </div>
+            <span class="card-link">OPEN CATEGORY &rarr;</span>
           </div>
-          <span class="card-link">OPEN ARCHIVE &rarr;</span>
         </div>
       </div>
     </div>
 
-    <!-- VIEW 3: ROSTER UPDATES CONTENT -->
+    <!-- VIEW 3: ROSTERS -->
     <div id="view-rosters" class="content-view">
-      <button class="back-btn" onclick="switchView('dashboard')">&larr; Back to Dashboard</button>
-      <h2 class="hero-title" style="font-size: 2.5rem;">ROSTER <span>UPDATES</span></h2>
-      <p class="hero-desc">Access official up-to-date roster files, transactions, and ratings sheets.</p>
-      <div class="dash-card" style="max-width: 450px;">
-        <div>
-          <span class="card-badge badge-active">Ready to Download</span>
-          <h3>Latest Season Roster Pack</h3>
-          <p>Includes updated contracts, rotation adjustments, and rookie cyberface mappings.</p>
+      <button class="back-btn" onclick="switchView('dashboard', event)">&larr; Back to Dashboard</button>
+      <h2 class="hero-title" style="font-size: 2.2rem;">ROSTER <span>UPDATES</span></h2>
+      <p class="hero-desc">Download the latest official roster archives directly.</p>
+      <div class="dash-card" style="max-width: 400px;">
+        <div class="card-body">
+          <div>
+            <span class="card-badge badge-active">Downloadable</span>
+            <h3>Latest Season Roster Pack</h3>
+            <p>Updated contracts, rotations, and player ratings.</p>
+          </div>
+          <a href="#" class="card-link">DOWNLOAD PACK (.ZIP) &rarr;</a>
         </div>
-        <a href="#" class="card-link" style="color: var(--accent-cyan);">DOWNLOAD PACK (ZIP) &rarr;</a>
       </div>
     </div>
 
-    <!-- VIEW 4: CYBERFACES CONTENT -->
+    <!-- VIEW 4: CYBERFACES -->
     <div id="view-cyberfaces" class="content-view">
-      <button class="back-btn" onclick="switchView('dashboard')">&larr; Back to Dashboard</button>
-      <h2 class="hero-title" style="font-size: 2.5rem;">PLAYER <span>CYBERFACES</span></h2>
-      <p class="hero-desc">High-definition face textures and custom headmodels mapped with exact IDs.</p>
-      <div class="dash-card" style="max-width: 450px;">
-        <div>
-          <span class="card-badge badge-active">Ready to Download</span>
-          <h3>Face Pack Vault</h3>
-          <p>Contains over 100+ updated player faces with realistic skin tones and beard mappings.</p>
+      <button class="back-btn" onclick="switchView('dashboard', event)">&larr; Back to Dashboard</button>
+      <h2 class="hero-title" style="font-size: 2.2rem;">PLAYER <span>CYBERFACES</span></h2>
+      <p class="hero-desc">Download face textures and headmodels with complete ID logs.</p>
+      <div class="dash-card" style="max-width: 400px;">
+        <div class="card-body">
+          <div>
+            <span class="card-badge badge-active">Downloadable</span>
+            <h3>HD Face Pack Vault</h3>
+            <p>Over 100+ updated realistic player scans and textures.</p>
+          </div>
+          <a href="#" class="card-link">DOWNLOAD VAULT (.ZIP) &rarr;</a>
         </div>
-        <a href="#" class="card-link" style="color: var(--accent-cyan);">DOWNLOAD VAULT &rarr;</a>
       </div>
     </div>
 
-    <!-- VIEW 5: COURTS & ARENAS CONTENT -->
+    <!-- VIEW 5: COURTS -->
     <div id="view-courts" class="content-view">
-      <button class="back-btn" onclick="switchView('dashboard')">&larr; Back to Dashboard</button>
-      <h2 class="hero-title" style="font-size: 2.5rem;">COURTS & <span>ARENAS</span></h2>
-      <p class="hero-desc">Custom hardwood floor designs, stadium lighting setups, and arena modifications.</p>
-      <div class="dash-card" style="max-width: 450px;">
-        <div>
-          <span class="card-badge badge-active">Ready to Download</span>
-          <h3>Arena Pack</h3>
-          <p>High-resolution flooring and stadium modifications.</p>
+      <button class="back-btn" onclick="switchView('dashboard', event)">&larr; Back to Dashboard</button>
+      <h2 class="hero-title" style="font-size: 2.2rem;">COURTS & <span>ARENAS</span></h2>
+      <p class="hero-desc">Downloadable high-resolution floor designs and stadium textures.</p>
+      <div class="dash-card" style="max-width: 400px;">
+        <div class="card-body">
+          <div>
+            <span class="card-badge badge-active">Downloadable</span>
+            <h3>Arena Hardwood Pack</h3>
+            <p>Custom 4K stadium floors and lighting shaders.</p>
+          </div>
+          <a href="#" class="card-link">DOWNLOAD ARENAS (.ZIP) &rarr;</a>
         </div>
-        <a href="#" class="card-link" style="color: var(--accent-cyan);">DOWNLOAD ARENAS &rarr;</a>
       </div>
     </div>
 
-    <!-- VIEW 6: PRESENTATION & ENB CONTENT -->
+    <!-- VIEW 6: SCOREBOARDS / PRESENTATION -->
     <div id="view-presentation" class="content-view">
-      <button class="back-btn" onclick="switchView('dashboard')">&larr; Back to Dashboard</button>
-      <h2 class="hero-title" style="font-size: 2.5rem;">PRESENTATION & <span>ENB</span></h2>
-      <p class="hero-desc">Broadcast scoreboards, replay packages, overlays, and custom lighting filters.</p>
-      <div class="dash-card" style="max-width: 450px;">
-        <div>
-          <span class="card-badge badge-active">Ready to Download</span>
-          <h3>Broadcast Graphics Suite</h3>
-          <p>Modern TV-style broadcast overlays and high-contrast color grading configurations.</p>
+      <button class="back-btn" onclick="switchView('dashboard', event)">&larr; Back to Dashboard</button>
+      <h2 class="hero-title" style="font-size: 2.2rem;">SCOREBOARDS & <span>ENB</span></h2>
+      <p class="hero-desc">Download broadcast graphics, television overlays, and ENB lighting suites.</p>
+      <div class="dash-card" style="max-width: 400px;">
+        <div class="card-body">
+          <div>
+            <span class="card-badge badge-active">Downloadable</span>
+            <h3>Broadcast Scoreboard Package</h3>
+            <p>Real TV network style scoreboards and graphic overlays.</p>
+          </div>
+          <a href="#" class="card-link">DOWNLOAD SCOREBOARDS (.ZIP) &rarr;</a>
         </div>
-        <a href="#" class="card-link" style="color: var(--accent-cyan);">DOWNLOAD SUITE &rarr;</a>
       </div>
     </div>
   </main>
@@ -722,7 +729,6 @@
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.getElementById('sidebar');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
-    const mainContainer = document.getElementById('mainContainer');
 
     function switchView(viewName, event) {
       if(event) event.preventDefault();
