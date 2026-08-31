@@ -282,7 +282,7 @@
       cursor: pointer;
       text-align: center;
       display: inline-block;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
     }
 
     .btn-cyan {
@@ -292,6 +292,8 @@
 
     .btn-cyan:hover {
       background-color: var(--accent-cyan-hover);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
     }
 
     .btn-outline {
@@ -300,13 +302,11 @@
       background: var(--card-bg);
     }
 
-    .btn-outline:hover, 
-    .btn-outline:active, 
-    .btn-outline:focus {
+    .btn-outline:hover {
       border-color: var(--accent-cyan);
       color: var(--accent-cyan);
-      box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
-      outline: none;
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
     }
 
     .dashboard-header {
@@ -447,6 +447,12 @@
       box-shadow: 0 4px 20px rgba(0, 240, 255, 0.3);
       text-decoration: none;
       z-index: 999;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .floating-support:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
     }
 
     @media (max-width: 768px) {
@@ -587,7 +593,7 @@
           <p>Scoreboards, replay wipes, and custom visual graphics suites.</p>
         </div>
         <a href="presentation.html" class="card-link">OPEN ARCHIVE &rarr;</a>
-    </div>
+      </div>
     </div>
   </main>
 
