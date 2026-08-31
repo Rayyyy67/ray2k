@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAY2K // NBA 2K14 LAB</title>
+  <title>RAY2K // LAB</title>
   <style>
     :root {
       --bg-dark: #0b0f17;
@@ -178,6 +178,7 @@
       flex: 1;
       padding: 30px 50px;
       width: 100%;
+      transition: margin-left 0.3s ease;
     }
 
     .top-bar {
@@ -426,6 +427,7 @@
 
     .dash-card.locked-card {
       opacity: 0.5;
+      cursor: not-allowed;
     }
 
     .card-badge {
@@ -519,7 +521,7 @@
       }
 
       main {
-        margin-left: 0;
+        margin-left: 0 !important;
         padding: 80px 20px 40px;
       }
 
@@ -551,24 +553,25 @@
   <div class="bg-overlay"></div>
 
   <header class="mobile-header">
-    <a href="index.html" class="logo">RAY<span>2K</span></a>
+    <a href="#" class="logo" id="mobileLogo">RAY<span>2K</span></a>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
   </header>
 
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-  <aside id="sidebar">
+  <!-- Left Sidebar (Hidden by default, reveals only when NBA 2K14 is unlocked/clicked) -->
+  <aside id="sidebar" style="display: none;">
     <div>
       <div class="brand">
-        <a href="index.html" class="logo">RAY<span>2K</span></a>
-        <span class="sub-title">NBA 2K14 LAB</span>
+        <a href="#" class="logo">RAY<span>2K</span></a>
+        <span class="sub-title" id="sidebarSubTitle">NBA 2K14 LAB</span>
       </div>
 
-      <ul class="sidebar-menu">
-        <li><a href="index.html" class="active">RAY2K LAB</a></li>
-        <li><a href="rosters.html">ROSTER UPDATES</a></li>
-        <li><a href="cyberfaces.html">CYBERFACES</a></li>
-        <li><a href="presentation.html">PRESENTATION</a></li>
+      <ul class="sidebar-menu" id="sidebarMenu">
+        <li><a href="#" class="active" onclick="switchSection('lab', event)">RAY2K LAB</a></li>
+        <li><a href="#" onclick="switchSection('rosters', event)">ROSTER UPDATES</a></li>
+        <li><a href="#" onclick="switchSection('cyberfaces', event)">CYBERFACES</a></li>
+        <li><a href="#" onclick="switchSection('presentation', event)">PRESENTATION</a></li>
       </ul>
     </div>
 
@@ -578,7 +581,8 @@
     </div>
   </aside>
 
-  <main>
+  <!-- Main Container -->
+  <main id="mainContainer" style="margin-left: 0;">
     <div class="top-bar">
       <div class="notice">
         <span class="badge-dot"></span>
@@ -598,7 +602,7 @@
     <p class="hero-desc">Roster updates, dedicated mods, IDs, tools, fixes, and installation guides — organized in one place.</p>
 
     <div class="btn-row">
-      <a href="#dashboard" class="btn btn-cyan"><span>START HERE</span></a>
+      <a href="#dashboard" class="btn btn-cyan" id="startBtn"><span>START HERE</span></a>
       <a href="https://www.facebook.com/profile.php?id=61594111973222" target="_blank" rel="noopener noreferrer" class="btn btn-outline">JOIN COMMUNITY</a>
     </div>
 
@@ -609,22 +613,24 @@
     </div>
 
     <div class="grid">
-      <div class="dash-card active-card">
+      <!-- NBA 2K14 Card (Clicking this reveals the left sidebar and fully unlocks access) -->
+      <div class="dash-card active-card" id="card2k14" style="cursor: pointer;">
         <div>
           <span class="card-badge badge-active">Available</span>
           <h3>NBA 2K14</h3>
           <p>The original QOL2K archive featuring rosters, cyberfaces, courts, and presentation mods.</p>
         </div>
-        <a href="rosters.html" class="card-link">ENTER ARCHIVE &rarr;</a>
+        <span class="card-link">ENTER ARCHIVE &rarr;</span>
       </div>
 
-      <div class="dash-card active-card">
+      <!-- NBA 2K23 Card (Locked initially) -->
+      <div class="dash-card locked-card" id="card2k23">
         <div>
-          <span class="card-badge badge-active">Available</span>
+          <span class="card-badge badge-locked">Locked</span>
           <h3>NBA 2K23</h3>
           <p>Next-generation roster and visual modification archive.</p>
         </div>
-        <a href="cyberfaces.html" class="card-link">COMING SOON &rarr;</a>
+        <span class="card-link" style="color: var(--text-muted);">COMING SOON (LOCKED) &rarr;</span>
       </div>
     </div>
   </main>
@@ -637,6 +643,34 @@
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.getElementById('sidebar');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const mainContainer = document.getElementById('mainContainer');
+    const card2k14 = document.getElementById('card2k14');
+    const startBtn = document.getElementById('startBtn');
+
+    // Function to reveal the left sidebar
+    function revealSidebar() {
+      sidebar.style.display = 'flex';
+      if (window.innerWidth > 768) {
+        mainContainer.style.marginLeft = '260px';
+      }
+    }
+
+    // Clicking NBA 2K14 card reveals sidebar and scrolls to dashboard
+    card2k14.addEventListener('click', () => {
+      revealSidebar();
+      document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // START HERE button triggers black circle expansion effect and reveals dashboard & sidebar options
+    startBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      // Allow time for the black circle click animation before revealing layout shifts
+      setTimeout(() => {
+        revealSidebar();
+        document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
+      }, 350);
+    });
 
     function toggleMenu() {
       sidebar.classList.toggle('open');
@@ -645,6 +679,12 @@
 
     menuToggle.addEventListener('click', toggleMenu);
     sidebarOverlay.addEventListener('click', toggleMenu);
+
+    function switchSection(section, event) {
+      if(event) event.preventDefault();
+      document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
+      if(event && event.target) event.target.classList.add('active');
+    }
   </script>
 </body>
 </html>
