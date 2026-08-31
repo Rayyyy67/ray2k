@@ -37,7 +37,7 @@
        SIDEBAR - THIS PAGE ONLY
     ========================= */
     aside {
-      width: 260px;
+      width: 220px;
       background: var(--bg-sidebar);
       border-right: 1px solid var(--border-color);
       display: flex;
@@ -104,11 +104,11 @@
        MAIN
     ========================= */
     main {
-      margin-left: 260px;
+      margin-left: 220px;
       flex: 1;
-      padding: 30px 50px 90px;
-      width: 100%;
-      max-width: 1500px;
+      padding: 30px 34px 90px;
+      width: calc(100% - 220px);
+      max-width: none;
     }
 
     .back-button {
@@ -165,8 +165,8 @@
     ========================= */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
       margin-bottom: 50px;
     }
 
@@ -187,7 +187,7 @@
     }
 
     .mod-preview {
-      height: 160px;
+      height: 175px;
       background: #000000;
       position: relative;
       overflow: hidden;
@@ -200,7 +200,7 @@
     .mod-preview img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
     }
 
@@ -263,6 +263,7 @@
       font-weight: 700;
       font-size: 0.75rem;
       text-decoration: none;
+      cursor: pointer;
     }
 
     .btn-id:hover {
@@ -380,6 +381,24 @@
 
     body.black .mod-preview { background: #000000; }
 
+    @media (max-width: 1200px) {
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* =========================
        MOBILE
     ========================= */
@@ -420,8 +439,7 @@
 .folder-side .folder-brand{display:block;font-size:24px;font-weight:950;letter-spacing:1px;text-decoration:none;color:#fff}.folder-side .folder-brand span{color:#00f0ff}
 .folder-side .folder-sub{display:block;color:#00f0ff;font-size:10px;font-weight:900;letter-spacing:1px;margin-top:3px}
 .folder-current{margin-top:28px;padding:12px;border-left:3px solid #00f0ff;background:rgba(0,240,255,.12);border-radius:6px;color:#00f0ff;font-size:11px;font-weight:900;letter-spacing:.7px}
-.folder-bottom{display:flex;flex-direction:column;gap:8px}.folder-clock{border-top:1px solid #1a2638;padding-top:11px;color:#718094;font-size:9px;line-height:1.5}.folder-clock strong{color:#00f0ff;font-size:11px}.folder-btn{display:block;width:100%;padding:9px 10px;background:#0f1520;border:1px solid #1a2638;border-radius:5px;color:#fff;font-size:10px;font-weight:900;text-align:center;text-decoration:none;text-transform:uppercase;cursor:pointer}.folder-btn:hover{border-color:#00f0ff;color:#00f0ff}.folder-support{position:fixed;right:22px;bottom:22px;z-index:9999;background:#00f0ff;color:#000;border-radius:30px;padding:10px 16px;font-size:11px;font-weight:950;text-decoration:none;box-shadow:0 4px 20px rgba(0,240,255,.28)}
-@media(max-width:768px){.folder-side{position:relative;width:100%;height:auto;border-right:0;border-bottom:1px solid #1a2638}.folder-bottom{margin-top:25px}main{margin-left:0!important}.folder-support{right:12px;bottom:12px}}
+.folder-bottom{display:flex;flex-direction:column;gap:8px}.folder-clock{border-top:1px solid #1a2638;padding-top:11px;color:#718094;font-size:9px;line-height:1.5}.folder-clock strong{color:#00f0ff;font-size:11px}.folder-btn{display:block;width:100%;padding:9px 10px;background:#0f1520;border:1px solid #1a2638;border-radius:5px;color:#fff;font-size:10px;font-weight:900;text-align:center;text-decoration:none;text-transform:uppercase;cursor:pointer}.folder-btn:hover{border-color:#00f0ff;color:#00f0ff}@media(max-width:768px){.folder-side{position:relative;width:100%;height:auto;border-right:0;border-bottom:1px solid #1a2638}.folder-bottom{margin-top:25px}main{margin-left:0!important}}
   </style>
  </head>
  <body>
@@ -461,7 +479,7 @@
     </a>
    </div>
   </aside>
-  <main style="margin-left:220px">
+  <main>
    <a class="back-button" href="index.html">
     ← BACK TO RAY2K
    </a>
@@ -496,9 +514,9 @@
        <a class="btn-download" href="https://www.mediafire.com/file/d4leedzryctuedo/scoreboard%20NBA%20ON%20ESPN.rar/file" rel="noopener noreferrer" target="_blank">
         DOWNLOAD
        </a>
-       <a class="btn-id" href="#">
+       <button class="btn-id" type="button" onclick="showInfo('NBA ON ESPN — Broadcast Scoreboard')">
         INFO
-       </a>
+       </button>
       </div>
      </div>
     </div>
@@ -521,9 +539,9 @@
        <a class="btn-download" href="https://www.mediafire.com/file/oj243rxj6u7e26w/Scoreboard%20NBA%20NEXGEN.rar/file" rel="noopener noreferrer" target="_blank">
         DOWNLOAD
        </a>
-       <a class="btn-id" href="#">
+       <button class="btn-id" type="button" onclick="showInfo('NBA NEXGEN — Modern TV Scoreboard')">
         INFO
-       </a>
+       </button>
       </div>
      </div>
     </div>
@@ -546,9 +564,9 @@
        <a class="btn-download" href="https://www.mediafire.com/file/pwdpesetvdx3y3v/scoreboard%20NBA%202k24%20-%2025.rar/file" rel="noopener noreferrer" target="_blank">
         DOWNLOAD
        </a>
-       <a class="btn-id" href="#">
+       <button class="btn-id" type="button" onclick="showInfo('NBA 2K24 - 25 — Next-Gen Scoreboard Suite')">
         INFO
-       </a>
+       </button>
       </div>
      </div>
     </div>
@@ -571,9 +589,9 @@
        <a class="btn-download" href="https://www.mediafire.com/file/ebp2t3eh0be27nr/scoreboard%20NBA%202k26.rar/file" rel="noopener noreferrer" target="_blank">
         DOWNLOAD
        </a>
-       <a class="btn-id" href="#">
+       <button class="btn-id" type="button" onclick="showInfo('NBA 2K26 — Futuristic Scoreboard')">
         INFO
-       </a>
+       </button>
       </div>
      </div>
     </div>
@@ -596,9 +614,9 @@
        <a class="btn-download" href="https://www.mediafire.com/file/287fwrpjjql6ae9/scoreboard%20NBA%202K25.rar/file" rel="noopener noreferrer" target="_blank">
         DOWNLOAD
        </a>
-       <a class="btn-id" href="#">
+       <button class="btn-id" type="button" onclick="showInfo('NBA 2K25 — Clean Broadcast Layout')">
         INFO
-       </a>
+       </button>
       </div>
      </div>
     </div>
@@ -621,9 +639,9 @@
        <a class="btn-download" href="https://www.mediafire.com/file/9ac52fk5z3674nc/scoreboard%20NBA%20NBC%20Sports.rar/file" rel="noopener noreferrer" target="_blank">
         DOWNLOAD
        </a>
-       <a class="btn-id" href="#">
+       <button class="btn-id" type="button" onclick="showInfo('NBA NBC Sports — Classic NBC Network Skin')">
         INFO
-       </a>
+       </button>
       </div>
      </div>
     </div>
@@ -646,9 +664,9 @@
        <a class="btn-download" href="https://www.mediafire.com/file/pe58eirf7gont1x/scoreboard%20NBA%20ESPN-V2.rar/file" rel="noopener noreferrer" target="_blank">
         DOWNLOAD
        </a>
-       <a class="btn-id" href="#">
+       <button class="btn-id" type="button" onclick="showInfo('ESPN V2 — Updated Broadcast Overlay')">
         INFO
-       </a>
+       </button>
       </div>
      </div>
     </div>
@@ -657,40 +675,31 @@
   <a class="floating-support" href="https://www.facebook.com/profile.php?id=61594111973222" rel="noopener noreferrer" target="_blank">
    ⚡ SUPPORT RAY2K
   </a>
-  <div class="tools">
-   <div class="clock-box">
-    <div class="clock-time" id="clockTime">
-     --:--:--
-    </div>
-    <div class="clock-date" id="clockDate">
-     Loading date...
-    </div>
-   </div>
-   <button class="theme-button" id="themeButton" type="button">
-    THEME
-   </button>
-  </div>
   <script>
-   /* =========================
+    /* =========================
        CLOCK + DATE
     ========================= */
     function updateClock() {
       const now = new Date();
+      const time = document.getElementById("folderTime");
+      const date = document.getElementById("folderDate");
 
-      document.getElementById("clockTime").textContent =
-        now.toLocaleTimeString([], {
+      if (time) {
+        time.textContent = now.toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
           second: "2-digit"
         });
+      }
 
-      document.getElementById("clockDate").textContent =
-        now.toLocaleDateString([], {
+      if (date) {
+        date.textContent = now.toLocaleDateString([], {
           weekday: "short",
           month: "short",
           day: "numeric",
           year: "numeric"
         });
+      }
     }
 
     updateClock();
@@ -698,17 +707,47 @@
 
 
     /* =========================
+       INFO BUTTONS
+    ========================= */
+    function showInfo(message) {
+      let toast = document.getElementById("scoreboardToast");
+
+      if (!toast) {
+        toast = document.createElement("div");
+        toast.id = "scoreboardToast";
+        toast.style.cssText = `
+          position: fixed;
+          left: 50%;
+          bottom: 24px;
+          transform: translateX(-50%);
+          background: var(--accent-cyan);
+          color: #000;
+          padding: 9px 16px;
+          border-radius: 20px;
+          font-size: .68rem;
+          font-weight: 900;
+          z-index: 5000;
+          box-shadow: 0 4px 14px rgba(0,0,0,.25);
+        `;
+        document.body.appendChild(toast);
+      }
+
+      toast.textContent = message;
+      toast.style.opacity = "1";
+
+      clearTimeout(window.ray2kScoreToast);
+
+      window.ray2kScoreToast = setTimeout(function () {
+        toast.style.opacity = "0";
+      }, 2200);
+    }
+
+
+    /* =========================
        THEME SWITCHER
     ========================= */
     const themeButton =
-      document.getElementById("themeButton");
-
-    const themes = [
-      "",
-      "red",
-      "black",
-      "light"
-    ];
+      document.getElementById("folderThemeBtn");
 
     const themeNames = [
       "CYAN",
@@ -717,12 +756,22 @@
       "LIGHT"
     ];
 
-    let themeIndex =
-      Number(localStorage.getItem("ray2kTheme") || 0);
+    const themeClasses = [
+      "",
+      "red",
+      "black",
+      "light"
+    ];
 
-    if (!Number.isInteger(themeIndex) ||
-        themeIndex < 0 ||
-        themeIndex >= themes.length) {
+    let themeIndex = Number(
+      localStorage.getItem("ray2kTheme") || 0
+    );
+
+    if (
+      !Number.isInteger(themeIndex) ||
+      themeIndex < 0 ||
+      themeIndex >= themeNames.length
+    ) {
       themeIndex = 0;
     }
 
@@ -733,43 +782,36 @@
         "light"
       );
 
-      if (themes[themeIndex]) {
+      if (themeClasses[themeIndex]) {
         document.body.classList.add(
-          themes[themeIndex]
+          themeClasses[themeIndex]
         );
       }
 
-      themeButton.textContent =
-        "THEME: " + themeNames[themeIndex];
+      if (themeButton) {
+        themeButton.textContent =
+          "THEME: " + themeNames[themeIndex];
+      }
+
+      localStorage.setItem(
+        "ray2kTheme",
+        String(themeIndex)
+      );
     }
 
-    themeButton.addEventListener(
-      "click",
-      function () {
-        themeIndex =
-          (themeIndex + 1) % themes.length;
+    if (themeButton) {
+      themeButton.addEventListener(
+        "click",
+        function () {
+          themeIndex =
+            (themeIndex + 1) % themeNames.length;
 
-        localStorage.setItem(
-          "ray2kTheme",
-          themeIndex
-        );
-
-        applyTheme();
-      }
-    );
+          applyTheme();
+        }
+      );
+    }
 
     applyTheme();
-  </script>
-  <a class="folder-support" href="https://www.facebook.com/profile.php?id=61594111973222" rel="noopener noreferrer" target="_blank">
-   ⚡ SUPPORT RAY2K
-  </a>
-  <script id="ray2k-folder-tools">
-   (function(){
-const key='ray2kFolderTheme';const modes=['CYAN','RED','BLACK','LIGHT'];let i=Math.max(0,modes.indexOf(localStorage.getItem(key)||'CYAN'));const root=document.documentElement,body=document.body;
-function apply(){const m=modes[i];let accent='#00f0ff',bg='#07090e',side='#04060a',card='#0f1520',line='#1a2638',text='#fff',muted='#808e9b';if(m==='RED'){accent='#ff3030';bg='#090608';line='#3a1b23'}if(m==='BLACK'){accent='#fff';bg='#000';side='#000';card='#080808';line='#222';muted='#777'}if(m==='LIGHT'){accent='#087cff';bg='#eef2f6';side='#fff';card='#fff';line='#d8dee8';text='#111827';muted='#687386'}root.style.setProperty('--accent-cyan',accent);root.style.setProperty('--bg-dark',bg);root.style.setProperty('--sidebar-bg',side);root.style.setProperty('--card-bg',card);root.style.setProperty('--border-color',line);root.style.setProperty('--text-white',text);root.style.setProperty('--text-muted',muted);const b=document.getElementById('folderThemeBtn');if(b)b.textContent='THEME: '+m;localStorage.setItem(key,m)}
-function cycle(){i=(i+1)%modes.length;apply()}const b=document.getElementById('folderThemeBtn');if(b)b.addEventListener('click',cycle);
-function clock(){const d=new Date();const t=document.getElementById('folderTime'),dt=document.getElementById('folderDate');if(t)t.textContent=d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});if(dt)dt.textContent=d.toLocaleDateString([], {weekday:'short',month:'short',day:'numeric',year:'numeric'})}clock();setInterval(clock,1000);apply();
-})();
   </script>
  </body>
 </html>
