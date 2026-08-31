@@ -1,70 +1,1182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cyberfaces — RAY2K</title>
-<style>
-:root{--bg-dark:#07090e;--card-bg:#0f1520;--card-inner:#141c2c;--border-color:#1a2638;--accent-cyan:#00f0ff;--accent-cyan-hover:#00cce0;--accent-glow:rgba(0,240,255,.15);--text-white:#fff;--text-muted:#808e9b}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg-dark);color:var(--text-white);font-family:Inter,system-ui,-apple-system,sans-serif;min-height:100vh}
-aside{display:none}
-main{margin-left:0;flex:1;padding:30px 40px 80px;max-width:1400px;margin-right:auto}
-.back-button{display:inline-flex;align-items:center;gap:8px;margin-bottom:24px;background:var(--card-bg);border:1px solid var(--border-color);color:var(--text-white);padding:10px 16px;border-radius:6px;text-decoration:none;font-size:.75rem;font-weight:900;letter-spacing:.6px;text-transform:uppercase;transition:.2s}
-.back-button:hover{border-color:var(--accent-cyan);color:var(--accent-cyan);background:var(--accent-glow)}
-.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.section-title{font-size:.9rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted)}
-.section-title span{color:var(--accent-cyan)}
-.pack-count{font-size:.75rem;font-weight:800;color:var(--text-muted)}
-.controls-bar{display:flex;gap:12px;margin-bottom:24px}
-.search-input,.sort-select{background:var(--card-bg);border:1px solid var(--border-color);border-radius:6px;color:var(--text-white);font-size:.8rem;outline:none}
-.search-input{flex:1;padding:10px 16px}.search-input:focus,.sort-select:focus{border-color:var(--accent-cyan)}
-.sort-select{padding:0 16px;font-weight:800;cursor:pointer}
-.cf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;margin-bottom:50px}
-.cf-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;position:relative;transition:border-color .2s,transform .2s}
-.cf-card:hover{border-color:var(--accent-cyan);transform:translateY(-2px)}
-.card-preview{width:100%;height:180px;background:#05070a;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.card-preview img{width:100%;height:100%;object-fit:cover;display:block}
-.badge-tag{position:absolute;top:10px;left:10px;background:var(--accent-cyan);color:#000;font-size:.65rem;font-weight:900;padding:2px 6px;border-radius:4px;letter-spacing:.5px;z-index:10}
-.card-body{padding:16px;display:flex;flex-direction:column;gap:6px}
-.player-name{font-size:.95rem;font-weight:900;text-transform:uppercase;letter-spacing:.5px}
-.tags-row{display:flex;gap:8px;font-size:.7rem;color:var(--text-muted);margin-bottom:10px}
-.btn-group{display:flex;gap:8px}
-.btn-download{flex:1;background:var(--accent-cyan);color:#000;border:0;border-radius:4px;padding:10px;font-size:.75rem;font-weight:900;text-transform:uppercase;text-decoration:none;text-align:center;cursor:pointer;transition:.2s}
-.btn-download:hover{background:var(--accent-cyan-hover)}
-.btn-download.disabled{background:#2a3546;color:#5d6d7e;cursor:not-allowed}.btn-download.disabled:hover{background:#2a3546}
-.btn-cfid{background:var(--card-inner);border:1px solid var(--border-color);color:var(--text-white);border-radius:4px;padding:0 12px;font-size:.7rem;font-weight:800;cursor:pointer;transition:.2s}
-.btn-cfid:hover{border-color:var(--accent-cyan);color:var(--accent-cyan)}
-.placeholder-preview{display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-weight:900;font-size:1.2rem;letter-spacing:2px;background:radial-gradient(circle,#141c2c 0%,#05070a 100%)}
-.floating-support{position:fixed;bottom:24px;right:24px;background:var(--accent-cyan);color:#000;border:0;border-radius:30px;padding:10px 18px;font-weight:900;font-size:.8rem;display:flex;align-items:center;gap:6px;cursor:pointer;box-shadow:0 4px 20px rgba(0,240,255,.3);text-decoration:none;z-index:999}
-@media(max-width:768px){main{padding:20px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyberfaces — RAY2K</title>
+
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --sidebar-bg: #04060a;
+      --card-bg: #0f1520;
+      --card-inner: #141c2c;
+      --border-color: #1a2638;
+      --accent-cyan: #00f0ff;
+      --accent-cyan-hover: #00cce0;
+      --accent-glow: rgba(0, 240, 255, 0.15);
+      --text-white: #ffffff;
+      --text-muted: #808e9b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* =========================
+       LEFT SIDEBAR
+    ========================= */
+
+    aside {
+      width: 240px;
+      background-color: var(--sidebar-bg);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px 16px;
+      position: fixed;
+      height: 100vh;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--text-white);
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: var(--accent-cyan);
+    }
+
+    .sub-title {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav-menu a {
+      display: block;
+      padding: 10px 12px;
+      border-radius: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.75rem;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+
+    .nav-menu a.active,
+    .nav-menu a:hover {
+      background: var(--accent-glow);
+      color: var(--accent-cyan);
+    }
+
+    .sidebar-footer {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+    }
+
+    /* =========================
+       MAIN AREA
+    ========================= */
+
+    main {
+      margin-left: 240px;
+      flex: 1;
+      padding: 30px 40px 80px;
+      max-width: 1400px;
+      width: 100%;
+    }
+
+    /* =========================
+       BACK BUTTON
+    ========================= */
+
+    .back-button {
+      display: inline-block;
+      background: var(--card-bg);
+      color: var(--text-white);
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      padding: 9px 14px;
+      margin-bottom: 24px;
+      font-size: 0.7rem;
+      font-weight: 900;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+
+    .back-button:hover {
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      background: var(--accent-glow);
+    }
+
+    /* =========================
+       SECTION HEADER
+    ========================= */
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 0.9rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .section-title span {
+      color: var(--accent-cyan);
+    }
+
+    .pack-count {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+
+    /* =========================
+       CONTROLS
+    ========================= */
+
+    .controls-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .search-input {
+      flex: 1;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 10px 16px;
+      color: var(--text-white);
+      font-size: 0.8rem;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    .search-input::placeholder {
+      color: #667384;
+    }
+
+    .sort-select {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-white);
+      padding: 0 16px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .sort-select:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    /* =========================
+       GRID
+    ========================= */
+
+    .cf-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+
+    /* =========================
+       CYBERFACE CARD
+    ========================= */
+
+    .cf-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .cf-card:hover {
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+
+    /* =========================
+       IMAGE PREVIEW
+    ========================= */
+
+    .card-preview {
+      width: 100%;
+      height: 180px;
+      background-color: #05070a;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .card-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .badge-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: var(--accent-cyan);
+      color: #000000;
+      font-size: 0.65rem;
+      font-weight: 900;
+      padding: 2px 6px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      z-index: 10;
+    }
+
+    /* =========================
+       CARD BODY
+    ========================= */
+
+    .card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .player-name {
+      font-size: 0.95rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tags-row {
+      display: flex;
+      gap: 8px;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    /* =========================
+       DOWNLOAD BUTTON
+    ========================= */
+
+    .btn-download {
+      flex: 1;
+      background-color: var(--accent-cyan);
+      color: #000000;
+      border: none;
+      border-radius: 4px;
+      padding: 10px;
+      font-size: 0.75rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-download:hover {
+      background-color: var(--accent-cyan-hover);
+    }
+
+    /* =========================
+       DISABLED DOWNLOAD
+    ========================= */
+
+    .btn-download.disabled {
+      background-color: #2a3546;
+      color: #5d6d7e;
+      cursor: not-allowed;
+    }
+
+    .btn-download.disabled:hover {
+      background-color: #2a3546;
+    }
+
+    /* =========================
+       CFID BUTTON
+    ========================= */
+
+    .btn-cfid {
+      background-color: var(--card-inner);
+      border: 1px solid var(--border-color);
+      color: var(--text-white);
+      border-radius: 4px;
+      padding: 0 12px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-cfid:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    /* =========================
+       COMING SOON
+    ========================= */
+
+    .placeholder-preview {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-weight: 900;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      background: radial-gradient(
+        circle,
+        #141c2c 0%,
+        #05070a 100%
+      );
+    }
+
+    /* =========================
+       FLOATING SUPPORT
+    ========================= */
+
+    .floating-support {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background-color: var(--accent-cyan);
+      color: #000000;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 18px;
+      font-weight: 900;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 240, 255, 0.3);
+      text-decoration: none;
+      z-index: 999;
+    }
+
+    .floating-support:hover {
+      background-color: var(--accent-cyan-hover);
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 768px) {
+      aside {
+        display: none;
+      }
+
+      main {
+        margin-left: 0;
+        padding: 20px;
+      }
+
+      .controls-bar {
+        flex-direction: column;
+      }
+
+      .sort-select {
+        height: 40px;
+      }
+
+      .cf-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<main>
-<a href="index.html" class="back-button">← BACK TO RAY2K</a>
 
-<div class="section-header"><div class="section-title">FREE <span>CYBERFACES</span></div><div class="pack-count">5 PACKS</div></div>
-<div class="controls-bar"><input type="text" id="freeSearch" class="search-input" placeholder="Search free packs..."><select id="freeSort" class="sort-select"><option value="name">SORT: NAME</option><option value="newest">SORT: NEWEST</option></select></div>
-<div class="cf-grid" id="freeGrid">
-<div class="cf-card" data-name="CALEB WILSON" data-cfid="png20603.iff"><div class="card-preview"><span class="badge-tag">NEW</span><img src="images/caleb_wilson.jpg.png" alt="Caleb Wilson Preview"></div><div class="card-body"><div class="player-name">CALEB WILSON</div><div class="tags-row"><span>Chicago Bulls</span> • <span>CF pack</span></div><div class="btn-group"><a href="https://www.mediafire.com/file/po1ue713z3bwdho/caleb_wilson_cf.zip/file" target="_blank" class="btn-download">DOWNLOAD</a><button class="btn-cfid" onclick="copyCFID('png20603.iff')">CFID</button></div></div></div>
-<div class="cf-card" data-name="AJ DYBANTSA" data-cfid="png20600.iff"><div class="card-preview"><span class="badge-tag">NEW</span><img src="images/aj_dybantsa.jpg.png" alt="AJ Dybantsa Preview"></div><div class="card-body"><div class="player-name">AJ DYBANTSA</div><div class="tags-row"><span>Washington Wizards</span> • <span>CF pack</span></div><div class="btn-group"><a href="https://www.mediafire.com/file/gaoax32gcov03yu/aj+dybantsa+cf.zip/file" target="_blank" class="btn-download">DOWNLOAD</a><button class="btn-cfid" onclick="copyCFID('png20600.iff')">CFID</button></div></div></div>
-<div class="cf-card" data-name="CAMERON BOOZER" data-cfid="png20602.iff"><div class="card-preview"><span class="badge-tag">NEW</span><img src="images/cameron_boozer.jpg.png" alt="Cameron Boozer Preview"></div><div class="card-body"><div class="player-name">CAMERON BOOZER</div><div class="tags-row"><span>Memphis Grizzlies</span> • <span>CF pack</span></div><div class="btn-group"><a href="https://www.mediafire.com/file/wr0fegg8mc77s5a/cameron_boozer_cf.zip/file" target="_blank" class="btn-download">DOWNLOAD</a><button class="btn-cfid" onclick="copyCFID('png20602.iff')">CFID</button></div></div></div>
-<div class="cf-card" data-name="KINGSTON FLEMINGS" data-cfid="png20607.iff"><div class="card-preview"><span class="badge-tag">NEW</span><img src="images/kingston_flemings.jpg.png" alt="Kingston Flemings Preview"></div><div class="card-body"><div class="player-name">KINGSTON FLEMINGS</div><div class="tags-row"><span>Atlanta Hawks</span> • <span>CF pack</span></div><div class="btn-group"><a href="https://www.mediafire.com/file/eriwvn2pcp27pp5/kingston_flemings_cf.zip/file" target="_blank" class="btn-download">DOWNLOAD</a><button class="btn-cfid" onclick="copyCFID('png20607.iff')">CFID</button></div></div></div>
-<div class="cf-card" data-name="YAXEL LENDEBORG" data-cfid="png20610.iff"><div class="card-preview"><span class="badge-tag">NEW</span><img src="images/yaxel_lendeborg.jpg.png" alt="Yaxel Lendeborg Preview"></div><div class="card-body"><div class="player-name">YAXEL LENDEBORG</div><div class="tags-row"><span>Golden State Warriors</span> • <span>CF pack</span></div><div class="btn-group"><a href="https://www.mediafire.com/file/sfkaqibbiygfs3t/yaxel_lenderberg_cf.zip/file" target="_blank" class="btn-download">DOWNLOAD</a><button class="btn-cfid" onclick="copyCFID('png20610.iff')">CFID</button></div></div></div>
-</div>
+  <!-- =========================
+       LEFT SIDEBAR
+  ========================= -->
 
-<div class="section-header"><div class="section-title">PAID <span>CYBERFACES</span></div><div class="pack-count">1 PACKS</div></div>
-<div class="controls-bar"><input type="text" id="paidSearch" class="search-input" placeholder="Search paid packs..."><select id="paidSort" class="sort-select"><option value="name">SORT: NAME</option></select></div>
-<div class="cf-grid" id="paidGrid"><div class="cf-card" data-name="COMING SOON" data-cfid="N/A"><div class="card-preview placeholder-preview"><span class="badge-tag">SOON</span>COMING SOON</div><div class="card-body"><div class="player-name">COMING SOON</div><div class="tags-row"><span>Exclusive Pack</span> • <span>Paid</span></div><div class="btn-group"><button class="btn-download disabled" onclick="showToast('This download is coming soon!')">DOWNLOAD</button><button class="btn-cfid" onclick="showToast('CFID unavailable')">CFID</button></div></div></div></div>
-</main>
-<a href="#" class="floating-support">⚡ SUPPORT</a>
-<script>
-document.getElementById('freeSearch').addEventListener('input',function(e){const query=e.target.value.toLowerCase();document.querySelectorAll('#freeGrid .cf-card').forEach(card=>{const name=card.getAttribute('data-name').toLowerCase();card.style.display=name.includes(query)?'flex':'none';});});
-document.getElementById('paidSearch').addEventListener('input',function(e){const query=e.target.value.toLowerCase();document.querySelectorAll('#paidGrid .cf-card').forEach(card=>{const name=card.getAttribute('data-name').toLowerCase();card.style.display=name.includes(query)?'flex':'none';});});
-function copyCFID(cfid){if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(cfid).then(()=>showToast('Copied: '+cfid)).catch(()=>fallbackCopyText(cfid));}else fallbackCopyText(cfid);}
-function fallbackCopyText(text){const textArea=document.createElement("textarea");textArea.value=text;textArea.style.position="fixed";textArea.style.left="-999999px";document.body.appendChild(textArea);textArea.focus();textArea.select();try{document.execCommand('copy');showToast('Copied: '+text);}catch(err){showToast('Failed to copy');}document.body.removeChild(textArea);}
-function showToast(message){let toast=document.getElementById("toast-msg");if(!toast){toast=document.createElement("div");toast.id="toast-msg";toast.style.cssText=`position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background-color:#00f0ff;color:#000;padding:8px 18px;border-radius:20px;font-weight:900;font-size:.75rem;z-index:9999;box-shadow:0 4px 12px rgba(0,240,255,.4);transition:opacity .3s ease;`;document.body.appendChild(toast);}toast.innerText=message;toast.style.opacity="1";setTimeout(()=>{toast.style.opacity="0";},2000);}
-</script>
+  <aside>
+    <div>
+
+      <div class="brand">
+        <a href="index.html" class="logo">
+          RAY<span>2K</span>
+        </a>
+
+        <span class="sub-title">
+          NBA 2K14 LAB
+        </span>
+      </div>
+
+      <ul class="nav-menu">
+
+        <li>
+          <a href="index.html">
+            RAY2K LAB
+          </a>
+        </li>
+
+        <li>
+          <a href="rosters.html">
+            ROSTER UPDATES
+          </a>
+        </li>
+
+        <li>
+          <a href="cyberfaces.html" class="active">
+            CYBERFACES
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            INSTALLATION
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            DEDICATED MODS
+          </a>
+        </li>
+
+        <li>
+          <a href="file-ids.html">
+            FILE IDS
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="sidebar-footer">
+      <p>Facebook</p>
+
+      <p style="margin-top: 4px; color: var(--text-muted);">
+        PC / Windows only
+      </p>
+    </div>
+
+  </aside>
+
+
+  <!-- =========================
+       MAIN CONTENT
+  ========================= -->
+
+  <main>
+
+    <!-- BACK BUTTON -->
+
+    <a href="index.html" class="back-button">
+      ← BACK TO RAY2K
+    </a>
+
+
+    <!-- =========================
+         FREE CYBERFACES
+    ========================= -->
+
+    <div class="section-header">
+
+      <div class="section-title">
+        FREE <span>CYBERFACES</span>
+      </div>
+
+      <div class="pack-count">
+        5 PACKS
+      </div>
+
+    </div>
+
+
+    <div class="controls-bar">
+
+      <input
+        type="text"
+        id="freeSearch"
+        class="search-input"
+        placeholder="Search free packs..."
+      >
+
+      <select id="freeSort" class="sort-select">
+
+        <option value="name">
+          SORT: NAME
+        </option>
+
+        <option value="newest">
+          SORT: NEWEST
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="cf-grid" id="freeGrid">
+
+
+      <!-- =========================
+           CALEB WILSON
+      ========================= -->
+
+      <div
+        class="cf-card"
+        data-name="CALEB WILSON"
+        data-cfid="png20603.iff"
+      >
+
+        <div class="card-preview">
+
+          <span class="badge-tag">
+            NEW
+          </span>
+
+          <!-- FIXED IMAGE PATH -->
+          <img
+            src="caleb_wilson.jpg"
+            alt="Caleb Wilson Preview"
+          >
+
+        </div>
+
+        <div class="card-body">
+
+          <div class="player-name">
+            CALEB WILSON
+          </div>
+
+          <div class="tags-row">
+            <span>Chicago Bulls</span>
+            •
+            <span>CF pack</span>
+          </div>
+
+          <div class="btn-group">
+
+            <a
+              href="https://www.mediafire.com/file/po1ue713z3bwdho/caleb_wilson_cf.zip/file"
+              target="_blank"
+              class="btn-download"
+            >
+              DOWNLOAD
+            </a>
+
+            <button
+              class="btn-cfid"
+              onclick="copyCFID('png20603.iff')"
+            >
+              CFID
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           AJ DYBANTSA
+      ========================= -->
+
+      <div
+        class="cf-card"
+        data-name="AJ DYBANTSA"
+        data-cfid="png20600.iff"
+      >
+
+        <div class="card-preview">
+
+          <span class="badge-tag">
+            NEW
+          </span>
+
+          <!-- FIXED IMAGE PATH -->
+          <img
+            src="aj_dybantsa.jpg"
+            alt="AJ Dybantsa Preview"
+          >
+
+        </div>
+
+        <div class="card-body">
+
+          <div class="player-name">
+            AJ DYBANTSA
+          </div>
+
+          <div class="tags-row">
+            <span>Washington Wizards</span>
+            •
+            <span>CF pack</span>
+          </div>
+
+          <div class="btn-group">
+
+            <a
+              href="https://www.mediafire.com/file/gaoax32gcov03yu/aj+dybantsa+cf.zip/file"
+              target="_blank"
+              class="btn-download"
+            >
+              DOWNLOAD
+            </a>
+
+            <button
+              class="btn-cfid"
+              onclick="copyCFID('png20600.iff')"
+            >
+              CFID
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           CAMERON BOOZER
+      ========================= -->
+
+      <div
+        class="cf-card"
+        data-name="CAMERON BOOZER"
+        data-cfid="png20602.iff"
+      >
+
+        <div class="card-preview">
+
+          <span class="badge-tag">
+            NEW
+          </span>
+
+          <!-- FIXED IMAGE PATH -->
+          <img
+            src="cameron_boozer.jpg"
+            alt="Cameron Boozer Preview"
+          >
+
+        </div>
+
+        <div class="card-body">
+
+          <div class="player-name">
+            CAMERON BOOZER
+          </div>
+
+          <div class="tags-row">
+            <span>Memphis Grizzlies</span>
+            •
+            <span>CF pack</span>
+          </div>
+
+          <div class="btn-group">
+
+            <a
+              href="https://www.mediafire.com/file/wr0fegg8mc77s5a/cameron_boozer_cf.zip/file"
+              target="_blank"
+              class="btn-download"
+            >
+              DOWNLOAD
+            </a>
+
+            <button
+              class="btn-cfid"
+              onclick="copyCFID('png20602.iff')"
+            >
+              CFID
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           KINGSTON FLEMINGS
+      ========================= -->
+
+      <div
+        class="cf-card"
+        data-name="KINGSTON FLEMINGS"
+        data-cfid="png20607.iff"
+      >
+
+        <div class="card-preview">
+
+          <span class="badge-tag">
+            NEW
+          </span>
+
+          <!-- FIXED IMAGE PATH + FILENAME -->
+          <img
+            src="kingston_fleming.jpg"
+            alt="Kingston Flemings Preview"
+          >
+
+        </div>
+
+        <div class="card-body">
+
+          <div class="player-name">
+            KINGSTON FLEMINGS
+          </div>
+
+          <div class="tags-row">
+            <span>Atlanta Hawks</span>
+            •
+            <span>CF pack</span>
+          </div>
+
+          <div class="btn-group">
+
+            <a
+              href="https://www.mediafire.com/file/eriwvn2pcp27pp5/kingston_flemings_cf.zip/file"
+              target="_blank"
+              class="btn-download"
+            >
+              DOWNLOAD
+            </a>
+
+            <button
+              class="btn-cfid"
+              onclick="copyCFID('png20607.iff')"
+            >
+              CFID
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           YAXEL LENDEBORG
+      ========================= -->
+
+      <div
+        class="cf-card"
+        data-name="YAXEL LENDEBORG"
+        data-cfid="png20610.iff"
+      >
+
+        <div class="card-preview">
+
+          <span class="badge-tag">
+            NEW
+          </span>
+
+          <!-- FIXED IMAGE PATH -->
+          <img
+            src="yaxel_lendeborg.jpg"
+            alt="Yaxel Lendeborg Preview"
+          >
+
+        </div>
+
+        <div class="card-body">
+
+          <div class="player-name">
+            YAXEL LENDEBORG
+          </div>
+
+          <div class="tags-row">
+            <span>Golden State Warriors</span>
+            •
+            <span>CF pack</span>
+          </div>
+
+          <div class="btn-group">
+
+            <a
+              href="https://www.mediafire.com/file/sfkaqibbiygfs3t/yaxel_lenderberg_cf.zip/file"
+              target="_blank"
+              class="btn-download"
+            >
+              DOWNLOAD
+            </a>
+
+            <button
+              class="btn-cfid"
+              onclick="copyCFID('png20610.iff')"
+            >
+              CFID
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         PAID CYBERFACES
+    ========================= -->
+
+    <div class="section-header">
+
+      <div class="section-title">
+        PAID <span>CYBERFACES</span>
+      </div>
+
+      <div class="pack-count">
+        1 PACK
+      </div>
+
+    </div>
+
+
+    <div class="controls-bar">
+
+      <input
+        type="text"
+        id="paidSearch"
+        class="search-input"
+        placeholder="Search paid packs..."
+      >
+
+      <select id="paidSort" class="sort-select">
+
+        <option value="name">
+          SORT: NAME
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="cf-grid" id="paidGrid">
+
+      <div
+        class="cf-card"
+        data-name="COMING SOON"
+        data-cfid="N/A"
+      >
+
+        <div class="card-preview placeholder-preview">
+
+          <span class="badge-tag">
+            SOON
+          </span>
+
+          COMING SOON
+
+        </div>
+
+        <div class="card-body">
+
+          <div class="player-name">
+            COMING SOON
+          </div>
+
+          <div class="tags-row">
+            <span>Exclusive Pack</span>
+            •
+            <span>Paid</span>
+          </div>
+
+          <div class="btn-group">
+
+            <button
+              class="btn-download disabled"
+              onclick="showToast('This download is coming soon!')"
+            >
+              DOWNLOAD
+            </button>
+
+            <button
+              class="btn-cfid"
+              onclick="showToast('CFID unavailable')"
+            >
+              CFID
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================
+       FLOATING SUPPORT
+  ========================= -->
+
+  <a href="#" class="floating-support">
+    ⚡ SUPPORT
+  </a>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+  <script>
+
+    /* =========================
+       FREE SEARCH
+    ========================= */
+
+    document
+      .getElementById('freeSearch')
+      .addEventListener('input', function(e) {
+
+        const query = e.target.value.toLowerCase();
+
+        const cards = document.querySelectorAll(
+          '#freeGrid .cf-card'
+        );
+
+        cards.forEach(card => {
+
+          const name = card
+            .getAttribute('data-name')
+            .toLowerCase();
+
+          card.style.display =
+            name.includes(query)
+              ? 'flex'
+              : 'none';
+
+        });
+
+      });
+
+
+    /* =========================
+       PAID SEARCH
+    ========================= */
+
+    document
+      .getElementById('paidSearch')
+      .addEventListener('input', function(e) {
+
+        const query = e.target.value.toLowerCase();
+
+        const cards = document.querySelectorAll(
+          '#paidGrid .cf-card'
+        );
+
+        cards.forEach(card => {
+
+          const name = card
+            .getAttribute('data-name')
+            .toLowerCase();
+
+          card.style.display =
+            name.includes(query)
+              ? 'flex'
+              : 'none';
+
+        });
+
+      });
+
+
+    /* =========================
+       COPY CFID
+    ========================= */
+
+    function copyCFID(cfid) {
+
+      if (
+        navigator.clipboard &&
+        window.isSecureContext
+      ) {
+
+        navigator.clipboard
+          .writeText(cfid)
+          .then(() => {
+
+            showToast(
+              'Copied: ' + cfid
+            );
+
+          })
+          .catch(() => {
+
+            fallbackCopyText(cfid);
+
+          });
+
+      } else {
+
+        fallbackCopyText(cfid);
+
+      }
+
+    }
+
+
+    /* =========================
+       FALLBACK COPY
+    ========================= */
+
+    function fallbackCopyText(text) {
+
+      const textArea =
+        document.createElement("textarea");
+
+      textArea.value = text;
+
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+
+      document.body.appendChild(textArea);
+
+      textArea.focus();
+      textArea.select();
+
+      try {
+
+        document.execCommand('copy');
+
+        showToast(
+          'Copied: ' + text
+        );
+
+      } catch (err) {
+
+        showToast(
+          'Failed to copy'
+        );
+
+      }
+
+      document.body.removeChild(textArea);
+
+    }
+
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    function showToast(message) {
+
+      let toast =
+        document.getElementById("toast-msg");
+
+      if (!toast) {
+
+        toast =
+          document.createElement("div");
+
+        toast.id = "toast-msg";
+
+        toast.style.cssText = `
+          position: fixed;
+          bottom: 24px;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: #00f0ff;
+          color: #000;
+          padding: 8px 18px;
+          border-radius: 20px;
+          font-weight: 900;
+          font-size: 0.75rem;
+          z-index: 9999;
+          box-shadow: 0 4px 12px rgba(0,240,255,0.4);
+          transition: opacity 0.3s ease;
+        `;
+
+        document.body.appendChild(toast);
+
+      }
+
+      toast.innerText = message;
+
+      toast.style.opacity = "1";
+
+      setTimeout(() => {
+
+        toast.style.opacity = "0";
+
+      }, 2000);
+
+    }
+
+  </script>
+
 </body>
 </html>
