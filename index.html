@@ -295,30 +295,6 @@
       overflow: hidden;
     }
 
-    .btn-cyan::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: #000000;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.4s ease-out, height 0.4s ease-out;
-      z-index: 1;
-    }
-
-    .btn-cyan span {
-      position: relative;
-      z-index: 2;
-    }
-
-    .btn-cyan:active::after {
-      width: 300px;
-      height: 300px;
-    }
-
     .btn-cyan:hover {
       background-color: var(--accent-cyan-hover);
       transform: translateY(-2px) scale(1.03);
@@ -329,21 +305,6 @@
       border: 2px solid var(--border-color);
       color: var(--text-white);
       background: var(--card-bg);
-      position: relative;
-    }
-
-    .btn-outline::before {
-      content: '';
-      position: absolute;
-      top: -6px;
-      left: -6px;
-      right: -6px;
-      bottom: -6px;
-      border: 2px solid var(--accent-cyan);
-      border-radius: 10px;
-      opacity: 0;
-      transform: scale(0.95);
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .btn-outline:hover {
@@ -478,7 +439,6 @@
       color: var(--accent-cyan);
     }
 
-    /* Dynamic View Content Area */
     .content-view {
       display: none;
     }
@@ -538,33 +498,26 @@
       .mobile-header {
         display: flex;
       }
-
       aside {
         transform: translateX(-100%);
       }
-
       aside.open {
         transform: translateX(0);
       }
-
       main {
         margin-left: 0 !important;
         padding: 80px 20px 40px;
       }
-
       .top-bar {
         flex-direction: column;
         align-items: flex-start;
       }
-
       .hero-title {
         font-size: 2.5rem;
       }
-
       .btn-row {
         flex-direction: column;
       }
-
       .btn {
         width: 100%;
       }
@@ -573,7 +526,6 @@
 </head>
 <body>
 
-  <!-- Moving Video Background Loop -->
   <video class="bg-video" autoplay muted loop playsinline>
     <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
   </video>
@@ -586,7 +538,6 @@
 
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-  <!-- Left Sidebar Navigation -->
   <aside id="sidebar" style="display: none;">
     <div>
       <div class="brand">
@@ -609,7 +560,6 @@
     </div>
   </aside>
 
-  <!-- Main Container -->
   <main id="mainContainer" style="margin-left: 0;">
     <div class="top-bar">
       <div class="notice">
@@ -643,7 +593,6 @@
       </div>
 
       <div class="grid">
-        <!-- NBA 2K14 Card (Unlocks the Sidebar & 4 folders) -->
         <div class="dash-card active-card" onclick="openArchive()">
           <div>
             <span class="card-badge badge-active">Available</span>
@@ -653,7 +602,6 @@
           <span class="card-link">ENTER ARCHIVE &rarr;</span>
         </div>
 
-        <!-- NBA 2K23 Card (Permanently Locked) -->
         <div class="dash-card locked-card">
           <div>
             <span class="card-badge badge-locked">Locked</span>
@@ -740,7 +688,7 @@
     <div id="view-courts" class="content-view">
       <button class="back-btn" onclick="switchView('dashboard')">&larr; Back to Dashboard</button>
       <h2 class="hero-title" style="font-size: 2.5rem;">COURTS & <span>ARENAS</span></h2>
-      <p class="dash-desc">Custom hardwood floor designs, stadium lighting setups, and arena modifications.</p>
+      <p class="hero-desc">Custom hardwood floor designs, stadium lighting setups, and arena modifications.</p>
       <div class="dash-card locked-card" style="margin-top: 20px;">
         <h3>Arena Pack (Coming Soon)</h3>
         <p>Currently locked under development vault.</p>
@@ -795,16 +743,13 @@
     function switchView(viewName, event) {
       if(event) event.preventDefault();
       
-      // Hide all views
       document.querySelectorAll('.content-view').forEach(v => v.classList.remove('active-view'));
       
-      // Show target view
       const target = document.getElementById('view-' + viewName);
       if(target) {
         target.classList.add('active-view');
       }
 
-      // Update active state in sidebar menu if applicable
       document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
       const activeNav = document.getElementById('nav-' + viewName);
       if(activeNav) {
@@ -814,10 +759,8 @@
         if(labNav) labNav.classList.add('active');
       }
 
-      // Scroll to top of main area
       window.scrollTo({ top: 0, behavior: 'smooth' });
       
-      // Close mobile menu if open
       sidebar.classList.remove('open');
       sidebarOverlay.classList.remove('active');
     }
