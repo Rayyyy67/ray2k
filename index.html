@@ -123,6 +123,7 @@
       letter-spacing: 1px;
       text-decoration: none;
       color: var(--text-white);
+      cursor: pointer;
     }
 
     .logo span {
@@ -154,6 +155,7 @@
       font-size: 0.85rem;
       letter-spacing: 0.5px;
       transition: all 0.2s;
+      cursor: pointer;
     }
 
     .sidebar-menu a.active,
@@ -280,7 +282,7 @@
       width: 100%;
     }
 
-    /* Card Component Styled like User Images */
+    /* Card Component */
     .dash-card {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
@@ -455,7 +457,7 @@
   <div class="bg-overlay"></div>
 
   <header class="mobile-header">
-    <a href="#" onclick="showGameSelect(); return false;" class="logo">RAY<span>2K</span></a>
+    <a onclick="showGameSelect(); return false;" class="logo">RAY<span>2K</span></a>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
   </header>
 
@@ -464,13 +466,13 @@
   <aside id="sidebar">
     <div>
       <div class="brand">
-        <a href="#" onclick="showGameSelect(); return false;" class="logo">RAY<span>2K</span></a>
+        <a onclick="showGameSelect(); return false;" class="logo">RAY<span>2K</span></a>
         <span class="sub-title">NBA LAB</span>
       </div>
 
       <ul class="sidebar-menu">
-        <li><a href="#" onclick="showGameSelect(); return false;" class="active" id="navLab">RAY2K LAB</a></li>
-        <li><a href="https://www.facebook.com/profile.php?id=61594111973222" target="_blank" rel="noopener noreferrer">COMMUNITY</a></li>
+        <li><a onclick="showGameSelect(); return false;" class="active" id="navLab">RAY2K LAB</a></li>
+        <li><a onclick="show2k23Dashboard(); return false;" id="navCategories">CATEGORIES</a></li>
       </ul>
     </div>
 
@@ -490,7 +492,7 @@
         <div class="time-badge">STATUS: ONLINE</div>
       </div>
 
-      <!-- GAME SELECTION VIEW (Only NBA 2K23 as requested) -->
+      <!-- GAME SELECTION VIEW -->
       <div id="gameSelectView" class="view-section active-view">
         <div class="section-header">
           <span class="section-tag">GAME VERSION</span>
@@ -499,7 +501,7 @@
         </div>
 
         <div class="grid-2">
-          <!-- NBA 2K23 LAB Card matching your exact style and blue theme -->
+          <!-- NBA 2K23 Card -->
           <div class="dash-card active-card" onclick="show2k23Dashboard();">
             <div>
               <div class="card-top-row">
@@ -525,7 +527,7 @@
         </div>
       </div>
 
-      <!-- NBA 2K23 DASHBOARD VIEW (Styled with blue accents matching your third image) -->
+      <!-- NBA 2K23 DASHBOARD VIEW -->
       <div id="dashboard2k23" class="view-section">
         <button class="back-btn" onclick="showGameSelect();">&larr; BACK TO GAMES</button>
         
@@ -536,7 +538,7 @@
         </div>
 
         <div class="grid-3">
-          <div class="dash-card active-card" onclick="window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');">
+          <div class="dash-card active-card" onclick="openModLink('Rosters');">
             <div>
               <div class="card-top-row">
                 <div class="card-icon-box">R</div>
@@ -547,7 +549,7 @@
             <span class="card-link">BROWSE &rarr;</span>
           </div>
 
-          <div class="dash-card active-card" onclick="window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');">
+          <div class="dash-card active-card" onclick="openModLink('Cyberfaces');">
             <div>
               <div class="card-top-row">
                 <div class="card-icon-box">F</div>
@@ -558,7 +560,7 @@
             <span class="card-link">BROWSE &rarr;</span>
           </div>
 
-          <div class="dash-card active-card" onclick="window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');">
+          <div class="dash-card active-card" onclick="openModLink('Portraits');">
             <div>
               <div class="card-top-row">
                 <div class="card-icon-box">P</div>
@@ -569,7 +571,7 @@
             <span class="card-link">BROWSE &rarr;</span>
           </div>
 
-          <div class="dash-card active-card" onclick="window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');">
+          <div class="dash-card active-card" onclick="openModLink('Jerseys');">
             <div>
               <div class="card-top-row">
                 <div class="card-icon-box">J</div>
@@ -580,7 +582,7 @@
             <span class="card-link">BROWSE &rarr;</span>
           </div>
 
-          <div class="dash-card active-card" onclick="window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');">
+          <div class="dash-card active-card" onclick="openModLink('Courts');">
             <div>
               <div class="card-top-row">
                 <div class="card-icon-box">C</div>
@@ -591,7 +593,7 @@
             <span class="card-link">BROWSE &rarr;</span>
           </div>
 
-          <div class="dash-card active-card" onclick="window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');">
+          <div class="dash-card active-card" onclick="openModLink('Scoreboards');">
             <div>
               <div class="card-top-row">
                 <div class="card-icon-box">S</div>
@@ -617,6 +619,8 @@
     const sidebarOverlay = document.getElementById('sidebarOverlay');
     const gameSelectView = document.getElementById('gameSelectView');
     const dashboard2k23 = document.getElementById('dashboard2k23');
+    const navLab = document.getElementById('navLab');
+    const navCategories = document.getElementById('navCategories');
 
     function toggleMenu() {
       sidebar.classList.toggle('open');
@@ -631,13 +635,28 @@
     function showGameSelect() {
       hideAllViews();
       gameSelectView.classList.add('active-view');
+      navLab.classList.add('active');
+      navCategories.classList.remove('active');
+      if (sidebar.classList.contains('open')) toggleMenu();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function show2k23Dashboard() {
       hideAllViews();
       dashboard2k23.classList.add('active-view');
+      navCategories.classList.add('active');
+      navLab.classList.remove('active');
+      if (sidebar.classList.contains('open')) toggleMenu();
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openModLink(categoryName) {
+      // Put your specific category links here instead of opening your main facebook profile for everything!
+      // Example:
+      // if(categoryName === 'Rosters') window.open('YOUR_ROSTERS_LINK_HERE', '_blank');
+      // else window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');
+      
+      window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');
     }
 
     menuToggle.addEventListener('click', toggleMenu);
