@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAY2K // NBA 2K14 LAB</title>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   RAY2K // NBA 2K14 LAB
+  </title>
   <style>
-    :root {
+   :root {
       --bg: #070b12;
       --bg-soft: #0a1019;
       --card: #0d1520;
@@ -654,131 +656,304 @@
       .category-card { min-height: 205px; }
     }
   </style>
-</head>
-<body>
-
+  <style>
+   .index-support{position:fixed;right:24px;bottom:24px;z-index:1200;background:var(--blue);color:#031018;border-radius:30px;padding:11px 16px;font-size:.65rem;font-weight:900;text-decoration:none;box-shadow:0 5px 22px var(--blue-glow)}.index-support:hover{transform:translateY(-2px)}
+  </style>
+ </head>
+ <body>
   <header class="site-header">
-    <nav class="nav" aria-label="Main navigation">
-      <a class="logo" href="index.html">RAY<span>2K</span><small>QUALITY OF LIFE MODS</small></a>
-      <ul class="nav-links">
-        <li><a class="active" href="index.html">HOME</a></li>
-        <li><a href="#featured">MODS</a></li>
-        <li><a href="rosters.html">ROSTERS</a></li>
-        <li><a href="cyberfaces.html">CYBERFACES</a></li>
-        <li><a href="presentation.html">SCOREBOARDS</a></li>
-        <li><a class="locked-nav" href="#versions" aria-disabled="true">2K23 🔒</a></li>
-      </ul>
-    </nav>
+   <nav aria-label="Main navigation" class="nav">
+    <a class="logo" href="index.html">
+     RAY
+     <span>
+      2K
+     </span>
+     <small>
+      QUALITY OF LIFE MODS
+     </small>
+    </a>
+    <ul class="nav-links">
+     <li>
+      <a class="active" href="index.html">
+       HOME
+      </a>
+     </li>
+     <li>
+      <a href="#featured">
+       MODS
+      </a>
+     </li>
+     <li>
+      <a href="rosters.html">
+       ROSTERS
+      </a>
+     </li>
+     <li>
+      <a href="cyberfaces.html">
+       CYBERFACES
+      </a>
+     </li>
+     <li>
+      <a href="presentation.html">
+       SCOREBOARDS
+      </a>
+     </li>
+     <li>
+      <a aria-disabled="true" class="locked-nav" href="#versions">
+       2K23 🔒
+      </a>
+     </li>
+    </ul>
+   </nav>
   </header>
-
   <main>
-    <section class="hero">
-      <div class="hero-content">
-        <div class="eyebrow">RAY2K // NBA 2K MOD ARCHIVE</div>
-        <h1>QUALITY OF LIFE<br><span>MODS FOR NBA 2K</span></h1>
-        <p>Rosters, cyberfaces, scoreboards, presentation and other curated NBA 2K14 files — kept organized so you can find the right mod fast.</p>
-        <div class="hero-buttons">
-          <a class="btn btn-primary" href="#versions">BROWSE ARCHIVE</a>
-          <a class="btn btn-outline" href="rosters.html">OPEN ROSTERS</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="stats" aria-label="RAY2K archive statistics">
-      <div class="stats-inner">
-        <div class="stat"><strong>3<span>+</span></strong><small>ACTIVE CATEGORIES</small></div>
-        <div class="stat"><strong>2K<span>14</span></strong><small>PRIMARY GAME</small></div>
-        <div class="stat"><strong>2K<span>23</span></strong><small>LOCKED</small></div>
-        <div class="stat"><strong>100<span>%</span></strong><small>RAY2K ARCHIVE</small></div>
-      </div>
-    </section>
-
-    <section class="section" id="featured">
-      <div class="section-heading">
-        <div>
-          <div class="section-tag">FEATURED CATEGORIES</div>
-          <h2>EVERY PART OF THE GAME,<br>COVERED</h2>
-          <div class="blue-line"></div>
-        </div>
-        <p>Choose NBA 2K14 below to open the active archive. Each folder is clickable and keeps the existing RAY2K pages and download content intact.</p>
-      </div>
-
-      <div class="version-grid" id="versions">
-        <button class="version-card active" type="button" id="open2k14" aria-expanded="false" aria-controls="categories">
-          <span class="version-status">ACTIVE</span>
-          <h3>NBA 2K14</h3>
-          <p>Open the RAY2K mod archive and browse the available categories.</p>
-        </button>
-        <div class="version-card locked" aria-label="NBA 2K23 locked">
-          <span class="version-status">LOCKED</span>
-          <h3>NBA 2K23</h3>
-          <p>Coming later. This version is intentionally locked for now.</p>
-        </div>
-      </div>
-
-      <div class="archive-back-wrap" id="archiveBackWrap">
-        <button class="archive-back" type="button" id="archiveBack">← BACK TO GAME VERSIONS</button>
-      </div>
-
-      <div class="category-grid is-hidden" id="categories" aria-hidden="true">
-        <a class="category-card" href="rosters.html" data-cursor-card>
-          <div class="category-top">
-            <div class="folder">R</div>
-            <h3>ROSTERS</h3>
-            <p>Updated rosters, draft classes and team changes for the current RAY2K setup.</p>
-          </div>
-          <div class="open-link">OPEN ARCHIVE &rarr;</div>
-        </a>
-
-        <a class="category-card" href="cyberfaces.html" data-cursor-card>
-          <div class="category-top">
-            <div class="folder">C</div>
-            <h3>CYBERFACES</h3>
-            <p>Player face scans, headshapes and appearance files already available in your archive.</p>
-          </div>
-          <div class="open-link">OPEN ARCHIVE &rarr;</div>
-        </a>
-
-        <a class="category-card" href="presentation.html" data-cursor-card>
-          <div class="category-top">
-            <div class="folder">S</div>
-            <h3>SCOREBOARDS</h3>
-            <p>Scoreboard and presentation downloads through your existing presentation page.</p>
-          </div>
-          <div class="open-link">OPEN ARCHIVE &rarr;</div>
-        </a>
-      </div>
-    </section>
-
-    <section class="why">
-      <div class="why-inner">
-        <div>
-          <div class="section-tag">WHY RAY2K?</div>
-          <h2>BUILT LIKE AN ARCHIVE,<br>NOT A <span>FORUM THREAD.</span></h2>
-          <p>RAY2K keeps NBA 2K14 mod categories in one clean place. The index only organizes the existing pages — your roster, cyberface and presentation/download pages remain where they already are.</p>
-        </div>
-        <div class="mini-stats">
-          <div class="mini-stat"><strong>3</strong><small>ACTIVE FOLDERS</small></div>
-          <div class="mini-stat"><strong>1</strong><small>PRIMARY GAME</small></div>
-          <div class="mini-stat"><strong>2K23</strong><small>LOCKED VERSION</small></div>
-          <div class="mini-stat"><strong>RAY2K</strong><small>MODDING VAULT</small></div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <div class="theme-tools" aria-label="Theme and clock controls">
-    <div class="theme-clock">
-      <span class="theme-time" id="themeTime">--:--:--</span>
-      <span class="theme-date" id="themeDate">Loading...</span>
+   <section class="hero">
+    <div class="hero-content">
+     <div class="eyebrow">
+      RAY2K // NBA 2K MOD ARCHIVE
+     </div>
+     <h1>
+      QUALITY OF LIFE
+      <br/>
+      <span>
+       MODS FOR NBA 2K
+      </span>
+     </h1>
+     <p>
+      Rosters, cyberfaces, scoreboards, presentation and other curated NBA 2K14 files — kept organized so you can find the right mod fast.
+     </p>
+     <div class="hero-buttons">
+      <a class="btn btn-primary" href="#versions">
+       BROWSE ARCHIVE
+      </a>
+      <a class="btn btn-outline" href="rosters.html">
+       OPEN ROSTERS
+      </a>
+      <a class="btn btn-outline" href="https://www.facebook.com/profile.php?id=61594111973222" rel="noopener noreferrer" target="_blank">
+       JOIN COMMUNITY
+      </a>
+     </div>
     </div>
-    <button class="theme-switch" type="button" id="themeSwitch">THEME: CYAN</button>
+   </section>
+   <section aria-label="RAY2K archive statistics" class="stats">
+    <div class="stats-inner">
+     <div class="stat">
+      <strong>
+       3
+       <span>
+        +
+       </span>
+      </strong>
+      <small>
+       ACTIVE CATEGORIES
+      </small>
+     </div>
+     <div class="stat">
+      <strong>
+       2K
+       <span>
+        14
+       </span>
+      </strong>
+      <small>
+       PRIMARY GAME
+      </small>
+     </div>
+     <div class="stat">
+      <strong>
+       2K
+       <span>
+        23
+       </span>
+      </strong>
+      <small>
+       LOCKED
+      </small>
+     </div>
+     <div class="stat">
+      <strong>
+       100
+       <span>
+        %
+       </span>
+      </strong>
+      <small>
+       RAY2K ARCHIVE
+      </small>
+     </div>
+    </div>
+   </section>
+   <section class="section" id="featured">
+    <div class="section-heading">
+     <div>
+      <div class="section-tag">
+       FEATURED CATEGORIES
+      </div>
+      <h2>
+       EVERY PART OF THE GAME,
+       <br/>
+       COVERED
+      </h2>
+      <div class="blue-line">
+      </div>
+     </div>
+     <p>
+      Choose NBA 2K14 below to open the active archive. Each folder is clickable and keeps the existing RAY2K pages and download content intact.
+     </p>
+    </div>
+    <div class="version-grid" id="versions">
+     <button aria-controls="categories" aria-expanded="false" class="version-card active" id="open2k14" type="button">
+      <span class="version-status">
+       ACTIVE
+      </span>
+      <h3>
+       NBA 2K14
+      </h3>
+      <p>
+       Open the RAY2K mod archive and browse the available categories.
+      </p>
+     </button>
+     <div aria-label="NBA 2K23 locked" class="version-card locked">
+      <span class="version-status">
+       LOCKED
+      </span>
+      <h3>
+       NBA 2K23
+      </h3>
+      <p>
+       Coming later. This version is intentionally locked for now.
+      </p>
+     </div>
+    </div>
+    <div class="archive-back-wrap" id="archiveBackWrap">
+     <button class="archive-back" id="archiveBack" type="button">
+      ← BACK TO GAME VERSIONS
+     </button>
+    </div>
+    <div aria-hidden="true" class="category-grid is-hidden" id="categories">
+     <a class="category-card" data-cursor-card="" href="rosters.html">
+      <div class="category-top">
+       <div class="folder">
+        R
+       </div>
+       <h3>
+        ROSTERS
+       </h3>
+       <p>
+        Updated rosters, draft classes and team changes for the current RAY2K setup.
+       </p>
+      </div>
+      <div class="open-link">
+       OPEN ARCHIVE →
+      </div>
+     </a>
+     <a class="category-card" data-cursor-card="" href="cyberfaces.html">
+      <div class="category-top">
+       <div class="folder">
+        C
+       </div>
+       <h3>
+        CYBERFACES
+       </h3>
+       <p>
+        Player face scans, headshapes and appearance files already available in your archive.
+       </p>
+      </div>
+      <div class="open-link">
+       OPEN ARCHIVE →
+      </div>
+     </a>
+     <a class="category-card" data-cursor-card="" href="presentation.html">
+      <div class="category-top">
+       <div class="folder">
+        S
+       </div>
+       <h3>
+        SCOREBOARDS
+       </h3>
+       <p>
+        Scoreboard and presentation downloads through your existing presentation page.
+       </p>
+      </div>
+      <div class="open-link">
+       OPEN ARCHIVE →
+      </div>
+     </a>
+    </div>
+   </section>
+   <section class="why">
+    <div class="why-inner">
+     <div>
+      <div class="section-tag">
+       WHY RAY2K?
+      </div>
+      <h2>
+       BUILT LIKE AN ARCHIVE,
+       <br/>
+       NOT A
+       <span>
+        FORUM THREAD.
+       </span>
+      </h2>
+      <p>
+       RAY2K keeps NBA 2K14 mod categories in one clean place. The index only organizes the existing pages — your roster, cyberface and presentation/download pages remain where they already are.
+      </p>
+     </div>
+     <div class="mini-stats">
+      <div class="mini-stat">
+       <strong>
+        3
+       </strong>
+       <small>
+        ACTIVE FOLDERS
+       </small>
+      </div>
+      <div class="mini-stat">
+       <strong>
+        1
+       </strong>
+       <small>
+        PRIMARY GAME
+       </small>
+      </div>
+      <div class="mini-stat">
+       <strong>
+        2K23
+       </strong>
+       <small>
+        LOCKED VERSION
+       </small>
+      </div>
+      <div class="mini-stat">
+       <strong>
+        RAY2K
+       </strong>
+       <small>
+        MODDING VAULT
+       </small>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <div aria-label="Theme and clock controls" class="theme-tools">
+   <div class="theme-clock">
+    <span class="theme-time" id="themeTime">
+     --:--:--
+    </span>
+    <span class="theme-date" id="themeDate">
+     Loading...
+    </span>
+   </div>
+   <button class="theme-switch" id="themeSwitch" type="button">
+    THEME: CYAN
+   </button>
   </div>
-
-  <footer>RAY2K // NBA 2K14 MODDING VAULT // PC / WINDOWS</footer>
-
+  <footer>
+   RAY2K // NBA 2K14 MODDING VAULT // PC / WINDOWS
+  </footer>
   <script>
-    const open2k14 = document.getElementById('open2k14');
+   const open2k14 = document.getElementById('open2k14');
     const archiveBack = document.getElementById('archiveBack');
     const archiveBackWrap = document.getElementById('archiveBackWrap');
     const categories = document.getElementById('categories');
@@ -880,5 +1055,8 @@
     if (themeSwitch) themeSwitch.addEventListener('click', cycleTheme);
     applyTheme();
   </script>
-</body>
+  <a class="index-support" href="https://www.facebook.com/profile.php?id=61594111973222" rel="noopener noreferrer" target="_blank">
+   ⚡ SUPPORT RAY2K
+  </a>
+ </body>
 </html>
