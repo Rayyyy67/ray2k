@@ -1,591 +1,523 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAY2K // NBA 2K14 LAB</title>
-  <style>
-    :root {
-      --bg-main: #0b0f17;
-      --bg-sidebar: #070a10;
-      --card-bg: #121824;
-      --accent-cyan: #00f0ff;
-      --accent-glow: rgba(0, 240, 255, 0.12);
-      --text-main: #f8fafc;
-      --text-muted: #808e9b;
-      --border: #1a2332;
-    }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    body {
-      background-color: var(--bg-main);
-      color: var(--text-main);
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      display: flex;
-      min-height: 100vh;
-    }
+<title>NBA 2K14 — RAY2K</title>
 
-    /* Left Sidebar */
-    aside {
-      width: 260px;
-      background-color: var(--bg-sidebar);
-      border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 24px;
-      position: fixed;
-      height: 100vh;
-    }
+<style>
 
-    .brand {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
+:root {
+  --bg:#07090e;
+  --sidebar:#04060a;
+  --card:#0f1520;
+  --card2:#141c2c;
+  --border:#1a2638;
+  --accent:#00f0ff;
+  --accent-hover:#00cce0;
+  --glow:rgba(0,240,255,.14);
+  --text:#fff;
+  --muted:#8290a0;
+}
 
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 900;
-      letter-spacing: 1px;
-      text-decoration: none;
-      color: var(--text-main);
-    }
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    .logo span {
-      color: var(--accent-cyan);
-    }
+body {
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,Arial,system-ui,sans-serif;
+}
 
-    .sub-title {
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: var(--accent-cyan);
-      letter-spacing: 1px;
-    }
+aside {
+  position:fixed;
+  left:0;
+  top:0;
+  width:240px;
+  height:100vh;
 
-    .sidebar-menu {
-      list-style: none;
-      margin-top: 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
+  padding:28px 16px;
 
-    .sidebar-menu a {
-      display: block;
-      padding: 12px 16px;
-      border-radius: 6px;
-      color: var(--text-muted);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.5px;
-      transition: all 0.2s;
-    }
+  background:var(--sidebar);
+  border-right:1px solid var(--border);
 
-    .sidebar-menu a.active, .sidebar-menu a:hover {
-      background: var(--accent-glow);
-      color: var(--accent-cyan);
-      border-left: 3px solid var(--accent-cyan);
-    }
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
 
-    .sidebar-footer {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border);
-      padding-top: 16px;
-    }
+.brand {
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  margin-bottom:30px;
+}
 
-    /* Main Content Area */
-    main {
-      margin-left: 260px;
-      flex: 1;
-      padding: 30px 50px;
-    }
+.logo {
+  color:var(--text);
+  text-decoration:none;
+  font-size:1.55rem;
+  font-weight:950;
+}
 
-    /* Announcement Bar */
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      margin-bottom: 40px;
-    }
+.logo span,
+.sub-title {
+  color:var(--accent);
+}
 
-    .badge-dot {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      background-color: var(--accent-cyan);
-      border-radius: 50%;
-      margin-right: 8px;
-    }
+.sub-title {
+  font-size:.65rem;
+  font-weight:900;
+  letter-spacing:1px;
+}
 
-    .notice {
-      color: var(--text-muted);
-    }
+.archive-label {
+  display:block;
 
-    .notice strong {
-      color: var(--text-main);
-    }
+  padding:13px 14px;
 
-    .notice a {
-      color: var(--accent-cyan);
-      text-decoration: none;
-      font-weight: 700;
-    }
+  border-left:3px solid var(--accent);
+  border-radius:6px;
 
-    .time-badge {
-      font-weight: 800;
-      color: var(--text-muted);
-    }
+  background:var(--glow);
 
-    /* Meta Tags Header */
-    .tags-row {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin-bottom: 16px;
-    }
+  color:var(--accent);
 
-    .pill {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      padding: 4px 12px;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--text-muted);
-    }
+  font-size:.75rem;
+  font-weight:900;
+  text-transform:uppercase;
+}
 
-    .pill.accent {
-      border-color: var(--accent-cyan);
-      color: var(--accent-cyan);
-    }
+.bottom {
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
 
-    /* Hero Headline */
-    .hero-title {
-      font-size: 4rem;
-      font-weight: 900;
-      line-height: 1;
-      letter-spacing: -1px;
-      margin-bottom: 20px;
-    }
+.clock {
+  border-top:1px solid var(--border);
+  padding-top:14px;
+}
 
-    .hero-title span {
-      color: var(--accent-cyan);
-    }
+#clock {
+  color:var(--accent);
+  font-size:.78rem;
+  font-weight:950;
+}
 
-    .hero-desc {
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      max-width: 650px;
-      line-height: 1.6;
-      margin-bottom: 30px;
-    }
+#date {
+  color:var(--muted);
+  font-size:.62rem;
+  margin-top:3px;
+}
 
-    /* Action Buttons */
-    .btn-row {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 60px;
-    }
+button,
+.back {
+  width:100%;
+  padding:10px 12px;
 
-    .btn {
-      padding: 14px 32px;
-      border-radius: 6px;
-      font-weight: 800;
-      font-size: 0.85rem;
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-    }
+  border-radius:6px;
 
-    .btn-cyan {
-      background-color: var(--accent-cyan);
-      color: #000;
-    }
+  background:var(--card);
+  color:var(--text);
 
-    .btn-outline {
-      border: 1px solid var(--border);
-      color: var(--text-main);
-      background: var(--card-bg);
-    }
+  border:1px solid var(--border);
 
-    /* Dashboard Cards Section */
-    .dashboard-header {
-      border-top: 1px solid var(--border);
-      padding-top: 40px;
-      margin-bottom: 30px;
-    }
+  font-size:.65rem;
+  font-weight:900;
 
-    .dash-tag {
-      color: var(--accent-cyan);
-      font-size: 0.75rem;
-      font-weight: 800;
-      letter-spacing: 1px;
-    }
+  text-transform:uppercase;
+  text-decoration:none;
 
-    .dash-title {
-      font-size: 2rem;
-      font-weight: 900;
-      margin-top: 4px;
-    }
+  cursor:pointer;
+}
 
-    .dash-subtitle {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-top: 6px;
-    }
+button:hover,
+.back:hover {
+  border-color:var(--accent);
+  color:var(--accent);
+}
 
-    /* Cards Grid */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
+main {
+  margin-left:240px;
+  min-height:100vh;
+  padding:55px 45px 80px;
+}
 
-    /* Dashboard Cards - Animated Cyan Line & Glow */
-    .dash-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
-    }
+.top {
+  max-width:1100px;
+  margin:auto;
+}
 
-    /* Top Cyan Line - Animates Left to Right */
-    .dash-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 3px;
-      background: var(--accent-cyan);
-      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+.kicker {
+  color:var(--accent);
+  font-size:.65rem;
+  font-weight:950;
+  letter-spacing:2px;
+}
 
-    /* Active Hover & Focus States */
-    .dash-card.active-card:hover {
-      border-color: var(--accent-cyan);
-      transform: translateY(-3px);
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
-    }
+h1 {
+  margin-top:10px;
+  font-size:clamp(2rem,5vw,4rem);
+  font-weight:950;
+  text-transform:uppercase;
+}
 
-    .dash-card.active-card:hover::before {
-      width: 100%;
-    }
+.description {
+  max-width:650px;
+  margin-top:14px;
 
-    .dash-card.locked-card {
-      opacity: 0.5;
-    }
+  color:var(--muted);
 
-    .card-badge {
-      font-size: 0.7rem;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 4px 8px;
-      border-radius: 4px;
-      display: inline-block;
-      margin-bottom: 12px;
-      width: fit-content;
-    }
+  font-size:.75rem;
+  line-height:1.7;
+}
 
-    .badge-active {
-      background: var(--accent-glow);
-      color: var(--accent-cyan);
-      border: 1px solid var(--accent-cyan);
-    }
+.grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
 
-    .badge-locked {
-      background: #1a2332;
-      color: #808e9b;
-      border: 1px solid var(--border);
-    }
+  margin-top:40px;
+}
 
-    .dash-card h3 {
-      font-size: 1.3rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
+.card {
+  min-height:190px;
+  padding:25px;
 
-    .dash-card p {
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:8px;
 
-    .card-link {
-      color: var(--text-main);
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 0.85rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-    }
+  text-decoration:none;
 
-    .dash-card.active-card .card-link:hover {
-      color: var(--accent-cyan);
-    }
+  transition:.2s ease;
+}
 
-    /* Modals / Popups for opening files */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(5px);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-    }
+.card:hover {
+  border-color:var(--accent);
+  transform:translateY(-2px);
+}
 
-    .modal-content {
-      background: var(--card-bg);
-      border: 1px solid var(--accent-cyan);
-      border-radius: 12px;
-      width: 90%;
-      max-width: 500px;
-      padding: 30px;
-      position: relative;
-    }
+.card-number {
+  color:var(--accent);
+  font-size:.65rem;
+  font-weight:950;
+}
 
-    .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 1.5rem;
-      color: var(--text-muted);
-      cursor: pointer;
-    }
+.card h2 {
+  margin-top:16px;
+  font-size:1rem;
+  font-weight:950;
+  text-transform:uppercase;
+}
 
-    .close-btn:hover {
-      color: var(--accent-cyan);
-    }
+.card p {
+  margin-top:9px;
+  color:var(--muted);
+  font-size:.68rem;
+  line-height:1.6;
+}
 
-    .modal h2 {
-      font-size: 1.6rem;
-      margin-bottom: 10px;
-      color: var(--accent-cyan);
-    }
+.open {
+  display:inline-block;
+  margin-top:20px;
 
-    .file-item {
-      background: var(--bg-main);
-      border: 1px solid var(--border);
-      padding: 12px 16px;
-      border-radius: 6px;
-      margin-top: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+  color:var(--accent);
 
-    .file-item span {
-      font-size: 0.9rem;
-      font-weight: 700;
-    }
+  font-size:.62rem;
+  font-weight:950;
+  text-transform:uppercase;
+}
 
-    .download-btn {
-      background: var(--accent-cyan);
-      color: #000;
-      padding: 6px 12px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-size: 0.75rem;
-      font-weight: 800;
-    }
+@media(max-width:800px) {
 
-    /* Floating Support Button */
-    .floating-btn {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background-color: var(--accent-cyan);
-      color: #000;
-      padding: 12px 20px;
-      border-radius: 30px;
-      font-weight: 800;
-      font-size: 0.85rem;
-      text-decoration: none;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    }
-  </style>
+  aside {
+    position:relative;
+    width:100%;
+    height:auto;
+
+    border-right:none;
+    border-bottom:1px solid var(--border);
+  }
+
+  main {
+    margin-left:0;
+    padding:35px 20px 60px;
+  }
+
+  .grid {
+    grid-template-columns:1fr;
+  }
+}
+
+</style>
 </head>
+
 <body>
 
-  <!-- Left Sidebar -->
-  <aside>
-    <div>
-      <div class="brand">
-        <a href="index.html" class="logo">RAY<span>2K</span></a>
-        <span class="sub-title">NBA 2K14 LAB</span>
-      </div>
+<aside>
 
-      <ul class="sidebar-menu">
-        <li><a href="#" class="active">RAY2K LAB</a></li>
-        <li><a href="javascript:void(0)" onclick="openModal('roster-modal')">ROSTER UPDATES</a></li>
-        <li><a href="javascript:void(0)" onclick="openModal('cyberface-modal')">CYBERFACES</a></li>
-      </ul>
+  <div>
+
+    <div class="brand">
+
+      <a href="index.html" class="logo">
+        RAY<span>2K</span>
+      </a>
+
+      <span class="sub-title">
+        NBA 2K14 LAB
+      </span>
+
     </div>
 
-    <div class="sidebar-footer">
-      <p>RAY2K Modding Vault</p>
-      <p style="color: #555; margin-top: 4px;">PC / Windows Support</p>
-    </div>
-  </aside>
-
-  <!-- Main Content Area -->
-  <main>
-    <!-- Top Announcement Bar -->
-    <div class="top-bar">
-      <div class="notice">
-        <span class="badge-dot"></span>
-        <strong>PC ONLY</strong> WINDOWS PC — NOT WINLATOR / ANDROID. <a href="#">INSTALL GUIDE &rarr;</a>
-      </div>
-      <div class="time-badge">STATUS: ONLINE</div>
+    <div class="archive-label">
+      NBA 2K14
     </div>
 
-    <!-- Hero Header -->
-    <div class="tags-row">
-      <span class="pill accent">LAB</span>
-      <span class="pill">Roster 2026</span>
-      <span class="pill">Updated Aug 2026</span>
-      <span class="pill">PC / Windows</span>
+  </div>
+
+  <div class="bottom">
+
+    <div class="clock">
+      <div id="clock">00:00:00</div>
+      <div id="date">Loading...</div>
     </div>
 
-    <h1 class="hero-title">NBA 2K14,<br><span>REBUILT.</span></h1>
-    <p class="hero-desc">Roster updates, dedicated mods, IDs, tools, fixes, and installation guides — organized in one place.</p>
+    <button onclick="changeTheme()">
+      THEME: CYAN
+    </button>
 
-    <div class="btn-row">
-      <a href="#dashboard" class="btn btn-cyan">START HERE</a>
-      <a href="#dashboard" class="btn btn-outline">BROWSE MODS</a>
+    <a
+      class="back"
+      href="index.html"
+    >
+      BACK TO RAY2K
+    </a>
+
+    <a
+      class="back"
+      href="https://www.facebook.com/profile.php?id=61594111973222"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      SUPPORT RAY2K
+    </a>
+
+  </div>
+
+</aside>
+
+<main>
+
+  <div class="top">
+
+    <div class="kicker">
+      ACTIVE ARCHIVE
     </div>
 
-    <!-- Dashboard Section -->
-    <div class="dashboard-header" id="dashboard">
-      <span class="dash-tag">RAY2K LAB</span>
-      <h2 class="dash-title">LAB DASHBOARD</h2>
-      <p class="dash-subtitle">Access active mods or check incoming updates.</p>
-    </div>
+    <h1>
+      NBA 2K14
+    </h1>
+
+    <p class="description">
+      Choose a category below to browse the RAY2K NBA 2K14 archive.
+    </p>
 
     <div class="grid">
-      <!-- Active Card 1: Roster -->
-      <div class="dash-card active-card">
-        <div>
-          <span class="card-badge badge-active">Available</span>
-          <h3>ROSTER UPDATES</h3>
-          <p>Download current season rosters, draft classes, and team rotations.</p>
-        </div>
-        <a class="card-link" onclick="openModal('roster-modal')">OPEN ARCHIVE &rarr;</a>
-      </div>
 
-      <!-- Active Card 2: Cyberface -->
-      <div class="dash-card active-card">
-        <div>
-          <span class="card-badge badge-active">Available</span>
-          <h3>CYBERFACES</h3>
-          <p>Updated face scans, headshapes, and skin textures for modern players.</p>
-        </div>
-        <a class="card-link" onclick="openModal('cyberface-modal')">OPEN ARCHIVE &rarr;</a>
-      </div>
+      <a href="rosters.html" class="card">
 
-      <!-- Locked Card 1 -->
-      <div class="dash-card locked-card">
-        <div>
-          <span class="card-badge badge-locked">Coming Soon</span>
-          <h3>COURTS & ARENAS</h3>
-          <p>3D stadium lighting, floor updates, and custom arena textures.</p>
+        <div class="card-number">
+          01
         </div>
-        <span class="card-link" style="color: #555; cursor: not-allowed;">LOCKED</span>
-      </div>
 
-      <!-- Locked Card 2 -->
-      <div class="dash-card locked-card">
-        <div>
-          <span class="card-badge badge-locked">Coming Soon</span>
-          <h3>PRESENTATION & ENB</h3>
-          <p>Scoreboards, replay wipes, and custom visual graphics suites.</p>
+        <h2>
+          ROSTERS
+        </h2>
+
+        <p>
+          NBA 2K14 roster files and roster updates.
+        </p>
+
+        <span class="open">
+          OPEN ROSTERS →
+        </span>
+
+      </a>
+
+      <a href="cyberfaces.html" class="card">
+
+        <div class="card-number">
+          02
         </div>
-        <span class="card-link" style="color: #555; cursor: not-allowed;">LOCKED</span>
-      </div>
+
+        <h2>
+          CYBERFACES
+        </h2>
+
+        <p>
+          Player faces, headshapes and appearance files.
+        </p>
+
+        <span class="open">
+          OPEN CYBERFACES →
+        </span>
+
+      </a>
+
+      <a href="presentation.html" class="card">
+
+        <div class="card-number">
+          03
+        </div>
+
+        <h2>
+          SCOREBOARDS
+        </h2>
+
+        <p>
+          Scoreboards and presentation files.
+        </p>
+
+        <span class="open">
+          OPEN SCOREBOARDS →
+        </span>
+
+      </a>
+
+      <a href="file-ids.html" class="card">
+
+        <div class="card-number">
+          04
+        </div>
+
+        <h2>
+          FILE IDS
+        </h2>
+
+        <p>
+          NBA 2K14 file IDs and useful reference information.
+        </p>
+
+        <span class="open">
+          OPEN FILE IDS →
+        </span>
+
+      </a>
+
     </div>
-  </main>
 
-  <!-- Roster Popup Modal -->
-  <div id="roster-modal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('roster-modal')">&times;</span>
-      <h2>ROSTER UPDATES</h2>
-      <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;">Available downloads for NBA 2K14:</p>
-      
-      <div class="file-item">
-        <span>RAY2K 2026 Roster V1.0</span>
-        <a href="#" class="download-btn">DOWNLOAD</a>
-      </div>
-      <div class="file-item">
-        <span>2026 Rookie Draft Class</span>
-        <a href="#" class="download-btn">DOWNLOAD</a>
-      </div>
-    </div>
   </div>
 
-  <!-- Cyberface Popup Modal -->
-  <div id="cyberface-modal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('cyberface-modal')">&times;</span>
-      <h2>CYBERFACE PACKS</h2>
-      <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;">Available face mods for NBA 2K14:</p>
-      
-      <div class="file-item">
-        <span>2026 Next-Gen Face Pack</span>
-        <a href="#" class="download-btn">DOWNLOAD</a>
-      </div>
-      <div class="file-item">
-        <span>Tattoo & Hair Texture Fix</span>
-        <a href="#" class="download-btn">DOWNLOAD</a>
-      </div>
-    </div>
-  </div>
+</main>
 
-  <a href="#" class="floating-btn">⚡ SUPPORT RAY2K</a>
+<script>
 
-  <script>
-    function openModal(id) {
-      document.getElementById(id).style.display = 'flex';
-    }
+function updateClock() {
 
-    function closeModal(id) {
-      document.getElementById(id).style.display = 'none';
-    }
+  const now = new Date();
 
-    window.onclick = function(event) {
-      if (event.target.classList.contains('modal')) {
-        event.target.style.display = 'none';
-      }
-    }
-  </script>
+  document.getElementById("clock").textContent =
+    now.toLocaleTimeString([], {
+      hour:"2-digit",
+      minute:"2-digit",
+      second:"2-digit"
+    });
+
+  document.getElementById("date").textContent =
+    now.toLocaleDateString([], {
+      weekday:"short",
+      month:"short",
+      day:"numeric",
+      year:"numeric"
+    });
+}
+
+updateClock();
+setInterval(updateClock,1000);
+
+
+/* THEME */
+
+const themes = [
+  ["CYAN","#00f0ff","#00cce0","rgba(0,240,255,.14)"],
+  ["RED","#ff3030","#df2020","rgba(255,48,48,.14)"],
+  ["LIGHT","#087cff","#0666d6","rgba(8,124,255,.12)"],
+  ["BLACK","#ffffff","#d9d9d9","rgba(255,255,255,.08)"]
+];
+
+let themeIndex =
+  Number(localStorage.getItem("ray2kTheme") || 0);
+
+function applyTheme() {
+
+  const t = themes[themeIndex];
+
+  document.documentElement.style.setProperty("--accent",t[1]);
+  document.documentElement.style.setProperty("--accent-hover",t[2]);
+  document.documentElement.style.setProperty("--glow",t[3]);
+
+  if(t[0] === "LIGHT") {
+    document.documentElement.style.setProperty("--bg","#eef1f5");
+    document.documentElement.style.setProperty("--sidebar","#fff");
+    document.documentElement.style.setProperty("--card","#fff");
+    document.documentElement.style.setProperty("--card2","#f5f7fa");
+    document.documentElement.style.setProperty("--border","#d8dee8");
+    document.documentElement.style.setProperty("--text","#111827");
+    document.documentElement.style.setProperty("--muted","#687386");
+  }
+
+  else if(t[0] === "BLACK") {
+    document.documentElement.style.setProperty("--bg","#000");
+    document.documentElement.style.setProperty("--sidebar","#000");
+    document.documentElement.style.setProperty("--card","#080808");
+    document.documentElement.style.setProperty("--card2","#111");
+    document.documentElement.style.setProperty("--border","#202020");
+    document.documentElement.style.setProperty("--text","#fff");
+    document.documentElement.style.setProperty("--muted","#777");
+  }
+
+  else {
+    document.documentElement.style.setProperty("--bg","#07090e");
+    document.documentElement.style.setProperty("--sidebar","#04060a");
+    document.documentElement.style.setProperty("--card","#0f1520");
+    document.documentElement.style.setProperty("--card2","#141c2c");
+    document.documentElement.style.setProperty("--border","#1a2638");
+    document.documentElement.style.setProperty("--text","#fff");
+    document.documentElement.style.setProperty("--muted","#8290a0");
+  }
+
+  document.querySelector("button").textContent =
+    "THEME: " + t[0];
+}
+
+function changeTheme() {
+
+  themeIndex++;
+
+  if(themeIndex >= themes.length) {
+    themeIndex = 0;
+  }
+
+  localStorage.setItem(
+    "ray2kTheme",
+    themeIndex
+  );
+
+  applyTheme();
+}
+
+applyTheme();
+
+</script>
 
 </body>
 </html>
