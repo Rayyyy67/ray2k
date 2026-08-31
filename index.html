@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAY2K // NBA LAB</title>
+  <title>RAY2K // NBA 2K14 LAB</title>
   <style>
     :root {
       --bg-dark: #0b0f17;
@@ -240,39 +240,6 @@
       margin-bottom: 30px;
     }
 
-    .btn-row {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 60px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 14px 32px;
-      border-radius: 6px;
-      font-weight: 800;
-      font-size: 0.85rem;
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .btn-cyan {
-      background-color: var(--accent-cyan);
-      color: #000000;
-    }
-
-    .btn-cyan:hover {
-      background-color: var(--accent-cyan-hover);
-    }
-
-    .btn-outline {
-      border: 1px solid var(--border-color);
-      color: var(--text-white);
-      background: var(--card-bg);
-    }
-
     .dashboard-header {
       border-top: 1px solid var(--border-color);
       padding-top: 40px;
@@ -408,6 +375,110 @@
       text-decoration: underline;
     }
 
+    /* Views container */
+    .view-section {
+      display: none;
+    }
+
+    .view-section.active {
+      display: block;
+    }
+
+    /* Roster View Styling matching screenshot */
+    .roster-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0;
+      max-width: 360px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .roster-card-top {
+      padding: 20px;
+      background: linear-gradient(180deg, #121824 0%, #080d16 100%);
+      border-bottom: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .latest-badge {
+      background: var(--accent-cyan);
+      color: #000;
+      font-size: 0.65rem;
+      font-weight: 900;
+      padding: 4px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 24px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .roster-card-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--accent-cyan);
+      letter-spacing: 0.5px;
+    }
+
+    .roster-card-bottom {
+      padding: 20px;
+      background: var(--card-bg);
+    }
+
+    .roster-info-title {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .roster-info-sub {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-bottom: 20px;
+    }
+
+    .download-btn {
+      display: block;
+      width: 100%;
+      background: var(--accent-cyan);
+      color: #000;
+      text-align: center;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: background 0.2s;
+    }
+
+    .download-btn:hover {
+      background: var(--accent-cyan-hover);
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      margin-bottom: 24px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .back-btn:hover {
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+    }
+
     .floating-support {
       position: fixed;
       bottom: 24px;
@@ -432,35 +503,22 @@
       .mobile-header {
         display: flex;
       }
-
       aside {
         transform: translateX(-100%);
       }
-
       aside.open {
         transform: translateX(0);
       }
-
       main {
         margin-left: 0;
         padding: 80px 20px 40px;
       }
-
       .top-bar {
         flex-direction: column;
         align-items: flex-start;
       }
-
       .hero-title {
         font-size: 2.5rem;
-      }
-
-      .btn-row {
-        flex-direction: column;
-      }
-
-      .btn {
-        width: 100%;
       }
     }
   </style>
@@ -468,7 +526,7 @@
 <body>
 
   <header class="mobile-header">
-    <a href="index.html" class="logo">RAY<span>2K</span></a>
+    <a href="#" class="logo" onclick="switchView('home')">RAY<span>2K</span></a>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
   </header>
 
@@ -477,13 +535,13 @@
   <aside id="sidebar">
     <div>
       <div class="brand">
-        <a href="index.html" class="logo">RAY<span>2K</span></a>
+        <a href="#" class="logo" onclick="switchView('home')">RAY<span>2K</span></a>
         <span class="sub-title">NBA LAB</span>
       </div>
 
       <ul class="sidebar-menu">
-        <li><a href="index.html" class="active">RAY2K LAB</a></li>
-        <li><a href="rosters.html">ROSTER UPDATES</a></li>
+        <li><a href="#" id="nav-home" class="active" onclick="switchView('home')">RAY2K LAB</a></li>
+        <li><a href="#" id="nav-roster" onclick="switchView('roster')">ROSTER UPDATES</a></li>
         <li><a href="cyberfaces.html">CYBERFACES</a></li>
         <li><a href="presentation.html">PRESENTATION</a></li>
       </ul>
@@ -504,51 +562,69 @@
       <div class="time-badge">STATUS: ONLINE</div>
     </div>
 
-    <div class="tags-row">
-      <span class="pill accent">LAB</span>
-      <span class="pill">Ecosystem Hub</span>
-      <span class="pill">Updated Aug 2026</span>
-      <span class="pill">PC / Windows</span>
-    </div>
-
-    <h1 class="hero-title">EVERYTHING NBA 2K,<br><span>REBUILT.</span></h1>
-    <p class="hero-desc">Discover rosters, cyberfaces, courts, scoreboards, tools, and total conversions across multiple basketball gaming communities.</p>
-
-    <div class="btn-row">
-      <a href="#dashboard" class="btn btn-cyan">BROWSE ARCHIVES</a>
-      <a href="#dashboard" class="btn btn-outline">JOIN COMMUNITY</a>
-    </div>
-
-    <div class="dashboard-header" id="dashboard">
-      <span class="dash-tag">GAME ECOSYSTEMS</span>
-      <h2 class="dash-title">CHOOSE YOUR GAME</h2>
-      <p class="dash-subtitle">Each game has its own dedicated hub with organized mods, tools, and community content.</p>
-    </div>
-
-    <div class="grid">
-      <!-- NBA 2K14 (Active) -->
-      <div class="dash-card active-card">
-        <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80" alt="NBA 2K14" class="card-banner">
-        <div class="card-content">
-          <div>
-            <span class="card-badge badge-active">Active Hub</span>
-            <h3>NBA 2K14</h3>
-            <p>The original QOL2K archive featuring rosters, cyberfaces, courts, and presentation mods.</p>
-          </div>
-          <a href="rosters.html" class="card-link">ENTER ARCHIVE &rarr;</a>
-        </div>
+    <!-- HOME VIEW -->
+    <div id="view-home" class="view-section active">
+      <div class="tags-row">
+        <span class="pill accent">LAB</span>
+        <span class="pill">Ecosystem Hub</span>
+        <span class="pill">Updated Aug 2026</span>
+        <span class="pill">PC / Windows</span>
       </div>
 
-      <!-- NBA 2K23 (Locked to 14 only) -->
-      <div class="dash-card locked-card">
-        <img src="https://images.unsplash.com/photo-1519766304817-4f37bda74a29?auto=format&fit=crop&w=600&q=80" alt="NBA 2K23" class="card-banner" style="filter: grayscale(100%);">
-        <div class="card-content">
-          <div>
-            <span class="card-badge badge-locked">Locked</span>
-            <h3>NBA 2K23</h3>
-            <p>Next-generation roster and visual modification archive.</p>
+      <h1 class="hero-title">EVERYTHING NBA 2K,<br><span>REBUILT.</span></h1>
+      <p class="hero-desc">Discover rosters, cyberfaces, courts, scoreboards, tools, and total conversions across multiple basketball gaming communities.</p>
+
+      <div class="dashboard-header" id="dashboard">
+        <span class="dash-tag">GAME ECOSYSTEMS</span>
+        <h2 class="dash-title">CHOOSE YOUR GAME</h2>
+        <p class="dash-subtitle">Each game has its own dedicated hub with organized mods, tools, and community content.</p>
+      </div>
+
+      <div class="grid">
+        <!-- NBA 2K14 (Active -> Directs to Roster or Hub) -->
+        <div class="dash-card active-card" style="border-top: 3px solid var(--accent-cyan);" onclick="switchView('roster')" style="cursor: pointer;">
+          <div class="card-content" style="min-height: 220px;">
+            <div>
+              <span class="card-badge badge-active" style="background: rgba(0, 240, 255, 0.15); color: var(--accent-cyan); border: 1px solid var(--accent-cyan); padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 800;">N</span>
+              <h3 style="margin-top: 12px; font-size: 1.5rem;">NBA 2K14</h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">The original QOL2K archive featuring rosters, cyberfaces, courts, and presentation mods.</p>
+            </div>
+            <a href="#" class="card-link" onclick="event.stopPropagation(); switchView('roster');">ENTER ARCHIVE &rarr;</a>
           </div>
-          <span class="card-link" style="color: var(--text-muted); cursor: not-allowed;">COMING SOON &rarr;</span>
+        </div>
+
+        <!-- NBA 2K23 (Locked) -->
+        <div class="dash-card locked-card">
+          <div class="card-content" style="min-height: 220px;">
+            <div>
+              <span class="card-badge badge-locked" style="background: var(--card-inner); color: var(--text-muted); border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 800;">N</span>
+              <h3 style="margin-top: 12px; font-size: 1.5rem;">NBA 2K23</h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">Next-generation roster and visual modification archive.</p>
+            </div>
+            <span class="card-link" style="color: var(--text-muted); cursor: not-allowed;">COMING SOON &rarr;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROSTER VIEW -->
+    <div id="view-roster" class="view-section">
+      <a href="#" class="back-btn" onclick="switchView('home')">&larr; BACK TO ECOSYSTEMS</a>
+      
+      <div class="tags-row" style="margin-bottom: 24px;">
+        <span class="pill accent">NBA 2K14</span>
+        <span class="pill">Official Archive</span>
+      </div>
+
+      <div class="roster-card">
+        <div class="roster-card-top">
+          <span class="latest-badge">LATEST</span>
+          <div class="roster-card-title">RAY2K ROSTER</div>
+        </div>
+        <div class="roster-card-bottom">
+          <div class="roster-info-title">ROSTER 26-27</div>
+          <div class="roster-info-sub">Official Update &bull; .ROS</div>
+          <a href="https://www.mediafire.com" target="_blank" class="download-btn">DOWNLOAD</a>
         </div>
       </div>
     </div>
@@ -570,6 +646,23 @@
 
     menuToggle.addEventListener('click', toggleMenu);
     sidebarOverlay.addEventListener('click', toggleMenu);
+
+    function switchView(viewName) {
+      document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+      document.getElementById('view-' + viewName).classList.add('active');
+
+      document.querySelectorAll('.sidebar-menu a').forEach(el => el.classList.remove('active'));
+      if(viewName === 'home') {
+        document.getElementById('nav-home').classList.add('active');
+      } else if(viewName === 'roster') {
+        document.getElementById('nav-roster').classList.add('active');
+      }
+
+      window.scrollTo(0, 0);
+      if(sidebar.classList.contains('open')) {
+        toggleMenu();
+      }
+    }
   </script>
 </body>
 </html>
