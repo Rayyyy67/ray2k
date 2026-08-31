@@ -32,6 +32,7 @@
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
+      scroll-behavior: smooth;
     }
 
     /* Video Background Styling */
@@ -224,35 +225,13 @@
       white-space: nowrap;
     }
 
-    .tags-row {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-
-    .pill {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      padding: 4px 12px;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--text-muted);
-    }
-
-    .pill.accent {
-      border-color: var(--accent-cyan);
-      color: var(--accent-cyan);
-    }
-
     .hero-title {
       font-size: 4rem;
       font-weight: 900;
       line-height: 1;
       letter-spacing: -1px;
       margin-bottom: 20px;
+      text-align: center;
     }
 
     .hero-title span {
@@ -265,6 +244,9 @@
       max-width: 650px;
       line-height: 1.6;
       margin-bottom: 30px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
     }
 
     .btn-row {
@@ -272,6 +254,7 @@
       gap: 16px;
       margin-bottom: 60px;
       flex-wrap: wrap;
+      justify-content: center;
     }
 
     .btn {
@@ -318,6 +301,7 @@
       border-top: 1px solid var(--border-color);
       padding-top: 40px;
       margin-bottom: 30px;
+      text-align: center;
     }
 
     .dash-tag {
@@ -342,7 +326,9 @@
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      gap: 23px;
+      max-width: 700px;
+      margin: 0 auto;
     }
 
     .dash-card {
@@ -383,6 +369,11 @@
       width: 100%;
     }
 
+    .dash-card.locked-card {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
     .card-badge {
       font-size: 0.7rem;
       font-weight: 800;
@@ -399,6 +390,12 @@
       background: var(--accent-glow);
       color: var(--accent-cyan);
       border: 1px solid var(--accent-cyan);
+    }
+
+    .badge-locked {
+      background: rgba(128, 142, 155, 0.15);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
     }
 
     .dash-card h3 {
@@ -560,31 +557,31 @@
 
     <!-- VIEW 1: HOME LANDING -->
     <div id="view-home" class="content-view active-view">
-      <div class="tags-row" style="justify-content: center;">
-        <span class="pill accent">LAB</span>
-        <span class="pill">Roster 2026</span>
-        <span class="pill">Updated Aug 2026</span>
-        <span class="pill">PC / Windows</span>
-      </div>
+      <div style="text-align: center; padding-top: 40px; padding-bottom: 60px;">
+        <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
+          <span class="pill accent">LAB</span>
+          <span class="pill">Roster 2026</span>
+          <span class="pill">Updated Aug 2026</span>
+          <span class="pill">PC / Windows</span>
+        </div>
 
-      <div style="text-align: center; margin-top: 20px;">
         <h1 class="hero-title">NBA 2K14,<br><span>REBUILT.</span></h1>
-        <p class="hero-desc" style="margin-left: auto; margin-right: auto;">Roster updates, dedicated mods, IDs, tools, fixes, and installation guides — organized in one place.</p>
+        <p class="hero-desc">Roster updates, dedicated mods, IDs, tools, fixes, and installation guides — organized in one place.</p>
 
-        <div class="btn-row" style="justify-content: center;">
+        <div class="btn-row">
           <a href="#dashboard" class="btn btn-cyan" id="startBtn"><span>START HERE</span></a>
           <a href="https://www.facebook.com/profile.php?id=61594111973222" target="_blank" rel="noopener noreferrer" class="btn btn-outline">JOIN COMMUNITY</a>
         </div>
       </div>
 
-      <div class="dashboard-header" id="dashboard" style="text-align: center;">
+      <div class="dashboard-header" id="dashboard" style="margin-top: 80px;">
         <span class="dash-tag">RAY2K LAB</span>
         <h2 class="dash-title">LAB DASHBOARD</h2>
         <p class="dash-subtitle">Choose your version below to access active archives.</p>
       </div>
 
-      <div class="grid" style="max-width: 700px; margin: 0 auto;">
-        <!-- NBA 2K14 Card -->
+      <div class="grid" style="padding-bottom: 60px;">
+        <!-- NBA 2K14 Card (Active) -->
         <div class="dash-card active-card" onclick="openArchive('2k14')">
           <div>
             <span class="card-badge badge-active">Available</span>
@@ -594,14 +591,14 @@
           <span class="card-link">ENTER ARCHIVE &rarr;</span>
         </div>
 
-        <!-- NBA 2K23 Card -->
-        <div class="dash-card active-card" onclick="openArchive('2k23')">
+        <!-- NBA 2K23 Card (Locked) -->
+        <div class="dash-card locked-card">
           <div>
-            <span class="card-badge badge-active">Available</span>
+            <span class="card-badge badge-locked">Locked</span>
             <h3>NBA 2K23</h3>
-            <p>Next-generation roster, graphics enhancements, and modification archive.</p>
+            <p>Next-generation roster and visual modification archive.</p>
           </div>
-          <span class="card-link">ENTER ARCHIVE &rarr;</span>
+          <span class="card-link" style="color: var(--text-muted);">LOCKED &rarr;</span>
         </div>
       </div>
     </div>
@@ -609,13 +606,13 @@
     <!-- VIEW 2: DASHBOARD / 4 FOLDERS SELECTION -->
     <div id="view-dashboard" class="content-view">
       <button class="back-btn" onclick="switchView('home')">&larr; Back to Home</button>
-      <div class="dashboard-header" style="border-top: none; padding-top: 0;">
+      <div class="dashboard-header" style="border-top: none; padding-top: 0; text-align: left;">
         <span class="dash-tag" id="archiveTitleTag">NBA 2K14 LAB</span>
         <h2 class="dash-title">LAB ARCHIVE</h2>
         <p class="dash-subtitle">Access active mods or check incoming updates.</p>
       </div>
       <br>
-      <div class="grid">
+      <div class="grid" style="max-width: 100%;">
         <div class="dash-card active-card" onclick="switchView('rosters')">
           <div>
             <span class="card-badge badge-active">Available</span>
@@ -657,9 +654,9 @@
     <!-- VIEW 3: ROSTER UPDATES CONTENT -->
     <div id="view-rosters" class="content-view">
       <button class="back-btn" onclick="switchView('dashboard')">&larr; Back to Dashboard</button>
-      <h2 class="hero-title" style="font-size: 2.5rem;">ROSTER <span>UPDATES</span></h2>
-      <p class="hero-desc">Access official up-to-date roster files, transactions, and ratings sheets.</p>
-      <div class="dash-card" style="margin-top: 20px;">
+      <h2 class="hero-title" style="font-size: 2.5rem; text-align: left;">ROSTER <span>UPDATES</span></h2>
+      <p class="hero-desc" style="margin-left: 0; text-align: left;">Access official up-to-date roster files, transactions, and ratings sheets.</p>
+      <div class="dash-card" style="margin-top: 20px; max-width: 500px;">
         <h3>Latest Season Roster Pack</h3>
         <p>Includes updated contracts, rotation adjustments, and rookie cyberface mappings.</p>
         <a href="#" class="card-link" style="color: var(--accent-cyan);">DOWNLOAD PACK (ZIP) &rarr;</a>
@@ -669,9 +666,9 @@
     <!-- VIEW 4: CYBERFACES CONTENT -->
     <div id="view-cyberfaces" class="content-view">
       <button class="back-btn" onclick="switchView('dashboard')">&larr; Back to Dashboard</button>
-      <h2 class="hero-title" style="font-size: 2.5rem;">PLAYER <span>CYBERFACES</span></h2>
-      <p class="hero-desc">High-definition face textures and custom headmodels mapped with exact IDs.</p>
-      <div class="dash-card" style="margin-top: 20px;">
+      <h2 class="hero-title" style="font-size: 2.5rem; text-align: left;">PLAYER <span>CYBERFACES</span></h2>
+      <p class="hero-desc" style="margin-left: 0; text-align: left;">High-definition face textures and custom headmodels mapped with exact IDs.</p>
+      <div class="dash-card" style="margin-top: 20px; max-width: 500px;">
         <h3>Face Pack Vault</h3>
         <p>Contains over 100+ updated player faces with realistic skin tones and beard mappings.</p>
         <a href="#" class="card-link" style="color: var(--accent-cyan);">DOWNLOAD VAULT &rarr;</a>
@@ -681,9 +678,9 @@
     <!-- VIEW 5: COURTS & ARENAS CONTENT -->
     <div id="view-courts" class="content-view">
       <button class="back-btn" onclick="switchView('dashboard')">&larr; Back to Dashboard</button>
-      <h2 class="hero-title" style="font-size: 2.5rem;">COURTS & <span>ARENAS</span></h2>
-      <p class="hero-desc">Custom hardwood floor designs, stadium lighting setups, and arena modifications.</p>
-      <div class="dash-card" style="margin-top: 20px;">
+      <h2 class="hero-title" style="font-size: 2.5rem; text-align: left;">COURTS & <span>ARENAS</span></h2>
+      <p class="hero-desc" style="margin-left: 0; text-align: left;">Custom hardwood floor designs, stadium lighting setups, and arena modifications.</p>
+      <div class="dash-card" style="margin-top: 20px; max-width: 500px;">
         <h3>Arena Pack</h3>
         <p>High-resolution flooring and stadium modifications.</p>
         <a href="#" class="card-link" style="color: var(--accent-cyan);">DOWNLOAD ARENAS &rarr;</a>
@@ -693,9 +690,9 @@
     <!-- VIEW 6: PRESENTATION & ENB CONTENT -->
     <div id="view-presentation" class="content-view">
       <button class="back-btn" onclick="switchView('dashboard')">&larr; Back to Dashboard</button>
-      <h2 class="hero-title" style="font-size: 2.5rem;">PRESENTATION & <span>ENB</span></h2>
-      <p class="hero-desc">Broadcast scoreboards, replay packages, overlays, and custom lighting filters.</p>
-      <div class="dash-card" style="margin-top: 20px;">
+      <h2 class="hero-title" style="font-size: 2.5rem; text-align: left;">PRESENTATION & <span>ENB</span></h2>
+      <p class="hero-desc" style="margin-left: 0; text-align: left;">Broadcast scoreboards, replay packages, overlays, and custom lighting filters.</p>
+      <div class="dash-card" style="margin-top: 20px; max-width: 500px;">
         <h3>Broadcast Graphics Suite</h3>
         <p>Modern TV-style broadcast overlays and high-contrast color grading configurations.</p>
         <a href="#" class="card-link" style="color: var(--accent-cyan);">DOWNLOAD SUITE &rarr;</a>
@@ -722,13 +719,10 @@
     }
 
     function openArchive(version) {
+      if (version === '2k23') return; // Locked
       revealSidebar();
       const titleTag = document.getElementById('archiveTitleTag');
-      if (version === '2k23') {
-        titleTag.textContent = 'NBA 2K23 LAB';
-      } else {
-        titleTag.textContent = 'NBA 2K14 LAB';
-      }
+      titleTag.textContent = 'NBA 2K14 LAB';
       switchView('dashboard');
     }
 
