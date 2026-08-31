@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAY2K // NBA LAB</title>
+  <title>RAY2K // NBA 2K14 LAB</title>
   <style>
     :root {
       --bg-dark: #0b0f17;
@@ -170,7 +170,7 @@
       padding-top: 16px;
     }
 
-    /* Main Area - Centered Layout wrapper, Left-aligned content inside */
+    /* Main Area - Centered Wrapper with Left-Aligned Elements */
     main {
       margin-left: 260px;
       flex: 1;
@@ -276,7 +276,7 @@
     .btn-row {
       display: flex;
       gap: 16px;
-      margin-bottom: 50px;
+      margin-bottom: 60px;
       flex-wrap: wrap;
     }
 
@@ -332,17 +332,9 @@
       margin-top: 6px;
     }
 
-    .grid-2 {
+    .grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      width: 100%;
-      margin-bottom: 50px;
-    }
-
-    .grid-4 {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 20px;
       width: 100%;
     }
@@ -472,12 +464,6 @@
       z-index: 999;
     }
 
-    @media (max-width: 1024px) {
-      .grid-4 {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
     @media (max-width: 768px) {
       .mobile-header {
         display: flex;
@@ -513,10 +499,6 @@
       .btn {
         width: 100%;
       }
-
-      .grid-2, .grid-4 {
-        grid-template-columns: 1fr;
-      }
     }
   </style>
 </head>
@@ -538,7 +520,7 @@
     <div>
       <div class="brand">
         <a href="index.html" class="logo">RAY<span>2K</span></a>
-        <span class="sub-title">NBA LAB</span>
+        <span class="sub-title">NBA 2K14 LAB</span>
       </div>
 
       <ul class="sidebar-menu">
@@ -580,66 +562,33 @@
         <a href="#dashboard" class="btn btn-outline">BROWSE MODS</a>
       </div>
 
-      <!-- Game Version Selection (2K14 & 2K23 side-by-side) -->
-      <div class="dashboard-header" id="versions">
-        <span class="dash-tag">GAME VERSION</span>
-        <h2 class="dash-title">SELECT GAME LAB</h2>
-        <p class="dash-subtitle">Choose between active 2K14 mods or upcoming 2K23 content.</p>
-      </div>
-
-      <div class="grid-2">
-        <div class="dash-card active-card">
-          <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" alt="NBA 2K14">
-          <div class="card-content-wrap">
-            <div>
-              <span class="card-badge badge-active">Available</span>
-              <h3>NBA 2K14 LAB</h3>
-              <p>Full modding suite, rosters, cyberfaces, and presentation updates.</p>
-            </div>
-            <a href="rosters.html" class="card-link">ENTER 2K14 LAB &rarr;</a>
-          </div>
-        </div>
-
-        <div class="dash-card locked-card">
-          <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80" alt="NBA 2K23">
-          <div class="card-content-wrap">
-            <div>
-              <span class="card-badge badge-locked">Coming Soon</span>
-              <h3>NBA 2K23 LAB</h3>
-              <p>Next-gen roster updates, custom lighting, and graphics mods.</p>
-            </div>
-            <span class="card-link" style="color: var(--text-muted); cursor: not-allowed;">LOCKED</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Lab Modules Dashboard -->
       <div class="dashboard-header" id="dashboard">
         <span class="dash-tag">RAY2K LAB</span>
         <h2 class="dash-title">LAB DASHBOARD</h2>
         <p class="dash-subtitle">Access active mods or check incoming updates.</p>
       </div>
 
-      <div class="grid-4">
-        <div class="dash-card active-card">
-          <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" alt="Rosters">
+      <div class="grid">
+        <!-- Clicking this opens rosters.html directly as requested -->
+        <div class="dash-card active-card" onclick="location.href='rosters.html';" style="cursor: pointer;">
+          <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" alt="Roster Updates">
           <div class="card-content-wrap">
             <div>
               <span class="card-badge badge-active">Available</span>
               <h3>ROSTER UPDATES</h3>
-              <p>Current season rosters, draft classes, and rotations.</p>
+              <p>Download current season rosters, draft classes, and team rotations.</p>
             </div>
             <a href="rosters.html" class="card-link">OPEN ARCHIVE &rarr;</a>
           </div>
         </div>
 
-        <div class="dash-card active-card">
+        <div class="dash-card active-card" onclick="location.href='cyberfaces.html';" style="cursor: pointer;">
           <img src="https://images.unsplash.com/photo-1519766304817-4f37bda74a29?auto=format&fit=crop&w=600&q=80" alt="Cyberfaces">
           <div class="card-content-wrap">
             <div>
               <span class="card-badge badge-active">Available</span>
               <h3>CYBERFACES</h3>
-              <p>Face scans, headshapes, and skin textures.</p>
+              <p>Updated face scans, headshapes, and skin textures for modern players.</p>
             </div>
             <a href="cyberfaces.html" class="card-link">OPEN ARCHIVE &rarr;</a>
           </div>
@@ -651,19 +600,19 @@
             <div>
               <span class="card-badge badge-locked">Coming Soon</span>
               <h3>COURTS & ARENAS</h3>
-              <p>Stadium lighting, floor updates, and textures.</p>
+              <p>3D stadium lighting, floor updates, and custom arena textures.</p>
             </div>
             <span class="card-link" style="color: var(--text-muted); cursor: not-allowed;">LOCKED</span>
           </div>
         </div>
 
-        <div class="dash-card active-card">
+        <div class="dash-card active-card" onclick="location.href='presentation.html';" style="cursor: pointer;">
           <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80" alt="Presentation & ENB">
           <div class="card-content-wrap">
             <div>
               <span class="card-badge badge-active">Available</span>
               <h3>PRESENTATION & ENB</h3>
-              <p>Scoreboards, replays, and graphics suites.</p>
+              <p>Scoreboards, replay wipes, and custom visual graphics suites.</p>
             </div>
             <a href="presentation.html" class="card-link">OPEN ARCHIVE &rarr;</a>
           </div>
