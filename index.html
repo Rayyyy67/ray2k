@@ -1,132 +1,570 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RAY2K // Everything NBA 2K</title>
-<style>
-:root{--bg:#06080b;--panel:#0b0f14;--blue:#078cff;--blue2:#37b9ff;--white:#f5f8fb;--muted:#8995a1;--line:#202a34}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{min-height:100vh;background:var(--bg);color:var(--white);font-family:Arial,Helvetica,sans-serif}
-a{text-decoration:none;color:inherit}button{font:inherit;cursor:pointer}
-.nav{height:48px;background:#07090c;border-bottom:1px solid #12171c;display:flex;align-items:center;justify-content:center;position:sticky;top:0;z-index:20}
-.nav-inner{width:min(1160px,calc(100% - 30px));display:flex;align-items:center;justify-content:space-between}
-.brand{font-size:14px;font-weight:950;letter-spacing:.5px}.brand span{color:var(--blue)}
-.brand small{color:#58636e;font-size:6px;letter-spacing:1.4px;margin-left:4px}
-.links{display:flex;gap:23px;align-items:center}.links a{font-size:8px;font-weight:900;color:#78838e;letter-spacing:.3px;transition:.2s}
-.links a:hover,.links a.active{color:var(--blue)}.links .active{background:#0d1620;padding:8px 10px;border-radius:2px}
-.hero{min-height:320px;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.78)),radial-gradient(ellipse at 50% 20%,rgba(10,125,230,.17),transparent 38%),linear-gradient(110deg,#080b10,#111820 48%,#070a0e)}
-.hero:before{content:"";position:absolute;inset:-20%;background:radial-gradient(circle at 42% 50%,rgba(40,160,255,.12),transparent 18%),radial-gradient(circle at 60% 55%,rgba(255,255,255,.055),transparent 20%);filter:blur(20px)}
-.hero:after{content:"";position:absolute;inset:0;opacity:.3;background:linear-gradient(118deg,transparent 0 43%,rgba(100,170,220,.08) 44%,transparent 45%),linear-gradient(62deg,transparent 0 70%,rgba(100,170,220,.05) 71%,transparent 72%);background-size:600px 360px,700px 430px}
-.hero-content{position:relative;z-index:2;max-width:650px;padding:40px 20px}.kicker{color:var(--blue);font-size:8px;font-weight:950;letter-spacing:2.5px;margin-bottom:13px}
-h1{font-size:clamp(38px,6vw,62px);font-weight:950;letter-spacing:-2px;line-height:.95;text-transform:uppercase}h1 span{color:var(--blue)}
-.hero p{color:#a2abb5;font-size:11px;line-height:1.55;max-width:530px;margin:15px auto 18px}
-.actions{display:flex;justify-content:center;gap:9px}.btn{padding:10px 17px;border-radius:2px;font-size:8px;font-weight:950;border:1px solid var(--line);transition:.2s}
-.btn-primary{background:var(--blue);color:#03101a;border-color:var(--blue)}.btn-primary:hover{background:var(--blue2)}
-.btn-outline{background:rgba(0,0,0,.2);color:#d5dce2}.btn-outline:hover{border-color:var(--blue);color:var(--blue)}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid #181e24;background:#090b0d}
-.stat{height:88px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid #1a1f24}.stat:last-child{border-right:0}
-.stat strong{font-size:27px;line-height:1;font-weight:950}.stat strong.blue{color:var(--blue)}.stat label{color:#5e6872;font-size:6px;letter-spacing:1.5px;font-weight:900;margin-top:5px}
-.view{display:none}.view.active{display:block}.archive{width:min(1120px,calc(100% - 30px));margin:auto;padding:40px 0 60px}
-.archive-head{text-align:center;margin-bottom:25px}.archive-head.left{text-align:left;display:flex;justify-content:space-between;align-items:center;gap:20px}.archive-head .kicker{margin-bottom:8px}.archive-head h2{font-size:24px;font-weight:950;letter-spacing:-1px}.archive-head p{color:#68737e;font-size:9px;margin-top:7px}
-.games{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.game{min-height:155px;padding:20px;position:relative;overflow:hidden;border:1px solid #29343e;border-radius:7px;background:#101214;transition:.2s;cursor:pointer}
-.game:before{content:"";position:absolute;top:0;left:0;width:105px;height:2px;background:var(--blue)}.game:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 12px 35px rgba(0,100,220,.12)}
-.game.locked{opacity:.6;cursor:not-allowed}.game.locked:hover{transform:none;border-color:#29343e;box-shadow:none}.game-icon{width:30px;height:30px;border:1px solid #275172;border-radius:6px;display:grid;place-items:center;color:var(--blue);font-size:11px;font-weight:950;margin-bottom:12px}
-.game h3{font-size:14px;font-weight:950;margin-bottom:6px}.game p{font-size:9px;color:#909aa4;line-height:1.5;max-width:430px}.game-action{display:inline-block;margin-top:16px;font-size:8px;color:var(--blue);font-weight:950;letter-spacing:.5px}.locked .game-action{color:#71808d}
-.watermark{position:absolute;right:17px;top:37px;color:rgba(255,255,255,.045);font-size:34px;font-weight:950}
-.subgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.sub-card{background:#101214;border:1px solid #29343e;border-radius:7px;padding:16px;position:relative;overflow:hidden;min-height:142px;transition:.2s;cursor:pointer}
-.sub-card:before{content:"";position:absolute;top:0;left:0;width:0;height:2px;background:var(--blue);transition:.2s}.sub-card.locked-cat{opacity:.55;cursor:not-allowed}.sub-card.locked-cat:hover{border-color:#29343e;transform:none;box-shadow:none}.locked-text{color:#65717c!important}.sub-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,100,220,.13)}.sub-card:hover:before{width:105px}
-.sub-icon{width:28px;height:28px;border:1px solid #275172;border-radius:6px;display:grid;place-items:center;color:var(--blue);font-size:11px;font-weight:950;margin-bottom:10px}
-.sub-card h3{font-size:13px;font-weight:950;margin-bottom:5px}.sub-card p{font-size:8px;color:#909aa4;line-height:1.45;max-width:250px}.sub-action{margin-top:13px;color:var(--blue);font-size:8px;font-weight:950}.sub-watermark{position:absolute;right:8px;top:37px;color:rgba(255,255,255,.11);font-size:27px;font-weight:950;white-space:nowrap}
-.files{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.file{border:1px solid #29343e;border-radius:7px;overflow:hidden;background:#101214}.thumb{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#111923}.scoreboard-thumb{object-fit:contain;background:#080b0f;padding:8px}.file-body{padding:12px}.file-name{font-size:10px;font-weight:950}.file-meta{font-size:8px;color:#778592;margin-top:4px}.download{display:inline-block;margin-top:10px;color:var(--blue);font-size:8px;font-weight:950}.download:hover{text-decoration:underline}
-.back{background:#0b1118;color:#b8c4ce;border:1px solid #29343e}.back:hover{color:var(--blue);border-color:var(--blue)}
-footer{border-top:1px solid #151a1f;padding:16px;text-align:center;color:#4d5862;font-size:7px;letter-spacing:1px}
-@media(max-width:768px){.links{gap:9px}.links a:nth-child(n+4){display:none}.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid #1a1f24}.games{grid-template-columns:1fr}.subgrid,.files{grid-template-columns:repeat(2,1fr)}.archive-head.left{align-items:flex-start;flex-direction:column}}
-@media(max-width:480px){.subgrid,.files{grid-template-columns:1fr}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAY2K // NBA 2K14 LAB</title>
+  <style>
+    :root {
+      --bg-dark: #0b0f17;
+      --bg-sidebar: #070a10;
+      --card-bg: #121824;
+      --card-inner: #162032;
+      --border-color: #1a2332;
+      --accent-cyan: #00f0ff;
+      --accent-cyan-hover: #00d0df;
+      --accent-glow: rgba(0, 240, 255, 0.15);
+      --text-white: #ffffff;
+      --text-muted: #808e9b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Mobile Header */
+    .mobile-header {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: var(--bg-sidebar);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0 20px;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1001;
+    }
+
+    .menu-toggle {
+      background: none;
+      border: none;
+      color: var(--accent-cyan);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(4px);
+      z-index: 1001;
+    }
+
+    .sidebar-overlay.active {
+      display: block;
+    }
+
+    /* Sidebar Nav */
+    aside {
+      width: 260px;
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px;
+      position: fixed;
+      height: 100vh;
+      z-index: 1002;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-decoration: none;
+      color: var(--text-white);
+    }
+
+    .logo span {
+      color: var(--accent-cyan);
+    }
+
+    .sub-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sidebar-menu a {
+      display: block;
+      padding: 12px 16px;
+      border-radius: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+    }
+
+    .sidebar-menu a.active,
+    .sidebar-menu a:hover {
+      background: var(--accent-glow);
+      color: var(--accent-cyan);
+      border-left: 3px solid var(--accent-cyan);
+    }
+
+    .sidebar-footer {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+    }
+
+    /* Main Area */
+    main {
+      margin-left: 260px;
+      flex: 1;
+      padding: 30px 50px;
+      width: 100%;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      margin-bottom: 40px;
+      gap: 12px;
+    }
+
+    .badge-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-cyan);
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    .notice {
+      color: var(--text-muted);
+    }
+
+    .notice strong {
+      color: var(--text-white);
+    }
+
+    .notice a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .time-badge {
+      font-weight: 800;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .tags-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .pill.accent {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    .hero-title span {
+      color: var(--accent-cyan);
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 650px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn-cyan {
+      background-color: var(--accent-cyan);
+      color: #000000;
+    }
+
+    .btn-cyan:hover {
+      background-color: var(--accent-cyan-hover);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border-color);
+      color: var(--text-white);
+      background: var(--card-bg);
+    }
+
+    .dashboard-header {
+      border-top: 1px solid var(--border-color);
+      padding-top: 40px;
+      margin-bottom: 30px;
+    }
+
+    .dash-tag {
+      color: var(--accent-cyan);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .dash-title {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-top: 4px;
+    }
+
+    .dash-subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 6px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .dash-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .dash-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--accent-cyan);
+      transition: width 0.3s ease;
+    }
+
+    .dash-card.active-card:hover {
+      border-color: var(--accent-cyan);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+    }
+
+    .dash-card.active-card:hover::before {
+      width: 100%;
+    }
+
+    .dash-card.locked-card {
+      opacity: 0.5;
+    }
+
+    .card-badge {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+
+    .badge-active {
+      background: var(--accent-glow);
+      color: var(--accent-cyan);
+      border: 1px solid var(--accent-cyan);
+    }
+
+    .badge-locked {
+      background: var(--card-inner);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
+    .dash-card h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .dash-card p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .card-link {
+      color: var(--text-white);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dash-card.active-card .card-link:hover {
+      color: var(--accent-cyan);
+    }
+
+    .floating-support {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background-color: var(--accent-cyan);
+      color: #000000;
+      border: none;
+      border-radius: 30px;
+      padding: 12px 20px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 240, 255, 0.3);
+      text-decoration: none;
+      z-index: 999;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-header {
+        display: flex;
+      }
+
+      aside {
+        transform: translateX(-100%);
+      }
+
+      aside.open {
+        transform: translateX(0);
+      }
+
+      main {
+        margin-left: 0;
+        padding: 80px 20px 40px;
+      }
+
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .btn-row {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-<nav class="nav"><div class="nav-inner">
-  <a class="brand" href="#" onclick="showView('home');return false">RAY<span>2K</span><small>QUALITY OF LIFE MODS</small></a>
-  <div class="links">
-    <a href="#" class="active" id="homeNav" onclick="showView('home');return false">HOME</a>
-    <a href="#games" onclick="showView('games');return false">NBA 2K14</a>
-    <a href="#" onclick="return false">NBA 2K23</a><a href="#" onclick="return false">PBA 2K</a><a href="#" onclick="return false">FIBA 2K</a><a href="#" onclick="return false">DONATE</a>
-  </div>
-</div></nav>
 
-<section id="home" class="view active">
-  <section class="hero"><div class="hero-content">
-    <div class="kicker">QUALITY OF LIFE MODS</div><h1>EVERYTHING <span>NBA 2K</span></h1>
-    <p>Discover rosters, cyberfaces, courts, scoreboards, tools, and total conversions across multiple basketball gaming communities.</p>
-    <div class="actions"><button class="btn btn-primary" onclick="showView('games')">BROWSE ARCHIVES</button><button class="btn btn-outline" onclick="showView('games')">JOIN COMMUNITY</button></div>
-  </div></section>
-  <section class="stats"><div class="stat"><strong class="blue">10+</strong><label>YEARS MODDING</label></div><div class="stat"><strong>500+</strong><label>MODS ARCHIVED</label></div><div class="stat"><strong>4</strong><label>GAME PLATFORMS</label></div><div class="stat"><strong class="blue">Active</strong><label>COMMUNITY</label></div></section>
-  <section class="archive" id="games"><div class="archive-head"><div class="kicker">GAME ARCHIVES</div><h2>CHOOSE YOUR NBA 2K</h2><p>Select a game to access its dedicated mod archive.</p></div>
-    <div class="games">
-      <article class="game" onclick="showView('nba14')"><div class="game-icon">N</div><div class="watermark">2K14</div><h3>NBA 2K14</h3><p>The original RAY2K archive featuring rosters, cyberfaces, courts, scoreboards, jerseys, portraits and presentation mods.</p><div class="game-action">ENTER ARCHIVE →</div></article>
-      <article class="game locked"><div class="game-icon">N</div><div class="watermark">2K23</div><h3>NBA 2K23</h3><p>Next-generation roster and visual modification archive.</p><div class="game-action">LOCKED / COMING SOON →</div></article>
+  <header class="mobile-header">
+    <a href="index.html" class="logo">RAY<span>2K</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
+  </header>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside id="sidebar">
+    <div>
+      <div class="brand">
+        <a href="index.html" class="logo">RAY<span>2K</span></a>
+        <span class="sub-title">NBA 2K14 LAB</span>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li><a href="index.html" class="active">RAY2K LAB</a></li>
+        <li><a href="rosters.html">ROSTER UPDATES</a></li>
+        <li><a href="cyberfaces.html">CYBERFACES</a></li>
+        <li><a href="presentation.html">PRESENTATION</a></li>
+      </ul>
     </div>
-  </section>
-</section>
 
-<section id="nba14" class="view"><section class="archive">
-  <div class="archive-head left"><div><div class="kicker">RAY2K // NBA 2K14</div><h2>NBA 2K14 ARCHIVE</h2><p>Choose a category. Every download here is for NBA 2K14 only.</p></div><button class="btn back" onclick="showView('home')">← HOME</button></div>
-  <div class="subgrid">
-    <div class="sub-card" onclick="showCategory('rosters')"><div class="sub-icon">R</div><div class="sub-watermark">26–27</div><h3>ROSTERS</h3><p>Updated season rosters, draft classes, and franchise files.</p><div class="sub-action">BROWSE →</div></div>
-    <div class="sub-card" onclick="showCategory('cyberfaces')"><div class="sub-icon">F</div><div class="sub-watermark">CYBERFACES</div><h3>CYBERFACES</h3><p>Player face scans and appearance upgrades for maximum realism.</p><div class="sub-action">BROWSE →</div></div>
-    <div class="sub-card locked-cat"><div class="sub-icon">P</div><div class="sub-watermark">PORTRAITS</div><h3>PORTRAITS</h3><p>Redrawn player portrait artwork for menus, rosters, and UI.</p><div class="sub-action locked-text">🔒 LOCKED</div></div>
-    <div class="sub-card locked-cat"><div class="sub-icon">J</div><div class="sub-watermark">JERSEYS</div><h3>JERSEYS</h3><p>Accurate and alternate jersey sets for teams across every era.</p><div class="sub-action locked-text">🔒 LOCKED</div></div>
-    <div class="sub-card" onclick="showCategory('arenas')"><div class="sub-icon">C</div><div class="sub-watermark">COURTS</div><h3>COURTS</h3><p>Rebuilt arena floors matching current team branding and designs.</p><div class="sub-action">BROWSE →</div></div>
-    <div class="sub-card" onclick="showCategory('scoreboards')"><div class="sub-icon">S</div><div class="sub-watermark">SCOREBOARDS</div><h3>SCOREBOARDS</h3><p>Modernized scoreboard and HUD designs for a cleaner in-game overlay.</p><div class="sub-action">BROWSE →</div></div>
-  </div>
-</section></section>
+    <div class="sidebar-footer">
+      <p>RAY2K Modding Vault</p>
+      <p style="color: var(--text-muted); margin-top: 4px;">PC / Windows Support</p>
+    </div>
+  </aside>
 
-<div id="categoryViews"></div>
-<footer>RAY2K // EVERYTHING NBA 2K // BLUE EDITION</footer>
+  <main>
+    <div class="top-bar">
+      <div class="notice">
+        <span class="badge-dot"></span>
+        <strong>PC ONLY</strong> WINDOWS PC — NOT WINLATOR / ANDROID. <a href="#">INSTALL GUIDE &rarr;</a>
+      </div>
+      <div class="time-badge">STATUS: ONLINE</div>
+    </div>
 
-<script>
-const data={
-rosters:{title:"ROSTERS",desc:"Updated season rosters, draft classes, and franchise files.",items:[
-["26–27 Roster","ROSTER","images/rosters/26-27.jpg","files/2k14/rosters/26-27-roster.ROS"],
-["26–27 Draft Class","DRAFT CLASS","images/rosters/draft.jpg","files/2k14/rosters/26-27-draft-class.DNA"],
-["Franchise Save","FRANCHISE","images/rosters/franchise.jpg","files/2k14/rosters/franchise-save"]]},
-cyberfaces:{title:"CYBERFACES",desc:"Player face scans and appearance upgrades for maximum realism.",items:[
-["Cameron Boozer","CYBERFACE","images/cyberfaces/cameron-boozer.jpg","files/2k14/cyberfaces/cameron-boozer.iff"],
-["Player Face Upgrade 1","CYBERFACE","images/cyberfaces/face1.jpg","files/2k14/cyberfaces/face1.iff"],
-["Player Face Upgrade 2","CYBERFACE","images/cyberfaces/face2.jpg","files/2k14/cyberfaces/face2.iff"]]},
-arenas:{title:"COURTS",desc:"Rebuilt arena floors matching current team branding and designs.",items:[
-["Standard Court","COURT","images/arenas/court1.jpg","files/2k14/courts/court1.iff"],
-["Finals Court","COURT","images/arenas/court2.jpg","files/2k14/courts/court2.iff"]]},
-scoreboards:{title:"SCOREBOARDS",desc:"Modernized scoreboard and HUD designs for a cleaner in-game overlay.",items:[
-["HD TV Broadcast Scoreboard","SCOREBOARD","images/scoreboards/sb1.jpg","files/2k14/scoreboards/scoreboard1.iff"],
-["Minimalist HUD Scoreboard","SCOREBOARD","images/scoreboards/sb2.jpg","files/2k14/scoreboards/scoreboard2.iff"],
-["Classic 90s Scoreboard","SCOREBOARD","images/scoreboards/sb3.jpg","files/2k14/scoreboards/scoreboard3.iff"]]}};
+    <div class="tags-row">
+      <span class="pill accent">LAB</span>
+      <span class="pill">Roster 2026</span>
+      <span class="pill">Updated Aug 2026</span>
+      <span class="pill">PC / Windows</span>
+    </div>
 
-function showView(id){
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.getElementById('categoryViews').innerHTML='';
-  window.scrollTo({top:0,behavior:'smooth'});
-}
+    <h1 class="hero-title">NBA 2K14,<br><span>REBUILT.</span></h1>
+    <p class="hero-desc">Roster updates, dedicated mods, IDs, tools, fixes, and installation guides — organized in one place.</p>
 
-function showCategory(catKey){
-  const cat=data[catKey];
-  if(!cat)return;
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  const container=document.getElementById('categoryViews');
-  let html=`<section class="view active"><section class="archive">
-  <div class="archive-head left"><div><div class="kicker">RAY2K // NBA 2K14</div><h2>${cat.title}</h2><p>${cat.desc}</p></div><button class="btn back" onclick="showView('nba14')">← CATEGORIES</button></div>
-  <div class="files">`;
-  cat.items.forEach(item=>{
-    let thumbClass = catKey === 'scoreboards' ? 'thumb scoreboard-thumb' : 'thumb';
-    html+=`<div class="file"><img class="${thumbClass}" src="${item[2]}" alt="${item[0]}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'56\'><rect width=\'100%\' height=\'100%\' fill=\'%23111923\'/><text x=\'50%\' y=\'50%\' fill=\'%23778592\' font-size=\'8\' text-anchor=\'middle\' dominant-baseline=\'middle\'>RAY2K</text></svg>'"><div class="file-body"><div class="file-name">${item[0]}</div><div class="file-meta">${item[1]}</div><a class="download" href="${item[3]}" download>DOWNLOAD ↓</a></div></div>`;
-  });
-  html+=`</div></section></section>`;
-  container.innerHTML=html;
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-</script>
+    <div class="btn-row">
+      <a href="#dashboard" class="btn btn-cyan">START HERE</a>
+      <a href="#dashboard" class="btn btn-outline">BROWSE MODS</a>
+    </div>
+
+    <div class="dashboard-header" id="dashboard">
+      <span class="dash-tag">RAY2K LAB</span>
+      <h2 class="dash-title">LAB DASHBOARD</h2>
+      <p class="dash-subtitle">Access active mods or check incoming updates.</p>
+    </div>
+
+    <div class="grid">
+      <div class="dash-card active-card">
+        <div>
+          <span class="card-badge badge-active">Available</span>
+          <h3>ROSTER UPDATES</h3>
+          <p>Download current season rosters, draft classes, and team rotations.</p>
+        </div>
+        <a href="rosters.html" class="card-link">OPEN ARCHIVE &rarr;</a>
+      </div>
+
+      <div class="dash-card active-card">
+        <div>
+          <span class="card-badge badge-active">Available</span>
+          <h3>CYBERFACES</h3>
+          <p>Updated face scans, headshapes, and skin textures for modern players.</p>
+        </div>
+        <a href="cyberfaces.html" class="card-link">OPEN ARCHIVE &rarr;</a>
+      </div>
+
+      <div class="dash-card locked-card">
+        <div>
+          <span class="card-badge badge-locked">Coming Soon</span>
+          <h3>COURTS & ARENAS</h3>
+          <p>3D stadium lighting, floor updates, and custom arena textures.</p>
+        </div>
+        <span class="card-link" style="color: var(--text-muted); cursor: not-allowed;">LOCKED</span>
+      </div>
+
+      <div class="dash-card active-card">
+        <div>
+          <span class="card-badge badge-active">Available</span>
+          <h3>PRESENTATION & ENB</h3>
+          <p>Scoreboards, replay wipes, and custom visual graphics suites.</p>
+        </div>
+        <a href="presentation.html" class="card-link">OPEN ARCHIVE &rarr;</a>
+      </div>
+    </div>
+  </main>
+
+  <a href="#" class="floating-support">
+    ⚡ Support RAY2K
+  </a>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+    function toggleMenu() {
+      sidebar.classList.toggle('open');
+      sidebarOverlay.classList.toggle('active');
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+    sidebarOverlay.addEventListener('click', toggleMenu);
+  </script>
 </body>
 </html>
