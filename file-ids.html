@@ -1,580 +1,600 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cyberface IDs — RAY2K</title>
-  <style>
-    :root {
-      --bg-dark: #07090e;
-      --sidebar-bg: #04060a;
-      --card-bg: #0f1520;
-      --card-inner: #141c2c;
-      --border-color: #1a2638;
-      --accent-cyan: #00f0ff;
-      --accent-cyan-hover: #00cce0;
-      --accent-glow: rgba(0, 240, 255, 0.15);
-      --text-white: #ffffff;
-      --text-muted: #808e9b;
-    }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text-white);
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      display: flex;
-      min-height: 100vh;
-    }
+<title>File IDs — RAY2K</title>
 
-    /* Left Sidebar */
-    aside {
-      width: 240px;
-      background-color: var(--sidebar-bg);
-      border-right: 1px solid var(--border-color);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 24px 16px;
-      position: fixed;
-      height: 100vh;
-      z-index: 100;
-    }
+<style>
 
-    .brand {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-bottom: 30px;
-    }
+:root {
+  --bg:#07090e;
+  --sidebar:#04060a;
+  --card:#0f1520;
+  --border:#1a2638;
+  --accent:#00f0ff;
+  --accent-hover:#00cce0;
+  --glow:rgba(0,240,255,.14);
+  --text:#fff;
+  --muted:#8290a0;
+}
 
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 900;
-      color: var(--text-white);
-      text-decoration: none;
-      letter-spacing: 1px;
-    }
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    .logo span {
-      color: var(--accent-cyan);
-    }
+body {
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,Arial,system-ui,sans-serif;
+}
 
-    .sub-title {
-      font-size: 0.65rem;
-      font-weight: 800;
-      color: var(--accent-cyan);
-      letter-spacing: 1px;
-    }
+aside {
+  position:fixed;
 
-    .nav-menu {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
+  left:0;
+  top:0;
 
-    .nav-menu a {
-      display: block;
-      padding: 10px 12px;
-      border-radius: 6px;
-      color: var(--text-muted);
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 0.75rem;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      transition: all 0.2s;
-    }
+  width:240px;
+  height:100vh;
 
-    .nav-menu a.active,
-    .nav-menu a:hover {
-      background: var(--accent-glow);
-      color: var(--accent-cyan);
-    }
+  padding:28px 16px;
 
-    .sidebar-footer {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border-color);
-      padding-top: 16px;
-    }
+  background:var(--sidebar);
+  border-right:1px solid var(--border);
 
-    /* Main Area */
-    main {
-      margin-left: 240px;
-      flex: 1;
-      padding: 30px 40px 80px;
-      max-width: 1400px;
-    }
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
 
-    /* Top Notice Bar */
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      padding: 10px 16px;
-      border-radius: 6px;
-      font-size: 0.7rem;
-      font-weight: 800;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
+.logo {
+  color:var(--text);
+  text-decoration:none;
 
-    .top-bar span {
-      color: var(--accent-cyan);
-    }
+  font-size:1.55rem;
+  font-weight:950;
+}
 
-    /* Page Header */
-    .header-banner {
-      background: linear-gradient(135deg, rgba(0, 240, 255, 0.05) 0%, rgba(15, 21, 32, 1) 100%);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 30px;
-      margin-bottom: 24px;
-      position: relative;
-    }
+.logo span,
+.sub {
+  color:var(--accent);
+}
 
-    .header-tag {
-      font-size: 0.7rem;
-      font-weight: 900;
-      color: var(--accent-cyan);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
+.sub {
+  display:block;
+  margin-top:4px;
 
-    .header-title {
-      font-size: 2.2rem;
-      font-weight: 900;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-    }
+  font-size:.65rem;
+  font-weight:900;
+  letter-spacing:1px;
+}
 
-    .header-title span {
-      color: var(--accent-cyan);
-    }
+.current {
+  margin-top:30px;
 
-    .header-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      max-width: 700px;
-      margin-bottom: 20px;
-      line-height: 1.4;
-    }
+  padding:13px 14px;
 
-    .meta-pills {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+  border-left:3px solid var(--accent);
+  border-radius:6px;
 
-    .pill {
-      background-color: var(--card-inner);
-      border: 1px solid var(--border-color);
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      font-weight: 800;
-      color: var(--text-white);
-    }
+  background:var(--glow);
 
-    /* Filter & Search Bar */
-    .controls-wrapper {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
+  color:var(--accent);
 
-    .search-row {
-      display: flex;
-      gap: 12px;
-    }
+  font-size:.75rem;
+  font-weight:900;
+}
 
-    .search-input {
-      flex: 1;
-      background-color: var(--bg-dark);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 12px 16px;
-      color: var(--text-white);
-      font-size: 0.85rem;
-      outline: none;
-    }
+.bottom {
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
 
-    .search-input:focus {
-      border-color: var(--accent-cyan);
-    }
+.clock {
+  border-top:1px solid var(--border);
+  padding-top:14px;
+}
 
-    .sort-select, .btn-reset {
-      background-color: var(--bg-dark);
-      border: 1px solid var(--border-color);
-      color: var(--text-white);
-      padding: 0 16px;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 800;
-      cursor: pointer;
-    }
+#clock {
+  color:var(--accent);
+  font-size:.78rem;
+  font-weight:950;
+}
 
-    .btn-reset:hover {
-      border-color: var(--accent-cyan);
-      color: var(--accent-cyan);
-    }
+#date {
+  color:var(--muted);
+  font-size:.62rem;
+  margin-top:3px;
+}
 
-    .range-pills, .alphabet-pills {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
+button,
+.bottom a {
+  width:100%;
 
-    .filter-btn {
-      background-color: var(--bg-dark);
-      border: 1px solid var(--border-color);
-      color: var(--text-muted);
-      padding: 6px 12px;
-      border-radius: 14px;
-      font-size: 0.7rem;
-      font-weight: 800;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
+  padding:10px 12px;
 
-    .filter-btn.active, .filter-btn:hover {
-      background-color: var(--accent-cyan);
-      color: #000000;
-      border-color: var(--accent-cyan);
-    }
+  background:var(--card);
 
-    /* Database Table */
-    .db-container {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      overflow: hidden;
-    }
+  border:1px solid var(--border);
+  border-radius:6px;
 
-    .db-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border-color);
-    }
+  color:var(--text);
 
-    .db-title {
-      font-size: 0.85rem;
-      font-weight: 900;
-      letter-spacing: 1px;
-    }
+  font-size:.65rem;
+  font-weight:900;
 
-    .db-count {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      font-weight: 800;
-    }
+  text-align:center;
+  text-decoration:none;
+  text-transform:uppercase;
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-    }
+  cursor:pointer;
+}
 
-    th {
-      background-color: rgba(255, 255, 255, 0.02);
-      color: var(--text-muted);
-      font-size: 0.7rem;
-      font-weight: 900;
-      letter-spacing: 1px;
-      padding: 12px 20px;
-      border-bottom: 1px solid var(--border-color);
-      text-transform: uppercase;
-    }
+button:hover,
+.bottom a:hover {
+  color:var(--accent);
+  border-color:var(--accent);
+}
 
-    td {
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--border-color);
-      font-size: 0.85rem;
-      font-weight: 700;
-    }
+main {
+  margin-left:240px;
 
-    tr:hover td {
-      background-color: var(--accent-glow);
-    }
+  min-height:100vh;
 
-    .cfid-col {
-      color: var(--accent-cyan);
-      font-weight: 900;
-      text-align: right;
-    }
+  padding:55px 45px 80px;
+}
 
-    .btn-copy {
-      background-color: var(--card-inner);
-      border: 1px solid var(--border-color);
-      color: var(--text-white);
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 0.65rem;
-      font-weight: 800;
-      cursor: pointer;
-      margin-left: 12px;
-      transition: all 0.2s;
-    }
+.container {
+  max-width:1100px;
+  margin:auto;
+}
 
-    .btn-copy:hover {
-      border-color: var(--accent-cyan);
-      color: var(--accent-cyan);
-    }
+.kicker {
+  color:var(--accent);
 
-    /* Floating Support */
-    .floating-support {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background-color: var(--accent-cyan);
-      color: #000000;
-      border: none;
-      border-radius: 30px;
-      padding: 10px 18px;
-      font-weight: 900;
-      font-size: 0.8rem;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      box-shadow: 0 4px 20px rgba(0, 240, 255, 0.3);
-      text-decoration: none;
-      z-index: 999;
-    }
+  font-size:.65rem;
+  font-weight:950;
 
-    @media (max-width: 768px) {
-      aside { display: none; }
-      main { margin-left: 0; padding: 20px; }
-    }
-  </style>
+  letter-spacing:2px;
+}
+
+h1 {
+  margin-top:10px;
+
+  font-size:clamp(2rem,5vw,4rem);
+
+  font-weight:950;
+
+  text-transform:uppercase;
+}
+
+.description {
+  max-width:650px;
+
+  margin-top:12px;
+
+  color:var(--muted);
+
+  font-size:.75rem;
+  line-height:1.7;
+}
+
+.table-wrap {
+  margin-top:35px;
+
+  overflow-x:auto;
+
+  border:1px solid var(--border);
+  border-radius:8px;
+}
+
+table {
+  width:100%;
+
+  border-collapse:collapse;
+
+  background:var(--card);
+}
+
+th,
+td {
+  padding:15px;
+
+  border-bottom:1px solid var(--border);
+
+  text-align:left;
+
+  font-size:.7rem;
+}
+
+th {
+  color:var(--accent);
+
+  font-size:.65rem;
+  font-weight:950;
+
+  text-transform:uppercase;
+}
+
+td {
+  color:var(--muted);
+}
+
+td:first-child {
+  color:var(--text);
+  font-weight:900;
+}
+
+.id {
+  color:var(--accent);
+  font-family:monospace;
+  font-weight:900;
+}
+
+.copy {
+  padding:6px 10px;
+
+  background:var(--card);
+
+  border:1px solid var(--border);
+  border-radius:4px;
+
+  color:var(--text);
+
+  font-size:.6rem;
+  font-weight:900;
+
+  cursor:pointer;
+}
+
+.copy:hover {
+  color:var(--accent);
+  border-color:var(--accent);
+}
+
+@media(max-width:800px) {
+
+  aside {
+    position:relative;
+
+    width:100%;
+    height:auto;
+
+    border-right:none;
+    border-bottom:1px solid var(--border);
+  }
+
+  main {
+    margin-left:0;
+    padding:35px 20px 60px;
+  }
+
+}
+
+</style>
 </head>
+
 <body>
 
-  <!-- Left Sidebar Navigation -->
-  <aside>
-    <div>
-      <div class="brand">
-        <a href="index.html" class="logo">RAY<span>2K</span></a>
-        <span class="sub-title">NBA 2K14 LAB</span>
-      </div>
+<aside>
 
-      <ul class="nav-menu">
-        <li><a href="index.html">RAY2K LAB</a></li>
-        <li><a href="rosters.html">ROSTER UPDATES</a></li>
-        <li><a href="cyberfaces.html">CYBERFACES</a></li>
-        <li><a href="#">INSTALLATION</a></li>
-        <li><a href="#">DEDICATED MODS</a></li>
-        <li><a href="file-ids.html" class="active">FILE IDS</a></li>
-      </ul>
+  <div>
+
+    <a href="index.html" class="logo">
+      RAY<span>2K</span>
+    </a>
+
+    <span class="sub">
+      NBA 2K14 LAB
+    </span>
+
+    <div class="current">
+      FILE IDS
     </div>
 
-    <div class="sidebar-footer">
-      <p>Facebook</p>
-      <p style="margin-top: 4px; color: var(--text-muted);">PC / Windows only</p>
-    </div>
-  </aside>
+  </div>
 
-  <!-- Main Content Area -->
-  <main>
+  <div class="bottom">
 
-    <div class="top-bar">
-      <span>● PC ONLY</span> WINDOWS PC — NOT WINLATOR / ANDROID
-      <div>PHT 23:28:02</div>
+    <div class="clock">
+      <div id="clock">00:00:00</div>
+      <div id="date">Loading...</div>
     </div>
 
-    <!-- Page Banner -->
-    <div class="header-banner">
-      <div class="header-tag">RAY2K // LAB • FILE IDS</div>
-      <h1 class="header-title">CYBERFACE <span>IDS</span></h1>
-      <p class="header-desc">
-        2026–2027 Cyberface ID reference for NBA 2K14 modding. Search by player, filter by ID generation, browse alphabetically, sort instantly, and copy an ID with one click.
-      </p>
-      <div class="meta-pills">
-        <span class="pill">729 UNIQUE IDS</span>
-        <span class="pill">729 MATCHES</span>
-        <span class="pill">2026–2027 REFERENCE</span>
-        <span class="pill">PC / NBA 2K14</span>
-      </div>
-    </div>
+    <button onclick="changeTheme()">
+      THEME: CYAN
+    </button>
 
-    <!-- Search & Filters -->
-    <div class="controls-wrapper">
-      <div class="search-row">
-        <input type="text" id="dbSearch" class="search-input" placeholder="Search player name or Cyberface ID...">
-        <select id="dbSort" class="sort-select">
-          <option value="last">SORT: LAST NAME</option>
-          <option value="first">SORT: FIRST NAME</option>
-          <option value="id">SORT: CFID</option>
-        </select>
-        <button class="btn-reset" onclick="resetFilters()">RESET</button>
-      </div>
+    <a
+      href="https://www.facebook.com/profile.php?id=61594111973222"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      JOIN COMMUNITY
+    </a>
 
-      <!-- Range Filters -->
-      <div class="range-pills">
-        <button class="filter-btn active" onclick="filterRange('all', this)">ALL IDS</button>
-        <button class="filter-btn" onclick="filterRange('1000', this)">1000s</button>
-        <button class="filter-btn" onclick="filterRange('2000', this)">2000s</button>
-        <button class="filter-btn" onclick="filterRange('4000', this)">4000s</button>
-        <button class="filter-btn" onclick="filterRange('17000', this)">17xxx</button>
-        <button class="filter-btn" onclick="filterRange('19000', this)">19xxx</button>
-        <button class="filter-btn" onclick="filterRange('20000', this)">20xxx</button>
-      </div>
+    <a href="index.html">
+      BACK TO RAY2K
+    </a>
 
-      <!-- Alphabet Filters -->
-      <div class="alphabet-pills" id="alphabetContainer">
-        <button class="filter-btn active" onclick="filterAlpha('ALL', this)">ALL</button>
-      </div>
-    </div>
+  </div>
 
-    <!-- Database Table -->
-    <div class="db-container">
-      <div class="db-header">
-        <div class="db-title">CYBERFACE ID DATABASE</div>
-        <div class="db-count" id="matchCount">Showing 1-50 of 729</div>
-      </div>
+</aside>
 
-      <table>
-        <thead>
-          <tr>
-            <th>LAST NAME</th>
-            <th>FIRST NAME</th>
-            <th style="text-align: right;">CFID</th>
-          </tr>
-        </thead>
-        <tbody id="idTableBody">
-          <!-- Rows dynamically injected by Script -->
-        </tbody>
-      </table>
-    </div>
+<main>
 
-  </main>
+<div class="container">
 
-  <!-- Support Button -->
-  <a href="#" class="floating-support">⚡ SUPPORT</a>
+  <div class="kicker">
+    NBA 2K14 ARCHIVE
+  </div>
 
-  <!-- Database & Interactivity Script -->
-  <script>
-    // Database Items
-    const database = [
-      { last: "Achiuwa", first: "Precious", cfid: "19219" },
-      { last: "Acuff Jr.", first: "Darius", cfid: "20606" },
-      { last: "Adams", first: "Steven", cfid: "2698" },
-      { last: "Adebayo", first: "Bam", cfid: "17013" },
-      { last: "Agbaji", first: "Ochai", cfid: "19413" },
-      { last: "Aldama", first: "Santi", cfid: "19329" },
-      { last: "Alexander", first: "Trey", cfid: "20501" },
-      { last: "Boozer", first: "Cameron", cfid: "20602" },
-      { last: "Dybantsa", first: "AJ", cfid: "20600" },
-      { last: "Flemings", first: "Kingston", cfid: "20607" },
-      { last: "Lendeborg", first: "Yaxel", cfid: "20610" },
-      { last: "Wilson", first: "Caleb", cfid: "20603" }
-    ];
+  <h1>
+    FILE IDS
+  </h1>
 
-    // Generate Alphabet Buttons
-    const alphaContainer = document.getElementById('alphabetContainer');
-    for (let i = 65; i <= 90; i++) {
-      const char = String.fromCharCode(i);
-      const btn = document.createElement('button');
-      btn.className = 'filter-btn';
-      btn.innerText = char;
-      btn.onclick = function() { filterAlpha(char, this); };
-      alphaContainer.appendChild(btn);
-    }
+  <p class="description">
+    NBA 2K14 file IDs and reference information.
+  </p>
 
-    let currentSearch = "";
-    let currentAlpha = "ALL";
-    let currentRange = "all";
+  <div class="table-wrap">
 
-    function renderTable() {
-      const tbody = document.getElementById('idTableBody');
-      tbody.innerHTML = "";
+    <table>
 
-      const filtered = database.filter(item => {
-        const fullText = (item.last + " " + item.first + " " + item.cfid).toLowerCase();
-        const matchesSearch = fullText.includes(currentSearch);
-        const matchesAlpha = currentAlpha === "ALL" || item.last.toUpperCase().startsWith(currentAlpha);
-        
-        let matchesRange = true;
-        const idNum = parseInt(item.cfid);
-        if (currentRange === '1000') matchesRange = idNum >= 1000 && idNum < 2000;
-        if (currentRange === '2000') matchesRange = idNum >= 2000 && idNum < 3000;
-        if (currentRange === '4000') matchesRange = idNum >= 4000 && idNum < 5000;
-        if (currentRange === '17000') matchesRange = idNum >= 17000 && idNum < 18000;
-        if (currentRange === '19000') matchesRange = idNum >= 19000 && idNum < 20000;
-        if (currentRange === '20000') matchesRange = idNum >= 20000 && idNum < 30000;
+      <thead>
 
-        return matchesSearch && matchesAlpha && matchesRange;
-      });
+        <tr>
+          <th>
+            PLAYER
+          </th>
 
-      filtered.forEach(item => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${item.last}</td>
-          <td>${item.first}</td>
-          <td class="cfid-col">
-            ${item.cfid}
-            <button class="btn-copy" onclick="copyCFID('${item.cfid}')">COPY</button>
+          <th>
+            CYBERFACE ID
+          </th>
+
+          <th>
+            ACTION
+          </th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr>
+
+          <td>
+            CALEB WILSON
           </td>
-        `;
-        tbody.appendChild(tr);
-      });
 
-      document.getElementById('matchCount').innerText = `Showing 1-${filtered.length} of ${database.length}`;
-    }
+          <td class="id">
+            png20603.iff
+          </td>
 
-    // Input handlers
-    document.getElementById('dbSearch').addEventListener('input', (e) => {
-      currentSearch = e.target.value.toLowerCase();
-      renderTable();
+          <td>
+            <button
+              class="copy"
+              onclick="copyID('png20603.iff')"
+            >
+              COPY
+            </button>
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td>
+            AJ DYBANTSA
+          </td>
+
+          <td class="id">
+            png20600.iff
+          </td>
+
+          <td>
+            <button
+              class="copy"
+              onclick="copyID('png20600.iff')"
+            >
+              COPY
+            </button>
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td>
+            CAMERON BOOZER
+          </td>
+
+          <td class="id">
+            png20602.iff
+          </td>
+
+          <td>
+            <button
+              class="copy"
+              onclick="copyID('png20602.iff')"
+            >
+              COPY
+            </button>
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td>
+            KINGSTON FLEMINGS
+          </td>
+
+          <td class="id">
+            png20607.iff
+          </td>
+
+          <td>
+            <button
+              class="copy"
+              onclick="copyID('png20607.iff')"
+            >
+              COPY
+            </button>
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td>
+            YAXEL LENDEBORG
+          </td>
+
+          <td class="id">
+            png20610.iff
+          </td>
+
+          <td>
+            <button
+              class="copy"
+              onclick="copyID('png20610.iff')"
+            >
+              COPY
+            </button>
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+</main>
+
+<script>
+
+function updateClock() {
+
+  const now = new Date();
+
+  document.getElementById("clock").textContent =
+    now.toLocaleTimeString([], {
+      hour:"2-digit",
+      minute:"2-digit",
+      second:"2-digit"
     });
 
-    function filterAlpha(letter, el) {
-      currentAlpha = letter;
-      document.querySelectorAll('#alphabetContainer .filter-btn').forEach(b => b.classList.remove('active'));
-      el.classList.add('active');
-      renderTable();
-    }
+  document.getElementById("date").textContent =
+    now.toLocaleDateString([], {
+      weekday:"short",
+      month:"short",
+      day:"numeric",
+      year:"numeric"
+    });
+}
 
-    function filterRange(range, el) {
-      currentRange = range;
-      document.querySelectorAll('.range-pills .filter-btn').forEach(b => b.classList.remove('active'));
-      el.classList.add('active');
-      renderTable();
-    }
+updateClock();
+setInterval(updateClock,1000);
 
-    function resetFilters() {
-      document.getElementById('dbSearch').value = "";
-      currentSearch = "";
-      currentAlpha = "ALL";
-      currentRange = "all";
-      renderTable();
-    }
 
-    function copyCFID(cfid) {
-      navigator.clipboard.writeText(`png${cfid}.iff`).then(() => {
-        alert(`Copied: png${cfid}.iff`);
-      });
-    }
+/* COPY */
 
-    // Initial Render
-    renderTable();
-  </script>
+function copyID(id) {
+
+  navigator.clipboard
+    .writeText(id)
+    .then(() => {
+
+      alert("Copied: " + id);
+
+    });
+
+}
+
+
+/* THEMES */
+
+const themes = [
+  ["CYAN","#00f0ff","#00cce0","rgba(0,240,255,.14)"],
+  ["RED","#ff3030","#df2020","rgba(255,48,48,.14)"],
+  ["LIGHT","#087cff","#0666d6","rgba(8,124,255,.12)"],
+  ["BLACK","#fff","#d9d9d9","rgba(255,255,255,.08)"]
+];
+
+let themeIndex =
+  Number(localStorage.getItem("ray2kTheme") || 0);
+
+function applyTheme() {
+
+  const t = themes[themeIndex];
+
+  document.documentElement.style.setProperty("--accent",t[1]);
+  document.documentElement.style.setProperty("--accent-hover",t[2]);
+  document.documentElement.style.setProperty("--glow",t[3]);
+
+  if(t[0] === "LIGHT") {
+
+    document.documentElement.style.setProperty("--bg","#eef1f5");
+    document.documentElement.style.setProperty("--sidebar","#fff");
+    document.documentElement.style.setProperty("--card","#fff");
+    document.documentElement.style.setProperty("--border","#d8dee8");
+    document.documentElement.style.setProperty("--text","#111827");
+    document.documentElement.style.setProperty("--muted","#687386");
+
+  } else if(t[0] === "BLACK") {
+
+    document.documentElement.style.setProperty("--bg","#000");
+    document.documentElement.style.setProperty("--sidebar","#000");
+    document.documentElement.style.setProperty("--card","#080808");
+    document.documentElement.style.setProperty("--border","#202020");
+    document.documentElement.style.setProperty("--text","#fff");
+    document.documentElement.style.setProperty("--muted","#777");
+
+  } else {
+
+    document.documentElement.style.setProperty("--bg","#07090e");
+    document.documentElement.style.setProperty("--sidebar","#04060a");
+    document.documentElement.style.setProperty("--card","#0f1520");
+    document.documentElement.style.setProperty("--border","#1a2638");
+    document.documentElement.style.setProperty("--text","#fff");
+    document.documentElement.style.setProperty("--muted","#8290a0");
+
+  }
+
+  document.querySelector("button").textContent =
+    "THEME: " + t[0];
+}
+
+function changeTheme() {
+
+  themeIndex++;
+
+  if(themeIndex >= themes.length)
+    themeIndex = 0;
+
+  localStorage.setItem(
+    "ray2kTheme",
+    themeIndex
+  );
+
+  applyTheme();
+}
+
+applyTheme();
+
+</script>
+
 </body>
 </html>
