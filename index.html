@@ -238,51 +238,6 @@
       margin-bottom: 30px;
     }
 
-    .btn-row {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 50px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 14px 32px;
-      border-radius: 6px;
-      font-weight: 800;
-      font-size: 0.85rem;
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      text-align: center;
-      display: inline-block;
-      transition: all 0.3s ease;
-    }
-
-    .btn-cyan {
-      background-color: var(--accent-cyan);
-      color: #000000;
-      border: 2px solid var(--accent-cyan);
-    }
-
-    .btn-cyan:hover {
-      background-color: var(--accent-cyan-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
-    }
-
-    .btn-outline {
-      border: 2px solid var(--border-color);
-      color: var(--text-white);
-      background: var(--card-bg);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--accent-cyan);
-      color: var(--accent-cyan);
-      transform: translateY(-2px);
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
-    }
-
     .dashboard-header {
       border-top: 1px solid var(--border-color);
       padding-top: 30px;
@@ -351,11 +306,6 @@
       box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
     }
 
-    .dash-card.locked-card {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
     .card-badge {
       font-size: 0.7rem;
       font-weight: 800;
@@ -372,12 +322,6 @@
       background: var(--accent-glow);
       color: var(--accent-cyan);
       border: 1px solid var(--accent-cyan);
-    }
-
-    .badge-locked {
-      background: rgba(128, 142, 155, 0.1);
-      color: var(--text-muted);
-      border: 1px solid var(--border-color);
     }
 
     .dash-card h3 {
@@ -405,6 +349,25 @@
 
     .card-link:hover {
       text-decoration: underline;
+    }
+
+    .btn-cyan {
+      background-color: var(--accent-cyan);
+      color: #000000;
+      border: 2px solid var(--accent-cyan);
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-decoration: none;
+      text-align: center;
+      display: block;
+      transition: all 0.3s ease;
+    }
+
+    .btn-cyan:hover {
+      background-color: var(--accent-cyan-hover);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
     }
 
     .content-view {
@@ -482,19 +445,6 @@
         padding: 80px 20px 40px;
         width: 100%;
       }
-      .top-bar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .hero-title {
-        font-size: 2.3rem;
-      }
-      .btn-row {
-        flex-direction: column;
-      }
-      .btn {
-        width: 100%;
-      }
     }
   </style>
 </head>
@@ -543,7 +493,7 @@
       <div class="time-badge">STATUS: ONLINE</div>
     </div>
 
-    <!-- VIEW 1: DASHBOARD (Default Landing View matching your screenshot) -->
+    <!-- VIEW 1: LAB DASHBOARD -->
     <div id="view-dashboard" class="content-view active-view">
       <div class="dashboard-header" style="border-top: none; padding-top: 0;">
         <span class="dash-tag">NBA 2K14 LAB</span>
@@ -602,7 +552,7 @@
       </div>
     </div>
 
-    <!-- VIEW 2: ROSTERS WITH DOWNLOAD LINK -->
+    <!-- VIEW 2: ROSTERS -->
     <div id="view-rosters" class="content-view">
       <button class="back-btn" onclick="switchView('dashboard', event)">&larr; Back to Dashboard</button>
       <h2 class="hero-title" style="font-size: 2.2rem;">ROSTER <span>UPDATES</span></h2>
@@ -616,13 +566,13 @@
               <h3>ROSTER 26-27</h3>
               <p>Official Update • ROS package with updated transactions and ratings.</p>
             </div>
-            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn btn-cyan" style="text-align: center; margin-top: 15px;">DOWNLOAD LINK</a>
+            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn-cyan">DOWNLOAD LINK</a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- VIEW 3: CYBERFACES WITH DOWNLOAD LINKS -->
+    <!-- VIEW 3: CYBERFACES -->
     <div id="view-cyberfaces" class="content-view">
       <button class="back-btn" onclick="switchView('dashboard', event)">&larr; Back to Dashboard</button>
       <h2 class="hero-title" style="font-size: 2.2rem;">FREE <span>CYBERFACES</span></h2>
@@ -636,7 +586,7 @@
               <h3>CALEB WILSON</h3>
               <p>Chicago Bulls • CF Pack</p>
             </div>
-            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn btn-cyan" style="text-align: center; margin-top: 15px;">DOWNLOAD LINK</a>
+            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn-cyan">DOWNLOAD LINK</a>
           </div>
         </div>
 
@@ -647,7 +597,7 @@
               <h3>AJ DYBANTSA</h3>
               <p>Washington Wizards • CF Pack</p>
             </div>
-            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn btn-cyan" style="text-align: center; margin-top: 15px;">DOWNLOAD LINK</a>
+            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn-cyan">DOWNLOAD LINK</a>
           </div>
         </div>
 
@@ -658,7 +608,7 @@
               <h3>CAMERON BOOZER</h3>
               <p>Memphis Grizzlies • CF Pack</p>
             </div>
-            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn btn-cyan" style="text-align: center; margin-top: 15px;">DOWNLOAD LINK</a>
+            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn-cyan">DOWNLOAD LINK</a>
           </div>
         </div>
 
@@ -669,13 +619,13 @@
               <h3>KINGSTON FLEMINGS</h3>
               <p>Atlanta Hawks • CF Pack</p>
             </div>
-            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn btn-cyan" style="text-align: center; margin-top: 15px;">DOWNLOAD LINK</a>
+            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn-cyan">DOWNLOAD LINK</a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- VIEW 4: COURTS & ARENAS WITH DOWNLOAD LINK -->
+    <!-- VIEW 4: COURTS & ARENAS -->
     <div id="view-courts" class="content-view">
       <button class="back-btn" onclick="switchView('dashboard', event)">&larr; Back to Dashboard</button>
       <h2 class="hero-title" style="font-size: 2.2rem;">COURTS & <span>ARENAS</span></h2>
@@ -689,13 +639,13 @@
               <h3>Stadium Floor Pack</h3>
               <p>Custom 3D hardwood lighting and arena texture package.</p>
             </div>
-            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn btn-cyan" style="text-align: center; margin-top: 15px;">DOWNLOAD LINK</a>
+            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn-cyan">DOWNLOAD LINK</a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- VIEW 5: SCOREBOARDS & PRESENTATION WITH DOWNLOAD LINKS -->
+    <!-- VIEW 5: SCOREBOARDS & PRESENTATION -->
     <div id="view-presentation" class="content-view">
       <button class="back-btn" onclick="switchView('dashboard', event)">&larr; Back to Dashboard</button>
       <h2 class="hero-title" style="font-size: 2.2rem;">SCOREBOARDS <span>ARCHIVE</span></h2>
@@ -709,7 +659,7 @@
               <h3>Scoreboard NBA on ESPN</h3>
               <p>Broadcast Scoreboard overlay package.</p>
             </div>
-            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn btn-cyan" style="text-align: center; margin-top: 15px;">DOWNLOAD LINK</a>
+            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn-cyan">DOWNLOAD LINK</a>
           </div>
         </div>
 
@@ -720,7 +670,7 @@
               <h3>Scoreboard NBA NextGen</h3>
               <p>Next-Gen TV Scoreboard suite.</p>
             </div>
-            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn btn-cyan" style="text-align: center; margin-top: 15px;">DOWNLOAD LINK</a>
+            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn-cyan">DOWNLOAD LINK</a>
           </div>
         </div>
 
@@ -731,7 +681,7 @@
               <h3>Scoreboard NBA 2K24 - 25</h3>
               <p>Modern TV scoreboard layout.</p>
             </div>
-            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn btn-cyan" style="text-align: center; margin-top: 15px;">DOWNLOAD LINK</a>
+            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn-cyan">DOWNLOAD LINK</a>
           </div>
         </div>
 
@@ -742,7 +692,7 @@
               <h3>Scoreboard NBA NBC Sports</h3>
               <p>Classic NBC Network skin.</p>
             </div>
-            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn btn-cyan" style="text-align: center; margin-top: 15px;">DOWNLOAD LINK</a>
+            <a href="https://www.mediafire.com" target="_blank" rel="noopener noreferrer" class="btn-cyan">DOWNLOAD LINK</a>
           </div>
         </div>
       </div>
