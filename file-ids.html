@@ -1,600 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>File IDs — RAY2K</title>
-
-<style>
-
-:root {
-  --bg:#07090e;
-  --sidebar:#04060a;
-  --card:#0f1520;
-  --border:#1a2638;
-  --accent:#00f0ff;
-  --accent-hover:#00cce0;
-  --glow:rgba(0,240,255,.14);
-  --text:#fff;
-  --muted:#8290a0;
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+  <title>
+   File IDs — RAY2K
+  </title>
+  <style>
+   :root {
+  --bg: #070b12;
+  --bg-soft: #0a1019;
+  --card: #0d1520;
+  --card-hover: #101b29;
+  --line: #1b2a3a;
+  --blue: #00d9ff;
+  --blue-2: #168cff;
+  --blue-glow: rgba(0, 217, 255, .16);
+  --text: #f4f8ff;
+  --muted: #8392a3;
+  --locked: #26313d;
 }
-
-* {
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-body {
-  min-height:100vh;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Inter,Arial,system-ui,sans-serif;
-}
-
-aside {
-  position:fixed;
-
-  left:0;
-  top:0;
-
-  width:240px;
-  height:100vh;
-
-  padding:28px 16px;
-
-  background:var(--sidebar);
-  border-right:1px solid var(--border);
-
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-}
-
-.logo {
-  color:var(--text);
-  text-decoration:none;
-
-  font-size:1.55rem;
-  font-weight:950;
-}
-
-.logo span,
-.sub {
-  color:var(--accent);
-}
-
-.sub {
-  display:block;
-  margin-top:4px;
-
-  font-size:.65rem;
-  font-weight:900;
-  letter-spacing:1px;
-}
-
-.current {
-  margin-top:30px;
-
-  padding:13px 14px;
-
-  border-left:3px solid var(--accent);
-  border-radius:6px;
-
-  background:var(--glow);
-
-  color:var(--accent);
-
-  font-size:.75rem;
-  font-weight:900;
-}
-
-.bottom {
-  display:flex;
-  flex-direction:column;
-  gap:9px;
-}
-
-.clock {
-  border-top:1px solid var(--border);
-  padding-top:14px;
-}
-
-#clock {
-  color:var(--accent);
-  font-size:.78rem;
-  font-weight:950;
-}
-
-#date {
-  color:var(--muted);
-  font-size:.62rem;
-  margin-top:3px;
-}
-
-button,
-.bottom a {
-  width:100%;
-
-  padding:10px 12px;
-
-  background:var(--card);
-
-  border:1px solid var(--border);
-  border-radius:6px;
-
-  color:var(--text);
-
-  font-size:.65rem;
-  font-weight:900;
-
-  text-align:center;
-  text-decoration:none;
-  text-transform:uppercase;
-
-  cursor:pointer;
-}
-
-button:hover,
-.bottom a:hover {
-  color:var(--accent);
-  border-color:var(--accent);
-}
-
-main {
-  margin-left:240px;
-
-  min-height:100vh;
-
-  padding:55px 45px 80px;
-}
-
-.container {
-  max-width:1100px;
-  margin:auto;
-}
-
-.kicker {
-  color:var(--accent);
-
-  font-size:.65rem;
-  font-weight:950;
-
-  letter-spacing:2px;
-}
-
-h1 {
-  margin-top:10px;
-
-  font-size:clamp(2rem,5vw,4rem);
-
-  font-weight:950;
-
-  text-transform:uppercase;
-}
-
-.description {
-  max-width:650px;
-
-  margin-top:12px;
-
-  color:var(--muted);
-
-  font-size:.75rem;
-  line-height:1.7;
-}
-
-.table-wrap {
-  margin-top:35px;
-
-  overflow-x:auto;
-
-  border:1px solid var(--border);
-  border-radius:8px;
-}
-
-table {
-  width:100%;
-
-  border-collapse:collapse;
-
-  background:var(--card);
-}
-
-th,
-td {
-  padding:15px;
-
-  border-bottom:1px solid var(--border);
-
-  text-align:left;
-
-  font-size:.7rem;
-}
-
-th {
-  color:var(--accent);
-
-  font-size:.65rem;
-  font-weight:950;
-
-  text-transform:uppercase;
-}
-
-td {
-  color:var(--muted);
-}
-
-td:first-child {
-  color:var(--text);
-  font-weight:900;
-}
-
-.id {
-  color:var(--accent);
-  font-family:monospace;
-  font-weight:900;
-}
-
-.copy {
-  padding:6px 10px;
-
-  background:var(--card);
-
-  border:1px solid var(--border);
-  border-radius:4px;
-
-  color:var(--text);
-
-  font-size:.6rem;
-  font-weight:900;
-
-  cursor:pointer;
-}
-
-.copy:hover {
-  color:var(--accent);
-  border-color:var(--accent);
-}
-
-@media(max-width:800px) {
-
-  aside {
-    position:relative;
-
-    width:100%;
-    height:auto;
-
-    border-right:none;
-    border-bottom:1px solid var(--border);
-  }
-
-  main {
-    margin-left:0;
-    padding:35px 20px 60px;
-  }
-
-}
-
-</style>
-</head>
-
-<body>
-
-<aside>
-
-  <div>
-
-    <a href="index.html" class="logo">
-      RAY<span>2K</span>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:linear-gradient(rgba(0,217,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,217,255,.025) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 80%)}
+a{color:inherit}
+.site-header{height:74px;border-bottom:1px solid var(--line);background:rgba(5,9,15,.94);display:flex;align-items:center;position:sticky;top:0;z-index:1000;backdrop-filter:blur(12px)}
+.nav{width:min(1180px,calc(100% - 48px));margin:auto;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{text-decoration:none;font-weight:1000;letter-spacing:-1px;font-size:1.25rem;white-space:nowrap}.logo span{color:var(--blue)}.logo small{color:#5c6b7b;font-size:.52rem;letter-spacing:2px;margin-left:8px;font-weight:800}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none}.nav-links a{text-decoration:none;color:var(--muted);font-size:.72rem;font-weight:800;letter-spacing:.6px;padding:10px 12px;border-radius:6px;transition:.2s ease}.nav-links a:hover,.nav-links a.active{color:var(--blue);background:var(--blue-glow)}
+.page{width:min(1180px,calc(100% - 48px));margin:auto;padding:48px 0 90px}.eyebrow,.section-tag{color:var(--blue);font-size:.65rem;font-weight:900;letter-spacing:3px}.title{font-size:clamp(2rem,5vw,4rem);line-height:.95;letter-spacing:-2px;text-transform:uppercase;margin:10px 0 16px}.muted{color:var(--muted);line-height:1.6;font-size:.82rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 20px;border-radius:5px;border:1px solid var(--line);text-decoration:none;font-size:.72rem;font-weight:900;letter-spacing:.5px;cursor:pointer;transition:.22s ease}.btn-primary{background:var(--blue);color:#031018;border-color:var(--blue)}.btn-outline{background:rgba(13,21,32,.7);color:var(--text)}.btn:hover{transform:translateY(-2px);border-color:var(--blue)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{position:relative;border:1px solid var(--line);border-radius:8px;background:linear-gradient(145deg,#101a27,#0a111b);padding:24px;text-decoration:none;transition:.25s ease}.card:hover{transform:translateY(-5px);border-color:rgba(0,217,255,.72);box-shadow:0 12px 40px rgba(0,0,0,.35),0 0 26px rgba(0,217,255,.12)}.card h2,.card h3{margin:10px 0 7px}.card p{color:var(--muted);font-size:.72rem;line-height:1.5}.folder{width:40px;height:34px;border:1px solid #365065;border-radius:6px;display:grid;place-items:center;color:var(--blue);background:rgba(5,12,20,.55)}
+.theme-panel{position:fixed;bottom:16px;left:16px;z-index:2000;display:flex;align-items:center;gap:6px;padding:6px;background:rgba(4,8,13,.92);border:1px solid var(--line);border-radius:8px;backdrop-filter:blur(10px)}.theme-panel button{border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:5px;padding:6px 8px;font-size:.55rem;font-weight:900;cursor:pointer}.theme-panel button:hover{color:var(--blue);border-color:var(--blue)}.clock{font-size:.58rem;color:#657486;letter-spacing:.5px;margin-right:3px;white-space:nowrap}
+body.red{--blue:#ff365f;--blue-2:#ff1748;--blue-glow:rgba(255,54,95,.16)}
+body.black{--bg:#000;--bg-soft:#030303;--card:#080808;--card-hover:#111;--line:#222;--blue:#fff;--blue-2:#ccc;--blue-glow:rgba(255,255,255,.10)}
+body.light{--bg:#eef2f6;--bg-soft:#f5f7fa;--card:#fff;--card-hover:#f4f6f8;--line:#cbd5df;--blue:#008bb5;--blue-2:#006f91;--blue-glow:rgba(0,139,181,.12);--text:#101820;--muted:#5d6b78;--locked:#9aa5ae}
+body.light .site-header{background:rgba(245,247,250,.94)}body.light::before{opacity:.1}
+@media(max-width:820px){.nav{width:min(100% - 28px,1180px)}.nav-links a{padding:8px;font-size:.61rem}.page{width:min(100% - 28px,1180px)}.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.site-header{height:62px}.nav-links a:nth-child(n+3){display:none}.grid{grid-template-columns:1fr}.page{padding-top:34px}.theme-panel{left:10px;bottom:10px}}
+  </style>
+  <style id="ray2k-folder-overrides">
+   .folder-side{position:fixed;left:0;top:0;width:220px;height:100vh;background:#04060a;border-right:1px solid #1a2638;padding:24px 14px;display:flex;flex-direction:column;justify-content:space-between;z-index:9998}
+.folder-side .folder-brand{display:block;font-size:24px;font-weight:950;letter-spacing:1px;text-decoration:none;color:#fff}.folder-side .folder-brand span{color:#00f0ff}
+.folder-side .folder-sub{display:block;color:#00f0ff;font-size:10px;font-weight:900;letter-spacing:1px;margin-top:3px}
+.folder-current{margin-top:28px;padding:12px;border-left:3px solid #00f0ff;background:rgba(0,240,255,.12);border-radius:6px;color:#00f0ff;font-size:11px;font-weight:900;letter-spacing:.7px}
+.folder-bottom{display:flex;flex-direction:column;gap:8px}.folder-clock{border-top:1px solid #1a2638;padding-top:11px;color:#718094;font-size:9px;line-height:1.5}.folder-clock strong{color:#00f0ff;font-size:11px}.folder-btn{display:block;width:100%;padding:9px 10px;background:#0f1520;border:1px solid #1a2638;border-radius:5px;color:#fff;font-size:10px;font-weight:900;text-align:center;text-decoration:none;text-transform:uppercase;cursor:pointer}.folder-btn:hover{border-color:#00f0ff;color:#00f0ff}.folder-support{position:fixed;right:22px;bottom:22px;z-index:9999;background:#00f0ff;color:#000;border-radius:30px;padding:10px 16px;font-size:11px;font-weight:950;text-decoration:none;box-shadow:0 4px 20px rgba(0,240,255,.28)}
+@media(max-width:768px){.folder-side{position:relative;width:100%;height:auto;border-right:0;border-bottom:1px solid #1a2638}.folder-bottom{margin-top:25px}main{margin-left:0!important}.folder-support{right:12px;bottom:12px}}
+  </style>
+ </head>
+ <body>
+  <aside class="folder-side">
+   <div>
+    <a class="folder-brand" href="index.html">
+     RAY
+     <span>
+      2K
+     </span>
     </a>
-
-    <span class="sub">
-      NBA 2K14 LAB
+    <span class="folder-sub">
+     NBA 2K14 LAB
     </span>
-
-    <div class="current">
-      FILE IDS
+    <div class="folder-current">
+     FILE IDS
     </div>
-
-  </div>
-
-  <div class="bottom">
-
-    <div class="clock">
-      <div id="clock">00:00:00</div>
-      <div id="date">Loading...</div>
+   </div>
+   <div class="folder-bottom">
+    <div class="folder-clock">
+     <strong id="folderTime">
+      --:--:--
+     </strong>
+     <br/>
+     <span id="folderDate">
+      Loading...
+     </span>
     </div>
-
-    <button onclick="changeTheme()">
-      THEME: CYAN
+    <button class="folder-btn" id="folderThemeBtn" type="button">
+     THEME: CYAN
     </button>
-
-    <a
-      href="https://www.facebook.com/profile.php?id=61594111973222"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      JOIN COMMUNITY
+    <a class="folder-btn" href="https://www.facebook.com/profile.php?id=61594111973222" rel="noopener noreferrer" target="_blank">
+     JOIN COMMUNITY
     </a>
-
-    <a href="index.html">
-      BACK TO RAY2K
+    <a class="folder-btn" href="index.html">
+     BACK TO RAY2K
     </a>
-
-  </div>
-
-</aside>
-
-<main>
-
-<div class="container">
-
-  <div class="kicker">
-    NBA 2K14 ARCHIVE
-  </div>
-
-  <h1>
+   </div>
+  </aside>
+  <header class="site-header">
+   <nav class="nav">
+    <a class="logo" href="index.html">
+     RAY
+     <span>
+      2K
+     </span>
+     <small>
+      QUALITY OF LIFE MODS
+     </small>
+    </a>
+    <ul class="nav-links">
+     <li>
+      <a class="" href="index.html">
+       HOME
+      </a>
+     </li>
+     <li>
+      <a class="" href="rosters.html">
+       ROSTERS
+      </a>
+     </li>
+     <li>
+      <a class="" href="cyberfaces.html">
+       CYBERFACES
+      </a>
+     </li>
+     <li>
+      <a class="" href="presentation.html">
+       SCOREBOARDS
+      </a>
+     </li>
+     <li>
+      <a class="active" href="file-ids.html">
+       FILE IDS
+      </a>
+     </li>
+    </ul>
+   </nav>
+  </header>
+  <main class="page" style="margin-left:220px">
+   <div class="eyebrow">
+    RAY2K // REFERENCE
+   </div>
+   <h1 class="title">
     FILE IDS
-  </h1>
-
-  <p class="description">
-    NBA 2K14 file IDs and reference information.
-  </p>
-
-  <div class="table-wrap">
-
-    <table>
-
-      <thead>
-
-        <tr>
-          <th>
-            PLAYER
-          </th>
-
-          <th>
-            CYBERFACE ID
-          </th>
-
-          <th>
-            ACTION
-          </th>
-        </tr>
-
-      </thead>
-
-      <tbody>
-
-        <tr>
-
-          <td>
-            CALEB WILSON
-          </td>
-
-          <td class="id">
-            png20603.iff
-          </td>
-
-          <td>
-            <button
-              class="copy"
-              onclick="copyID('png20603.iff')"
-            >
-              COPY
-            </button>
-          </td>
-
-        </tr>
-
-        <tr>
-
-          <td>
-            AJ DYBANTSA
-          </td>
-
-          <td class="id">
-            png20600.iff
-          </td>
-
-          <td>
-            <button
-              class="copy"
-              onclick="copyID('png20600.iff')"
-            >
-              COPY
-            </button>
-          </td>
-
-        </tr>
-
-        <tr>
-
-          <td>
-            CAMERON BOOZER
-          </td>
-
-          <td class="id">
-            png20602.iff
-          </td>
-
-          <td>
-            <button
-              class="copy"
-              onclick="copyID('png20602.iff')"
-            >
-              COPY
-            </button>
-          </td>
-
-        </tr>
-
-        <tr>
-
-          <td>
-            KINGSTON FLEMINGS
-          </td>
-
-          <td class="id">
-            png20607.iff
-          </td>
-
-          <td>
-            <button
-              class="copy"
-              onclick="copyID('png20607.iff')"
-            >
-              COPY
-            </button>
-          </td>
-
-        </tr>
-
-        <tr>
-
-          <td>
-            YAXEL LENDEBORG
-          </td>
-
-          <td class="id">
-            png20610.iff
-          </td>
-
-          <td>
-            <button
-              class="copy"
-              onclick="copyID('png20610.iff')"
-            >
-              COPY
-            </button>
-          </td>
-
-        </tr>
-
-      </tbody>
-
-    </table>
-
+   </h1>
+   <p class="muted" style="margin-bottom:30px">
+    Cyberface IDs used by the current RAY2K archive.
+   </p>
+   <div class="grid">
+    <div class="card">
+     <div class="folder">
+      CF
+     </div>
+     <h3>
+      CALEB WILSON
+     </h3>
+     <p>
+      png20603.iff
+     </p>
+    </div>
+    <div class="card">
+     <div class="folder">
+      CF
+     </div>
+     <h3>
+      AJ DYBANTSA
+     </h3>
+     <p>
+      png20600.iff
+     </p>
+    </div>
+    <div class="card">
+     <div class="folder">
+      CF
+     </div>
+     <h3>
+      CAMERON BOOZER
+     </h3>
+     <p>
+      png20602.iff
+     </p>
+    </div>
+    <div class="card">
+     <div class="folder">
+      CF
+     </div>
+     <h3>
+      KINGSTON FLEMINGS
+     </h3>
+     <p>
+      png20607.iff
+     </p>
+    </div>
+    <div class="card">
+     <div class="folder">
+      CF
+     </div>
+     <h3>
+      YAXEL LENDEBORG
+     </h3>
+     <p>
+      png20610.iff
+     </p>
+    </div>
+   </div>
+  </main>
+  <div class="theme-panel">
+   <span class="clock" id="clock">
+   </span>
+   <button onclick="setTheme('cyan')">
+    CYAN
+   </button>
+   <button onclick="setTheme('red')">
+    RED
+   </button>
+   <button onclick="setTheme('black')">
+    BLACK
+   </button>
+   <button onclick="setTheme('light')">
+    LIGHT
+   </button>
   </div>
-
-</div>
-
-</main>
-
-<script>
-
-function updateClock() {
-
-  const now = new Date();
-
-  document.getElementById("clock").textContent =
-    now.toLocaleTimeString([], {
-      hour:"2-digit",
-      minute:"2-digit",
-      second:"2-digit"
-    });
-
-  document.getElementById("date").textContent =
-    now.toLocaleDateString([], {
-      weekday:"short",
-      month:"short",
-      day:"numeric",
-      year:"numeric"
-    });
-}
-
-updateClock();
-setInterval(updateClock,1000);
-
-
-/* COPY */
-
-function copyID(id) {
-
-  navigator.clipboard
-    .writeText(id)
-    .then(() => {
-
-      alert("Copied: " + id);
-
-    });
-
-}
-
-
-/* THEMES */
-
-const themes = [
-  ["CYAN","#00f0ff","#00cce0","rgba(0,240,255,.14)"],
-  ["RED","#ff3030","#df2020","rgba(255,48,48,.14)"],
-  ["LIGHT","#087cff","#0666d6","rgba(8,124,255,.12)"],
-  ["BLACK","#fff","#d9d9d9","rgba(255,255,255,.08)"]
-];
-
-let themeIndex =
-  Number(localStorage.getItem("ray2kTheme") || 0);
-
-function applyTheme() {
-
-  const t = themes[themeIndex];
-
-  document.documentElement.style.setProperty("--accent",t[1]);
-  document.documentElement.style.setProperty("--accent-hover",t[2]);
-  document.documentElement.style.setProperty("--glow",t[3]);
-
-  if(t[0] === "LIGHT") {
-
-    document.documentElement.style.setProperty("--bg","#eef1f5");
-    document.documentElement.style.setProperty("--sidebar","#fff");
-    document.documentElement.style.setProperty("--card","#fff");
-    document.documentElement.style.setProperty("--border","#d8dee8");
-    document.documentElement.style.setProperty("--text","#111827");
-    document.documentElement.style.setProperty("--muted","#687386");
-
-  } else if(t[0] === "BLACK") {
-
-    document.documentElement.style.setProperty("--bg","#000");
-    document.documentElement.style.setProperty("--sidebar","#000");
-    document.documentElement.style.setProperty("--card","#080808");
-    document.documentElement.style.setProperty("--border","#202020");
-    document.documentElement.style.setProperty("--text","#fff");
-    document.documentElement.style.setProperty("--muted","#777");
-
-  } else {
-
-    document.documentElement.style.setProperty("--bg","#07090e");
-    document.documentElement.style.setProperty("--sidebar","#04060a");
-    document.documentElement.style.setProperty("--card","#0f1520");
-    document.documentElement.style.setProperty("--border","#1a2638");
-    document.documentElement.style.setProperty("--text","#fff");
-    document.documentElement.style.setProperty("--muted","#8290a0");
-
-  }
-
-  document.querySelector("button").textContent =
-    "THEME: " + t[0];
-}
-
-function changeTheme() {
-
-  themeIndex++;
-
-  if(themeIndex >= themes.length)
-    themeIndex = 0;
-
-  localStorage.setItem(
-    "ray2kTheme",
-    themeIndex
-  );
-
-  applyTheme();
-}
-
-applyTheme();
-
-</script>
-
-</body>
+  <script>
+   function setTheme(t){document.body.className=t==='cyan'?'':t;localStorage.setItem('ray2k-theme',t)}
+const saved=localStorage.getItem('ray2k-theme');if(saved)setTheme(saved);
+function tick(){const d=new Date();document.getElementById('clock').textContent=d.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'})+' · '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}tick();setInterval(tick,1000);
+  </script>
+  <a class="folder-support" href="https://www.facebook.com/profile.php?id=61594111973222" rel="noopener noreferrer" target="_blank">
+   ⚡ SUPPORT RAY2K
+  </a>
+  <script id="ray2k-folder-tools">
+   (function(){
+const key='ray2kFolderTheme';const modes=['CYAN','RED','BLACK','LIGHT'];let i=Math.max(0,modes.indexOf(localStorage.getItem(key)||'CYAN'));const root=document.documentElement,body=document.body;
+function apply(){const m=modes[i];let accent='#00f0ff',bg='#07090e',side='#04060a',card='#0f1520',line='#1a2638',text='#fff',muted='#808e9b';if(m==='RED'){accent='#ff3030';bg='#090608';line='#3a1b23'}if(m==='BLACK'){accent='#fff';bg='#000';side='#000';card='#080808';line='#222';muted='#777'}if(m==='LIGHT'){accent='#087cff';bg='#eef2f6';side='#fff';card='#fff';line='#d8dee8';text='#111827';muted='#687386'}root.style.setProperty('--accent-cyan',accent);root.style.setProperty('--bg-dark',bg);root.style.setProperty('--sidebar-bg',side);root.style.setProperty('--card-bg',card);root.style.setProperty('--border-color',line);root.style.setProperty('--text-white',text);root.style.setProperty('--text-muted',muted);const b=document.getElementById('folderThemeBtn');if(b)b.textContent='THEME: '+m;localStorage.setItem(key,m)}
+function cycle(){i=(i+1)%modes.length;apply()}const b=document.getElementById('folderThemeBtn');if(b)b.addEventListener('click',cycle);
+function clock(){const d=new Date();const t=document.getElementById('folderTime'),dt=document.getElementById('folderDate');if(t)t.textContent=d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});if(dt)dt.textContent=d.toLocaleDateString([], {weekday:'short',month:'short',day:'numeric',year:'numeric'})}clock();setInterval(clock,1000);apply();
+})();
+  </script>
+ </body>
 </html>
