@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAY2K // LAB</title>
+  <title>RAY2K // NBA 2K14 LAB</title>
   <style>
     :root {
       --bg-dark: #0b0f17;
@@ -559,7 +559,7 @@
 
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-  <!-- Left Sidebar (Hidden by default, reveals only when NBA 2K14 is unlocked/clicked) -->
+  <!-- Left Sidebar (Hidden by default, reveals only after clicking START HERE) -->
   <aside id="sidebar" style="display: none;">
     <div>
       <div class="brand">
@@ -602,6 +602,7 @@
     <p class="hero-desc">Roster updates, dedicated mods, IDs, tools, fixes, and installation guides — organized in one place.</p>
 
     <div class="btn-row">
+      <!-- START HERE button with black circle animation -->
       <a href="#dashboard" class="btn btn-cyan" id="startBtn"><span>START HERE</span></a>
       <a href="https://www.facebook.com/profile.php?id=61594111973222" target="_blank" rel="noopener noreferrer" class="btn btn-outline">JOIN COMMUNITY</a>
     </div>
@@ -613,24 +614,24 @@
     </div>
 
     <div class="grid">
-      <!-- NBA 2K14 Card (Clicking this reveals the left sidebar and fully unlocks access) -->
+      <!-- NBA 2K14 Card (Clickable/Active when opened) -->
       <div class="dash-card active-card" id="card2k14" style="cursor: pointer;">
         <div>
           <span class="card-badge badge-active">Available</span>
           <h3>NBA 2K14</h3>
           <p>The original QOL2K archive featuring rosters, cyberfaces, courts, and presentation mods.</p>
         </div>
-        <span class="card-link">ENTER ARCHIVE &rarr;</span>
+        <span class="card-link">OPEN ARCHIVE &rarr;</span>
       </div>
 
-      <!-- NBA 2K23 Card (Locked initially) -->
+      <!-- NBA 2K23 Card (Locked as requested) -->
       <div class="dash-card locked-card" id="card2k23">
         <div>
           <span class="card-badge badge-locked">Locked</span>
           <h3>NBA 2K23</h3>
           <p>Next-generation roster and visual modification archive.</p>
         </div>
-        <span class="card-link" style="color: var(--text-muted);">COMING SOON (LOCKED) &rarr;</span>
+        <span class="card-link" style="color: var(--text-muted);">LOCKED &rarr;</span>
       </div>
     </div>
   </main>
@@ -644,8 +645,8 @@
     const sidebar = document.getElementById('sidebar');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
     const mainContainer = document.getElementById('mainContainer');
-    const card2k14 = document.getElementById('card2k14');
     const startBtn = document.getElementById('startBtn');
+    const card2k14 = document.getElementById('card2k14');
 
     // Function to reveal the left sidebar
     function revealSidebar() {
@@ -655,21 +656,20 @@
       }
     }
 
-    // Clicking NBA 2K14 card reveals sidebar and scrolls to dashboard
-    card2k14.addEventListener('click', () => {
-      revealSidebar();
-      document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
-    });
-
-    // START HERE button triggers black circle expansion effect and reveals dashboard & sidebar options
+    // START HERE button triggers black circle expansion effect, then reveals sidebar and dashboard views
     startBtn.addEventListener('click', (e) => {
       e.preventDefault();
       
-      // Allow time for the black circle click animation before revealing layout shifts
+      // Allow time for the black circle click animation before revealing sidebar
       setTimeout(() => {
         revealSidebar();
         document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
       }, 350);
+    });
+
+    // Clicking NBA 2K14 card action
+    card2k14.addEventListener('click', () => {
+      alert("Opening NBA 2K14 Archive Dashboard...");
     });
 
     function toggleMenu() {
