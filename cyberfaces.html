@@ -1,1355 +1,635 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Cyberfaces — RAY2K</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
+<title>Cyberfaces — RAY2K</title>
 
-    /* =========================================================
-       THEMES
-    ========================================================= */
+<style>
 
-    :root {
-      --bg-dark: #07090e;
-      --card-bg: #0f1520;
-      --card-inner: #141c2c;
-      --border-color: #1a2638;
+:root {
+  --bg:#07090e;
+  --sidebar:#04060a;
+  --card:#0f1520;
+  --card2:#141c2c;
+  --border:#1a2638;
+  --accent:#00f0ff;
+  --accent-hover:#00cce0;
+  --glow:rgba(0,240,255,.14);
+  --text:#fff;
+  --muted:#8290a0;
+}
 
-      --accent: #00f0ff;
-      --accent-hover: #00cce0;
-      --accent-glow: rgba(0, 240, 255, 0.15);
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-      --text-main: #ffffff;
-      --text-muted: #808e9b;
+body {
+  min-height:100vh;
 
-      --input-bg: #0f1520;
-      --preview-bg: #05070a;
+  background:var(--bg);
+  color:var(--text);
 
-      --support-shadow: rgba(0, 240, 255, 0.3);
-    }
+  font-family:Inter,Arial,system-ui,sans-serif;
+}
 
+aside {
+  position:fixed;
 
-    /* RED / DARK */
+  left:0;
+  top:0;
 
-    body.theme-red {
-      --bg-dark: #0b0709;
-      --card-bg: #171014;
-      --card-inner: #21151a;
-      --border-color: #382027;
+  width:240px;
+  height:100vh;
 
-      --accent: #ff304f;
-      --accent-hover: #e51f3d;
-      --accent-glow: rgba(255, 48, 79, 0.15);
+  padding:28px 16px;
 
-      --text-main: #ffffff;
-      --text-muted: #9b8087;
+  background:var(--sidebar);
+  border-right:1px solid var(--border);
 
-      --input-bg: #171014;
-      --preview-bg: #080506;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 
-      --support-shadow: rgba(255, 48, 79, 0.3);
-    }
+  z-index:100;
+}
 
+.brand {
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
 
-    /* WHITE / LIGHT */
+.logo {
+  color:var(--text);
+  text-decoration:none;
 
-    body.theme-light {
-      --bg-dark: #f1f4f7;
-      --card-bg: #ffffff;
-      --card-inner: #eef1f5;
-      --border-color: #d4dbe3;
+  font-size:1.55rem;
+  font-weight:950;
+}
 
-      --accent: #009dcc;
-      --accent-hover: #007fa8;
-      --accent-glow: rgba(0, 157, 204, 0.12);
+.logo span,
+.sub {
+  color:var(--accent);
+}
 
-      --text-main: #111820;
-      --text-muted: #66717d;
+.sub {
+  font-size:.65rem;
+  font-weight:900;
+  letter-spacing:1px;
+}
 
-      --input-bg: #ffffff;
-      --preview-bg: #e7ebef;
+.current {
+  display:block;
 
-      --support-shadow: rgba(0, 157, 204, 0.25);
-    }
+  margin-top:30px;
 
+  padding:13px 14px;
 
-    /* =========================================================
-       GLOBAL
-    ========================================================= */
+  border-left:3px solid var(--accent);
+  border-radius:6px;
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  background:var(--glow);
 
+  color:var(--accent);
 
-    html {
-      scroll-behavior: smooth;
-    }
+  font-size:.75rem;
+  font-weight:900;
 
+  text-transform:uppercase;
+}
 
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text-main);
+.bottom {
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
 
-      font-family:
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
+.clock {
+  border-top:1px solid var(--border);
+  padding-top:14px;
+}
 
-      min-height: 100vh;
+#clock {
+  color:var(--accent);
 
-      overflow-x: hidden;
+  font-size:.78rem;
+  font-weight:950;
 
-      transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
-    }
+  letter-spacing:1px;
+}
 
+#date {
+  color:var(--muted);
 
-    button,
-    input,
-    select {
-      font-family: inherit;
-    }
+  font-size:.62rem;
+  font-weight:700;
 
+  margin-top:3px;
+}
 
-    /* =========================================================
-       TOP BAR
-    ========================================================= */
+.theme-button,
+.community,
+.back {
+  display:block;
+  width:100%;
 
-    .top-bar {
-      width: 100%;
+  padding:10px 12px;
 
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+  border:1px solid var(--border);
+  border-radius:6px;
 
-      padding: 18px 30px;
+  background:var(--card);
+  color:var(--text);
 
-      border-bottom: 1px solid var(--border-color);
+  font-size:.65rem;
+  font-weight:900;
 
-      background: var(--bg-dark);
+  text-align:center;
+  text-decoration:none;
+  text-transform:uppercase;
 
-      position: sticky;
-      top: 0;
+  cursor:pointer;
+}
 
-      z-index: 500;
+.theme-button:hover,
+.community:hover,
+.back:hover {
+  border-color:var(--accent);
+  color:var(--accent);
+}
 
-      transition:
-        background-color 0.3s ease,
-        border-color 0.3s ease;
-    }
+main {
+  margin-left:240px;
 
+  min-height:100vh;
 
-    .top-brand {
-      text-decoration: none;
+  padding:50px 45px 80px;
+}
 
-      font-size: 1.25rem;
-      font-weight: 950;
+.container {
+  max-width:1200px;
+  margin:auto;
+}
 
-      letter-spacing: 1px;
+.top-row {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 
-      color: var(--text-main);
-    }
+  margin-bottom:18px;
+}
 
+.back-top {
+  display:inline-block;
 
-    .top-brand span {
-      color: var(--accent);
-    }
+  padding:10px 14px;
 
+  border:1px solid var(--border);
+  border-radius:5px;
 
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+  background:var(--card);
 
+  color:var(--text);
 
-    /* =========================================================
-       BACK BUTTON
-    ========================================================= */
+  text-decoration:none;
 
-    .back-button {
-      display: inline-flex;
-      align-items: center;
+  font-size:.65rem;
+  font-weight:900;
+  text-transform:uppercase;
+}
 
-      background: var(--card-bg);
-      color: var(--text-main);
+.back-top:hover {
+  color:var(--accent);
+  border-color:var(--accent);
+}
 
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
+.section-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 
-      padding: 10px 14px;
+  margin-bottom:15px;
+}
 
-      font-size: 0.7rem;
-      font-weight: 900;
+.section-title {
+  color:var(--muted);
 
-      text-decoration: none;
-      text-transform: uppercase;
+  font-size:.9rem;
+  font-weight:950;
 
-      transition: all 0.2s ease;
-    }
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
 
+.section-title span {
+  color:var(--accent);
+}
 
-    .back-button:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-      background: var(--accent-glow);
-    }
+.count {
+  color:var(--muted);
 
+  font-size:.7rem;
+  font-weight:900;
 
-    /* =========================================================
-       THEME BUTTON
-    ========================================================= */
+  text-transform:uppercase;
+}
 
-    .theme-button {
-      border: 1px solid var(--border-color);
+.controls {
+  display:flex;
+  gap:10px;
 
-      background: var(--card-bg);
-      color: var(--text-main);
+  margin-bottom:24px;
+}
 
-      border-radius: 6px;
+.search {
+  flex:1;
 
-      padding: 10px 14px;
+  padding:12px 15px;
 
-      font-size: 0.7rem;
-      font-weight: 900;
+  background:var(--card);
 
-      text-transform: uppercase;
+  border:1px solid var(--border);
+  border-radius:6px;
 
-      cursor: pointer;
+  color:var(--text);
 
-      transition: all 0.2s ease;
-    }
+  outline:none;
+}
 
+.search:focus {
+  border-color:var(--accent);
+}
 
-    .theme-button:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-      background: var(--accent-glow);
-    }
+.search::placeholder {
+  color:#667384;
+}
 
+.sort {
+  min-width:120px;
 
-    /* =========================================================
-       MAIN
-    ========================================================= */
+  background:var(--card);
 
-    main {
-      width: 100%;
+  border:1px solid var(--border);
+  border-radius:6px;
 
-      max-width: 1600px;
+  color:var(--text);
 
-      margin: 0 auto;
+  padding:0 12px;
 
-      padding:
-        35px
-        40px
-        100px;
-    }
+  font-size:.7rem;
+  font-weight:900;
+}
 
+.grid {
+  display:grid;
 
-    /* =========================================================
-       PAGE HEADER
-    ========================================================= */
+  grid-template-columns:
+    repeat(auto-fill,minmax(260px,1fr));
 
-    .page-heading {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+  gap:20px;
+}
 
-      margin-bottom: 24px;
-    }
+.card {
+  overflow:hidden;
 
+  background:var(--card);
 
-    .page-title {
-      font-size: 1.45rem;
+  border:1px solid var(--border);
+  border-radius:8px;
 
-      font-weight: 950;
+  transition:.2s ease;
+}
 
-      letter-spacing: 1px;
+.card:hover {
+  border-color:var(--accent);
 
-      text-transform: uppercase;
-    }
+  transform:translateY(-2px);
 
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.25);
+}
 
-    .page-title span {
-      color: var(--accent);
-    }
+.preview {
+  height:190px;
 
+  background:#05070a;
 
-    .page-subtitle {
-      margin-top: 6px;
+  overflow:hidden;
+  position:relative;
+}
 
-      color: var(--text-muted);
+.preview img {
+  width:100%;
+  height:100%;
 
-      font-size: 0.75rem;
+  object-fit:cover;
 
-      font-weight: 600;
-    }
+  display:block;
+}
 
+.badge {
+  position:absolute;
 
-    .pack-count {
-      color: var(--text-muted);
+  left:10px;
+  top:10px;
 
-      font-size: 0.75rem;
+  padding:3px 7px;
 
-      font-weight: 900;
+  border-radius:4px;
 
-      text-transform: uppercase;
-    }
+  background:var(--accent);
+  color:#000;
 
+  font-size:.62rem;
+  font-weight:950;
 
-    /* =========================================================
-       CONTROLS
-    ========================================================= */
+  z-index:2;
+}
 
-    .controls-bar {
-      display: flex;
+.body {
+  padding:16px;
+}
 
-      gap: 12px;
+.name {
+  font-size:.95rem;
+  font-weight:950;
 
-      margin-bottom: 24px;
-    }
+  text-transform:uppercase;
+}
 
+.tags {
+  display:flex;
+  gap:8px;
 
-    .search-input {
-      flex: 1;
+  margin-top:7px;
+  margin-bottom:14px;
 
-      min-width: 0;
+  color:var(--muted);
 
-      background: var(--input-bg);
+  font-size:.68rem;
+}
 
-      border: 1px solid var(--border-color);
+.buttons {
+  display:flex;
+  gap:8px;
+}
 
-      border-radius: 6px;
+.download {
+  flex:1;
 
-      padding: 12px 16px;
+  padding:11px;
 
-      color: var(--text-main);
+  background:var(--accent);
+  color:#000;
 
-      font-size: 0.8rem;
+  border-radius:4px;
 
-      outline: none;
+  text-align:center;
+  text-decoration:none;
 
-      transition: all 0.2s ease;
-    }
+  font-size:.7rem;
+  font-weight:950;
 
+  text-transform:uppercase;
+}
 
-    .search-input:focus {
-      border-color: var(--accent);
+.download:hover {
+  background:var(--accent-hover);
+}
 
-      box-shadow:
-        0 0 12px var(--accent-glow);
-    }
+.cfid {
+  padding:0 13px;
 
+  background:var(--card2);
 
-    .search-input::placeholder {
-      color: var(--text-muted);
-    }
+  border:1px solid var(--border);
+  border-radius:4px;
 
+  color:var(--text);
 
-    .sort-select {
-      background: var(--input-bg);
+  font-size:.68rem;
+  font-weight:900;
 
-      border: 1px solid var(--border-color);
+  cursor:pointer;
+}
 
-      color: var(--text-main);
+.cfid:hover {
+  color:var(--accent);
+  border-color:var(--accent);
+}
 
-      padding: 0 16px;
+.paid {
+  margin-top:50px;
+}
 
-      border-radius: 6px;
+.soon {
+  height:190px;
 
-      font-size: 0.75rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-      font-weight: 900;
+  color:var(--muted);
 
-      outline: none;
+  font-size:.9rem;
+  font-weight:950;
+}
 
-      cursor: pointer;
+@media(max-width:800px) {
 
-      min-width: 120px;
-    }
+  aside {
+    position:relative;
 
+    width:100%;
+    height:auto;
 
-    .sort-select:focus {
-      border-color: var(--accent);
-    }
+    border-right:none;
+    border-bottom:1px solid var(--border);
+  }
 
+  main {
+    margin-left:0;
 
-    /* =========================================================
-       CYBERFACE GRID
-    ========================================================= */
+    padding:35px 20px 60px;
+  }
 
-    .cf-grid {
-      display: grid;
+  .controls {
+    flex-direction:column;
+  }
 
-      grid-template-columns:
-        repeat(
-          auto-fill,
-          minmax(260px, 1fr)
-        );
+}
 
-      gap: 20px;
-
-      margin-bottom: 55px;
-    }
-
-
-    /* =========================================================
-       CYBERFACE CARD
-    ========================================================= */
-
-    .cf-card {
-      background: var(--card-bg);
-
-      border: 1px solid var(--border-color);
-
-      border-radius: 8px;
-
-      overflow: hidden;
-
-      display: flex;
-
-      flex-direction: column;
-
-      position: relative;
-
-      transition:
-        border-color 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background-color 0.3s ease;
-    }
-
-
-    .cf-card:hover {
-      border-color: var(--accent);
-
-      transform: translateY(-3px);
-
-      box-shadow:
-        0 10px 30px
-        rgba(0, 0, 0, 0.25);
-    }
-
-
-    /* =========================================================
-       IMAGE
-    ========================================================= */
-
-    .card-preview {
-      width: 100%;
-
-      height: 200px;
-
-      background: var(--preview-bg);
-
-      position: relative;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      overflow: hidden;
-    }
-
-
-    .card-preview img {
-      width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-
-      display: block;
-    }
-
-
-    .badge-tag {
-      position: absolute;
-
-      top: 10px;
-      left: 10px;
-
-      background: var(--accent);
-
-      color: #000000;
-
-      font-size: 0.65rem;
-
-      font-weight: 950;
-
-      padding: 3px 7px;
-
-      border-radius: 4px;
-
-      letter-spacing: 0.5px;
-
-      z-index: 10;
-    }
-
-
-    /* =========================================================
-       CARD BODY
-    ========================================================= */
-
-    .card-body {
-      padding: 16px;
-
-      display: flex;
-
-      flex-direction: column;
-
-      gap: 7px;
-    }
-
-
-    .player-name {
-      font-size: 0.95rem;
-
-      font-weight: 950;
-
-      text-transform: uppercase;
-
-      letter-spacing: 0.5px;
-
-      color: var(--text-main);
-    }
-
-
-    .tags-row {
-      display: flex;
-
-      gap: 8px;
-
-      align-items: center;
-
-      font-size: 0.7rem;
-
-      color: var(--text-muted);
-
-      margin-bottom: 10px;
-    }
-
-
-    .btn-group {
-      display: flex;
-
-      gap: 8px;
-    }
-
-
-    /* =========================================================
-       DOWNLOAD
-    ========================================================= */
-
-    .btn-download {
-      flex: 1;
-
-      background: var(--accent);
-
-      color: #000000;
-
-      border: none;
-
-      border-radius: 4px;
-
-      padding: 11px;
-
-      font-size: 0.75rem;
-
-      font-weight: 950;
-
-      text-transform: uppercase;
-
-      text-decoration: none;
-
-      text-align: center;
-
-      cursor: pointer;
-
-      transition:
-        background-color 0.2s ease,
-        transform 0.2s ease;
-    }
-
-
-    .btn-download:hover {
-      background: var(--accent-hover);
-
-      transform: translateY(-1px);
-    }
-
-
-    .btn-download.disabled {
-      background: #53606e;
-
-      color: #aeb7c0;
-
-      cursor: not-allowed;
-    }
-
-
-    /* =========================================================
-       CFID
-    ========================================================= */
-
-    .btn-cfid {
-      background: var(--card-inner);
-
-      border: 1px solid var(--border-color);
-
-      color: var(--text-main);
-
-      border-radius: 4px;
-
-      padding: 0 13px;
-
-      font-size: 0.7rem;
-
-      font-weight: 900;
-
-      cursor: pointer;
-
-      transition: all 0.2s ease;
-    }
-
-
-    .btn-cfid:hover {
-      border-color: var(--accent);
-
-      color: var(--accent);
-
-      background: var(--accent-glow);
-    }
-
-
-    /* =========================================================
-       PAID / COMING SOON
-    ========================================================= */
-
-    .placeholder-preview {
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      color: var(--text-muted);
-
-      font-weight: 950;
-
-      font-size: 1rem;
-
-      letter-spacing: 2px;
-
-      background:
-        radial-gradient(
-          circle,
-          var(--card-inner) 0%,
-          var(--preview-bg) 100%
-        );
-    }
-
-
-    /* =========================================================
-       SUPPORT RAY2K
-    ========================================================= */
-
-    .floating-support {
-      position: fixed;
-
-      bottom: 24px;
-      right: 24px;
-
-      background: var(--accent);
-
-      color: #000000;
-
-      border: none;
-
-      border-radius: 30px;
-
-      padding: 11px 19px;
-
-      font-weight: 950;
-
-      font-size: 0.78rem;
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 6px;
-
-      cursor: pointer;
-
-      box-shadow:
-        0 4px 20px
-        var(--support-shadow);
-
-      text-decoration: none;
-
-      z-index: 999;
-
-      transition:
-        background-color 0.2s ease,
-        transform 0.2s ease;
-    }
-
-
-    .floating-support:hover {
-      background: var(--accent-hover);
-
-      transform: translateY(-2px);
-    }
-
-
-    /* =========================================================
-       TOAST
-    ========================================================= */
-
-    #toast-msg {
-      position: fixed;
-
-      bottom: 25px;
-
-      left: 50%;
-
-      transform: translateX(-50%);
-
-      background: var(--accent);
-
-      color: #000000;
-
-      padding: 9px 18px;
-
-      border-radius: 20px;
-
-      font-weight: 950;
-
-      font-size: 0.75rem;
-
-      z-index: 9999;
-
-      box-shadow:
-        0 4px 15px
-        var(--support-shadow);
-
-      opacity: 0;
-
-      pointer-events: none;
-
-      transition: opacity 0.3s ease;
-    }
-
-
-    /* =========================================================
-       MOBILE
-    ========================================================= */
-
-    @media (max-width: 900px) {
-
-      main {
-        padding:
-          25px
-          20px
-          100px;
-      }
-
-      .cf-grid {
-        grid-template-columns:
-          repeat(
-            auto-fill,
-            minmax(230px, 1fr)
-          );
-      }
-
-    }
-
-
-    @media (max-width: 650px) {
-
-      .top-bar {
-        padding: 15px 16px;
-      }
-
-
-      .top-brand {
-        font-size: 1.05rem;
-      }
-
-
-      .top-actions {
-        gap: 6px;
-      }
-
-
-      .back-button,
-      .theme-button {
-        padding: 9px 10px;
-
-        font-size: 0.62rem;
-      }
-
-
-      .page-heading {
-        align-items: flex-start;
-
-        flex-direction: column;
-
-        gap: 8px;
-      }
-
-
-      .controls-bar {
-        flex-direction: column;
-      }
-
-
-      .sort-select {
-        height: 42px;
-      }
-
-
-      .cf-grid {
-        grid-template-columns: 1fr;
-      }
-
-
-      .floating-support {
-        right: 16px;
-
-        bottom: 16px;
-      }
-
-    }
-
-
-    @media (max-width: 400px) {
-
-      .page-title {
-        font-size: 1.15rem;
-      }
-
-
-      .card-preview {
-        height: 215px;
-      }
-
-    }
-
-  </style>
+</style>
 </head>
-
 
 <body>
 
+<aside>
 
-  <!-- =========================================================
-       TOP BAR
-  ========================================================= -->
+  <div>
 
-  <header class="top-bar">
+    <div class="brand">
+
+      <a href="index.html" class="logo">
+        RAY<span>2K</span>
+      </a>
+
+      <span class="sub">
+        NBA 2K14 LAB
+      </span>
+
+    </div>
+
+    <div class="current">
+      CYBERFACES
+    </div>
+
+  </div>
+
+  <div class="bottom">
+
+    <div class="clock">
+      <div id="clock">00:00:00</div>
+      <div id="date">Loading...</div>
+    </div>
+
+    <button
+      type="button"
+      class="theme-button"
+      onclick="changeTheme()"
+    >
+      THEME: CYAN
+    </button>
+
+    <a
+      href="https://www.facebook.com/profile.php?id=61594111973222"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="community"
+    >
+      JOIN COMMUNITY
+    </a>
 
     <a
       href="index.html"
-      class="top-brand"
+      class="back"
     >
-      RAY<span>2K</span>
+      BACK TO RAY2K
     </a>
 
+  </div>
 
-    <div class="top-actions">
+</aside>
 
-      <a
-        href="index.html"
-        class="back-button"
-      >
-        ← BACK
-      </a>
+<main>
 
+<div class="container">
 
-      <button
-        type="button"
-        class="theme-button"
-        id="themeButton"
-      >
-        🎨 THEME
-      </button>
+  <div class="top-row">
 
+    <a
+      href="index.html"
+      class="back-top"
+    >
+      ← BACK TO RAY2K
+    </a>
+
+  </div>
+
+  <div class="section-header">
+
+    <div class="section-title">
+      FREE <span>CYBERFACES</span>
     </div>
 
-  </header>
-
-
-
-  <!-- =========================================================
-       MAIN
-  ========================================================= -->
-
-  <main>
-
-
-    <!-- PAGE HEADER -->
-
-    <div class="page-heading">
-
-      <div>
-
-        <div class="page-title">
-          FREE <span>CYBERFACES</span>
-        </div>
-
-        <div class="page-subtitle">
-          NBA 2K14 cyberface packs and file IDs.
-        </div>
-
-      </div>
-
-
-      <div
-        class="pack-count"
-        id="freeCount"
-      >
-        5 PACKS
-      </div>
-
+    <div class="count" id="freeCount">
+      5 PACKS
     </div>
 
+  </div>
 
+  <div class="controls">
 
-    <!-- =========================================================
-         SEARCH + SORT
-    ========================================================= -->
-
-    <div class="controls-bar">
-
-      <input
-        type="text"
-        id="freeSearch"
-        class="search-input"
-        placeholder="Search cyberfaces..."
-        autocomplete="off"
-      >
-
-
-      <select
-        id="freeSort"
-        class="sort-select"
-      >
-
-        <option value="name">
-          SORT: NAME
-        </option>
-
-        <option value="newest">
-          SORT: NEWEST
-        </option>
-
-      </select>
-
-    </div>
-
-
-
-    <!-- =========================================================
-         FREE CYBERFACES
-    ========================================================= -->
-
-    <div
-      class="cf-grid"
-      id="freeGrid"
+    <input
+      id="search"
+      class="search"
+      type="text"
+      placeholder="Search free packs..."
+      autocomplete="off"
     >
 
+    <select id="sort" class="sort">
 
-      <!-- =====================================================
-           CALEB WILSON
-           CFID: png20603.iff
-      ====================================================== -->
+      <option value="name">
+        SORT: NAME
+      </option>
 
-      <div
-        class="cf-card"
-        data-name="CALEB WILSON"
-        data-cfid="png20603.iff"
-        data-order="1"
-      >
+      <option value="newest">
+        SORT: NEWEST
+      </option>
 
-        <div class="card-preview">
+    </select>
 
-          <span class="badge-tag">
-            NEW
-          </span>
+  </div>
 
-          <img
-            src="caleb_wilson.jpg"
-            alt="Caleb Wilson Preview"
-            loading="lazy"
-          >
+  <div class="grid" id="grid">
 
-        </div>
+    <!-- CALEB -->
 
+    <div
+      class="card"
+      data-name="CALEB WILSON"
+      data-order="1"
+    >
 
-        <div class="card-body">
+      <div class="preview">
 
-          <div class="player-name">
-            CALEB WILSON
-          </div>
+        <span class="badge">
+          NEW
+        </span>
 
-
-          <div class="tags-row">
-
-            <span>
-              Chicago Bulls
-            </span>
-
-            <span>•</span>
-
-            <span>
-              CF pack
-            </span>
-
-          </div>
-
-
-          <div class="btn-group">
-
-            <a
-              href="https://www.mediafire.com/file/po1ue713z3bwdho/caleb_wilson_cf.zip/file"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-download"
-            >
-              DOWNLOAD
-            </a>
-
-
-            <button
-              type="button"
-              class="btn-cfid"
-              onclick="copyCFID('png20603.iff')"
-            >
-              CFID
-            </button>
-
-          </div>
-
-        </div>
+        <img
+          src="caleb_wilson.jpg"
+          alt="Caleb Wilson Preview"
+          loading="lazy"
+        >
 
       </div>
 
+      <div class="body">
 
+        <div class="name">
+          CALEB WILSON
+        </div>
 
-      <!-- =====================================================
-           AJ DYBANTSA
-           CFID: png20600.iff
-      ====================================================== -->
+        <div class="tags">
+          <span>Chicago Bulls</span>
+          <span>•</span>
+          <span>CF pack</span>
+        </div>
 
-      <div
-        class="cf-card"
-        data-name="AJ DYBANTSA"
-        data-cfid="png20600.iff"
-        data-order="2"
-      >
+        <div class="buttons">
 
-        <div class="card-preview">
-
-          <span class="badge-tag">
-            NEW
-          </span>
-
-          <img
-            src="aj_dybantsa.jpg"
-            alt="AJ Dybantsa Preview"
-            loading="lazy"
+          <a
+            href="https://www.mediafire.com/file/po1ue713z3bwdho/caleb_wilson_cf.zip/file"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="download"
           >
+            DOWNLOAD
+          </a>
 
-        </div>
-
-
-        <div class="card-body">
-
-          <div class="player-name">
-            AJ DYBANTSA
-          </div>
-
-
-          <div class="tags-row">
-
-            <span>
-              Washington Wizards
-            </span>
-
-            <span>•</span>
-
-            <span>
-              CF pack
-            </span>
-
-          </div>
-
-
-          <div class="btn-group">
-
-            <a
-              href="https://www.mediafire.com/file/gaoax32gcov03yu/aj+dybantsa+cf.zip/file"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-download"
-            >
-              DOWNLOAD
-            </a>
-
-
-            <button
-              type="button"
-              class="btn-cfid"
-              onclick="copyCFID('png20600.iff')"
-            >
-              CFID
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-
-      <!-- =====================================================
-           CAMERON BOOZER
-           CFID: png20602.iff
-      ====================================================== -->
-
-      <div
-        class="cf-card"
-        data-name="CAMERON BOOZER"
-        data-cfid="png20602.iff"
-        data-order="3"
-      >
-
-        <div class="card-preview">
-
-          <span class="badge-tag">
-            NEW
-          </span>
-
-          <img
-            src="cameron_boozer.jpg"
-            alt="Cameron Boozer Preview"
-            loading="lazy"
+          <button
+            class="cfid"
+            onclick="copyCFID('png20603.iff')"
           >
-
-        </div>
-
-
-        <div class="card-body">
-
-          <div class="player-name">
-            CAMERON BOOZER
-          </div>
-
-
-          <div class="tags-row">
-
-            <span>
-              Memphis Grizzlies
-            </span>
-
-            <span>•</span>
-
-            <span>
-              CF pack
-            </span>
-
-          </div>
-
-
-          <div class="btn-group">
-
-            <a
-              href="https://www.mediafire.com/file/wr0fegg8mc77s5a/cameron_boozer_cf.zip/file"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-download"
-            >
-              DOWNLOAD
-            </a>
-
-
-            <button
-              type="button"
-              class="btn-cfid"
-              onclick="copyCFID('png20602.iff')"
-            >
-              CFID
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-
-      <!-- =====================================================
-           KINGSTON FLEMINGS
-           CFID: png20607.iff
-      ====================================================== -->
-
-      <div
-        class="cf-card"
-        data-name="KINGSTON FLEMINGS"
-        data-cfid="png20607.iff"
-        data-order="4"
-      >
-
-        <div class="card-preview">
-
-          <span class="badge-tag">
-            NEW
-          </span>
-
-          <img
-            src="kingston_flemings.jpg"
-            alt="Kingston Flemings Preview"
-            loading="lazy"
-          >
-
-        </div>
-
-
-        <div class="card-body">
-
-          <div class="player-name">
-            KINGSTON FLEMINGS
-          </div>
-
-
-          <div class="tags-row">
-
-            <span>
-              Atlanta Hawks
-            </span>
-
-            <span>•</span>
-
-            <span>
-              CF pack
-            </span>
-
-          </div>
-
-
-          <div class="btn-group">
-
-            <a
-              href="https://www.mediafire.com/file/eriwvn2pcp27pp5/kingston_flemings_cf.zip/file"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-download"
-            >
-              DOWNLOAD
-            </a>
-
-
-            <button
-              type="button"
-              class="btn-cfid"
-              onclick="copyCFID('png20607.iff')"
-            >
-              CFID
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-
-      <!-- =====================================================
-           YAXEL LENDEBORG
-           CFID: png20610.iff
-      ====================================================== -->
-
-      <div
-        class="cf-card"
-        data-name="YAXEL LENDEBORG"
-        data-cfid="png20610.iff"
-        data-order="5"
-      >
-
-        <div class="card-preview">
-
-          <span class="badge-tag">
-            NEW
-          </span>
-
-          <img
-            src="yaxel_lendeborg.jpg"
-            alt="Yaxel Lendeborg Preview"
-            loading="lazy"
-          >
-
-        </div>
-
-
-        <div class="card-body">
-
-          <div class="player-name">
-            YAXEL LENDEBORG
-          </div>
-
-
-          <div class="tags-row">
-
-            <span>
-              Golden State Warriors
-            </span>
-
-            <span>•</span>
-
-            <span>
-              CF pack
-            </span>
-
-          </div>
-
-
-          <div class="btn-group">
-
-            <a
-              href="https://www.mediafire.com/file/sfkaqibbiygfs3t/yaxel_lenderberg_cf.zip/file"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-download"
-            >
-              DOWNLOAD
-            </a>
-
-
-            <button
-              type="button"
-              class="btn-cfid"
-              onclick="copyCFID('png20610.iff')"
-            >
-              CFID
-            </button>
-
-          </div>
+            CFID
+          </button>
 
         </div>
 
@@ -1358,95 +638,278 @@
     </div>
 
 
+    <!-- AJ -->
 
-    <!-- =========================================================
-         PAID CYBERFACES
-    ========================================================= -->
+    <div
+      class="card"
+      data-name="AJ DYBANTSA"
+      data-order="2"
+    >
 
-    <div class="page-heading">
+      <div class="preview">
 
-      <div>
+        <span class="badge">
+          NEW
+        </span>
 
-        <div class="page-title">
-          PAID <span>CYBERFACES</span>
+        <img
+          src="aj_dybantsa.jpg"
+          alt="AJ Dybantsa Preview"
+          loading="lazy"
+        >
+
+      </div>
+
+      <div class="body">
+
+        <div class="name">
+          AJ DYBANTSA
         </div>
 
-        <div class="page-subtitle">
-          Exclusive RAY2K cyberface releases.
+        <div class="tags">
+          <span>Washington Wizards</span>
+          <span>•</span>
+          <span>CF pack</span>
+        </div>
+
+        <div class="buttons">
+
+          <a
+            href="https://www.mediafire.com/file/gaoax32gcov03yu/aj+dybantsa+cf.zip/file"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="download"
+          >
+            DOWNLOAD
+          </a>
+
+          <button
+            class="cfid"
+            onclick="copyCFID('png20600.iff')"
+          >
+            CFID
+          </button>
+
         </div>
 
       </div>
 
+    </div>
 
-      <div class="pack-count">
+
+    <!-- CAMERON -->
+
+    <div
+      class="card"
+      data-name="CAMERON BOOZER"
+      data-order="3"
+    >
+
+      <div class="preview">
+
+        <span class="badge">
+          NEW
+        </span>
+
+        <img
+          src="cameron_boozer.jpg"
+          alt="Cameron Boozer Preview"
+          loading="lazy"
+        >
+
+      </div>
+
+      <div class="body">
+
+        <div class="name">
+          CAMERON BOOZER
+        </div>
+
+        <div class="tags">
+          <span>Memphis Grizzlies</span>
+          <span>•</span>
+          <span>CF pack</span>
+        </div>
+
+        <div class="buttons">
+
+          <a
+            href="https://www.mediafire.com/file/wr0fegg8mc77s5a/cameron_boozer_cf.zip/file"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="download"
+          >
+            DOWNLOAD
+          </a>
+
+          <button
+            class="cfid"
+            onclick="copyCFID('png20602.iff')"
+          >
+            CFID
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- KINGSTON -->
+
+    <div
+      class="card"
+      data-name="KINGSTON FLEMINGS"
+      data-order="4"
+    >
+
+      <div class="preview">
+
+        <span class="badge">
+          NEW
+        </span>
+
+        <img
+          src="kingston_flemings.jpg"
+          alt="Kingston Flemings Preview"
+          loading="lazy"
+        >
+
+      </div>
+
+      <div class="body">
+
+        <div class="name">
+          KINGSTON FLEMINGS
+        </div>
+
+        <div class="tags">
+          <span>Atlanta Hawks</span>
+          <span>•</span>
+          <span>CF pack</span>
+        </div>
+
+        <div class="buttons">
+
+          <a
+            href="https://www.mediafire.com/file/eriwvn2pcp27pp5/kingston_flemings_cf.zip/file"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="download"
+          >
+            DOWNLOAD
+          </a>
+
+          <button
+            class="cfid"
+            onclick="copyCFID('png20607.iff')"
+          >
+            CFID
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- YAXEL -->
+
+    <div
+      class="card"
+      data-name="YAXEL LENDEBORG"
+      data-order="5"
+    >
+
+      <div class="preview">
+
+        <span class="badge">
+          NEW
+        </span>
+
+        <img
+          src="yaxel_lendeborg.jpg"
+          alt="Yaxel Lendeborg Preview"
+          loading="lazy"
+        >
+
+      </div>
+
+      <div class="body">
+
+        <div class="name">
+          YAXEL LENDEBORG
+        </div>
+
+        <div class="tags">
+          <span>Golden State Warriors</span>
+          <span>•</span>
+          <span>CF pack</span>
+        </div>
+
+        <div class="buttons">
+
+          <a
+            href="https://www.mediafire.com/file/sfkaqibbiygfs3t/yaxel_lenderberg_cf.zip/file"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="download"
+          >
+            DOWNLOAD
+          </a>
+
+          <button
+            class="cfid"
+            onclick="copyCFID('png20610.iff')"
+          >
+            CFID
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- PAID -->
+
+  <div class="paid">
+
+    <div class="section-header">
+
+      <div class="section-title">
+        PAID <span>CYBERFACES</span>
+      </div>
+
+      <div class="count">
         1 PACK
       </div>
 
     </div>
 
+    <div class="grid">
 
+      <div class="card">
 
-    <div class="cf-grid" id="paidGrid">
-
-
-      <div
-        class="cf-card"
-        data-name="COMING SOON"
-        data-cfid="N/A"
-      >
-
-        <div class="card-preview placeholder-preview">
-
-          <span class="badge-tag">
-            SOON
-          </span>
-
+        <div class="soon">
           COMING SOON
-
         </div>
 
+        <div class="body">
 
-        <div class="card-body">
-
-          <div class="player-name">
+          <div class="name">
             COMING SOON
           </div>
 
-
-          <div class="tags-row">
-
-            <span>
-              Exclusive Pack
-            </span>
-
+          <div class="tags">
+            <span>Exclusive Pack</span>
             <span>•</span>
-
-            <span>
-              Paid
-            </span>
-
-          </div>
-
-
-          <div class="btn-group">
-
-            <button
-              type="button"
-              class="btn-download disabled"
-              onclick="showToast('This download is coming soon!')"
-            >
-              DOWNLOAD
-            </button>
-
-
-            <button
-              type="button"
-              class="btn-cfid"
-              onclick="showToast('CFID unavailable')"
-            >
-              CFID
-            </button>
-
+            <span>Paid</span>
           </div>
 
         </div>
@@ -1455,608 +918,209 @@
 
     </div>
 
-  </main>
+  </div>
+
+</div>
+
+</main>
+
+<script>
+
+/* CLOCK */
+
+function updateClock() {
+
+  const now = new Date();
+
+  document.getElementById("clock").textContent =
+    now.toLocaleTimeString([], {
+      hour:"2-digit",
+      minute:"2-digit",
+      second:"2-digit"
+    });
+
+  document.getElementById("date").textContent =
+    now.toLocaleDateString([], {
+      weekday:"short",
+      month:"short",
+      day:"numeric",
+      year:"numeric"
+    });
+}
+
+updateClock();
+setInterval(updateClock,1000);
 
 
+/* SEARCH */
 
-  <!-- =========================================================
-       SUPPORT RAY2K
-  ========================================================= -->
+const search =
+  document.getElementById("search");
 
-  <a
-    href="https://www.facebook.com/profile.php?id=61594111973222"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="floating-support"
-  >
-    ⚡ SUPPORT RAY2K
-  </a>
+const grid =
+  document.getElementById("grid");
 
+search.addEventListener("input",function() {
 
+  const query =
+    this.value.trim().toLowerCase();
 
-  <!-- =========================================================
-       TOAST
-  ========================================================= -->
+  const cards =
+    grid.querySelectorAll(".card");
 
-  <div id="toast-msg"></div>
+  let visible = 0;
 
+  cards.forEach(card => {
 
+    const name =
+      card.dataset.name.toLowerCase();
 
-  <!-- =========================================================
-       JAVASCRIPT
-  ========================================================= -->
+    if(name.includes(query)) {
 
-  <script>
+      card.style.display = "block";
+      visible++;
 
+    } else {
 
-    /* =========================================================
-       THEME SYSTEM
-       
-       0 = BLUE / DARK
-       1 = RED / DARK
-       2 = WHITE / LIGHT
-    ========================================================= */
-
-    const themeButton =
-      document.getElementById("themeButton");
-
-
-    const themes = [
-      {
-        className: "",
-        name: "BLUE"
-      },
-      {
-        className: "theme-red",
-        name: "RED"
-      },
-      {
-        className: "theme-light",
-        name: "LIGHT"
-      }
-    ];
-
-
-    let currentTheme =
-      Number(
-        localStorage.getItem("ray2kTheme") || "0"
-      );
-
-
-    function applyTheme(index) {
-
-      if (
-        index < 0 ||
-        index >= themes.length
-      ) {
-        index = 0;
-      }
-
-
-      document.body.classList.remove(
-        "theme-red",
-        "theme-light"
-      );
-
-
-      if (themes[index].className) {
-
-        document.body.classList.add(
-          themes[index].className
-        );
-
-      }
-
-
-      currentTheme = index;
-
-
-      localStorage.setItem(
-        "ray2kTheme",
-        String(index)
-      );
-
-
-      if (themeButton) {
-
-        themeButton.innerText =
-          "🎨 " +
-          themes[index].name;
-
-      }
+      card.style.display = "none";
 
     }
 
+  });
 
-    if (themeButton) {
+  document.getElementById("freeCount").textContent =
+    visible + " PACKS";
 
-      themeButton.addEventListener(
-        "click",
-        function () {
-
-          currentTheme =
-            (currentTheme + 1) %
-            themes.length;
-
-          applyTheme(currentTheme);
-
-        }
-      );
-
-    }
+});
 
 
-    applyTheme(currentTheme);
+/* SORT */
 
+document.getElementById("sort")
+.addEventListener("change",function() {
 
+  const cards =
+    Array.from(grid.querySelectorAll(".card"));
 
-    /* =========================================================
-       SEARCH
-    ========================================================= */
+  if(this.value === "name") {
 
-    function setupSearch(
-      searchID,
-      gridID
-    ) {
-
-      const search =
-        document.getElementById(searchID);
-
-      const grid =
-        document.getElementById(gridID);
-
-
-      if (!search || !grid) {
-        return;
-      }
-
-
-      search.addEventListener(
-        "input",
-        function () {
-
-          const query =
-            search.value
-              .trim()
-              .toLowerCase();
-
-
-          const cards =
-            grid.querySelectorAll(
-              ".cf-card"
-            );
-
-
-          cards.forEach(
-            function (card) {
-
-              const name =
-                card.getAttribute(
-                  "data-name"
-                ) || "";
-
-
-              const cfid =
-                card.getAttribute(
-                  "data-cfid"
-                ) || "";
-
-
-              const matches =
-                name
-                  .toLowerCase()
-                  .includes(query)
-                ||
-                cfid
-                  .toLowerCase()
-                  .includes(query);
-
-
-              card.style.display =
-                matches
-                  ? "flex"
-                  : "none";
-
-            }
-          );
-
-
-          updateFreeCount();
-
-        }
-      );
-
-    }
-
-
-    setupSearch(
-      "freeSearch",
-      "freeGrid"
+    cards.sort((a,b) =>
+      a.dataset.name.localeCompare(
+        b.dataset.name
+      )
     );
 
+  }
 
+  if(this.value === "newest") {
 
-    /* =========================================================
-       FREE SORT
-    ========================================================= */
+    cards.sort((a,b) =>
+      Number(b.dataset.order) -
+      Number(a.dataset.order)
+    );
 
-    const freeSort =
-      document.getElementById(
-        "freeSort"
-      );
+  }
 
+  cards.forEach(card =>
+    grid.appendChild(card)
+  );
 
-    const freeGrid =
-      document.getElementById(
-        "freeGrid"
-      );
+});
 
 
-    if (
-      freeSort &&
-      freeGrid
-    ) {
+/* COPY ID */
 
-      freeSort.addEventListener(
-        "change",
-        function () {
+function copyCFID(id) {
 
-          const cards =
-            Array.from(
-              freeGrid.querySelectorAll(
-                ".cf-card"
-              )
-            );
+  if(navigator.clipboard) {
 
+    navigator.clipboard
+      .writeText(id)
+      .then(() => {
 
-          if (
-            freeSort.value ===
-            "name"
-          ) {
+        alert("Copied: " + id);
 
-            cards.sort(
-              function (a, b) {
+      });
 
-                const nameA =
-                  a.dataset.name
-                    .toLowerCase();
+  }
 
+}
 
-                const nameB =
-                  b.dataset.name
-                    .toLowerCase();
 
+/* THEMES */
 
-                return nameA.localeCompare(
-                  nameB
-                );
+const themes = [
+  ["CYAN","#00f0ff","#00cce0","rgba(0,240,255,.14)"],
+  ["RED","#ff3030","#df2020","rgba(255,48,48,.14)"],
+  ["LIGHT","#087cff","#0666d6","rgba(8,124,255,.12)"],
+  ["BLACK","#fff","#d9d9d9","rgba(255,255,255,.08)"]
+];
 
-              }
-            );
+let themeIndex =
+  Number(localStorage.getItem("ray2kTheme") || 0);
 
-          }
+function applyTheme() {
 
+  const t = themes[themeIndex];
 
-          if (
-            freeSort.value ===
-            "newest"
-          ) {
+  document.documentElement.style.setProperty("--accent",t[1]);
+  document.documentElement.style.setProperty("--accent-hover",t[2]);
+  document.documentElement.style.setProperty("--glow",t[3]);
 
-            cards.sort(
-              function (a, b) {
+  if(t[0] === "LIGHT") {
 
-                return (
-                  Number(
-                    b.dataset.order
-                  )
-                  -
-                  Number(
-                    a.dataset.order
-                  )
-                );
+    document.documentElement.style.setProperty("--bg","#eef1f5");
+    document.documentElement.style.setProperty("--sidebar","#fff");
+    document.documentElement.style.setProperty("--card","#fff");
+    document.documentElement.style.setProperty("--card2","#f5f7fa");
+    document.documentElement.style.setProperty("--border","#d8dee8");
+    document.documentElement.style.setProperty("--text","#111827");
+    document.documentElement.style.setProperty("--muted","#687386");
 
-              }
-            );
+  } else if(t[0] === "BLACK") {
 
-          }
+    document.documentElement.style.setProperty("--bg","#000");
+    document.documentElement.style.setProperty("--sidebar","#000");
+    document.documentElement.style.setProperty("--card","#080808");
+    document.documentElement.style.setProperty("--card2","#111");
+    document.documentElement.style.setProperty("--border","#202020");
+    document.documentElement.style.setProperty("--text","#fff");
+    document.documentElement.style.setProperty("--muted","#777");
 
+  } else {
 
-          cards.forEach(
-            function (card) {
+    document.documentElement.style.setProperty("--bg","#07090e");
+    document.documentElement.style.setProperty("--sidebar","#04060a");
+    document.documentElement.style.setProperty("--card","#0f1520");
+    document.documentElement.style.setProperty("--card2","#141c2c");
+    document.documentElement.style.setProperty("--border","#1a2638");
+    document.documentElement.style.setProperty("--text","#fff");
+    document.documentElement.style.setProperty("--muted","#8290a0");
 
-              freeGrid.appendChild(
-                card
-              );
+  }
 
-            }
-          );
+  document.querySelector(".theme-button").textContent =
+    "THEME: " + t[0];
+}
 
-        }
-      );
+function changeTheme() {
 
-    }
+  themeIndex++;
 
+  if(themeIndex >= themes.length)
+    themeIndex = 0;
 
+  localStorage.setItem(
+    "ray2kTheme",
+    themeIndex
+  );
 
-    /* =========================================================
-       FREE COUNT
-    ========================================================= */
+  applyTheme();
+}
 
-    function updateFreeCount() {
+applyTheme();
 
-      const count =
-        document.getElementById(
-          "freeCount"
-        );
-
-
-      if (!count || !freeGrid) {
-        return;
-      }
-
-
-      const visible =
-        Array.from(
-          freeGrid.querySelectorAll(
-            ".cf-card"
-          )
-        ).filter(
-          function (card) {
-
-            return (
-              card.style.display !==
-              "none"
-            );
-
-          }
-        );
-
-
-      count.innerText =
-        visible.length +
-        (
-          visible.length === 1
-            ? " PACK"
-            : " PACKS"
-        );
-
-    }
-
-
-    updateFreeCount();
-
-
-
-    /* =========================================================
-       COPY CYBERFACE ID
-    ========================================================= */
-
-    function copyCFID(cfid) {
-
-      if (
-        navigator.clipboard &&
-        window.isSecureContext
-      ) {
-
-        navigator.clipboard
-          .writeText(cfid)
-          .then(
-            function () {
-
-              showToast(
-                "Copied: " + cfid
-              );
-
-            }
-          )
-          .catch(
-            function () {
-
-              fallbackCopyText(
-                cfid
-              );
-
-            }
-          );
-
-      } else {
-
-        fallbackCopyText(
-          cfid
-        );
-
-      }
-
-    }
-
-
-
-    /* =========================================================
-       FALLBACK COPY
-    ========================================================= */
-
-    function fallbackCopyText(text) {
-
-      const textArea =
-        document.createElement(
-          "textarea"
-        );
-
-
-      textArea.value = text;
-
-
-      textArea.style.position =
-        "fixed";
-
-      textArea.style.left =
-        "-999999px";
-
-      textArea.style.top =
-        "0";
-
-
-      document.body.appendChild(
-        textArea
-      );
-
-
-      textArea.focus();
-
-      textArea.select();
-
-
-      try {
-
-        document.execCommand(
-          "copy"
-        );
-
-
-        showToast(
-          "Copied: " + text
-        );
-
-      } catch (err) {
-
-        showToast(
-          "Failed to copy"
-        );
-
-      }
-
-
-      document.body.removeChild(
-        textArea
-      );
-
-    }
-
-
-
-    /* =========================================================
-       TOAST
-    ========================================================= */
-
-    let toastTimer = null;
-
-
-    function showToast(message) {
-
-      const toast =
-        document.getElementById(
-          "toast-msg"
-        );
-
-
-      if (!toast) {
-        return;
-      }
-
-
-      toast.innerText =
-        message;
-
-
-      toast.style.opacity =
-        "1";
-
-
-      clearTimeout(
-        toastTimer
-      );
-
-
-      toastTimer =
-        setTimeout(
-          function () {
-
-            toast.style.opacity =
-              "0";
-
-          },
-          2000
-        );
-
-    }
-
-
-
-    /* =========================================================
-       IMAGE ERROR HANDLING
-    ========================================================= */
-
-    document
-      .querySelectorAll(
-        ".card-preview img"
-      )
-      .forEach(
-        function (img) {
-
-          img.addEventListener(
-            "error",
-            function () {
-
-              img.style.display =
-                "none";
-
-
-              const preview =
-                img.closest(
-                  ".card-preview"
-                );
-
-
-              if (!preview) {
-                return;
-              }
-
-
-              preview.style.background =
-                "radial-gradient(circle, var(--card-inner) 0%, var(--preview-bg) 100%)";
-
-
-              if (
-                !preview.querySelector(
-                  ".image-error"
-                )
-              ) {
-
-                const error =
-                  document.createElement(
-                    "div"
-                  );
-
-
-                error.className =
-                  "image-error";
-
-
-                error.innerText =
-                  "PREVIEW UNAVAILABLE";
-
-
-                error.style.cssText = `
-                  color: var(--text-muted);
-                  font-size: .65rem;
-                  font-weight: 900;
-                  letter-spacing: 1px;
-                `;
-
-
-                preview.appendChild(
-                  error
-                );
-
-              }
-
-            }
-          );
-
-        }
-      );
-
-  </script>
+</script>
 
 </body>
 </html>
