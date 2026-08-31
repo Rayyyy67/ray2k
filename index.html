@@ -282,6 +282,7 @@
       cursor: pointer;
       text-align: center;
       display: inline-block;
+      transition: all 0.2s ease;
     }
 
     .btn-cyan {
@@ -299,9 +300,13 @@
       background: var(--card-bg);
     }
 
-    .btn-outline:hover {
+    .btn-outline:hover, 
+    .btn-outline:active, 
+    .btn-outline:focus {
       border-color: var(--accent-cyan);
       color: var(--accent-cyan);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+      outline: none;
     }
 
     .dashboard-header {
@@ -582,7 +587,7 @@
           <p>Scoreboards, replay wipes, and custom visual graphics suites.</p>
         </div>
         <a href="presentation.html" class="card-link">OPEN ARCHIVE &rarr;</a>
-      </div>
+    </div>
     </div>
   </main>
 
