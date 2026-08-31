@@ -111,6 +111,11 @@
       height: 100vh;
       z-index: 1002;
       transition: transform 0.3s ease-in-out;
+      transform: translateX(-100%); /* Hidden by default on home/landing */
+    }
+
+    aside.visible {
+      transform: translateX(0); /* Shown when inside archive */
     }
 
     .brand {
@@ -176,11 +181,15 @@
 
     /* Main Area */
     main {
-      margin-left: 260px;
+      margin-left: 0; /* Full width when sidebar is hidden */
       flex: 1;
       padding: 30px 50px;
       width: 100%;
       transition: margin-left 0.3s ease;
+    }
+
+    main.sidebar-active {
+      margin-left: 260px; /* Push content when sidebar is visible */
     }
 
     .top-bar {
@@ -369,6 +378,11 @@
       width: 100%;
     }
 
+    .dash-card.locked-card {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     .card-badge {
       font-size: 0.7rem;
       font-weight: 800;
@@ -385,6 +399,12 @@
       background: var(--accent-glow);
       color: var(--accent-cyan);
       border: 1px solid var(--accent-cyan);
+    }
+
+    .badge-locked {
+      background: rgba(128, 142, 155, 0.1);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
     }
 
     .dash-card h3 {
@@ -479,13 +499,16 @@
         display: flex;
       }
       aside {
-        transform: translateX(-100%);
+        transform: translateX(-100%) !important;
       }
-      aside.open {
-        transform: translateX(0);
+      aside.visible.open {
+        transform: translateX(0) !important;
+      }
+      main.sidebar-active {
+        margin-left: 0 !important;
+        padding: 80px 20px 40px;
       }
       main {
-        margin-left: 0 !important;
         padding: 80px 20px 40px;
       }
       .top-bar {
@@ -518,7 +541,7 @@
 
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-  <aside id="sidebar" style="display: none;">
+  <aside id="sidebar">
     <div>
       <div class="brand">
         <a href="#" class="logo" onclick="switchView('home', event)">RAY<span>2K</span></a>
@@ -540,7 +563,7 @@
     </div>
   </aside>
 
-  <main id="mainContainer" style="margin-left: 0;">
+  <main id="mainContainer">
     <div class="top-bar">
       <div class="notice">
         <span class="badge-dot"></span>
@@ -553,10 +576,10 @@
     <div id="view-home" class="content-view active-view">
       <div style="text-align: center; padding-top: 40px; padding-bottom: 60px;">
         <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
-          <span class="pill accent">LAB</span>
-          <span class="pill">Roster 2026</span>
-          <span class="pill">Updated Aug 2026</span>
-          <span class="pill">PC / Windows</span>
+          <span class="badge-active card-badge">LAB</span>
+          <span class="card-badge badge-locked">Roster 2026</span>
+          <span class="card-badge badge-locked">Updated Aug 2026</span>
+          <span class="card-badge badge-locked">PC / Windows</span>
         </div>
 
         <h1 class="hero-title">NBA 2K14,<br><span>REBUILT.</span></h1>
@@ -575,7 +598,7 @@
       </div>
 
       <div class="grid" style="padding-bottom: 60px;">
-        <!-- NBA 2K14 Card (Active) -->
+        <!-- NBA 2K14 Card (Active & Openable) -->
         <div class="dash-card active-card" onclick="openArchive('2k14')">
           <div>
             <span class="card-badge badge-active">Available</span>
@@ -585,19 +608,19 @@
           <span class="card-link">ENTER ARCHIVE &rarr;</span>
         </div>
 
-        <!-- NBA 2K23 Card (Active & Openable) -->
-        <div class="dash-card active-card" onclick="openArchive('2k23')">
+        <!-- NBA 2K23 Card (Locked as shown in reference) -->
+        <div class="dash-card locked-card">
           <div>
-            <span class="card-badge badge-active">Available</span>
+            <span class="card-badge badge-locked">Locked</span>
             <h3>NBA 2K23</h3>
-            <p>Next-generation roster, graphics enhancements, and modification archive.</p>
+            <p>Next-generation roster and visual modification archive.</p>
           </div>
-          <span class="card-link">ENTER ARCHIVE &rarr;</span>
+          <span class="card-link" style="color: var(--text-muted);">LOCKED &rarr;</span>
         </div>
       </div>
     </div>
 
-    <!-- VIEW 2: DASHBOARD / 4 FOLDERS SELECTION -->
+    <!-- VIEW 2: DASHBOARD / LAB ARCHIVE -->
     <div id="view-dashboard" class="content-view">
       <button class="back-btn" onclick="switchView('home')">&larr; Back to Home</button>
       <div class="dashboard-header" style="border-top: none; padding-top: 0; text-align: left;">
@@ -705,27 +728,27 @@
     const mainContainer = document.getElementById('mainContainer');
     const startBtn = document.getElementById('startBtn');
 
-    function revealSidebar() {
-      sidebar.style.display = 'flex';
-      if (window.innerWidth > 768) {
-        mainContainer.style.marginLeft = '260px';
-      }
-    }
-
     function openArchive(version) {
-      revealSidebar();
-      const titleTag = document.getElementById('archiveTitleTag');
-      if (version === '2k23') {
-        titleTag.textContent = 'NBA 2K23 LAB';
-      } else {
-        titleTag.textContent = 'NBA 2K14 LAB';
+      if (version === '2k14') {
+        // Show the sidebar with transition
+        sidebar.classList.add('visible');
+        if (window.innerWidth > 768) {
+          mainContainer.classList.add('sidebar-active');
+        }
+        document.getElementById('archiveTitleTag').textContent = 'NBA 2K14 LAB';
+        switchView('dashboard');
       }
-      switchView('dashboard');
     }
 
     startBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
+      const dashboardElement = document.getElementById('dashboard');
+      
+      // Smooth scroll down to the dashboard section
+      dashboardElement.scrollIntoView({ behavior: 'smooth' });
+
+      // After scrolling down, hide the hero section text/buttons smoothly if desired, 
+      // or keep them visible as part of the page layout until an archive is entered.
     });
 
     function switchView(viewName, event) {
@@ -736,6 +759,12 @@
       const target = document.getElementById('view-' + viewName);
       if(target) {
         target.classList.add('active-view');
+      }
+
+      // If going back to home, hide sidebar again
+      if (viewName === 'home') {
+        sidebar.classList.remove('visible');
+        mainContainer.classList.remove('sidebar-active');
       }
 
       document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
