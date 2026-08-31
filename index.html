@@ -369,11 +369,6 @@
       width: 100%;
     }
 
-    .dash-card.locked-card {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-
     .card-badge {
       font-size: 0.7rem;
       font-weight: 800;
@@ -390,12 +385,6 @@
       background: var(--accent-glow);
       color: var(--accent-cyan);
       border: 1px solid var(--accent-cyan);
-    }
-
-    .badge-locked {
-      background: rgba(128, 142, 155, 0.15);
-      color: var(--text-muted);
-      border: 1px solid var(--border-color);
     }
 
     .dash-card h3 {
@@ -427,10 +416,15 @@
 
     .content-view {
       display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
     .content-view.active-view {
       display: block;
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .back-btn {
@@ -591,14 +585,14 @@
           <span class="card-link">ENTER ARCHIVE &rarr;</span>
         </div>
 
-        <!-- NBA 2K23 Card (Locked) -->
-        <div class="dash-card locked-card">
+        <!-- NBA 2K23 Card (Active & Openable) -->
+        <div class="dash-card active-card" onclick="openArchive('2k23')">
           <div>
-            <span class="card-badge badge-locked">Locked</span>
+            <span class="card-badge badge-active">Available</span>
             <h3>NBA 2K23</h3>
-            <p>Next-generation roster and visual modification archive.</p>
+            <p>Next-generation roster, graphics enhancements, and modification archive.</p>
           </div>
-          <span class="card-link" style="color: var(--text-muted);">LOCKED &rarr;</span>
+          <span class="card-link">ENTER ARCHIVE &rarr;</span>
         </div>
       </div>
     </div>
@@ -719,10 +713,13 @@
     }
 
     function openArchive(version) {
-      if (version === '2k23') return; // Locked
       revealSidebar();
       const titleTag = document.getElementById('archiveTitleTag');
-      titleTag.textContent = 'NBA 2K14 LAB';
+      if (version === '2k23') {
+        titleTag.textContent = 'NBA 2K23 LAB';
+      } else {
+        titleTag.textContent = 'NBA 2K14 LAB';
+      }
       switchView('dashboard');
     }
 
