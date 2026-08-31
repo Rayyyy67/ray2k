@@ -111,11 +111,11 @@
       height: 100vh;
       z-index: 1002;
       transition: transform 0.3s ease-in-out;
-      transform: translateX(-100%); /* Hidden by default on home/landing */
+      transform: translateX(-100%); /* Fully hidden out of view by default */
     }
 
     aside.visible {
-      transform: translateX(0); /* Shown when inside archive */
+      transform: translateX(0); /* Slides into view when active */
     }
 
     .brand {
@@ -181,7 +181,7 @@
 
     /* Main Area */
     main {
-      margin-left: 0; /* Full width when sidebar is hidden */
+      margin-left: 0; /* Full width on home/landing */
       flex: 1;
       padding: 30px 50px;
       width: 100%;
@@ -189,7 +189,7 @@
     }
 
     main.sidebar-active {
-      margin-left: 260px; /* Push content when sidebar is visible */
+      margin-left: 260px; /* Pushes content when sidebar is visible */
     }
 
     .top-bar {
@@ -541,6 +541,7 @@
 
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
+  <!-- Sidebar is hidden by default using the CSS class setup -->
   <aside id="sidebar">
     <div>
       <div class="brand">
@@ -608,7 +609,7 @@
           <span class="card-link">ENTER ARCHIVE &rarr;</span>
         </div>
 
-        <!-- NBA 2K23 Card (Locked as shown in reference) -->
+        <!-- NBA 2K23 Card (Locked) -->
         <div class="dash-card locked-card">
           <div>
             <span class="card-badge badge-locked">Locked</span>
@@ -730,7 +731,7 @@
 
     function openArchive(version) {
       if (version === '2k14') {
-        // Show the sidebar with transition
+        // Show the sidebar with an open animation
         sidebar.classList.add('visible');
         if (window.innerWidth > 768) {
           mainContainer.classList.add('sidebar-active');
@@ -744,11 +745,21 @@
       e.preventDefault();
       const dashboardElement = document.getElementById('dashboard');
       
-      // Smooth scroll down to the dashboard section
+      // Smooth animated scroll down to the dashboard cards section
       dashboardElement.scrollIntoView({ behavior: 'smooth' });
 
-      // After scrolling down, hide the hero section text/buttons smoothly if desired, 
-      // or keep them visible as part of the page layout until an archive is entered.
+      // Animate and hide the hero text/buttons after starting the down scroll
+      setTimeout(() => {
+        const heroContent = document.querySelector('#view-home > div:first-child');
+        if (heroContent) {
+          heroContent.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          heroContent.style.opacity = '0';
+          heroContent.style.transform = 'translateY(-30px)';
+          setTimeout(() => {
+            heroContent.style.display = 'none';
+          }, 600);
+        }
+      }, 400);
     });
 
     function switchView(viewName, event) {
@@ -761,10 +772,18 @@
         target.classList.add('active-view');
       }
 
-      // If going back to home, hide sidebar again
+      // Fully hide sidebar when returning home
       if (viewName === 'home') {
         sidebar.classList.remove('visible');
         mainContainer.classList.remove('sidebar-active');
+        
+        // Reset hero content visibility if returning home
+        const heroContent = document.querySelector('#view-home > div:first-child');
+        if (heroContent) {
+          heroContent.style.display = 'block';
+          heroContent.style.opacity = '1';
+          heroContent.style.transform = 'translateY(0)';
+        }
       }
 
       document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
