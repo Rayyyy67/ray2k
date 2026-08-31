@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAY2K // NBA 2K14 LAB</title>
+  <title>RAY2K // NBA LAB</title>
   <style>
     :root {
       --bg-dark: #0b0f17;
@@ -341,7 +341,7 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
     }
 
@@ -383,11 +383,6 @@
       width: 100%;
     }
 
-    .dash-card.locked-card {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
     .card-badge {
       font-size: 0.7rem;
       font-weight: 800;
@@ -404,12 +399,6 @@
       background: var(--accent-glow);
       color: var(--accent-cyan);
       border: 1px solid var(--accent-cyan);
-    }
-
-    .badge-locked {
-      background: var(--card-inner);
-      color: var(--text-muted);
-      border: 1px solid var(--border-color);
     }
 
     .dash-card h3 {
@@ -542,7 +531,7 @@
     <div>
       <div class="brand">
         <a href="#" class="logo" onclick="switchView('home', event)">RAY<span>2K</span></a>
-        <span class="sub-title" id="sidebarSubTitle">NBA 2K14 LAB</span>
+        <span class="sub-title" id="sidebarSubTitle">NBA LAB</span>
       </div>
 
       <ul class="sidebar-menu" id="sidebarMenu">
@@ -571,29 +560,32 @@
 
     <!-- VIEW 1: HOME LANDING -->
     <div id="view-home" class="content-view active-view">
-      <div class="tags-row">
+      <div class="tags-row" style="justify-content: center;">
         <span class="pill accent">LAB</span>
         <span class="pill">Roster 2026</span>
         <span class="pill">Updated Aug 2026</span>
         <span class="pill">PC / Windows</span>
       </div>
 
-      <h1 class="hero-title">NBA 2K14,<br><span>REBUILT.</span></h1>
-      <p class="hero-desc">Roster updates, dedicated mods, IDs, tools, fixes, and installation guides — organized in one place.</p>
+      <div style="text-align: center; margin-top: 20px;">
+        <h1 class="hero-title">NBA 2K14,<br><span>REBUILT.</span></h1>
+        <p class="hero-desc" style="margin-left: auto; margin-right: auto;">Roster updates, dedicated mods, IDs, tools, fixes, and installation guides — organized in one place.</p>
 
-      <div class="btn-row">
-        <a href="#dashboard" class="btn btn-cyan" id="startBtn"><span>START HERE</span></a>
-        <a href="https://www.facebook.com/profile.php?id=61594111973222" target="_blank" rel="noopener noreferrer" class="btn btn-outline">JOIN COMMUNITY</a>
+        <div class="btn-row" style="justify-content: center;">
+          <a href="#dashboard" class="btn btn-cyan" id="startBtn"><span>START HERE</span></a>
+          <a href="https://www.facebook.com/profile.php?id=61594111973222" target="_blank" rel="noopener noreferrer" class="btn btn-outline">JOIN COMMUNITY</a>
+        </div>
       </div>
 
-      <div class="dashboard-header" id="dashboard">
+      <div class="dashboard-header" id="dashboard" style="text-align: center;">
         <span class="dash-tag">RAY2K LAB</span>
         <h2 class="dash-title">LAB DASHBOARD</h2>
-        <p class="dash-subtitle">Access active mods or check incoming updates.</p>
+        <p class="dash-subtitle">Choose your version below to access active archives.</p>
       </div>
 
-      <div class="grid">
-        <div class="dash-card active-card" onclick="openArchive()">
+      <div class="grid" style="max-width: 700px; margin: 0 auto;">
+        <!-- NBA 2K14 Card -->
+        <div class="dash-card active-card" onclick="openArchive('2k14')">
           <div>
             <span class="card-badge badge-active">Available</span>
             <h3>NBA 2K14</h3>
@@ -602,22 +594,24 @@
           <span class="card-link">ENTER ARCHIVE &rarr;</span>
         </div>
 
-        <div class="dash-card locked-card">
+        <!-- NBA 2K23 Card -->
+        <div class="dash-card active-card" onclick="openArchive('2k23')">
           <div>
-            <span class="card-badge badge-locked">Locked</span>
+            <span class="card-badge badge-active">Available</span>
             <h3>NBA 2K23</h3>
-            <p>Next-generation roster and visual modification archive.</p>
+            <p>Next-generation roster, graphics enhancements, and modification archive.</p>
           </div>
-          <span class="card-link" style="color: var(--text-muted);">LOCKED &rarr;</span>
+          <span class="card-link">ENTER ARCHIVE &rarr;</span>
         </div>
       </div>
     </div>
 
     <!-- VIEW 2: DASHBOARD / 4 FOLDERS SELECTION -->
     <div id="view-dashboard" class="content-view">
+      <button class="back-btn" onclick="switchView('home')">&larr; Back to Home</button>
       <div class="dashboard-header" style="border-top: none; padding-top: 0;">
-        <span class="dash-tag">RAY2K LAB</span>
-        <h2 class="dash-title">LAB DASHBOARD</h2>
+        <span class="dash-tag" id="archiveTitleTag">NBA 2K14 LAB</span>
+        <h2 class="dash-title">LAB ARCHIVE</h2>
         <p class="dash-subtitle">Access active mods or check incoming updates.</p>
       </div>
       <br>
@@ -640,13 +634,13 @@
           <span class="card-link">OPEN ARCHIVE &rarr;</span>
         </div>
 
-        <div class="dash-card locked-card">
+        <div class="dash-card active-card" onclick="switchView('courts')">
           <div>
-            <span class="card-badge badge-locked">Coming Soon</span>
+            <span class="card-badge badge-active">Available</span>
             <h3>COURTS & ARENAS</h3>
             <p>3D stadium lighting, floor updates, and custom arena textures.</p>
           </div>
-          <span class="card-link" style="color: var(--text-muted);">LOCKED</span>
+          <span class="card-link">OPEN ARCHIVE &rarr;</span>
         </div>
 
         <div class="dash-card active-card" onclick="switchView('presentation')">
@@ -666,7 +660,7 @@
       <h2 class="hero-title" style="font-size: 2.5rem;">ROSTER <span>UPDATES</span></h2>
       <p class="hero-desc">Access official up-to-date roster files, transactions, and ratings sheets.</p>
       <div class="dash-card" style="margin-top: 20px;">
-        <h3>Latest 2026-2027 Roster Pack</h3>
+        <h3>Latest Season Roster Pack</h3>
         <p>Includes updated contracts, rotation adjustments, and rookie cyberface mappings.</p>
         <a href="#" class="card-link" style="color: var(--accent-cyan);">DOWNLOAD PACK (ZIP) &rarr;</a>
       </div>
@@ -678,7 +672,7 @@
       <h2 class="hero-title" style="font-size: 2.5rem;">PLAYER <span>CYBERFACES</span></h2>
       <p class="hero-desc">High-definition face textures and custom headmodels mapped with exact IDs.</p>
       <div class="dash-card" style="margin-top: 20px;">
-        <h3>Face Pack Vault (August Update)</h3>
+        <h3>Face Pack Vault</h3>
         <p>Contains over 100+ updated player faces with realistic skin tones and beard mappings.</p>
         <a href="#" class="card-link" style="color: var(--accent-cyan);">DOWNLOAD VAULT &rarr;</a>
       </div>
@@ -689,10 +683,10 @@
       <button class="back-btn" onclick="switchView('dashboard')">&larr; Back to Dashboard</button>
       <h2 class="hero-title" style="font-size: 2.5rem;">COURTS & <span>ARENAS</span></h2>
       <p class="hero-desc">Custom hardwood floor designs, stadium lighting setups, and arena modifications.</p>
-      <div class="dash-card locked-card" style="margin-top: 20px;">
-        <h3>Arena Pack (Coming Soon)</h3>
-        <p>Currently locked under development vault.</p>
-        <span class="card-link" style="color: var(--text-muted);">LOCKED</span>
+      <div class="dash-card" style="margin-top: 20px;">
+        <h3>Arena Pack</h3>
+        <p>High-resolution flooring and stadium modifications.</p>
+        <a href="#" class="card-link" style="color: var(--accent-cyan);">DOWNLOAD ARENAS &rarr;</a>
       </div>
     </div>
 
@@ -702,7 +696,7 @@
       <h2 class="hero-title" style="font-size: 2.5rem;">PRESENTATION & <span>ENB</span></h2>
       <p class="hero-desc">Broadcast scoreboards, replay packages, overlays, and custom lighting filters.</p>
       <div class="dash-card" style="margin-top: 20px;">
-        <h3>Broadcast Graphics Suite v3</h3>
+        <h3>Broadcast Graphics Suite</h3>
         <p>Modern TV-style broadcast overlays and high-contrast color grading configurations.</p>
         <a href="#" class="card-link" style="color: var(--accent-cyan);">DOWNLOAD SUITE &rarr;</a>
       </div>
@@ -727,17 +721,20 @@
       }
     }
 
-    function openArchive() {
+    function openArchive(version) {
       revealSidebar();
+      const titleTag = document.getElementById('archiveTitleTag');
+      if (version === '2k23') {
+        titleTag.textContent = 'NBA 2K23 LAB';
+      } else {
+        titleTag.textContent = 'NBA 2K14 LAB';
+      }
       switchView('dashboard');
     }
 
     startBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      setTimeout(() => {
-        openArchive();
-        document.getElementById('mainContainer').scrollIntoView({ behavior: 'smooth' });
-      }, 350);
+      document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
     });
 
     function switchView(viewName, event) {
