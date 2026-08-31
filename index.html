@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAY2K // NBA LAB</title>
+  <title>RAY2K // EVERYTHING NBA 2K</title>
   <style>
     :root {
       --bg-dark: #0b0f17;
@@ -230,7 +230,6 @@
       white-space: nowrap;
     }
 
-    /* Views container logic */
     .view-section {
       display: none;
       width: 100%;
@@ -477,7 +476,7 @@
       </div>
 
       <ul class="sidebar-menu">
-        <li><a href="#" onclick="showVersionSelect(); return false;" class="active" id="navLab">RAY2K LAB</a></li>
+        <li><a href="#" onclick="showGameSelect(); return false;" class="active">CHOOSE GAME</a></li>
         <li><a href="rosters.html">ROSTER UPDATES</a></li>
         <li><a href="cyberfaces.html">CYBERFACES</a></li>
         <li><a href="presentation.html">PRESENTATION</a></li>
@@ -500,48 +499,49 @@
         <div class="time-badge">STATUS: ONLINE</div>
       </div>
 
-      <!-- VIEW 1: GAME VERSION SELECTION (Shown by default) -->
-      <div id="versionSelectView" class="view-section active-view">
+      <!-- GAME SELECTION VIEW -->
+      <div id="gameSelectView" class="view-section active-view">
         <div class="section-header">
-          <span class="section-tag">GAME VERSION</span>
-          <h2 class="section-title">CHOOSE GAME LAB</h2>
+          <span class="section-tag">GAME ECOSYSTEMS</span>
+          <h2 class="section-title">CHOOSE YOUR GAME</h2>
           <p class="section-subtitle">Select an active game lab or view upcoming releases.</p>
         </div>
 
         <div class="grid-2">
-          <!-- Clicking this hides version selection and reveals the 4-card dashboard -->
-          <div class="dash-card active-card" onclick="showDashboard();" style="cursor: pointer;">
-            <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" alt="NBA 2K14 LAB">
+          <!-- NBA 2K14 Option -->
+          <div class="dash-card active-card" onclick="show2k14Dashboard();" style="cursor: pointer;">
+            <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" alt="NBA 2K14">
             <div class="card-content-wrap">
               <div>
                 <span class="card-badge badge-active">Available</span>
-                <h3>NBA 2K14 LAB</h3>
-                <p>Full modding suite, roster archives, cyberfaces, and presentation updates.</p>
+                <h3>NBA 2K14</h3>
+                <p>The original archive featuring rosters, cyberfaces, courts, and presentation mods.</p>
               </div>
-              <span class="card-link">ENTER 2K14 LAB &rarr;</span>
+              <span class="card-link">ENTER 2K14 &rarr;</span>
             </div>
           </div>
 
-          <div class="dash-card locked-card">
-            <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80" alt="NBA 2K23 LAB">
+          <!-- NBA 2K23 Option -->
+          <div class="dash-card active-card" onclick="show2k23Dashboard();" style="cursor: pointer;">
+            <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80" alt="NBA 2K23">
             <div class="card-content-wrap">
               <div>
-                <span class="card-badge badge-locked">Coming Soon</span>
-                <h3>NBA 2K23 LAB</h3>
-                <p>Next-gen roster updates, custom lighting, and graphics mods.</p>
+                <span class="card-badge badge-active">Available</span>
+                <h3>NBA 2K23</h3>
+                <p>Next-generation roster and visual modification archive.</p>
               </div>
-              <span class="card-link" style="color: var(--text-muted); cursor: not-allowed;">LOCKED</span>
+              <span class="card-link">ENTER 2K23 &rarr;</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- VIEW 2: 4-CARD DASHBOARD (Hidden by default, shown after clicking 2K14) -->
-      <div id="dashboardView" class="view-section">
-        <button class="back-btn" onclick="showVersionSelect();">&larr; BACK TO GAMES</button>
+      <!-- NBA 2K14 DASHBOARD VIEW -->
+      <div id="dashboard2k14" class="view-section">
+        <button class="back-btn" onclick="showGameSelect();">&larr; BACK TO GAMES</button>
         
         <div class="section-header">
-          <span class="section-tag">RAY2K LAB</span>
+          <span class="section-tag">NBA 2K14 LAB</span>
           <h2 class="section-title">LAB DASHBOARD</h2>
           <p class="section-subtitle">Access active mods or check incoming updates.</p>
         </div>
@@ -572,7 +572,7 @@
           </div>
 
           <div class="dash-card locked-card">
-            <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80" alt="Courts & Arenas">
+            <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80" alt="Courts">
             <div class="card-content-wrap">
               <div>
                 <span class="card-badge badge-locked">Coming Soon</span>
@@ -584,7 +584,7 @@
           </div>
 
           <div class="dash-card active-card" onclick="location.href='presentation.html';" style="cursor: pointer;">
-            <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80" alt="Presentation & ENB">
+            <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80" alt="Presentation">
             <div class="card-content-wrap">
               <div>
                 <span class="card-badge badge-active">Available</span>
@@ -592,6 +592,43 @@
                 <p>Scoreboards, replay wipes, and custom visual graphics suites.</p>
               </div>
               <a href="presentation.html" class="card-link">OPEN ARCHIVE &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NBA 2K23 DASHBOARD VIEW -->
+      <div id="dashboard2k23" class="view-section">
+        <button class="back-btn" onclick="showGameSelect();">&larr; BACK TO GAMES</button>
+        
+        <div class="section-header">
+          <span class="section-tag">NBA 2K23 LAB</span>
+          <h2 class="section-title">LAB DASHBOARD</h2>
+          <p class="section-subtitle">Access next-gen roster and modification files.</p>
+        </div>
+
+        <div class="grid-4">
+          <div class="dash-card active-card">
+            <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" alt="2K23 Rosters">
+            <div class="card-content-wrap">
+              <div>
+                <span class="card-badge badge-active">Available</span>
+                <h3>NEXT-GEN ROSTERS</h3>
+                <p>Updated rosters, ratings, and player movements for 2K23.</p>
+              </div>
+              <span class="card-link">OPEN ARCHIVE &rarr;</span>
+            </div>
+          </div>
+
+          <div class="dash-card active-card">
+            <img src="https://images.unsplash.com/photo-1519766304817-4f37bda74a29?auto=format&fit=crop&w=600&q=80" alt="2K23 Faces">
+            <div class="card-content-wrap">
+              <div>
+                <span class="card-badge badge-active">Available</span>
+                <h3>MODS & FIXES</h3>
+                <p>Essential utility mods, graphics enhancements, and lighting fixes.</p>
+              </div>
+              <span class="card-link">OPEN ARCHIVE &rarr;</span>
             </div>
           </div>
         </div>
@@ -608,23 +645,36 @@
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.getElementById('sidebar');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
-    const versionSelectView = document.getElementById('versionSelectView');
-    const dashboardView = document.getElementById('dashboardView');
+    const gameSelectView = document.getElementById('gameSelectView');
+    const dashboard2k14 = document.getElementById('dashboard2k14');
+    const dashboard2k23 = document.getElementById('dashboard2k23');
 
     function toggleMenu() {
       sidebar.classList.toggle('open');
       sidebarOverlay.classList.toggle('active');
     }
 
-    function showDashboard() {
-      versionSelectView.classList.remove('active-view');
-      dashboardView.classList.add('active-view');
+    function hideAllViews() {
+      gameSelectView.classList.remove('active-view');
+      dashboard2k14.classList.remove('active-view');
+      dashboard2k23.classList.remove('active-view');
+    }
+
+    function showGameSelect() {
+      hideAllViews();
+      gameSelectView.classList.add('active-view');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function showVersionSelect() {
-      dashboardView.classList.remove('active-view');
-      versionSelectView.classList.add('active-view');
+    function show2k14Dashboard() {
+      hideAllViews();
+      dashboard2k14.classList.add('active-view');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function show2k23Dashboard() {
+      hideAllViews();
+      dashboard2k23.classList.add('active-view');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
