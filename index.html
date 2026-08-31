@@ -413,7 +413,7 @@
       z-index: 999;
     }
 
-    /* Archive Content View Styles */
+    /* Archive Views Display Logic */
     .archive-view {
       display: none;
     }
@@ -613,7 +613,7 @@
       </div>
     </div>
 
-    <!-- ROSTERS VIEW -->
+    <!-- ROSTERS ARCHIVE VIEW -->
     <div id="rostersView" class="archive-view">
       <button class="btn btn-outline back-btn" onclick="switchView('home')">&larr; Back to Dashboard</button>
       <div class="dashboard-header" style="border-top: none; padding-top: 0;">
@@ -649,7 +649,7 @@
       </div>
     </div>
 
-    <!-- CYBERFACES VIEW -->
+    <!-- CYBERFACES ARCHIVE VIEW -->
     <div id="cyberfacesView" class="archive-view">
       <button class="btn btn-outline back-btn" onclick="switchView('home')">&larr; Back to Dashboard</button>
       <div class="dashboard-header" style="border-top: none; padding-top: 0;">
@@ -685,7 +685,7 @@
       </div>
     </div>
 
-    <!-- PRESENTATION VIEW (SCOREBOARDS) -->
+    <!-- PRESENTATION & SCOREBOARDS ARCHIVE VIEW -->
     <div id="presentationView" class="archive-view">
       <button class="btn btn-outline back-btn" onclick="switchView('home')">&larr; Back to Dashboard</button>
       <div class="dashboard-header" style="border-top: none; padding-top: 0;">
@@ -740,13 +740,9 @@
     sidebarOverlay.addEventListener('click', toggleMenu);
 
     function switchView(viewName) {
-      // Hide all views
       document.querySelectorAll('.archive-view').forEach(v => v.classList.remove('active'));
-      
-      // Remove active from menu links
       document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
 
-      // Show selected view and highlight correct menu item
       if (viewName === 'home') {
         document.getElementById('homeView').classList.add('active');
         document.getElementById('menuHome').classList.add('active');
@@ -761,10 +757,8 @@
         document.getElementById('menuPresentation').classList.add('active');
       }
 
-      // Close mobile sidebar if open
       sidebar.classList.remove('open');
       sidebarOverlay.classList.remove('active');
-      
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
