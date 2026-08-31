@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAY2K // NBA LAB</title>
+  <title>RAY2K // NBA 2K14 LAB</title>
   <style>
     :root {
       --bg-dark: #0b0f17;
@@ -276,7 +276,7 @@
     .btn-row {
       display: flex;
       gap: 16px;
-      margin-bottom: 50px;
+      margin-bottom: 60px;
       flex-wrap: wrap;
     }
 
@@ -306,38 +306,30 @@
       background: var(--card-bg);
     }
 
-    .section-header {
+    .dashboard-header {
       border-top: 1px solid var(--border-color);
       padding-top: 40px;
       margin-bottom: 24px;
       width: 100%;
     }
 
-    .section-tag {
+    .dash-tag {
       color: var(--accent-cyan);
       font-size: 0.75rem;
       font-weight: 800;
       letter-spacing: 1px;
     }
 
-    .section-title {
+    .dash-title {
       font-size: 2rem;
       font-weight: 900;
       margin-top: 4px;
     }
 
-    .section-subtitle {
+    .dash-subtitle {
       color: var(--text-muted);
       font-size: 0.95rem;
       margin-top: 6px;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      width: 100%;
-      margin-bottom: 40px;
     }
 
     .grid-4 {
@@ -514,7 +506,7 @@
         width: 100%;
       }
 
-      .grid-2, .grid-4 {
+      .grid-4 {
         grid-template-columns: 1fr;
       }
     }
@@ -538,7 +530,7 @@
     <div>
       <div class="brand">
         <a href="index.html" class="logo">RAY<span>2K</span></a>
-        <span class="sub-title">NBA LAB</span>
+        <span class="sub-title">NBA 2K14 LAB</span>
       </div>
 
       <ul class="sidebar-menu">
@@ -576,51 +568,19 @@
       <p class="hero-desc">Roster updates, dedicated mods, IDs, tools, fixes, and installation guides — organized in one place.</p>
 
       <div class="btn-row">
-        <a href="#versions" class="btn btn-cyan">START HERE</a>
+        <a href="#dashboard" class="btn btn-cyan">START HERE</a>
         <a href="#dashboard" class="btn btn-outline">BROWSE MODS</a>
       </div>
 
-      <!-- Game Version Selection Section (2K14 & 2K23 side by side) -->
-      <div class="section-header" id="versions">
-        <span class="section-tag">GAME VERSION</span>
-        <h2 class="section-title">CHOOSE GAME LAB</h2>
-        <p class="section-subtitle">Select an active game lab or view upcoming releases.</p>
-      </div>
-
-      <div class="grid-2">
-        <div class="dash-card active-card" onclick="location.href='rosters.html';" style="cursor: pointer;">
-          <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" alt="NBA 2K14 LAB">
-          <div class="card-content-wrap">
-            <div>
-              <span class="card-badge badge-active">Available</span>
-              <h3>NBA 2K14 LAB</h3>
-              <p>Full modding suite, roster archives, cyberfaces, and presentation updates.</p>
-            </div>
-            <a href="rosters.html" class="card-link">ENTER 2K14 LAB &rarr;</a>
-          </div>
-        </div>
-
-        <div class="dash-card locked-card">
-          <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80" alt="NBA 2K23 LAB">
-          <div class="card-content-wrap">
-            <div>
-              <span class="card-badge badge-locked">Coming Soon</span>
-              <h3>NBA 2K23 LAB</h3>
-              <p>Next-gen roster updates, custom lighting, and graphics mods.</p>
-            </div>
-            <span class="card-link" style="color: var(--text-muted); cursor: not-allowed;">LOCKED</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Lab Modules Dashboard Section -->
-      <div class="section-header" id="dashboard">
-        <span class="section-tag">RAY2K LAB</span>
-        <h2 class="section-title">LAB DASHBOARD</h2>
-        <p class="section-subtitle">Access active mods or check incoming updates.</p>
+      <!-- Lab Modules Dashboard Section (Exact Layout Preserved) -->
+      <div class="dashboard-header" id="dashboard">
+        <span class="dash-tag">RAY2K LAB</span>
+        <h2 class="dash-title">LAB DASHBOARD</h2>
+        <p class="dash-subtitle">Access active mods or check incoming updates.</p>
       </div>
 
       <div class="grid-4">
+        <!-- Roster Updates Card -->
         <div class="dash-card active-card" onclick="location.href='rosters.html';" style="cursor: pointer;">
           <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" alt="Rosters">
           <div class="card-content-wrap">
@@ -633,6 +593,7 @@
           </div>
         </div>
 
+        <!-- Cyberfaces Card -->
         <div class="dash-card active-card" onclick="location.href='cyberfaces.html';" style="cursor: pointer;">
           <img src="https://images.unsplash.com/photo-1519766304817-4f37bda74a29?auto=format&fit=crop&w=600&q=80" alt="Cyberfaces">
           <div class="card-content-wrap">
@@ -645,6 +606,7 @@
           </div>
         </div>
 
+        <!-- Courts & Arenas Card (Locked) -->
         <div class="dash-card locked-card">
           <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80" alt="Courts & Arenas">
           <div class="card-content-wrap">
@@ -657,6 +619,7 @@
           </div>
         </div>
 
+        <!-- Presentation & ENB Card -->
         <div class="dash-card active-card" onclick="location.href='presentation.html';" style="cursor: pointer;">
           <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80" alt="Presentation & ENB">
           <div class="card-content-wrap">
