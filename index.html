@@ -55,9 +55,7 @@
       mask-image: linear-gradient(to bottom, black, transparent 80%);
     }
 
-    /* =========================
-       HEADER
-    ========================= */
+    /* HEADER */
 
     .site-header {
       height: 74px;
@@ -129,9 +127,7 @@
       cursor: not-allowed;
     }
 
-    /* =========================
-       HERO
-    ========================= */
+    /* HERO */
 
     .hero {
       width: min(1180px, calc(100% - 48px));
@@ -238,9 +234,7 @@
       transform: translateY(-2px);
     }
 
-    /* =========================
-       STATS
-    ========================= */
+    /* STATS */
 
     .stats {
       border-top: 1px solid var(--line);
@@ -285,9 +279,7 @@
       letter-spacing: 2px;
     }
 
-    /* =========================
-       SECTIONS
-    ========================= */
+    /* SECTION */
 
     .section {
       width: min(1180px, calc(100% - 48px));
@@ -333,9 +325,7 @@
       box-shadow: 0 0 12px rgba(0,217,255,.6);
     }
 
-    /* =========================
-       VERSION SELECTOR
-    ========================= */
+    /* VERSION */
 
     .version-grid {
       display: grid;
@@ -351,16 +341,9 @@
       border-radius: 8px;
       min-height: 112px;
       padding: 22px;
-      background: linear-gradient(
-        135deg,
-        #0e1723,
-        #09101a
-      );
+      background: linear-gradient(135deg, #0e1723, #09101a);
       text-decoration: none;
-      transition:
-        transform .25s ease,
-        border-color .25s ease,
-        box-shadow .25s ease;
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
     }
 
     .version-card.active:hover {
@@ -417,9 +400,7 @@
       outline-offset: 4px;
     }
 
-    /* =========================
-       HIDDEN CATEGORIES
-    ========================= */
+    /* CATEGORY GRID */
 
     .category-grid.is-hidden {
       display: none;
@@ -440,10 +421,6 @@
         transform: translateY(0);
       }
     }
-
-    /* =========================
-       CATEGORY CARDS
-    ========================= */
 
     .category-grid {
       display: grid;
@@ -468,11 +445,7 @@
           rgba(0,217,255,.15),
           transparent 24%
         ),
-        linear-gradient(
-          145deg,
-          #101a27,
-          #0a111b
-        );
+        linear-gradient(145deg, #101a27, #0a111b);
 
       text-decoration: none;
 
@@ -578,58 +551,41 @@
       z-index: 2;
     }
 
-    /* =========================
-       FOLDER ICON
-    ========================= */
+    /* FOLDER */
 
     .folder {
       width: 40px;
       height: 34px;
-
       border: 1px solid #365065;
       border-radius: 6px;
-
       display: grid;
       place-items: center;
-
       color: var(--blue);
-
       margin-bottom: 20px;
-
       position: relative;
-
       transition: .25s ease;
-
       background: rgba(5,12,20,.55);
     }
 
     .folder::before {
       content: "";
       position: absolute;
-
       width: 15px;
       height: 5px;
-
       left: 5px;
       top: -5px;
-
       border: 1px solid #365065;
       border-bottom: 0;
-
       border-radius: 4px 4px 0 0;
-
       background: #0d1722;
     }
 
     .folder::after {
       content: "";
-
       position: absolute;
       inset: -10px;
-
       border: 1px solid transparent;
       border-radius: 50%;
-
       transition: .25s ease;
     }
 
@@ -675,17 +631,13 @@
     .open-link {
       position: relative;
       z-index: 2;
-
       color: var(--blue);
-
       font-size: .62rem;
       font-weight: 1000;
       letter-spacing: 1px;
     }
 
-    /* =========================
-       LOCKED CATEGORIES
-    ========================= */
+    /* LOCKED */
 
     .locked-category {
       opacity: .42;
@@ -712,9 +664,7 @@
       color: #596878;
     }
 
-    /* =========================
-       WHY RAY2K
-    ========================= */
+    /* WHY */
 
     .why {
       border-top: 1px solid var(--line);
@@ -724,12 +674,9 @@
     .why-inner {
       width: min(1180px, calc(100% - 48px));
       margin: auto;
-
       padding: 62px 0;
-
       display: grid;
       grid-template-columns: 1.15fr .85fr;
-
       gap: 50px;
       align-items: center;
     }
@@ -759,15 +706,11 @@
 
     .mini-stat {
       min-height: 82px;
-
       border: 1px solid var(--line);
       background: var(--card);
-
       border-radius: 7px;
-
       display: grid;
       place-items: center;
-
       text-align: center;
     }
 
@@ -783,34 +726,22 @@
       font-weight: 900;
     }
 
-    /* =========================
-       FOOTER
-    ========================= */
-
     footer {
       border-top: 1px solid var(--line);
-
       min-height: 70px;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       color: #526171;
-
       font-size: .58rem;
       letter-spacing: 1px;
-
       text-align: center;
       padding: 20px;
     }
 
-    /* =========================
-       MOBILE
-    ========================= */
+    /* MOBILE */
 
     @media (max-width: 820px) {
-
       .nav {
         width: min(100% - 28px, 1180px);
       }
@@ -856,7 +787,6 @@
     }
 
     @media (max-width: 560px) {
-
       .site-header {
         height: 62px;
       }
@@ -900,12 +830,9 @@
 
 <body>
 
-  <!-- =========================
-       HEADER
-  ========================= -->
+  <!-- HEADER -->
 
   <header class="site-header">
-
     <nav class="nav" aria-label="Main navigation">
 
       <a class="logo" href="index.html">
@@ -927,14 +854,10 @@
           </a>
         </li>
 
-        <!-- CHANGED: ROSTERS -> JOIN COMMUNITY -->
+        <!-- ROSTERS IS BACK -->
         <li>
-          <a
-            href="https://www.facebook.com/profile.php?id=61594111973222"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            JOIN COMMUNITY
+          <a href="rosters.html">
+            ROSTERS
           </a>
         </li>
 
@@ -963,19 +886,12 @@
       </ul>
 
     </nav>
-
   </header>
 
 
-  <!-- =========================
-       MAIN
-  ========================= -->
-
   <main>
 
-    <!-- =========================
-         HERO
-    ========================= -->
+    <!-- HERO -->
 
     <section class="hero">
 
@@ -991,16 +907,12 @@
         </h1>
 
         <p>
-          Rosters, cyberfaces, scoreboards, presentation
-          and other curated NBA 2K14 files — kept organized
-          so you can find the right mod fast.
+          Rosters, cyberfaces, scoreboards, presentation and other
+          curated NBA 2K14 files — kept organized so you can find
+          the right mod fast.
         </p>
 
         <div class="hero-buttons">
-
-          <!-- IMPORTANT:
-               THIS NOW ONLY SCROLLS TO NBA 2K14 / 2K23
-          -->
 
           <button
             class="btn btn-primary"
@@ -1010,16 +922,12 @@
             BROWSE ARCHIVE
           </button>
 
-
-          <!-- JOIN COMMUNITY -->
-
+          <!-- ROSTERS BACK -->
           <a
             class="btn btn-outline"
-            href="https://www.facebook.com/profile.php?id=61594111973222"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="rosters.html"
           >
-            JOIN COMMUNITY
+            OPEN ROSTERS
           </a>
 
         </div>
@@ -1029,51 +937,30 @@
     </section>
 
 
-    <!-- =========================
-         STATS
-    ========================= -->
+    <!-- STATS -->
 
-    <section
-      class="stats"
-      aria-label="RAY2K archive statistics"
-    >
+    <section class="stats">
 
       <div class="stats-inner">
 
         <div class="stat">
-          <strong>
-            3<span>+</span>
-          </strong>
-          <small>
-            ACTIVE CATEGORIES
-          </small>
+          <strong>3<span>+</span></strong>
+          <small>ACTIVE CATEGORIES</small>
         </div>
 
         <div class="stat">
-          <strong>
-            2K<span>14</span>
-          </strong>
-          <small>
-            PRIMARY GAME
-          </small>
+          <strong>2K<span>14</span></strong>
+          <small>PRIMARY GAME</small>
         </div>
 
         <div class="stat">
-          <strong>
-            2K<span>23</span>
-          </strong>
-          <small>
-            LOCKED
-          </small>
+          <strong>2K<span>23</span></strong>
+          <small>LOCKED</small>
         </div>
 
         <div class="stat">
-          <strong>
-            100<span>%</span>
-          </strong>
-          <small>
-            RAY2K ARCHIVE
-          </small>
+          <strong>100<span>%</span></strong>
+          <small>RAY2K ARCHIVE</small>
         </div>
 
       </div>
@@ -1081,9 +968,7 @@
     </section>
 
 
-    <!-- =========================
-         FEATURED
-    ========================= -->
+    <!-- FEATURED -->
 
     <section
       class="section"
@@ -1109,25 +994,19 @@
 
         <p>
           Choose NBA 2K14 to open the active archive.
-          NBA 2K23 is currently locked and will be available
-          later.
+          Each folder is clickable and keeps the existing
+          RAY2K pages and download content intact.
         </p>
 
       </div>
 
 
-      <!-- =========================
-           VERSION SELECTOR
-           ONLY THESE SHOW WHEN
-           BROWSE ARCHIVE IS CLICKED
-      ========================= -->
+      <!-- VERSION SELECTOR -->
 
       <div
         class="version-grid"
         id="versions"
       >
-
-        <!-- NBA 2K14 -->
 
         <button
           class="version-card active"
@@ -1153,8 +1032,6 @@
         </button>
 
 
-        <!-- NBA 2K23 -->
-
         <div
           class="version-card locked"
           aria-label="NBA 2K23 locked"
@@ -1178,14 +1055,7 @@
       </div>
 
 
-      <!-- =========================
-           CATEGORIES
-           
-           HIDDEN BY DEFAULT
-           
-           THEY ONLY APPEAR AFTER
-           CLICKING NBA 2K14
-      ========================= -->
+      <!-- CATEGORIES -->
 
       <div
         class="category-grid is-hidden"
@@ -1193,13 +1063,10 @@
         aria-hidden="true"
       >
 
-        <!-- JOIN COMMUNITY -->
-
+        <!-- ROSTERS -->
         <a
           class="category-card"
-          href="https://www.facebook.com/profile.php?id=61594111973222"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="rosters.html"
           data-cursor-card
         >
 
@@ -1210,18 +1077,18 @@
             </div>
 
             <h3>
-              JOIN COMMUNITY
+              ROSTERS
             </h3>
 
             <p>
-              Join the RAY2K community for roster updates,
-              releases, announcements and NBA 2K14 modding.
+              Updated rosters, draft classes and team
+              changes for the current RAY2K setup.
             </p>
 
           </div>
 
           <div class="open-link">
-            OPEN FACEBOOK →
+            OPEN ARCHIVE →
           </div>
 
         </a>
@@ -1278,8 +1145,8 @@
             </h3>
 
             <p>
-              Scoreboard and presentation downloads
-              through your existing presentation page.
+              Scoreboard and presentation downloads through
+              your existing presentation page.
             </p>
 
           </div>
@@ -1291,7 +1158,7 @@
         </a>
 
 
-        <!-- COURTS -->
+        <!-- LOCKED -->
 
         <div
           class="category-card locked-category"
@@ -1322,8 +1189,6 @@
         </div>
 
 
-        <!-- JERSEYS -->
-
         <div
           class="category-card locked-category"
           aria-label="Jerseys locked"
@@ -1352,8 +1217,6 @@
 
         </div>
 
-
-        <!-- PORTRAITS -->
 
         <div
           class="category-card locked-category"
@@ -1388,9 +1251,7 @@
     </section>
 
 
-    <!-- =========================
-         WHY RAY2K
-    ========================= -->
+    <!-- WHY RAY2K -->
 
     <section class="why">
 
@@ -1409,8 +1270,10 @@
 
           <p>
             RAY2K keeps NBA 2K14 mod categories in one
-            clean place. The index organizes the existing
-            pages so you can quickly find the content you need.
+            clean place. The index only organizes the
+            existing pages — your roster, cyberface and
+            presentation/download pages remain where
+            they already are.
           </p>
 
         </div>
@@ -1447,96 +1310,53 @@
   </main>
 
 
-  <!-- =========================
-       FOOTER
-  ========================= -->
-
   <footer>
     RAY2K // NBA 2K14 MODDING VAULT // PC / WINDOWS
   </footer>
 
 
-  <!-- =========================
-       JAVASCRIPT
-  ========================= -->
-
   <script>
 
     const open2k14 =
-      document.getElementById('open2k14');
+      document.getElementById("open2k14");
 
     const browseArchive =
-      document.getElementById('browseArchive');
+      document.getElementById("browseArchive");
 
     const categories =
-      document.getElementById('categories');
+      document.getElementById("categories");
 
-    const versions =
-      document.getElementById('versions');
-
-
-    /* ==========================================
-       BROWSE ARCHIVE
-       
-       IMPORTANT:
-       DOES NOT OPEN CATEGORIES.
-       
-       IT ONLY SCROLLS TO THE VERSION SELECTOR.
-    ========================================== */
-
-    function browseVersions() {
-
-      versions.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-      });
-
-    }
-
-
-    /* ==========================================
-       NBA 2K14
-       
-       THIS IS THE ONLY BUTTON THAT OPENS
-       THE CATEGORY SECTION.
-    ========================================== */
 
     function show2K14Archive() {
 
       const isHidden =
-        categories.classList.contains('is-hidden');
-
+        categories.classList.contains("is-hidden");
 
       if (isHidden) {
 
-        categories.classList.remove('is-hidden');
+        categories.classList.remove("is-hidden");
 
-        categories.classList.add('reveal');
+        categories.classList.add("reveal");
 
         categories.setAttribute(
-          'aria-hidden',
-          'false'
+          "aria-hidden",
+          "false"
         );
 
         open2k14.setAttribute(
-          'aria-expanded',
-          'true'
+          "aria-expanded",
+          "true"
         );
 
         setTimeout(() => {
-
-          categories.classList.remove('reveal');
-
+          categories.classList.remove("reveal");
         }, 500);
-
-
-        /* Scroll to categories AFTER opening */
 
         requestAnimationFrame(() => {
 
           categories.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+            behavior: "smooth",
+            block: "start"
           });
 
         });
@@ -1544,8 +1364,8 @@
       } else {
 
         categories.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+          behavior: "smooth",
+          block: "start"
         });
 
       }
@@ -1553,48 +1373,38 @@
     }
 
 
-    /* ==========================================
-       BUTTON EVENTS
-    ========================================== */
-
-    /* Browse Archive ONLY shows NBA 2K14 / 2K23 */
-
-    browseArchive.addEventListener(
-      'click',
-      browseVersions
-    );
-
-
-    /* NBA 2K14 opens categories */
-
     open2k14.addEventListener(
-      'click',
+      "click",
       show2K14Archive
     );
 
 
-    /* ==========================================
-       CURSOR FOLLOWING EFFECT
-    ========================================== */
+    browseArchive.addEventListener(
+      "click",
+      show2K14Archive
+    );
+
+
+    /* Cursor effects */
 
     document
-      .querySelectorAll('[data-cursor-card]')
+      .querySelectorAll("[data-cursor-card]")
       .forEach(card => {
 
         card.addEventListener(
-          'pointermove',
+          "pointermove",
           event => {
 
             const rect =
               card.getBoundingClientRect();
 
             card.style.setProperty(
-              '--mx',
+              "--mx",
               `${event.clientX - rect.left}px`
             );
 
             card.style.setProperty(
-              '--my',
+              "--my",
               `${event.clientY - rect.top}px`
             );
 
@@ -1604,20 +1414,16 @@
       });
 
 
-    /* ==========================================
-       LOCKED 2K23 NAV
-    ========================================== */
+    /* Prevent locked 2K23 navigation */
 
     document
-      .querySelectorAll('.locked-nav')
+      .querySelectorAll(".locked-nav")
       .forEach(item => {
 
         item.addEventListener(
-          'click',
+          "click",
           event => {
-
             event.preventDefault();
-
           }
         );
 
