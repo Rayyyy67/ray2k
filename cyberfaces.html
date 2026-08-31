@@ -480,9 +480,14 @@
           </a>
         </li>
 
+        <!-- JOIN COMMUNITY -->
         <li>
-          <a href="rosters.html">
-            ROSTER UPDATES
+          <a
+            href="https://www.facebook.com/profile.php?id=61594111973222"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            JOIN COMMUNITY
           </a>
         </li>
 
@@ -598,7 +603,6 @@
             NEW
           </span>
 
-          <!-- FIXED IMAGE PATH -->
           <img
             src="caleb_wilson.jpg"
             alt="Caleb Wilson Preview"
@@ -623,6 +627,7 @@
             <a
               href="https://www.mediafire.com/file/po1ue713z3bwdho/caleb_wilson_cf.zip/file"
               target="_blank"
+              rel="noopener noreferrer"
               class="btn-download"
             >
               DOWNLOAD
@@ -658,7 +663,6 @@
             NEW
           </span>
 
-          <!-- FIXED IMAGE PATH -->
           <img
             src="aj_dybantsa.jpg"
             alt="AJ Dybantsa Preview"
@@ -683,6 +687,7 @@
             <a
               href="https://www.mediafire.com/file/gaoax32gcov03yu/aj+dybantsa+cf.zip/file"
               target="_blank"
+              rel="noopener noreferrer"
               class="btn-download"
             >
               DOWNLOAD
@@ -718,7 +723,6 @@
             NEW
           </span>
 
-          <!-- FIXED IMAGE PATH -->
           <img
             src="cameron_boozer.jpg"
             alt="Cameron Boozer Preview"
@@ -743,6 +747,7 @@
             <a
               href="https://www.mediafire.com/file/wr0fegg8mc77s5a/cameron_boozer_cf.zip/file"
               target="_blank"
+              rel="noopener noreferrer"
               class="btn-download"
             >
               DOWNLOAD
@@ -778,7 +783,7 @@
             NEW
           </span>
 
-          <!-- FIXED IMAGE PATH + FILENAME -->
+          <!-- FILE NAME MATCHES YOUR GITHUB FILE -->
           <img
             src="kingston_fleming.jpg"
             alt="Kingston Flemings Preview"
@@ -803,6 +808,7 @@
             <a
               href="https://www.mediafire.com/file/eriwvn2pcp27pp5/kingston_flemings_cf.zip/file"
               target="_blank"
+              rel="noopener noreferrer"
               class="btn-download"
             >
               DOWNLOAD
@@ -838,7 +844,6 @@
             NEW
           </span>
 
-          <!-- FIXED IMAGE PATH -->
           <img
             src="yaxel_lendeborg.jpg"
             alt="Yaxel Lendeborg Preview"
@@ -863,6 +868,7 @@
             <a
               href="https://www.mediafire.com/file/sfkaqibbiygfs3t/yaxel_lenderberg_cf.zip/file"
               target="_blank"
+              rel="noopener noreferrer"
               class="btn-download"
             >
               DOWNLOAD
@@ -979,11 +985,17 @@
 
 
   <!-- =========================
-       FLOATING SUPPORT
+       SUPPORT RAY2K
+       OPENS FACEBOOK
   ========================= -->
 
-  <a href="#" class="floating-support">
-    ⚡ SUPPORT
+  <a
+    href="https://www.facebook.com/profile.php?id=61594111973222"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="floating-support"
+  >
+    ⚡ SUPPORT RAY2K
   </a>
 
 
@@ -1048,6 +1060,74 @@
               ? 'flex'
               : 'none';
 
+        });
+
+      });
+
+
+    /* =========================
+       FREE SORT
+    ========================= */
+
+    document
+      .getElementById('freeSort')
+      .addEventListener('change', function(e) {
+
+        const grid =
+          document.getElementById('freeGrid');
+
+        const cards =
+          Array.from(
+            grid.querySelectorAll('.cf-card')
+          );
+
+        if (e.target.value === 'name') {
+
+          cards.sort((a, b) => {
+
+            return a
+              .dataset
+              .name
+              .localeCompare(b.dataset.name);
+
+          });
+
+        }
+
+        cards.forEach(card => {
+          grid.appendChild(card);
+        });
+
+      });
+
+
+    /* =========================
+       PAID SORT
+    ========================= */
+
+    document
+      .getElementById('paidSort')
+      .addEventListener('change', function(e) {
+
+        const grid =
+          document.getElementById('paidGrid');
+
+        const cards =
+          Array.from(
+            grid.querySelectorAll('.cf-card')
+          );
+
+        cards.sort((a, b) => {
+
+          return a
+            .dataset
+            .name
+            .localeCompare(b.dataset.name);
+
+        });
+
+        cards.forEach(card => {
+          grid.appendChild(card);
         });
 
       });
