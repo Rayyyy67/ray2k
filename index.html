@@ -374,11 +374,6 @@
       letter-spacing: 0.5px;
     }
 
-    .dash-card.locked-card .card-link {
-      color: var(--text-muted);
-      cursor: not-allowed;
-    }
-
     .back-btn {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
@@ -472,7 +467,6 @@
 
       <ul class="sidebar-menu">
         <li><a onclick="showGameSelect(); return false;" class="active" id="navLab">RAY2K LAB</a></li>
-        <li><a onclick="show2k23Dashboard(); return false;" id="navCategories">CATEGORIES</a></li>
       </ul>
     </div>
 
@@ -501,7 +495,19 @@
         </div>
 
         <div class="grid-2">
-          <!-- NBA 2K23 Card -->
+          <!-- NBA 2K14 Card -->
+          <div class="dash-card active-card" onclick="show2k14Dashboard();">
+            <div>
+              <div class="card-top-row">
+                <div class="card-icon-box">14</div>
+              </div>
+              <h3>NBA 2K14</h3>
+              <p>Full modding suite, roster archives, cyberfaces, and presentation updates.</p>
+            </div>
+            <span class="card-link">ENTER 2K14 LAB &rarr;</span>
+          </div>
+
+          <!-- NBA 2K23 Card (Styled exact like your image) -->
           <div class="dash-card active-card" onclick="show2k23Dashboard();">
             <div>
               <div class="card-top-row">
@@ -512,17 +518,45 @@
             </div>
             <span class="card-link">ENTER 2K23 LAB &rarr;</span>
           </div>
+        </div>
+      </div>
 
-          <!-- Locked Placeholder Card -->
-          <div class="dash-card locked-card">
+      <!-- NBA 2K14 DASHBOARD VIEW -->
+      <div id="dashboard2k14" class="view-section">
+        <button class="back-btn" onclick="showGameSelect();">&larr; BACK TO GAMES</button>
+        
+        <div class="section-header">
+          <span class="section-tag">NBA 2K14 LAB</span>
+          <h2 class="section-title">LAB DASHBOARD</h2>
+          <p class="section-subtitle">Access active mods or check incoming updates.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="dash-card active-card" onclick="openModLink('2K14_Rosters');">
             <div>
-              <div class="card-top-row">
-                <div class="card-icon-box" style="color: var(--text-muted);">24</div>
-              </div>
-              <h3 style="color: var(--text-muted);">NBA 2K24</h3>
-              <p>Future release mod archive and upcoming tool suites.</p>
+              <div class="card-top-row"><div class="card-icon-box">R</div></div>
+              <h3>ROSTER UPDATES</h3>
+              <p>Download current season rosters, draft classes, and team rotations.</p>
             </div>
-            <span class="card-link">COMING SOON &rarr;</span>
+            <span class="card-link">OPEN ARCHIVE &rarr;</span>
+          </div>
+
+          <div class="dash-card active-card" onclick="openModLink('2K14_Cyberfaces');">
+            <div>
+              <div class="card-top-row"><div class="card-icon-box">F</div></div>
+              <h3>CYBERFACES</h3>
+              <p>Updated face scans, headshapes, and skin textures for modern players.</p>
+            </div>
+            <span class="card-link">OPEN ARCHIVE &rarr;</span>
+          </div>
+
+          <div class="dash-card active-card" onclick="openModLink('2K14_Presentation');">
+            <div>
+              <div class="card-top-row"><div class="card-icon-box">P</div></div>
+              <h3>PRESENTATION</h3>
+              <p>Scoreboards, broadcast overlays, replay wipes, and custom graphics.</p>
+            </div>
+            <span class="card-link">OPEN ARCHIVE &rarr;</span>
           </div>
         </div>
       </div>
@@ -532,72 +566,60 @@
         <button class="back-btn" onclick="showGameSelect();">&larr; BACK TO GAMES</button>
         
         <div class="section-header">
-          <span class="section-tag">RAY2K LAB</span>
-          <h2 class="section-title">NBA 2K23 DASHBOARD</h2>
+          <span class="section-tag">NBA 2K23 LAB</span>
+          <h2 class="section-title">LAB DASHBOARD</h2>
           <p class="section-subtitle">Access active mods or check incoming updates.</p>
         </div>
 
         <div class="grid-3">
-          <div class="dash-card active-card" onclick="openModLink('Rosters');">
+          <div class="dash-card active-card" onclick="openModLink('2K23_Rosters');">
             <div>
-              <div class="card-top-row">
-                <div class="card-icon-box">R</div>
-              </div>
+              <div class="card-top-row"><div class="card-icon-box">R</div></div>
               <h3>ROSTERS</h3>
               <p>Updated season rosters, draft classes, and franchise files.</p>
             </div>
             <span class="card-link">BROWSE &rarr;</span>
           </div>
 
-          <div class="dash-card active-card" onclick="openModLink('Cyberfaces');">
+          <div class="dash-card active-card" onclick="openModLink('2K23_Cyberfaces');">
             <div>
-              <div class="card-top-row">
-                <div class="card-icon-box">F</div>
-              </div>
+              <div class="card-top-row"><div class="card-icon-box">F</div></div>
               <h3>CYBERFACES</h3>
               <p>Player face scans and appearance upgrades for maximum realism.</p>
             </div>
             <span class="card-link">BROWSE &rarr;</span>
           </div>
 
-          <div class="dash-card active-card" onclick="openModLink('Portraits');">
+          <div class="dash-card active-card" onclick="openModLink('2K23_Portraits');">
             <div>
-              <div class="card-top-row">
-                <div class="card-icon-box">P</div>
-              </div>
+              <div class="card-top-row"><div class="card-icon-box">P</div></div>
               <h3>PORTRAITS</h3>
               <p>Redrawn player portrait artwork for menus, rosters, and UI.</p>
             </div>
             <span class="card-link">BROWSE &rarr;</span>
           </div>
 
-          <div class="dash-card active-card" onclick="openModLink('Jerseys');">
+          <div class="dash-card active-card" onclick="openModLink('2K23_Jerseys');">
             <div>
-              <div class="card-top-row">
-                <div class="card-icon-box">J</div>
-              </div>
+              <div class="card-top-row"><div class="card-icon-box">J</div></div>
               <h3>JERSEYS</h3>
               <p>Accurate and alternate jersey sets for teams across every era.</p>
             </div>
             <span class="card-link">BROWSE &rarr;</span>
           </div>
 
-          <div class="dash-card active-card" onclick="openModLink('Courts');">
+          <div class="dash-card active-card" onclick="openModLink('2K23_Courts');">
             <div>
-              <div class="card-top-row">
-                <div class="card-icon-box">C</div>
-              </div>
+              <div class="card-top-row"><div class="card-icon-box">C</div></div>
               <h3>COURTS</h3>
               <p>Rebuilt arena floors matching current team branding and designs.</p>
             </div>
             <span class="card-link">BROWSE &rarr;</span>
           </div>
 
-          <div class="dash-card active-card" onclick="openModLink('Scoreboards');">
+          <div class="dash-card active-card" onclick="openModLink('2K23_Scoreboards');">
             <div>
-              <div class="card-top-row">
-                <div class="card-icon-box">S</div>
-              </div>
+              <div class="card-top-row"><div class="card-icon-box">S</div></div>
               <h3>SCOREBOARDS</h3>
               <p>Modernized scoreboard and HUD designs for a cleaner in-game overlay.</p>
             </div>
@@ -618,9 +640,9 @@
     const sidebar = document.getElementById('sidebar');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
     const gameSelectView = document.getElementById('gameSelectView');
+    const dashboard2k14 = document.getElementById('dashboard2k14');
     const dashboard2k23 = document.getElementById('dashboard2k23');
     const navLab = document.getElementById('navLab');
-    const navCategories = document.getElementById('navCategories');
 
     function toggleMenu() {
       sidebar.classList.toggle('open');
@@ -629,6 +651,7 @@
 
     function hideAllViews() {
       gameSelectView.classList.remove('active-view');
+      dashboard2k14.classList.remove('active-view');
       dashboard2k23.classList.remove('active-view');
     }
 
@@ -636,7 +659,13 @@
       hideAllViews();
       gameSelectView.classList.add('active-view');
       navLab.classList.add('active');
-      navCategories.classList.remove('active');
+      if (sidebar.classList.contains('open')) toggleMenu();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function show2k14Dashboard() {
+      hideAllViews();
+      dashboard2k14.classList.add('active-view');
       if (sidebar.classList.contains('open')) toggleMenu();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -644,18 +673,13 @@
     function show2k23Dashboard() {
       hideAllViews();
       dashboard2k23.classList.add('active-view');
-      navCategories.classList.add('active');
-      navLab.classList.remove('active');
       if (sidebar.classList.contains('open')) toggleMenu();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function openModLink(categoryName) {
-      // Put your specific category links here instead of opening your main facebook profile for everything!
-      // Example:
-      // if(categoryName === 'Rosters') window.open('YOUR_ROSTERS_LINK_HERE', '_blank');
-      // else window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');
-      
+    function openModLink(categoryType) {
+      // Change these links to point to your specific folder/file links for each category!
+      // Right now it opens your facebook profile as a placeholder:
       window.open('https://www.facebook.com/profile.php?id=61594111973222', '_blank');
     }
 
